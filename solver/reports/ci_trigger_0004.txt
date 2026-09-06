@@ -1,0 +1,2 @@
+CI probe trigger for checkpoint 0004 protocol coverage verification.
+This file carries no research evidence and exists only to trigger the pull_request workflow.
