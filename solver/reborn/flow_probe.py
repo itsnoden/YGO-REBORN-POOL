@@ -6,7 +6,9 @@ this module must never be interpreted as deck win rates or search priors.
 """
 import argparse
 import json
+import struct
 
+from .announce import choose_declarable
 from .effects import UnsupportedInteraction
 from .import_pool import ROOT, dump
 from .ocgcore import Duel
@@ -18,6 +20,7 @@ MSG_WIN = 5
 
 def run_one(library, database, scripts, deck0, deck1, mapped, seed, budget=5000):
     row = dict(seed=seed, status='pending', steps=0, decisions=0, message_types=[], blocker=None)
+    allowed_codes = [entry['passcode'] for entry in mapped.values()]
     with Duel(library, database, scripts, seed=seed) as duel:
         for player, deck in enumerate((deck0, deck1)):
             for index, cid in enumerate(deck):
@@ -35,7 +38,12 @@ def run_one(library, database, scripts, deck0, deck1, mapped, seed, budget=5000)
             if decision is not None:
                 row['decisions'] += 1
                 decision.view_for(decision.player)
-                duel.respond(conservative_response(decision))
+                if decision.kind == 'announce_card':
+                    code = choose_declarable(database, decision.meta['opcodes'], allowed_codes)
+                    response = struct.pack('<i', code)
+                else:
+                    response = conservative_response(decision)
+                duel.respond(response)
                 continue
             if status != 2:
                 raise UnsupportedInteraction(
