@@ -6,6 +6,11 @@ on:
     paths:
       - 'solver/**'
       - '.github/workflows/solver-verify.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'solver/**'
+      - '.github/workflows/solver-verify.yml'
   workflow_dispatch:
 
 permissions:
