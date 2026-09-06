@@ -10,7 +10,7 @@ import json
 from .effects import UnsupportedInteraction
 from .import_pool import ROOT, dump
 from .ocgcore import Duel
-from .protocol import extract_decision, conservative_response
+from .protocol_extra import extract_decision, conservative_response
 from .search import validate
 
 MSG_WIN = 5
@@ -29,20 +29,14 @@ def run_one(library, database, scripts, deck0, deck1, mapped, seed, budget=5000)
             row['message_types'].extend(m[0] for m in messages if m)
             wins = [m for m in messages if m and m[0] == MSG_WIN]
             if wins:
-                # MSG_WIN payload begins winner/reason, but do not need it for
-                # protocol coverage certification.
                 row.update(status='completed', completed=True)
                 return row
             decision = extract_decision(messages)
             if decision is not None:
                 row['decisions'] += 1
-                # Explicitly materialize only the acting player's filtered view.
-                # This assertion prevents future policies from consuming raw prompts.
                 decision.view_for(decision.player)
                 duel.respond(conservative_response(decision))
                 continue
-            # status 2 means engine can continue internally.  Any other state
-            # without a decision or win is a strict coverage blocker.
             if status != 2:
                 raise UnsupportedInteraction(
                     f'engine stopped without win/decision: status={status}, messages={[m[0] for m in messages if m]}'
