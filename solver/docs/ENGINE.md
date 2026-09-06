@@ -42,6 +42,29 @@ binary is rebuildable; machine-specific objects are not committed.
   script errors. This is **zero completed duels**, and conveys no win-rate data.
 - Privileged message framing and response transport. Raw messages are not an
   agent observation: they may expose hidden information.
+- Strict parsers/response encoders now cover `SELECT_IDLECMD`, `SELECT_BATTLECMD`,
+  effect yes/no, yes/no, option, card selection, chain selection, place/disabled
+  field selection and position selection against the pinned core binary layout.
+- Decision ownership is enforced: only the acting player can materialize a policy
+  view of a parsed decision. Raw referee messages remain outside policy input.
+- `reborn.flow_probe` now drives candidate pairs forward with a deterministic,
+  conservative legal-action baseline and stops on unsupported prompts instead of
+  guessing. This probe exists only to establish protocol/game-flow coverage and
+  MUST NOT be used as deck strength evidence.
+
+## Complete-duel flow probe
+
+After rebuilding the pinned engine dependencies, run:
+
+```
+python -m reborn.flow_probe --library build/libocgcore.so --database vendor/database/cards.cdb --scripts vendor/scripts --count 8
+```
+
+The output is saved to `reports/flow_probe.json`. Any unsupported decision type,
+core retry, missing script, nonterminal engine stop or step-budget overflow is a
+hard blocker. Do not convert blocked games into losses or discard them silently.
+The deterministic baseline intentionally prefers passing/ending phases where
+legal; even completed games from this probe are protocol tests, not win-rate data.
 
 ## Next implementation work
 
@@ -50,12 +73,16 @@ binary is rebuildable; machine-specific objects are not committed.
 2. Audit 313 non-exact official/engine text comparisons: many may be formatting
    or terminology, but no semantic equivalence is assumed. 1,938 mapped cards
    have exact whitespace-normalized official text equality.
-3. Implement all binary decision-message parsers, legal-action response encoders,
-   and private/public observation filtering. Unsupported prompts must abort and
-   be logged, never become guessed moves. Regression-test selected effects.
-4. Build a baseline legal pilot, paired-seat complete-duel tests and replay logs,
+3. Run `flow_probe` against the pinned binary and implement remaining decision
+   messages in blocker-frequency order. Unsupported prompts must abort and be
+   logged, never become guessed moves. Add protocol regression tests for every
+   new message family before enabling it in self-play.
+4. Add public-state querying/observation construction beyond decision ownership:
+   own hand, public zones, revealed cards, LP/phase/turn/chain state, while masking
+   opponent hand/deck identities and facedown information not legally known.
+5. Build a baseline legal pilot, paired-seat complete-duel tests and replay logs,
    then information-set planning and independent held-out pilot evaluation.
-5. Connect certified payoff data to the double-oracle callback orchestration.
+6. Connect certified payoff data to the double-oracle callback orchestration.
    Restricted-game mixture solving and learned best responses are not yet built.
 
 ## Errata-specific finding
