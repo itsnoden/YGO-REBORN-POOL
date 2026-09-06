@@ -1,41 +1,65 @@
-# Checkpoint 0002 — 2026-09-06
+# Checkpoint 0003 — 2026-09-06
 
-Status: pool imported; first official-text pass complete; existing EDOPro engine
-compiled and connected; candidate generation and initial-state tests complete.
+Status: first strict legal-action protocol layer implemented and published; a
+complete-duel correctness probe now exists. No strongest deck has been established.
 
-- 2,273 unique confirmed titles imported with contiguous source indexes.
-- Copy-limit counts: 34 forbidden; 45 limited; 11 semi-limited; 2,183 unrestricted.
-- Ceasefire and Cyber-Stein appear on the banlist but are absent from MASTER.
-  Do not insert them into the pool.
-- User explicitly requires latest official errata ALWAYS, superseding historical
-  uncertainty in the archived deckbuilding findings.
-- All 140 official-page batches saved. 2,241 official matches, 32 unresolved names.
-- All 2,239 legal pool cards accounted for: 2,207 text-screened, 32 missing text.
-- 256 proposals across full-pool coverage restarts, graph beam seeds, random
-  restarts, one/two-card mutation and genetic proxy selection. All 2,121 currently
-  verified legal Main Deck cards occur in the proposal population. Extra Deck
-  construction is not optimized yet; missing identities stay queued.
-- 2,251 engine-ID matches: 1,880 Lua scripts found, 370 scriptless Normal Monsters,
-  one explicitly blocked missing-path effect script. 22 unresolved engine names.
-- EDOPro core compiled successfully. Eight generated candidates reached the
-  first real engine decision without script errors. 11 unit tests pass.
-- No complete duels, win rates, certified combinations or #1 deck yet. The
-  double-oracle loop has orchestration/gates only, not a trained best-response AI.
-- Shared-name copy limit added after integration exposed aliases such as the
-  Harpie Lady variants. Candidates regenerated with that legality check.
-- Latest-errata script-path anomaly for Red-Eyes Darkness Metal Dragon is recorded
-  in `docs/ENGINE.md`; do not quietly load a pre-errata implementation.
-- Public upload of this checkpoint, including MASTER, banlist and saved findings,
-  was explicitly approved by the user. GitHub is the canonical resume location.
-  Earlier upload failures and already-staged blobs are recorded for historical
-  reference in reports/publication_pending.json; no further approval is needed.
+## New work in this checkpoint
 
+- Added `reborn/protocol.py`, derived from the exact pinned ygopro-core protocol
+  layout at core commit `b8c05dff14da0b13608950a73906287dc0b601f9`.
+- Implemented strict parser/response support for:
+  - `MSG_SELECT_IDLECMD`
+  - `MSG_SELECT_BATTLECMD`
+  - `MSG_SELECT_EFFECTYN`
+  - `MSG_SELECT_YESNO`
+  - `MSG_SELECT_OPTION`
+  - `MSG_SELECT_CARD`
+  - `MSG_SELECT_CHAIN`
+  - `MSG_SELECT_PLACE`
+  - `MSG_SELECT_DISFIELD`
+  - `MSG_SELECT_POSITION`
+- Added legal response encoders for command choices, card-index selections and
+  field-zone selections. Invalid counts, indices, duplicate selections and
+  forbidden zones raise instead of being guessed.
+- Added an explicit privacy boundary: parsed decision views can only be
+  materialized for the player who owns the prompt. Raw engine messages remain
+  privileged referee data and are not policy observations.
+- Added `tests/test_protocol.py`. The six focused protocol tests passed in the
+  implementation workspace before publication.
+- Added `reborn/flow_probe.py`, which advances generated candidate pairs using a
+  deterministic conservative legal-action baseline. It stops on unsupported
+  prompts, missing scripts, retries or nonterminal unexplained engine stops.
+- Updated `docs/ENGINE.md` with the new rebuild/probe path and strict rules for
+  interpreting its output.
 
-Resume: read `docs/ENGINE.md`. Rebuild pinned dependencies, then implement legal
-action parsing/encoding and hidden-information filtering. Reconcile missing names
-and text discrepancies. The official importer reuses completed page checkpoints;
-use `--refresh` only when intentionally taking a new snapshot. Save separate
-experiment directories before replacing generated outputs in future runs.
+## Important evidence boundary
 
-Do not use the archived findings' decklists, rankings or proxy win rates as
-search priors. Do not describe text coverage as effect implementation coverage.
+`flow_probe` is **not a deck-strength evaluator**. The baseline intentionally
+prefers passing/ending phases and exists only to discover protocol and engine
+coverage blockers. Even a completed duel from this probe is not a certified
+win-rate sample and must not feed deck ranking, mutation selection, the oracle,
+or any search prior.
+
+No complete duel from the pinned engine has been recorded in the repository yet,
+because the live pinned dependency rebuild/probe has not been executed after this
+code publication. Therefore there are still **zero certified completed duels,
+zero certified win rates and no #1 deck**.
+
+## Resume
+
+1. Rebuild the exact pinned core/scripts/database from `engine.lock.json`.
+2. Run `python -m unittest discover -s tests -v` and then `reborn.flow_probe`.
+3. Inspect the first unsupported prompt family in `reports/flow_probe.json` and
+   implement it from pinned core source, with regression tests, before proceeding.
+4. Continue until diverse candidate pairs can complete full games without retry,
+   unsupported-prompt, script or hidden-information failures.
+5. Add public-state querying/observation filtering beyond prompt ownership before
+   any learned or search pilot can consume duel state.
+6. Only after that, build paired-seat pilots, adversarial self-play, held-out
+   evaluation and certified payoff matrices for the double-oracle search.
+
+The existing source constraints remain unchanged: use only the exact 2,273-card
+Reborn pool, Reborn banlist, actual Yu-Gi-Oh rules and latest official errata.
+Simulator code/card data may implement those rules/effects; do not use tournament
+decks, historical decklists, Reddit, tier lists, community strategy priors or
+outside metagame data.
