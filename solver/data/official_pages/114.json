@@ -1,0 +1,63 @@
+{
+  "page": 114,
+  "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=114&request_locale=en",
+  "total": 13918,
+  "records": [
+    {
+      "name": "Spring of Rebirth",
+      "cid": "5164",
+      "spec": "SPELL Continuous",
+      "attribute": "SPELL",
+      "text": "Increase your Life Points by 500 points every time monsters return from the field to the owner's hand.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5164&request_locale=en",
+      "retrieved_at": "2026-09-06T11:45:06.948029+00:00",
+      "page_sha256": "0b926a0abf7276b4f6e73ebd939a50246b86c427d0526effc5aa11caad1b7050",
+      "text_sha256": "dbf8b117d07c916d5846a4be5d2cace0a8c8c598f4b8a1bd02e2ad3998199a1f",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=114&request_locale=en"
+    },
+    {
+      "name": "St. Joan",
+      "cid": "5208",
+      "spec": "LIGHT Level 7 [\r\n\t\t\t\t\t\t\t\t\t\tFairy ／Fusion ] ATK 2800 DEF 2000",
+      "attribute": "LIGHT",
+      "text": "\"The Forgiving Maiden\" + \"Darklord Marie\"",
+      "placement": "extra",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5208&request_locale=en",
+      "retrieved_at": "2026-09-06T11:45:06.950075+00:00",
+      "page_sha256": "0b926a0abf7276b4f6e73ebd939a50246b86c427d0526effc5aa11caad1b7050",
+      "text_sha256": "c9f44566108b8b5a44b37d75cfa113419acdddac38019f3290733328456d5707",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=114&request_locale=en"
+    },
+    {
+      "name": "Stamping Destruction",
+      "cid": "5345",
+      "spec": "SPELL",
+      "attribute": "SPELL",
+      "text": "If you control a Dragon monster: Target 1 Spell/Trap on the field; destroy that target, and if you do, inflict 500 damage to its controller.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5345&request_locale=en",
+      "retrieved_at": "2026-09-06T11:45:06.950749+00:00",
+      "page_sha256": "0b926a0abf7276b4f6e73ebd939a50246b86c427d0526effc5aa11caad1b7050",
+      "text_sha256": "7216ab4ef374a39204c3fd0512c80bf782aff831e6682bbed2f070a4e85fde33",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=114&request_locale=en"
+    },
+    {
+      "name": "Star Boy",
+      "cid": "4530",
+      "spec": "WATER Level 2 [\r\n\t\t\t\t\t\t\t\t\t\tAqua ／Effect ] ATK 550 DEF 500",
+      "attribute": "WATER",
+      "text": "As long as this card remains face-up on the field, increase the ATK of all WATER monsters by 500 points and decrease the ATK of all FIRE monsters by 400 points.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4530&request_locale=en",
+      "retrieved_at": "2026-09-06T11:45:06.956845+00:00",
+      "page_sha256": "0b926a0abf7276b4f6e73ebd939a50246b86c427d0526effc5aa11caad1b7050",
+      "text_sha256": "2384daad95fade901b13711758e63fbfef0b64b4bddfe475a1f63fde2d6f947e",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=114&request_locale=en"
+    }
+  ]
+}

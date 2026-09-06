@@ -1,0 +1,183 @@
+{
+  "profile": "experimental_current_tcg_not_reborn_confirmed",
+  "results": [
+    {
+      "candidate": "160dbfa8dc27352a",
+      "seed": 1000,
+      "status": "reached_decision",
+      "engine_status": 1,
+      "message_types": [
+        90,
+        90,
+        40,
+        41,
+        2,
+        41,
+        41,
+        11
+      ],
+      "logs": [],
+      "hand_counts": [
+        5,
+        5
+      ],
+      "flags": 12885092352
+    },
+    {
+      "candidate": "977eddb411cb6266",
+      "seed": 1001,
+      "status": "reached_decision",
+      "engine_status": 1,
+      "message_types": [
+        90,
+        90,
+        40,
+        41,
+        2,
+        41,
+        41,
+        11
+      ],
+      "logs": [],
+      "hand_counts": [
+        5,
+        5
+      ],
+      "flags": 12885092352
+    },
+    {
+      "candidate": "0bfbdae3659b6159",
+      "seed": 1002,
+      "status": "reached_decision",
+      "engine_status": 1,
+      "message_types": [
+        90,
+        90,
+        40,
+        41,
+        2,
+        41,
+        41,
+        11
+      ],
+      "logs": [],
+      "hand_counts": [
+        5,
+        5
+      ],
+      "flags": 12885092352
+    },
+    {
+      "candidate": "22af860e3c963100",
+      "seed": 1003,
+      "status": "reached_decision",
+      "engine_status": 1,
+      "message_types": [
+        90,
+        90,
+        40,
+        41,
+        2,
+        41,
+        41,
+        11
+      ],
+      "logs": [],
+      "hand_counts": [
+        5,
+        5
+      ],
+      "flags": 12885092352
+    },
+    {
+      "candidate": "6bcc971e0d0af3ef",
+      "seed": 1004,
+      "status": "reached_decision",
+      "engine_status": 1,
+      "message_types": [
+        90,
+        90,
+        40,
+        41,
+        2,
+        41,
+        41,
+        11
+      ],
+      "logs": [],
+      "hand_counts": [
+        5,
+        5
+      ],
+      "flags": 12885092352
+    },
+    {
+      "candidate": "593df70fb35282f5",
+      "seed": 1005,
+      "status": "reached_decision",
+      "engine_status": 1,
+      "message_types": [
+        90,
+        90,
+        40,
+        41,
+        2,
+        41,
+        41,
+        11
+      ],
+      "logs": [],
+      "hand_counts": [
+        5,
+        5
+      ],
+      "flags": 12885092352
+    },
+    {
+      "candidate": "5a2b15f08cbeaecb",
+      "seed": 1006,
+      "status": "reached_decision",
+      "engine_status": 1,
+      "message_types": [
+        90,
+        90,
+        40,
+        41,
+        2,
+        41,
+        41,
+        11
+      ],
+      "logs": [],
+      "hand_counts": [
+        5,
+        5
+      ],
+      "flags": 12885092352
+    },
+    {
+      "candidate": "9a2b405b3f78bf1f",
+      "seed": 1007,
+      "status": "reached_decision",
+      "engine_status": 1,
+      "message_types": [
+        90,
+        90,
+        40,
+        41,
+        2,
+        41,
+        41,
+        11
+      ],
+      "logs": [],
+      "hand_counts": [
+        5,
+        5
+      ],
+      "flags": 12885092352
+    }
+  ],
+  "completed_duels": 0,
+  "note": "Initial draw and first decision only. No piloting or strength evidence."
+}

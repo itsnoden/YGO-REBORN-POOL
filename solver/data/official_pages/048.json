@@ -1,0 +1,77 @@
+{
+  "page": 48,
+  "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=48&request_locale=en",
+  "total": 13918,
+  "records": [
+    {
+      "name": "Gadget Soldier",
+      "cid": "5092",
+      "spec": "FIRE Level 6 [\r\n\t\t\t\t\t\t\t\t\t\tMachine ／Normal ] ATK 1800 DEF 2000",
+      "attribute": "FIRE",
+      "text": "A rust-free machine warrior born to battle.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5092&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:06.501393+00:00",
+      "page_sha256": "e54871dcf38e3398cc535f670fe081b000a160bfd1f16b89da1e1da03674a2b1",
+      "text_sha256": "130733442f8631eb0d1fefac8427f362dbd2559b1ed51ebd071b9fd64d57330f",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=48&request_locale=en"
+    },
+    {
+      "name": "Gagagigo",
+      "cid": "5759",
+      "spec": "WATER Level 4 [\r\n\t\t\t\t\t\t\t\t\t\tReptile ／Normal ] ATK 1850 DEF 1000",
+      "attribute": "WATER",
+      "text": "This young evildoer used to have an evil heart, but by meeting a special person, he discovered justice.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5759&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:06.503268+00:00",
+      "page_sha256": "e54871dcf38e3398cc535f670fe081b000a160bfd1f16b89da1e1da03674a2b1",
+      "text_sha256": "cddf656524ca692c679a61f1b3cd6da127fc8b47a6ed097684eda811d68c4b12",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=48&request_locale=en"
+    },
+    {
+      "name": "Gaia Power",
+      "cid": "4932",
+      "spec": "SPELL Field",
+      "attribute": "SPELL",
+      "text": "Increase the ATK of all EARTH monsters by 500 points and decrease their DEF by 400 points.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4932&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:06.504110+00:00",
+      "page_sha256": "e54871dcf38e3398cc535f670fe081b000a160bfd1f16b89da1e1da03674a2b1",
+      "text_sha256": "3dbea7004a6c68dcb1cace36b0c2a7ec719887254706644a0f6dd4435b36c69f",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=48&request_locale=en"
+    },
+    {
+      "name": "Gaia Soul the Combustible Collective",
+      "cid": "6197",
+      "spec": "FIRE Level 4 [\r\n\t\t\t\t\t\t\t\t\t\tPyro ／Effect ] ATK 2000 DEF 0",
+      "attribute": "FIRE",
+      "text": "Once per turn: You can Tribute up to 2 Pyro-Type monsters; this card gains 1000 ATK for each. If this card attacks a Defense Position monster, inflict piercing battle damage to your opponent. During the End Phase: Destroy this card.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6197&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:06.505040+00:00",
+      "page_sha256": "e54871dcf38e3398cc535f670fe081b000a160bfd1f16b89da1e1da03674a2b1",
+      "text_sha256": "f56d4aad76ff1b475283b5ef310f5f500187ea4327e9aac38be80b3f5a0c762e",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=48&request_locale=en"
+    },
+    {
+      "name": "Gaia The Fierce Knight",
+      "cid": "4044",
+      "spec": "EARTH Level 7 [\r\n\t\t\t\t\t\t\t\t\t\tWarrior ／Normal ] ATK 2300 DEF 2100",
+      "attribute": "EARTH",
+      "text": "A knight whose horse travels faster than the wind. His battle-charge is a force to be reckoned with.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4044&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:06.505613+00:00",
+      "page_sha256": "e54871dcf38e3398cc535f670fe081b000a160bfd1f16b89da1e1da03674a2b1",
+      "text_sha256": "70dc950483f9e595762ce5090118e8022625e58d336507a1015bc7091615219a",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=48&request_locale=en"
+    }
+  ]
+}

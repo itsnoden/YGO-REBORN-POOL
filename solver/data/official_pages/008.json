@@ -1,0 +1,77 @@
+{
+  "page": 8,
+  "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=8&request_locale=en",
+  "total": 13918,
+  "records": [
+    {
+      "name": "Array of Revealing Light",
+      "cid": "5329",
+      "spec": "SPELL Field",
+      "attribute": "SPELL",
+      "text": "Declare 1 Type of monster. Any monster of the declared Type cannot declare an attack during the turn it is Normal Summoned, Flip Summoned or Special Summoned.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5329&request_locale=en",
+      "retrieved_at": "2026-09-06T11:41:52.303507+00:00",
+      "page_sha256": "b7ef4bede54a6c3a4f5d988b6c6ad6df5ca9a3ae120e7b41f7c394e26794c40a",
+      "text_sha256": "229bf6d0fe42bea8fcea40b1a56f660854686ef22bf3cc0d0670d51da7126e96",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=8&request_locale=en"
+    },
+    {
+      "name": "Arsenal Bug",
+      "cid": "5033",
+      "spec": "EARTH Level 3 [\r\n\t\t\t\t\t\t\t\t\t\tInsect ／Effect ] ATK 2000 DEF 2000",
+      "attribute": "EARTH",
+      "text": "If you control no other Insect-Type monsters, this card's ATK and DEF become 1000.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5033&request_locale=en",
+      "retrieved_at": "2026-09-06T11:41:52.304792+00:00",
+      "page_sha256": "b7ef4bede54a6c3a4f5d988b6c6ad6df5ca9a3ae120e7b41f7c394e26794c40a",
+      "text_sha256": "9734850369cf6c47447a048e90f4e3992d126ff9d74c687cd2fc70347ecbf151",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=8&request_locale=en"
+    },
+    {
+      "name": "Arsenal Robber",
+      "cid": "5739",
+      "spec": "TRAP",
+      "attribute": "TRAP",
+      "text": "Your opponent selects 1 Equip Spell Card from his/her Deck and sends it to the Graveyard.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5739&request_locale=en",
+      "retrieved_at": "2026-09-06T11:41:52.310432+00:00",
+      "page_sha256": "b7ef4bede54a6c3a4f5d988b6c6ad6df5ca9a3ae120e7b41f7c394e26794c40a",
+      "text_sha256": "693b1e91f59b5afe7b3859009c980ca1fde3053a78cfe1e654609a721169fd10",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=8&request_locale=en"
+    },
+    {
+      "name": "Arsenal Summoner",
+      "cid": "5703",
+      "spec": "WIND Level 4 [\r\n\t\t\t\t\t\t\t\t\t\tSpellcaster ／Flip／Effect ] ATK 1600 DEF 1600",
+      "attribute": "WIND",
+      "text": "FLIP: Add 1 \"Guardian\" card from your Deck to your hand, except \"Celtic Guardian\", \"Winged Dragon, Guardian of the Fortress #1\", \"Winged Dragon, Guardian of the Fortress #2\", \"Guardian of the Labyrinth\", or \"The Reliable Guardian\".",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5703&request_locale=en",
+      "retrieved_at": "2026-09-06T11:41:52.330859+00:00",
+      "page_sha256": "b7ef4bede54a6c3a4f5d988b6c6ad6df5ca9a3ae120e7b41f7c394e26794c40a",
+      "text_sha256": "aee1bf412970cd3543571894a73e4793257bdce2e208750da686bb4937d8a9d8",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=8&request_locale=en"
+    },
+    {
+      "name": "Assault on GHQ",
+      "cid": "6282",
+      "spec": "TRAP",
+      "attribute": "TRAP",
+      "text": "Target 1 monster you control; destroy it, then send 2 cards from the top of your opponent's Deck to the GY.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6282&request_locale=en",
+      "retrieved_at": "2026-09-06T11:41:52.344570+00:00",
+      "page_sha256": "b7ef4bede54a6c3a4f5d988b6c6ad6df5ca9a3ae120e7b41f7c394e26794c40a",
+      "text_sha256": "e74b1f34f7346021d18e2106dcf94b84f8f413c375f6e07d5ad0be6ef71268bd",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=8&request_locale=en"
+    }
+  ]
+}

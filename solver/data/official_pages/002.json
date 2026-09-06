@@ -1,0 +1,91 @@
+{
+  "page": 2,
+  "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=2&request_locale=en",
+  "total": 13918,
+  "records": [
+    {
+      "name": "Abyssal Designator",
+      "cid": "6132",
+      "spec": "SPELL",
+      "attribute": "SPELL",
+      "text": "Pay 1000 Life Points. Declare a Type and an Attribute. Your opponent must send 1 monster with both the declared Type and Attribute from their hand or Deck to the Graveyard.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6132&request_locale=en",
+      "retrieved_at": "2026-09-06T11:41:45.065400+00:00",
+      "page_sha256": "ce17575e35f782c49e821615063cf6458dbc7cd1d4ca1f83acca395800eb3186",
+      "text_sha256": "ce067fe6560c9a82f178e49f17a270a3c07475a3efcb8e8522d9635f804f172e",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=2&request_locale=en"
+    },
+    {
+      "name": "Accumulated Fortune",
+      "cid": "6916",
+      "spec": "TRAP",
+      "attribute": "TRAP",
+      "text": "Activate only as Chain Link 4 or higher. Draw 2 cards. You cannot activate this card if multiple cards/effects with the same name are in that Chain.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6916&request_locale=en",
+      "retrieved_at": "2026-09-06T11:41:45.066599+00:00",
+      "page_sha256": "ce17575e35f782c49e821615063cf6458dbc7cd1d4ca1f83acca395800eb3186",
+      "text_sha256": "00caed7da93490c37cff6e7fc4a64104f83592f13b9b38b718e479bcc41c171c",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=2&request_locale=en"
+    },
+    {
+      "name": "Acid Rain",
+      "cid": "4666",
+      "spec": "SPELL",
+      "attribute": "SPELL",
+      "text": "Destroy all Machine monsters on the field.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4666&request_locale=en",
+      "retrieved_at": "2026-09-06T11:41:45.067539+00:00",
+      "page_sha256": "ce17575e35f782c49e821615063cf6458dbc7cd1d4ca1f83acca395800eb3186",
+      "text_sha256": "f87859473d0f1228385d4b4160d14f17d9938600c815f26fc30e88bdd638e0e1",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=2&request_locale=en"
+    },
+    {
+      "name": "Acid Trap Hole",
+      "cid": "4691",
+      "spec": "TRAP",
+      "attribute": "TRAP",
+      "text": "Target 1 face-down Defense Position monster on the field; flip it face-up, then destroy it if its DEF is 2000 or less, or return it face-down if its DEF is more than 2000.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4691&request_locale=en",
+      "retrieved_at": "2026-09-06T11:41:45.068336+00:00",
+      "page_sha256": "ce17575e35f782c49e821615063cf6458dbc7cd1d4ca1f83acca395800eb3186",
+      "text_sha256": "0f16888150325e8c8f958e91137a7af99a116d43d297209c9e30ea07b32513d4",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=2&request_locale=en"
+    },
+    {
+      "name": "Acrobat Monkey",
+      "cid": "5705",
+      "spec": "EARTH Level 3 [\r\n\t\t\t\t\t\t\t\t\t\tMachine ／Normal ] ATK 1000 DEF 1800",
+      "attribute": "EARTH",
+      "text": "An autonomous monkey type robot which was developed with cutting-edge technology. It moves very acrobatically.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5705&request_locale=en",
+      "retrieved_at": "2026-09-06T11:41:45.069550+00:00",
+      "page_sha256": "ce17575e35f782c49e821615063cf6458dbc7cd1d4ca1f83acca395800eb3186",
+      "text_sha256": "84b12cbdad31f2e279903bcaba4b149778d7f883ee247c82ae9b98614bfadb1b",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=2&request_locale=en"
+    },
+    {
+      "name": "Aitsu",
+      "cid": "5642",
+      "spec": "FIRE Level 5 [\r\n\t\t\t\t\t\t\t\t\t\tFairy ／Normal ] ATK 100 DEF 100",
+      "attribute": "FIRE",
+      "text": "He seems to be very unreliable, but he might have incredible potential.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5642&request_locale=en",
+      "retrieved_at": "2026-09-06T11:41:45.072552+00:00",
+      "page_sha256": "ce17575e35f782c49e821615063cf6458dbc7cd1d4ca1f83acca395800eb3186",
+      "text_sha256": "937471f20012a1eeaf072800a993d09f044a6324203883f1fc4d8669a05d7dcb",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=2&request_locale=en"
+    }
+  ]
+}

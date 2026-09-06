@@ -1,0 +1,143 @@
+YGO REBORN — AUGUST 30, 2026 — BANLIST MASTER
+============================================================
+
+AUTHORITATIVE SOURCE
+- /YGO Reborn Database/2026-08-30 Banlist.mp4
+- Video duration: 13.0 seconds
+- TCG banlist tabs transcribed: Forbidden / Limited / Semi-Limited
+
+PURPOSE
+- Durable deckbuilding checkpoint. Load this file before building or evaluating any YGO Reborn deck.
+- Do NOT substitute a historical TCG/OCG banlist.
+- If a card is not listed here, it is unrestricted at up to 3 copies unless a later user-confirmed override is recorded below.
+
+TRANSCRIPTION NOTES
+- The Forbidden panel visually shows Snatch Steal twice. It is deduplicated below because the status is identical.
+- A prior explicit user confirmation states Bottomless Trap Hole is Semi-Limited (maximum 2). It is not visible in the Semi-Limited panel of this 13-second video, so it is preserved below as a USER-CONFIRMED FORMAT OVERRIDE/ADDITION rather than silently discarded.
+
+============================================================
+FORBIDDEN — MAX 0
+============================================================
+01. Self-Destruct Button
+02. Confiscation
+03. Snatch Steal
+04. Messenger of Peace
+05. Level Limit - Area B
+06. Gravity Bind
+07. Trap Dustshoot
+08. Tsukuyomi
+09. Thousand-Eyes Restrict
+10. Cyber-Stein
+11. Chaos Sorcerer
+12. Black Luster Soldier - Envoy of the Beginning
+13. Chaos Emperor Dragon - Envoy of the End
+14. Cyber Jar
+15. Fiber Jar
+16. Magical Scientist
+17. Tribe-Infecting Virus
+18. Witch of the Black Forest
+19. Yata-Garasu
+20. Graceful Charity
+21. Butterfly Dagger - Elma
+22. Change of Heart
+23. Dark Hole
+24. Delinquent Duo
+25. Harpie's Feather Duster
+26. Mirage of Nightmare
+27. Monster Reborn
+28. Painful Choice
+29. Pot of Greed
+30. Raigeki
+31. The Forceful Sentry
+32. Last Will
+33. Exchange of the Spirit
+34. Imperial Order
+35. Time Seal
+
+============================================================
+LIMITED — MAX 1
+============================================================
+01. Royal Decree
+02. Magician of Faith
+03. Breaker the Magical Warrior
+04. Solemn Judgment
+05. Chain Strike
+06. Ojama Trio
+07. Elemental HERO Stratos
+08. Neo-Spacian Grand Mole
+09. Spirit Reaper
+10. D.D. Warrior Lady
+11. Dark Magician of Chaos
+12. Exodia the Forbidden One
+13. Jinzo
+14. Left Arm of the Forbidden One
+15. Left Leg of the Forbidden One
+16. Morphing Jar
+17. Night Assailant
+18. Protector of the Sanctuary
+19. Right Leg of the Forbidden One
+20. Right Arm of the Forbidden One
+21. Sangan
+22. Treeborn Frog
+23. Overload Fusion
+24. Dimension Fusion
+25. Giant Trunade
+26. Future Fusion
+27. Nobleman of Crossout
+28. Book of Moon
+29. Card Destruction
+30. Heavy Storm
+31. Limiter Removal
+32. Mage Power
+33. Mystical Space Typhoon
+34. Pot of Avarice
+35. Premature Burial
+36. Scapegoat
+37. Swords of Revealing Light
+38. United We Stand
+39. Crush Card Virus
+40. Ring of Destruction
+41. Call of the Haunted
+42. Ceasefire
+43. Mind Crush
+44. Magic Cylinder
+45. Mirror Force
+46. Torrential Tribute
+
+============================================================
+SEMI-LIMITED — MAX 2 — VIDEO PANEL
+============================================================
+01. D.D. Assailant
+02. Apprentice Magician
+03. Manticore of Darkness
+04. Metamorphosis
+05. Creature Swap
+06. Reinforcement of the Army
+07. Wall of Revealing Light
+08. Reckless Greed
+09. Deck Devastation Virus
+10. Good Goblin Housekeeping
+
+============================================================
+USER-CONFIRMED FORMAT OVERRIDES / ADDITIONS
+============================================================
+- Bottomless Trap Hole — SEMI-LIMITED — MAX 2
+  Source: user explicit confirmation for the YGO Reborn August 30, 2026 format.
+  Note: not visible in the Semi-Limited panel of the saved 13-second banlist video; preserve this user confirmation unless the user later corrects it.
+
+============================================================
+IMPORTANT DECKBUILDING CONSEQUENCES
+============================================================
+- Brain Control is NOT listed in the saved video transcription -> up to 3.
+- Destiny Draw is NOT listed -> up to 3.
+- Destiny HERO - Malicious is NOT listed -> up to 3 (and is separately confirmed present in the card pool).
+- Elemental HERO Stratos -> 1.
+- Treeborn Frog -> 1.
+- Reinforcement of the Army -> 2.
+- Crush Card Virus -> 1.
+- Royal Decree -> 1.
+- Solemn Judgment -> 1.
+- Bottomless Trap Hole -> 2 by user-confirmed format override.
+
+CHECKPOINT RULE
+Before recommending, optimizing, or comparing a YGO Reborn deck, use this BANLIST MASTER together with the current card-pool MASTER. Never infer legality from a historical real-world Yu-Gi-Oh format.

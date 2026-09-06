@@ -1,0 +1,91 @@
+{
+  "page": 61,
+  "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=61&request_locale=en",
+  "total": 13918,
+  "records": [
+    {
+      "name": "Impenetrable Formation",
+      "cid": "6355",
+      "spec": "SPELL Continuous",
+      "attribute": "SPELL",
+      "text": "Select 1 monster on your side of the field to activate this card. While you have 2 or more monsters on your side of the field, and all monsters on your side of the field are in Defense Position, the selected monster gains 700 DEF. When the selected monster is removed from the field, destroy this card.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6355&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:29.208207+00:00",
+      "page_sha256": "81e59cba392f3a3392bf2aa3caec36d8ae147180f590339b61bf6c4b97bb36c5",
+      "text_sha256": "f5eef80aa6c4e18526d6b764327af6a1056f4e70a16860d3a7ba6ee43efad38b",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=61&request_locale=en"
+    },
+    {
+      "name": "Imperial Order",
+      "cid": "4960",
+      "spec": "TRAP Continuous",
+      "attribute": "TRAP",
+      "text": "Negate all Spell effects on the field. Once per turn, during the Standby Phase, you must pay 700 LP (this is not optional), or this card is destroyed.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4960&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:29.208877+00:00",
+      "page_sha256": "81e59cba392f3a3392bf2aa3caec36d8ae147180f590339b61bf6c4b97bb36c5",
+      "text_sha256": "7bab6acba616dd2faff5bcdd4ac42375609378e63295fed5b4a0981188381a48",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=61&request_locale=en"
+    },
+    {
+      "name": "Inaba White Rabbit",
+      "cid": "5374",
+      "spec": "EARTH Level 3 [\r\n\t\t\t\t\t\t\t\t\t\tBeast ／Spirit／Effect ] ATK 700 DEF 500",
+      "attribute": "EARTH",
+      "text": "This card cannot be Special Summoned. This card returns to the owner's hand during the End Phase of the turn that this card is Normal Summoned or flipped face-up. This monster attacks your opponent's Life Points directly.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5374&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:29.209613+00:00",
+      "page_sha256": "81e59cba392f3a3392bf2aa3caec36d8ae147180f590339b61bf6c4b97bb36c5",
+      "text_sha256": "771153eb58b1524150b6d099e5a7475134618ec86784666900bde1fec3bdcc88",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=61&request_locale=en"
+    },
+    {
+      "name": "Incandescent Ordeal",
+      "cid": "5783",
+      "spec": "SPELL Ritual",
+      "attribute": "SPELL",
+      "text": "This card is used to Ritual Summon \"Legendary Flame Lord\". You must also Tribute monsters whose total Levels equal 7 or more from the field or your hand.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5783&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:29.210215+00:00",
+      "page_sha256": "81e59cba392f3a3392bf2aa3caec36d8ae147180f590339b61bf6c4b97bb36c5",
+      "text_sha256": "89a4348edda3156adcaad0998bca4d520b93cfc25e6d4e7e3138dac4b423620b",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=61&request_locale=en"
+    },
+    {
+      "name": "Indomitable Fighter Lei Lei",
+      "cid": "6421",
+      "spec": "EARTH Level 4 [\r\n\t\t\t\t\t\t\t\t\t\tBeast-Warrior ／Effect ] ATK 2300 DEF 0",
+      "attribute": "EARTH",
+      "text": "If this card attacks, it is changed to Defense Position at the end of the Battle Phase. This card's battle position cannot be changed until the end of your next turn, except with a card effect.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6421&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:29.210892+00:00",
+      "page_sha256": "81e59cba392f3a3392bf2aa3caec36d8ae147180f590339b61bf6c4b97bb36c5",
+      "text_sha256": "fe956164a176de9837a7a1e66be222d67904ce89ceef1776d28c702d3a2aaa98",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=61&request_locale=en"
+    },
+    {
+      "name": "Infernal Dragon",
+      "cid": "6944",
+      "spec": "DARK Level 4 [\r\n\t\t\t\t\t\t\t\t\t\tDragon ／Effect ] ATK 2000 DEF 0",
+      "attribute": "DARK",
+      "text": "Once per turn, during the End Phase, if this card attacked this turn: Destroy this card. When this card on the field is destroyed and sent to the GY: You can Tribute 1 monster; Special Summon this card from the GY.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6944&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:29.211500+00:00",
+      "page_sha256": "81e59cba392f3a3392bf2aa3caec36d8ae147180f590339b61bf6c4b97bb36c5",
+      "text_sha256": "d393958229a00370bec7a1bb9f69ce31ec559f4687954bfea3762560e6311b40",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=61&request_locale=en"
+    }
+  ]
+}

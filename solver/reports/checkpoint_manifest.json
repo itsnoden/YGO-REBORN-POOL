@@ -1,0 +1,12 @@
+{
+  "checkpoint": "0002",
+  "tests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "core_version": "11.0",
+  "complete_duels": 0,
+  "first_decision_smokes": 8,
+  "current_number_one": null,
+  "publication": "user_approved_github_checkpoint"
+}

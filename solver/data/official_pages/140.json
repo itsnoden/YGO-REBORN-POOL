@@ -1,0 +1,21 @@
+{
+  "page": 140,
+  "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=140&request_locale=en",
+  "total": 13918,
+  "records": [
+    {
+      "name": "Zure, Knight of Dark World",
+      "cid": "6497",
+      "spec": "DARK Level 4 [\r\n\t\t\t\t\t\t\t\t\t\tFiend ／Normal ] ATK 1800 DEF 1500",
+      "attribute": "DARK",
+      "text": "The name of this illustrious knight is known by all residents of Dark World. He never oppresses the commoners.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6497&request_locale=en",
+      "retrieved_at": "2026-09-06T11:45:52.736325+00:00",
+      "page_sha256": "6560c9507ccbc0edbd51fa4f750bbca453e2d4a9f9ad0ca39126a5b6b3b45cfc",
+      "text_sha256": "3cba4cdb667b4f72b95acaff323126188f2f9d14bf26b03fe1c13f475e3f8bb7",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=140&request_locale=en"
+    }
+  ]
+}

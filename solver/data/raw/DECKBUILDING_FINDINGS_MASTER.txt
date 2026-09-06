@@ -1,0 +1,1436 @@
+YGO REBORN — AUGUST 30, 2026 — DECKBUILDING FINDINGS MASTER
+====================================================================
+LAST UPDATED: 2026-09-04
+PURPOSE: Durable handoff for future chats. This file records deckbuilding conclusions,
+strongest engines found, current best deck candidate, caveats, and what must be rechecked
+before changing the ranking.
+
+READ THESE FILES FIRST IN EVERY NEW CHAT
+----------------------------------------
+1. /YGO Reborn Database/YGO_Reborn_Aug30_2026_400plus_MASTER.txt
+   - Current reconstructed pool authority.
+   - Current checkpoint at time of this file: 2,273 unique confirmed cards / 0 unresolved.
+2. /YGO Reborn Database/YGO_Reborn_Aug30_2026_BANLIST_MASTER.txt
+   - Current legality authority.
+   - Rule: if a card is not listed there, it is unrestricted up to 3 copies unless a
+     later user-confirmed override exists.
+3. /YGO Reborn Database/YGO_Reborn_Aug30_2026_DECKBUILDING_FINDINGS_MASTER.txt
+   - This file. Continue from these findings rather than restarting deck research.
+
+IMPORTANT DECKBUILDING RULE
+---------------------------
+Do NOT copy a historical Yu-Gi-Oh tournament deck and assume it is optimal here.
+Build only from the reconstructed YGO Reborn pool and the saved Reborn banlist.
+Historical lists may be used only as background ideas, not as the authority.
+
+CURRENT FORMAT-SPECIFIC BANLIST FACTS THAT MATTER MOST
+-----------------------------------------------------
+Forbidden examples: Confiscation, Snatch Steal, Messenger of Peace, Level Limit - Area B,
+Gravity Bind, Trap Dustshoot, Tsukuyomi, Thousand-Eyes Restrict, Cyber-Stein,
+Chaos Sorcerer, Black Luster Soldier - Envoy of the Beginning, Chaos Emperor Dragon,
+Cyber Jar, Fiber Jar, Magical Scientist, Tribe-Infecting Virus, Witch of the Black Forest,
+Yata-Garasu, Graceful Charity, Change of Heart, Dark Hole, Delinquent Duo,
+Harpie's Feather Duster, Mirage of Nightmare, Monster Reborn, Painful Choice,
+Pot of Greed, Raigeki, The Forceful Sentry, Last Will, Exchange of the Spirit,
+Imperial Order, Time Seal.
+
+Limited to 1 examples that materially affect top decks: Royal Decree, Magician of Faith,
+Breaker the Magical Warrior, Solemn Judgment, Elemental HERO Stratos,
+Neo-Spacian Grand Mole, Spirit Reaper, D.D. Warrior Lady, Dark Magician of Chaos,
+Sangan, Treeborn Frog, Dimension Fusion, Giant Trunade, Future Fusion,
+Nobleman of Crossout, Book of Moon, Card Destruction, Heavy Storm,
+Mystical Space Typhoon, Pot of Avarice, Premature Burial, Crush Card Virus,
+Ring of Destruction, Call of the Haunted, Mirror Force, Torrential Tribute.
+
+Semi-limited to 2 examples: D.D. Assailant, Apprentice Magician, Manticore of Darkness,
+Metamorphosis, Creature Swap, Reinforcement of the Army, Wall of Revealing Light,
+Reckless Greed, Deck Devastation Virus, Good Goblin Housekeeping.
+User-confirmed override: Bottomless Trap Hole is semi-limited to 2.
+
+Important unrestricted cards under this saved banlist include:
+- Brain Control (3)
+- Destiny Draw (3)
+- Destiny HERO - Malicious (3)
+- Destiny HERO - Disk Commander (3 under legality list)
+- Raiza the Storm Monarch (3)
+- Vanity's Fiend (3)
+- Soul Exchange (3)
+- Upstart Goblin (3)
+- Necrovalley (3)
+- Gravekeeper's Commandant (3)
+- Terraforming (3)
+- Royal Tribute (3)
+- Royal Oppression (3)
+- Makyura the Destructor (3 under legality list)
+- Card of Safe Return (3)
+- Reasoning (3)
+- Monster Gate (3)
+- Mass Driver (3)
+- Cannon Soldier (3)
+- Magical Stone Excavation (3)
+
+CURRENT #1 DECK CANDIDATE
+-------------------------
+GRAVEKEEPER ROYAL TRIBUTE LOCK / CONTROL
+Status: current best deck candidate after whole-pool review. Tier 0 candidate, NOT claimed
+as tournament-proven Tier 0 without actual event data.
+
+Why it moved above D-HERO Raiza/Vanity:
+- Necrovalley + Gravekeeper's Commandant + Terraforming gives 9 direct access cards to
+  Necrovalley before Upstart filtering.
+- Royal Tribute is unrestricted at 3 in this custom banlist.
+- Royal Tribute under Necrovalley can strip monsters from the opponent's hand while the
+  Gravekeeper deck is constructed to minimize self-damage from the effect.
+- Necrovalley directly attacks many of the strongest engines found in this pool:
+  Malicious, Treeborn Frog, Disk Commander revival, Zombie recursion, Book of Life,
+  Premature Burial/Call-style graveyard recursion, Spell Striker graveyard banish costs,
+  and several combo shells.
+- Gravekeeper's Spy gives the deck a strong non-combo backup plan instead of relying only
+  on Royal Tribute.
+- Rite of Spirit works as Gravekeeper-specific recursion while playing through Necrovalley.
+- Royal Oppression is also unrestricted and can be used as a supplemental lock, though
+  too many copies can interfere with Spy/Rite, so it should not automatically be maxed.
+
+CURRENT MAIN DECK — 40 — NO-SIDE TOURNAMENT v5
+-------------------------------------------
+MONSTERS — 12
+3 Gravekeeper's Commandant
+3 Gravekeeper's Spy
+3 Gravekeeper's Assailant
+1 Breaker the Magical Warrior
+1 Neo-Spacian Grand Mole
+1 D.D. Warrior Lady
+
+SPELLS — 16
+3 Necrovalley
+3 Royal Tribute
+3 Terraforming
+3 Upstart Goblin
+1 Heavy Storm
+1 Mystical Space Typhoon
+1 Book of Moon
+1 Nobleman of Crossout
+
+TRAPS — 12
+1 Deck Devastation Virus
+2 Anti-Spell Fragrance
+1 Phoenix Wing Wind Blast
+1 Dust Tornado
+2 Bottomless Trap Hole
+1 Royal Oppression
+1 Solemn Judgment
+1 Mirror Force
+1 Torrential Tribute
+1 Ring of Destruction
+
+SIDE-DECK NOTE
+--------------
+User explicitly requested NO SIDE DECK for the ranking/test. No side-deck cards are assumed in any matchup conclusion below. Previous side ideas are archival only and do not support the current #1 ranking.
+
+WHY THIS DECK IS CURRENTLY #1
+-----------------------------
+1. The no-side matchup stress test found that the prior 9-monster v3 over-optimized Royal Tribute asymmetry at the cost of too many monsterless hands.
+2. With 3 Upstart Goblin treated as immediate cycling, the 9-monster v3 still opened without a monster about 22.6% of the time in simulation.
+3. The 12-monster v5 reduces that monsterless-opening rate to about 12.2% while leaving Necrovalley + Royal Tribute access essentially unchanged at about 25.7–25.8%.
+4. CORRECTED: In simulated Royal Tribute lock openings, stricter sequencing leaves v5 discarding zero of its own remaining monsters about 68.8% of the time; average self-discard is about 0.36 monster. Earlier ~79.8% / ~0.22 figures were overstated and are superseded.
+5. Breaker the Magical Warrior is a generic going-second Spell/Trap answer for Macro/Burn/Counter-Fairy/backrow fields.
+6. Neo-Spacian Grand Mole and D.D. Warrior Lady are immediate main-deck monster answers for established Vanity's Fiend, Monarchs, Great Shogun Shien, Cyber Dragon, Horus, and other large threats.
+7. One Deck Devastation Virus remains as a high-upside card against D-HERO low-ATK engine monsters, Gadgets, small Six Samurai, Pyramid Turtle, Cyber Valley/Card Trooper, and many burn/control monsters. IMPORTANT correction: Gravekeeper's Commandant is EARTH, not DARK, so the natural direct DDV tribute in this list is Gravekeeper's Assailant at 2000 ATK under Necrovalley (Spy can later access Assailant).
+8. Anti-Spell Fragrance is especially strong against D-HERO Monarch and Brain/Soul-Exchange Monarch variants because it delays Destiny Draw, Brain Control, Soul Exchange, Heavy Storm, MST, and similar Spell-heavy answers.
+9. Dust Tornado is mained in v5 specifically because this is a no-side all-comers deck; it improves Macro Monarch, Burn/Stall, Counter Fairy, opposing continuous cards, and set Spells under Anti-Spell without being a matchup-only side card.
+10. No tested meta candidate had both a favorable Gravekeeper matchup and a better overall spread against the rest of the pool.
+
+PREVIOUS #1 / CURRENT #2
+------------------------
+D-HERO RAIZA / VANITY TURBO
+Core findings:
+- 3 Destiny Draw + 3 Malicious is extremely efficient.
+- 3 Brain Control is unusually powerful with unrestricted Raiza.
+- Malicious becomes free tribute material for Raiza after Destiny Draw setup.
+- Vanity's Fiend gives a strong Special Summon lock after the deck uses its own graveyard
+  resources.
+- Crush Card Virus has many natural DARK tribute targets.
+- The engine is still one of the strongest decks in the pool, but Necrovalley + Royal
+  Tribute attacks it directly enough that Gravekeepers currently rank above it.
+
+Earlier 40-card D-HERO/Raiza/Vanity shell used for comparison:
+MONSTERS — 18
+3 Raiza the Storm Monarch
+2 Vanity's Fiend
+3 Destiny HERO - Malicious
+3 Destiny HERO - Disk Commander
+1 Destiny HERO - Diamond Dude
+1 Elemental HERO Stratos
+1 Treeborn Frog
+2 Card Trooper
+1 Sangan
+1 Spirit Reaper
+
+SPELLS — 17
+3 Destiny Draw
+3 Brain Control
+2 Soul Exchange
+3 Upstart Goblin
+2 Reinforcement of the Army
+1 Heavy Storm
+1 Mystical Space Typhoon
+1 Premature Burial
+1 Book of Moon
+
+TRAPS — 5
+1 Call of the Haunted
+1 Crush Card Virus
+1 Torrential Tribute
+1 Mirror Force
+1 Ring of Destruction
+
+OTHER HIGH-POWER ENGINES REVIEWED
+---------------------------------
+A. D-HERO Dimension Fusion / Diamond Dude Turbo
+- Very high ceiling.
+- Dimension Fusion is limited to 1, so consistency is lower than the Gravekeeper shell.
+- Vulnerable to Necrovalley and graveyard disruption.
+
+B. Manticore of Darkness + Card of Safe Return
+- Both are in pool; Manticore is semi-limited to 2.
+- Potential infinite/near-infinite draw interaction must be evaluated based on exact
+  card text/errata implemented by YGO Reborn.
+- Current conclusion: too assembly-dependent to rank above Gravekeepers unless the
+  simulator uses older card text that materially changes consistency.
+
+C. Royal Magical Library / Exodia
+- Pool contains Royal Magical Library, Upstart Goblin, Reload, Magical Mallet,
+  Card Destruction, Reckless Greed and all Exodia pieces.
+- High ceiling but insufficient guaranteed access to Library/draw density to outrank
+  Gravekeepers under current assumptions.
+
+D. Makyura / trap-combo shells
+- Makyura the Destructor is in pool and not listed on banlist, so legality list allows 3.
+- This is a major caveat: pre-errata Makyura would radically change the format and could
+  enable FTK lines. Current card text is much weaker.
+- Do not declare an FTK #1 without confirming which card text YGO Reborn actually uses.
+
+E. Reasoning / Monster Gate turbo
+- Both are in pool and unrestricted by the saved list.
+- Strong combo potential with graveyard setup and tribute fodder.
+- Necrovalley / Royal Tribute is a major hostile matchup.
+
+F. Machine Duplication / Cyber Valley / Card Trooper shells
+- Machine Duplication is confirmed present.
+- Cyber Valley and Card Trooper are in pool.
+- Explosive but more combination-dependent and less oppressive across matchups than the
+  current Gravekeeper shell.
+
+G. Zombies / Card of Safe Return
+- Strong recursion and draw potential.
+- Necrovalley is an unusually direct answer and is available with 9 access cards in the
+  current #1 deck.
+
+H. Six Samurai
+- Strong swarming/pressure shell in pool.
+- Vulnerable to Royal Tribute, Bottomless Trap Hole, Royal Oppression, and generic control.
+- Current ranking below Gravekeepers and D-HERO.
+
+I. Gadgets
+- Red/Green/Yellow Gadget all confirmed in pool.
+- Very consistent, but Royal Tribute and Deck Devastation Virus are especially punishing.
+
+J. Macro / banish control and Monarch control
+- Macro Cosmos / Dimensional Fissure / Monarch tools are present.
+- Strong counter strategy, but current conclusion is lower raw card advantage and weaker
+  hand attack than Gravekeeper Royal Tribute.
+
+CURRENT POWER RANKING
+---------------------
+1. Gravekeeper Royal Tribute Lock / Control — Tier 0 candidate
+2. D-HERO Raiza / Vanity Turbo — Tier 1 / borderline Tier 0
+3. Macro Monarch / anti-grave control — Tier 1 candidate
+4. Machine Duplication / Cyber Valley Turbo — Tier 1 candidate
+5. Six Samurai — Tier 1-ish candidate
+Additional dangerous shells: Zombies/Safe Return, Gadgets, Reasoning/Gate turbo,
+Library/Exodia, Manticore/Safe Return, Makyura combo.
+
+CRITICAL ERRATA / SIMULATOR-TEXT CAVEAT
+---------------------------------------
+The largest unresolved deckbuilding question is NOT pool membership or banlist legality;
+it is which card text/errata YGO Reborn actually implements for historically altered cards.
+This matters especially for:
+- Makyura the Destructor
+- Destiny HERO - Disk Commander
+- Dark Magician of Chaos
+- other historically errata'd combo cards
+
+If YGO Reborn uses PRE-ERRATA versions, the current ranking must be reopened immediately.
+An FTK/combo deck could become the actual #1 deck.
+Do not assume old text merely because the pool resembles an older era; verify in-game text
+or a reliable YGO Reborn source first.
+
+
+THIRD WHOLE-POOL POWER AUDIT — FIND SOMETHING MORE BROKEN
+----------------------------------------------------------
+Goal:
+- Try to dethrone Gravekeeper Prison with a true FTK/OTK, infinite loop, hand wipe, summon
+  lock, or other format-specific abuse using only the confirmed 2,273-card pool and saved
+  Reborn banlist.
+
+Major challengers rechecked:
+A. Protector of the Sanctuary hand-wipe ideas
+- Protector + Card Destruction/Disturbance looks like a complete hand wipe at first glance, but
+  those draw effects cannot legally be activated while Protector is already face-up. The wipe
+  only works if Protector becomes face-up after the draw effect is activated or if a mandatory
+  effect such as Morphing Jar resolves while Protector is face-up. That makes the turn-1 setup
+  too specific to outrank Royal Tribute.
+
+B. Empty Jar / deck-out FTK
+- Morphing Jar, Book of Taiyou, The Shallow Grave, A Feather of the Phoenix, Serial Spell,
+  Reload, Magical Mallet and Card Destruction are in the pool.
+- However Cyber Jar is Forbidden, Morphing Jar is Limited to 1, Book of Moon is Limited to 1,
+  and several major Empty-Jar consistency cards are not in this pool. The available version is
+  too fragile and too dependent on seeing the single Morphing Jar.
+
+C. Cyber Valley / Dimension Fusion infinite draw
+- Cyber Valley, Machine Duplication, Spell Economics, Dimension Fusion and Dark Magician of
+  Chaos are all present. The classic infinite loop requires Dark Magician of Chaos to return
+  Dimension Fusion immediately when Special Summoned. Current DMoC text does not do that; it
+  retrieves a Spell only in the End Phase and is once per turn. Therefore the loop is NOT
+  promoted unless YGO Reborn is directly proven to use the pre-errata DMoC text.
+
+D. Makyura / Magical Explosion / Life Equalizer
+- Magical Explosion, Life Equalizer, Reasoning, Monster Gate, Magical Stone Excavation and
+  other spell-loading tools exist.
+- Current Makyura allows only one Trap from hand for the turn after it is sent from the Monster
+  Zone to the GY. That is not enough for a clean first-turn Life Equalizer + Magical Explosion
+  kill, and the multiple-Trap setup is less consistent than Royal Tribute Prison.
+
+E. Manticore of Darkness + Card of Safe Return Exodia
+- The two-Manticore loop with Card of Safe Return is a real infinite-draw interaction if one
+  Manticore is in the GY after being sent that turn and the other is face-up to alternate as
+  the send cost.
+- Manticore is Semi-Limited to 2 and there is no reliable direct Manticore searcher in the
+  confirmed pool, so assembly consistency remains too low to beat Gravekeepers.
+
+F. Reversal Quiz / Black Pendant
+- Reversal Quiz, Black Pendant, Wall of Revealing Light, Convulsion of Nature and Archfiend's
+  Oath are present. The OTK is possible in principle but requires too many individually specific
+  pieces and precise LP manipulation. It is not close to the 25%+ natural Royal Tribute opening
+  rate.
+
+G. Ultimate Offering / Gadget / Cannon Soldier burn
+- Ultimate Offering, all three Gadgets, Cannon Soldier, Dark Room of Nightmare and Makyura are
+  present and can produce very high burn ceilings.
+- A turn-1 version requires Makyura to be sent from the Monster Zone, Ultimate Offering to be
+  activated from hand, Cannon Soldier/Gadget access, plus burn amplification. The opening is far
+  more multi-piece than Gravekeepers and is vulnerable to bad Monster Gate hits.
+
+H. Demise / Doom Dozer OTK
+- Demise, King of Armageddon, Doom Dozer and Megamorph are present, but Advanced Ritual Art is
+  absent from the confirmed pool. The remaining ritual routes require more cards from hand and
+  are not consistent enough to rank #1.
+
+I. Horus / Spell Canceller / Jinzo hard locks
+- Horus LV8, Spell Canceller, Jinzo, Royal Decree, Jowgen and Vanity monsters were reviewed as
+  spell/trap/special-summon lock packages. Their ceilings are high, but they require more setup
+  and leave more conventional outs than Necrovalley + Royal Tribute + draw denial.
+
+J. Wanghu / Burden / Kaiser stun
+- King Tiger Wanghu, Burden of the Mighty, Kaiser Colosseum and Royal Oppression can create a
+  strong monster-summon prison. This is a legitimate anti-meta shell but is a 2-3 card board lock
+  that does not generate the same immediate hand advantage as Royal Tribute.
+
+Third-audit conclusion:
+- No different archetype is promoted above Gravekeepers.
+- The strongest improvement found is Drop Off. It directly converts successful Royal Tribute
+  openings into a next-draw denial sequence and is unrestricted by the saved Reborn list.
+- At the end of this third audit the best build was GRAVEKEEPER ROYAL TRIBUTE / DROP OFF PRISON v3; this has since been SUPERSEDED by the no-side matchup-tested v4 below.
+- Re-open the ranking immediately if in-game YGO Reborn text proves PRE-ERRATA Dark Magician of
+  Chaos or another historically changed combo card is implemented.
+
+LATEST POWER RANKING AFTER THIRD AUDIT
+--------------------------------------
+1. Gravekeeper Royal Tribute / Drop Off Prison v3 — strongest current Tier 0 candidate
+2. D-HERO Raiza / Vanity Turbo
+3. Macro Monarch / anti-grave control
+4. Machine Duplication / Cyber Valley Turbo (non-infinite under current DMoC text)
+5. Six Samurai
+High-ceiling but lower-consistency challengers: Manticore/Safe Return Exodia, Empty Jar,
+Magical Explosion/Life Equalizer, Reversal Quiz, Offering/Gadget/Cannon burn, Demise OTK,
+Horus/Spell lock, Wanghu/Burden stun.
+
+
+FOURTH AUDIT — NO-SIDE META MATCHUP STRESS TEST — 2026-09-04
+-------------------------------------------------------------
+User constraint:
+- NO SIDE DECK. Every matchup judgment uses only each deck's main-deck plan. No side cards are counted as answers.
+
+Method:
+- Rebuilt/considered the strongest plausible main-deck versions from the confirmed 2,273-card pool and saved Reborn banlist rather than historical tournament lists.
+- Stress-tested Gravekeeper Prison against D-HERO Monarch, pure/Brain-Control Monarch, Macro Monarch, Six Samurai, Zombies/Card of Safe Return, Gadgets/Ultimate Offering, Cyber Valley/Machine Duplication, Dark World, Burn/Stall, Counter Fairy/Horus-style control, combo shells, and the Gravekeeper mirror.
+- Used opening-hand Monte Carlo for Gravekeeper consistency and key opposing combo access, plus card-interaction analysis. These are matchup-model results, not literal simulator duel records.
+
+Royal Tribute target-density reference for 5-card hands:
+- 18-monster D-HERO Monarch/Zombie shell: ~96.0% chance to open at least one monster; 2.25 monsters average. Even after committing one monster, ~76.0% of hands still contain another monster, averaging ~1.29 residual monsters.
+- 17-monster pure/Macro Monarch shell: ~94.9% at least one monster; 2.13 average. After committing one, ~72.0% still hold another, averaging ~1.18.
+- 19-monster Six Samurai shell: ~96.9% at least one monster; 2.38 average. After committing one, ~79.6% still hold another, averaging ~1.41.
+- 15-monster Gadget shell: ~91.9% at least one monster; 1.88 average.
+These densities are why Royal Tribute remains high-impact even when Gravekeepers goes second after an opponent has already committed a monster.
+
+MATCHUP CONCLUSIONS — MAIN DECK ONLY
+--------------------------------------
+D-HERO MONARCH — GRAVEKEEPERS FAVORED
+- Necrovalley attacks Malicious, Treeborn Frog, Disk Commander/Premature/Call-style recursion, and Spell Striker-style GY costs.
+- Royal Tribute attacks a monster-dense hand; DDV specifically punishes Malicious, Disk Commander, Treeborn, Card Trooper and other low-ATK engine pieces.
+- Anti-Spell delays Destiny Draw, Brain Control, Soul Exchange and generic Spell outs.
+- D-HERO's best route is to go first, extract value with Destiny Draw before Necrovalley lands, then establish Vanity's Fiend/Raiza or remove Necrovalley. Grand Mole/DD Warrior Lady in v4 are included as broad main-deck answers to those established threats.
+
+PURE / BRAIN-CONTROL MONARCH — GRAVEKEEPERS SLIGHTLY FAVORED
+- This is closer because the deck is less graveyard-dependent than D-HERO.
+- Brain Control/Soul Exchange into Raiza or Mobius can punish Gravekeepers, especially going first.
+- Royal Tribute still attacks the Monarch/tribute-fodder hand heavily, and Anti-Spell makes the Spell-based tribute package slower.
+
+MACRO MONARCH — CLOSEST MATCHUP; APPROXIMATELY EVEN TO SLIGHT GRAVEKEEPER EDGE
+- This is the hardest mainstream matchup because Necrovalley does not meaningfully shut down D.D. Survivor/banish-based resource loops.
+- Macro/Fissure also reduces the value of some graveyard-centric cards.
+- Gravekeepers still has the stronger immediate hand attack in Royal Tribute and retains Anti-Spell, DDV, Torrential/Mirror/Ring, plus v4 Breaker/Dust/Phoenix to interact with continuous banish cards.
+- No clear reason emerged to rank Macro Monarch above Gravekeepers across the whole field.
+
+SIX SAMURAI — GRAVEKEEPERS SLIGHTLY FAVORED, VERY DIE-ROLL SENSITIVE
+- Six Samurai is the most explosive non-combo challenger. Royal Tribute is especially punishing because optimized Six Samurai lists are monster-dense.
+- A deliberately aggressive Six Samurai model using roughly 12 normal Samurai starters, 3 Grandmaster, 3 Great Shogun Shien, up to 3 Double Summon, 2 ROTA and 3 Upstart reached a turn-1 Shogun-establishment line only around the low-teens percentage range (~13% in the most aggressive tested construction).
+- That Shogun opening is dangerous because it can limit the Gravekeeper player to one Spell/Trap activation for the turn, preventing Necrovalley + Royal Tribute from both being activated immediately.
+- Kamon can also attack face-up Spell/Trap cards when another Six Samurai is present.
+- However going first, Gravekeepers can strip Grandmaster/Shogun/Samurai from hand before the swarm happens; DDV hits many smaller Samurai and Bottomless/Oppression/Torrential punish Grandmaster/Shogun summons.
+
+ZOMBIES / CARD OF SAFE RETURN — GRAVEKEEPERS STRONGLY FAVORED
+- Necrovalley directly attacks Book of Life, Vampire Lord recursion and other graveyard-return engines.
+- Royal Tribute and DDV pressure Pyramid Turtle/smaller monsters and Anti-Spell delays Safe Return/Book of Life.
+
+GADGETS / ULTIMATE OFFERING — GRAVEKEEPERS STRONGLY FAVORED
+- Necrovalley is not the key; DDV is. All three Gadgets fall in the low-ATK range and DDV can punish field/hand and future draws.
+- Royal Tribute strips Gadget-heavy hands; Torrential/Mirror/Ring and Royal Oppression/control cards cover Offering-driven boards.
+
+CYBER VALLEY / MACHINE DUPLICATION — GRAVEKEEPERS FAVORED
+- Royal Tribute attacks the required monsters; DDV hits Cyber Valley/Card Trooper-type Duplication targets.
+- Anti-Spell delays Machine Duplication and Royal Oppression/Torrential/Bottomless punish the explosive Special Summon turns.
+- The current-text DMoC assumption prevents the previously investigated Dimension Fusion infinite loop.
+
+DARK WORLD — CLOSE BUT STILL SLIGHT GRAVEKEEPER EDGE
+- This is the natural Royal Tribute anti-synergy matchup: Broww discarded by an opponent's card effect draws 2, so a Royal Tribute can refill the Dark World player's hand instead of cleanly deleting it.
+- However Necrovalley negates effects that would move cards out of the GY, suppressing Goldd/Sillva/Beiige self-Special-Summon effects under current card text.
+- DDV hits Broww/Scarr and Anti-Spell delays Dark World Dealings/Lightning. Dark World is therefore a real concern, but not enough to overturn the #1 ranking.
+
+BURN / STALL — APPROXIMATELY EVEN TO SLIGHT GRAVEKEEPER EDGE WITH v4
+- This was a weakness of the 9-monster v3 because Royal Tribute/Necrovalley are less impressive versus low-monster burn.
+- v4 improves the matchup without sideboarding by adding Breaker and Dust Tornado while retaining Heavy/MST/Phoenix. Anti-Spell slows Wave-Motion Cannon and other Spells; DDV punishes Des Koala/Stealth Bird-type low-ATK monsters.
+- The format's saved banlist also forbids Messenger of Peace, Level Limit - Area B and Gravity Bind, removing several premier stall pieces.
+
+COUNTER FAIRY / HORUS / GENERIC LOCK CONTROL — GRAVEKEEPERS SLIGHTLY FAVORED OVERALL
+- These can produce difficult established boards and are less graveyard-dependent.
+- They are slower/more multi-piece than Royal Tribute and generally expose either monsters to Tribute/DDV or continuous Spell/Trap cards to the v4 generic removal package.
+
+GRAVEKEEPER MIRROR — EVEN
+- Naturally close to 50/50 and sequencing/die-roll dependent. It does not provide a reason to rank another archetype above Gravekeepers.
+
+NO-SIDE META CONCLUSION
+-----------------------
+- Gravekeepers remains #1 after the matchup stress test, but v3 and the initial v4 DDV ratio are superseded.
+- Current best all-comers main deck is GRAVEKEEPER ROYAL TRIBUTE TOURNAMENT PRISON v5 (12 monsters / 16 spells / 12 traps).
+- Hardest expected matchups: Macro Monarch first, then Six Samurai / pure Monarch depending on who goes first; Dark World and Burn are meaningful rogue checks.
+- Strongest favorable targets: D-HERO Monarch, Zombies, Gadgets, most GY/combo decks.
+- No side-deck assumption is used anywhere in this conclusion.
+
+LATEST POWER RANKING AFTER NO-SIDE META TEST
+---------------------------------------------
+1. Gravekeeper Royal Tribute Tournament Prison v5 — current #1 / Tier 0 candidate
+2. D-HERO Raiza / Vanity Turbo — strongest broad challenger but directly attacked by Necrovalley
+3. Macro Monarch — hardest Gravekeeper matchup and very strong all-comers deck
+4. Six Samurai — explosive, die-roll sensitive, slightly less consistent at its oppressive ceiling
+5. Pure/Brain-Control Monarch — excellent generic power, less unfair than the top three
+Next tier/rogue threats: Zombies/Safe Return, Gadgets/Offering, Cyber Valley/Machine Duplication, Dark World, Burn/Stall, Horus/Counter-Fairy control.
+
+FIFTH AUDIT — DOUBLE-CHECK / RULES CORRECTION — 2026-09-04
+------------------------------------------------------------
+User request: double-check the no-side #1 conclusion rather than simply confirm it.
+
+Corrections found:
+1. Gravekeeper's Commandant is EARTH (1600 ATK), NOT DARK. Under Necrovalley it reaches
+   2100 ATK, but it still cannot satisfy Deck Devastation Virus because DDV requires a DARK
+   monster with 2000 or more ATK.
+2. Gravekeeper's Assailant is DARK 1500 ATK and becomes 2000 ATK under Necrovalley, so it
+   is the natural direct DDV tribute in this main deck. Spy can later Special Summon Assailant.
+3. Therefore the prior 2-DDV v4 ratio overestimated live tribute access. A 300,000-hand check
+   found 2 DDV appeared in about 25.4% of post-Upstart opening hands, but only about 19% of
+   those DDV-seen hands also had an immediate Necrovalley + Assailant line.
+4. V5 correction: -1 Deck Devastation Virus, +1 Bottomless Trap Hole. This keeps one DDV's
+   format-warping upside while making the second trap slot universally live against the hardest
+   no-side matchups (Macro Monarch, Six Samurai, pure Monarch, Vanity's Fiend, Cyber Dragon,
+   Great Shogun Shien, etc.). Bottomless removes the summoned body but does NOT negate Monarch
+   summon-trigger effects; this distinction is important.
+5. Royal Tribute self-discard numbers were re-run with stricter sequencing. The correct v5
+   5-card-opening estimates after resolving Upstarts are approximately:
+   - Necrovalley + Royal Tribute access: 25.8%
+   - no monster after Upstart cycling: 12.3%
+   - conditional zero own-monster discard in lock openings: 68.8%
+   - average own monsters discarded in those lock openings: 0.36
+   Earlier ~79.8% zero-discard / ~0.22 average figures are superseded.
+6. A Terraforming ratio check still favors 3 for this deck's identity: going from 3 to 2 drops
+   the natural Royal Tribute lock rate by roughly 1.8 percentage points; no tested generic
+   replacement produced a clearer all-meta gain.
+7. The matchup ranking itself did NOT overturn. D-HERO Monarch remains favorable; pure Monarch
+   remains close/slightly favorable; Macro Monarch remains the hardest mainstream matchup; Six
+   Samurai remains explosive and die-roll sensitive; Zombies/Gadgets/GY-combo remain favorable.
+8. No side deck is assumed. V5 is a main-deck-only all-comers correction, not a sideboard plan.
+
+CURRENT CORRECTED #1:
+- GRAVEKEEPER ROYAL TRIBUTE TOURNAMENT PRISON v5
+- Change from v4: 1 DDV / 2 Bottomless instead of 2 DDV / 1 Bottomless.
+- Overall archetype ranking remains #1 under current-card-text assumptions.
+
+NEXT-CHAT HANDOFF INSTRUCTIONS
+------------------------------
+When continuing this project in a new chat:
+1. Read the current card-pool MASTER.
+2. Read the current BANLIST MASTER.
+3. Read this DECKBUILDING FINDINGS MASTER.
+4. Do not restart from generic historical decklists.
+5. Treat Diamond Dude Turbo (DDT) as the current #1 baseline to beat; Gravekeeper v5 is current #2 and strongest anti-meta/lock challenger.
+6. Any challenger must be compared on:
+   - opening-hand consistency
+   - going-first strength
+   - going-second strength
+   - brick rate
+   - recovery/grind
+   - vulnerability to Necrovalley/Royal Tribute
+   - matchup spread vs Gravekeepers, D-HERO, Monarchs, Zombies, Six Samurai, Gadgets,
+     and combo/FTK shells
+7. If exact YGO Reborn card text for Makyura/Disk Commander/DMoC is confirmed, update this
+   file and rerun the FTK ranking immediately.
+8. Save meaningful new deckbuilding discoveries back into THIS file so future chats can
+   continue without relying on conversation memory.
+
+END OF CURRENT FINDINGS CHECKPOINT
+====================================================================
+
+SIXTH AUDIT — OVERALL BEST-DECK RE-RANK — 2026-09-05
+------------------------------------------------------
+User asked for the strongest deck in the entire confirmed pool, independent of the two screenshot decklists.
+
+Fresh conclusion under current-card-text assumptions and no-side-deck judging:
+1. DIAMOND DUDE TURBO (DDT) — current overall #1 candidate
+2. Gravekeeper Royal Tribute Tournament Prison v5 — best lock / anti-meta deck
+3. D-HERO Perfect Circle / Raiza / Vanity Monarch
+4. Macro Monarch / Return from the Different Dimension banish shell
+5. Six Samurai
+
+Why DDT moved to #1:
+- The Reborn banlist leaves Destiny HERO - Diamond Dude, Destiny HERO - Malicious, Destiny Draw,
+  Reasoning, Monster Gate, Magical Stone Excavation, Divine Sword - Phoenix Blade, Upstart Goblin,
+  and several other core turbo pieces unrestricted at 3; Reinforcement of the Army is at 2 and
+  Dimension Fusion is limited rather than forbidden.
+- The confirmed pool contains Diamond Dude, Malicious, Destiny Draw, Card Trooper, Machine
+  Duplication, Reasoning, Monster Gate, Magical Stone Excavation, Divine Sword - Phoenix Blade,
+  Dimension Fusion, and Return from the Different Dimension.
+- DDT has more redundant live opening engines than Gravekeepers and is materially stronger going
+  second, while still having a very high going-first ceiling.
+- Gravekeepers has the single nastier lock opening (Necrovalley + Royal Tribute) and is one of the
+  best natural DDT counters, but the lock itself appears in roughly one quarter of 5-card openings,
+  whereas DDT has many overlapping starter lines through Diamond/ROTA, D-Draw/Malicious,
+  Reasoning/Gate, Card Trooper, and spell-recursion packages.
+- No pre-errata Dark Magician of Chaos, Makyura, or Disk Commander assumption is required for the
+  DDT ranking. If Reborn uses pre-errata text for any of those, the ranking must be reopened because
+  true FTK/infinite lines may become #1 instead.
+
+Important caution:
+- The exact final 40-card DDT list is NOT yet fully ratio-locked. The current ranking is archetype-level:
+  DDT is the strongest overall engine/deck candidate, but the last flex slots (e.g. Machine
+  Duplication, Return from the Different Dimension, extra Brain Control/Lightning Vortex, defensive
+  trap count) still need a final head-to-head optimization pass versus Gravekeeper v5, Perfect Circle,
+  Macro Monarch, and Six Samurai.
+
+CURRENT OVERALL BASELINE TO BEAT:
+- Diamond Dude Turbo (DDT), not Gravekeeper v5.
+
+
+SEVENTH AUDIT — STRONGEST UNRESTRICTED INDIVIDUAL CARD — 2026-09-05
+-------------------------------------------------------------------
+User asked for the strongest individual card in the confirmed pool that is NOT Forbidden, Limited,
+or Semi-Limited under the saved Reborn banlist, then asked for continued research.
+
+Method / important distinction:
+- Use the Reborn banlist only for legality. If a pool card is absent from that saved list, it is legal at 3.
+- Separate (A) strongest standalone / low-setup individual card from (B) highest-ceiling engine/combo card.
+- Current-card-text assumptions remain in force. Pre-errata Makyura / Disk Commander / DMoC / Rescue Cat
+  could radically alter rankings and must be reopened if Reborn is proven to use old text.
+
+Current-TCG-Forbidden cards that ARE in the confirmed Reborn pool but are unrestricted at 3 under the
+saved Reborn banlist include:
+- Card of Safe Return
+- Cold Wave
+- Kaiser Colosseum
+- Mass Driver
+- Smoke Grenade of the Thief
+- Return from the Different Dimension
+- Royal Oppression
+- Ultimate Offering
+This is a major custom-format power anomaly. OCG-only / additional dangerous unrestricted cards in the
+pool include Divine Sword - Phoenix Blade, Magical Explosion, and Life Equalizer.
+
+Important newly surfaced candidate:
+- Smoke Grenade of the Thief is confirmed in pool and unrestricted. Gearfried the Iron Knight is also
+  confirmed, and Reinforcement of the Army is at 2, so the format has a practical Gearfried + Smoke
+  Grenade hand-rip package. Smoke Grenade is not the best standalone card because it needs an equipped
+  destruction enabler, but its targeted hand knowledge/discard makes it one of the most dangerous
+  unrestricted engine cards in the format.
+
+Other high-ceiling unrestricted engine cards:
+- Card of Safe Return: highest draw-engine ceiling. With the two legal Manticore of Darkness copies,
+  the classic End Phase alternating-Manticore loop can draw through the deck once assembled. Assembly
+  consistency remains much lower than the top standalone lock cards, so Safe Return is not promoted to
+  #1 standalone.
+- Ultimate Offering: extremely dangerous with the 9-Gadget engine because one Gadget can search the
+  next and Offering converts those searches into repeated Normal Summons. High ceiling, but trap-speed
+  and archetype-dependent.
+- Return from the Different Dimension: enormous OTK/comeback payoff but requires a stocked banished zone.
+- Mass Driver / Magical Explosion / Life Equalizer: FTK/burn ceilings are real, but current pool setup
+  remains more multi-piece than the best generic lock cards.
+- Divine Sword - Phoenix Blade: major DDT recursion/banish enabler, but not a powerful standalone draw.
+
+CURRENT STRONGEST-STANDALONE CONCLUSION:
+1. ROYAL OPPRESSION — strongest unrestricted individual low-setup card in the pool.
+   Reason: a single Continuous Trap can repeatedly negate and destroy Special Summons / effects that
+   Special Summon for 800 LP each. It attacks DDT, Six Samurai, Zombies, Cyber Valley/Machine Duplication,
+   Dimension Fusion/Return lines and many other top engines, and can trade one card for multiple opposing
+   cards. Its main drawbacks are symmetry, trap speed, removal vulnerability, and redundancy in multiples.
+2. Kaiser Colosseum — strongest one-sided board-restriction challenger. Easier on own engine than
+   Oppression, but it does not stop the opponent's first/equal-count monster and is weaker versus
+   one-monster Monarch lines.
+3. Brain Control — strongest generic going-second tempo card among unrestricted cards; broadly live
+   against Normal-Summonable top threats and especially abusive with tribute decks, but dead going first.
+4. Cold Wave — extremely powerful in monster-heavy aggro, especially Six Samurai-style decks, but not
+   universal and actively conflicts with Spell-heavy DDT.
+5. Smoke Grenade of the Thief — best unrestricted hand-control enabler once paired with a destroy/equip
+   enabler; lower standalone score because it is not live alone.
+
+CONTEXT-SPECIFIC WINNERS:
+- Strongest Gravekeeper-specific effect: Royal Tribute, but it is NOT standalone because Necrovalley is
+  required.
+- Highest draw/combo ceiling: Card of Safe Return.
+- Highest banish payoff: Return from the Different Dimension.
+- Highest Gadget engine payoff: Ultimate Offering.
+- Strongest unrestricted standalone lock: Royal Oppression.
+
+Do NOT interpret 'Royal Oppression is the strongest individual card' as 'every deck should play 3'.
+Multiple copies are redundant and many decks (DDT, Zombies, Spy-heavy Gravekeepers) can conflict with it.
+
+
+EIGHTH AUDIT — DIMENSION FUSION DDT OTK RATIO-LOCK — 2026-09-05
+------------------------------------------------------------
+User requested the strongest Dimension Fusion / DDT-style OTK deck using only the confirmed YGO Reborn pool and saved Reborn banlist.
+
+Current ratio-locked Dimension Fusion DDT OTK build — 40 cards:
+MONSTERS — 12
+3 Destiny HERO - Diamond Dude
+3 Destiny HERO - Malicious
+3 Card Trooper
+1 Elemental HERO Stratos
+1 Destiny HERO - Dasher
+1 Dark Magician of Chaos
+
+SPELLS — 27
+3 Destiny Draw
+3 Reasoning
+3 Monster Gate
+3 Magical Stone Excavation
+3 Upstart Goblin
+2 Reinforcement of the Army
+2 Machine Duplication
+1 Brain Control
+1 Dimension Fusion
+1 Divine Sword - Phoenix Blade
+1 Heavy Storm
+1 Giant Trunade
+1 Premature Burial
+1 Card Destruction
+1 Lightning Vortex
+
+TRAPS — 1
+1 Return from the Different Dimension
+
+Why this ratio:
+- Maximizes Diamond Dude live Normal Spell density while keeping only 12 monsters.
+- 3 Malicious + Phoenix Blade + Magical Stone Excavation create the grave/banish economy that powers Dimension Fusion and Return.
+- 3 Card Trooper + 2 Machine Duplication accelerate milling, provide Monster Gate fodder, and create OTK bodies.
+- Dimension Fusion is Limited to 1 but can be reused via Magical Stone Excavation; Return is kept to 1 because multiples brick before the banished zone is stocked.
+- Heavy Storm + Giant Trunade improve going-second OTK conversion.
+- DMoC is included as a Reasoning/Monster Gate payoff and banishable 2800-ATK Dimension Fusion target under current-card-text assumptions.
+- Current-text assumptions remain in force. If YGO Reborn proves pre-errata Disk Commander, DMoC, or Makyura text, rerun the list immediately.
+
+NINTH AUDIT — GRAVEKEEPER 13TH-MONSTER GUARD TEST — 2026-09-05
+---------------------------------------------------------------
+User asked whether adding 1 Gravekeeper's Guard over Phoenix Wing Wind Blast improves real matchup performance versus the current 12-monster Gravekeeper v5.
+
+Compared builds:
+A) Current v5 / 12 monsters / 1 Phoenix Wing Wind Blast.
+B) Guard variant / 13 monsters: +1 Gravekeeper's Guard, -1 Phoenix Wing Wind Blast.
+
+Method:
+- Same no-side-deck framework as prior matchup audit.
+- 200,000 modeled games per matchup per build.
+- 50/50 going-first / going-second split.
+- Upstart Goblin treated as immediate cycling for actionable opening-hand quality.
+- Matchup Monte Carlo + card-interaction scoring, NOT a literal rules-engine duel simulator.
+- Absolute win rates are calibrated to the prior saved matchup conclusions; the most meaningful output is the paired Guard-vs-v5 delta.
+
+Opening-hand consistency check (500,000 first-player hands):
+- Current 12-monster v5 monsterless after Upstart cycling: 12.23%.
+- 13-monster Guard variant monsterless after Upstart cycling: 9.77%.
+- Necrovalley + Royal Tribute access stayed essentially unchanged: 25.88% in both builds.
+- Average monsters seen after Upstart cycling rose from ~1.62 to ~1.75.
+
+Modeled matchup results:
+- D-HERO Monarch: v5 59.0% -> Guard 60.7% (+1.7 pp)
+- Pure / Brain-Control Monarch: v5 54.5% -> Guard 56.9% (+2.4 pp)
+- Card Trooper / Cyber Valley / Machine Duplication: v5 60.0% -> Guard 60.8% (+0.8 pp)
+- Six Samurai: v5 54.5% -> Guard 56.1% (+1.6 pp)
+- Macro Monarch: v5 51.0% -> Guard 51.7% (+0.7 pp)
+- Zombies / Card of Safe Return: v5 65.0% -> Guard 65.9% (+0.9 pp)
+- DDT: v5 51.5% -> Guard 52.0% (+0.5 pp)
+- Equal-weight average across these seven modeled matchups: 56.5% -> 57.7% (+1.2 pp).
+
+Interpretation:
+- Guard's biggest value is not raw attack power; it reduces monsterless starts while adding a Spy-compatible defensive/removal target.
+- The strongest gains are against Monarchs and Six Samurai, where a 2400 DEF Guard under Necrovalley plus its Flip bounce effect has relevant board impact.
+- Phoenix Wing remains the better immediate generic tempo card against established combo/backrow boards, so the Guard gain is modest against Trooper/Cyber Valley, Macro, Zombies, and DDT.
+- In this model the consistency gain outweighed losing Phoenix Wing in every tested matchup.
+
+CURRENT RECOMMENDATION FROM THIS AUDIT:
+- For maximum broad-field no-side-deck win rate, test/promote the 13-monster version with +1 Gravekeeper's Guard / -1 Phoenix Wing Wind Blast over the prior 12-monster v5.
+- Confidence is moderate, not tournament-proof: these are modeled matchup estimates, not literal duel-engine records or event results.
+- Do not interpret the +1.2 pp modeled average as an exact real-world win-rate guarantee; the robust finding is that Guard appears to be a small positive rather than a meaningful power loss.
+
+TENTH AUDIT — DDT FINAL RATIO / BEST-DECK RECHECK — 2026-09-05
+-------------------------------------------------------------
+User asked to re-review the current #1 DDT list and make sure it is the best deck / best 40 under the confirmed Reborn pool and saved banlist.
+
+Scope:
+- Rechecked pool legality and the saved Reborn banlist rather than a historical list.
+- Re-audited the flex cards: Machine Duplication count, Return from the Different Dimension, Lightning Vortex, Brain Control, Jinzo, Destiny HERO - Dasher, Dark Magician of Chaos, Disk Commander, and extra Phoenix Blade copies.
+- Used current-card-text assumptions; exact YGO Reborn errata for Disk Commander / DMoC / Makyura remains the only unresolved format-changing caveat.
+
+Legality / pool result:
+- Core remains legal exactly as built: Dimension Fusion, Giant Trunade, Heavy Storm, Card Destruction, Premature Burial and DMoC are Limited to 1; ROTA is at 2; Diamond Dude, Malicious, Destiny Draw, Reasoning, Monster Gate, Magical Stone Excavation, Upstart Goblin, Machine Duplication, Brain Control and Phoenix Blade remain available at the current ratios.
+
+Machine Duplication ratio test:
+- With Upstart Goblin treated as immediate cycling, modeled 5-card actionable-hand checks gave approximately:
+  * 1 Dup: Trooper+Dup together 4.1%; Dup seen without Trooper 9.4%.
+  * 2 Dup: Trooper+Dup together 7.9%; Dup seen without Trooper 17.6%.
+  * 3 Dup: Trooper+Dup together 11.3%; Dup seen without Trooper 24.8%.
+- Conclusion: 2 Machine Duplication remains the best compromise. The third copy adds only about 3.4 pp more opening combo access while creating roughly 7.2 pp more opening Dup-without-Trooper hands.
+
+Jinzo audit:
+- Jinzo is confirmed in the pool and Limited to 1. It is an attractive Reasoning/Monster Gate payoff versus Gravekeeper trap density, Macro Cosmos and generic backrow.
+- However, adding Jinzo over Return raises Level-6 density from 4/12 to 5/13 monsters, making "6" a stronger Reasoning call (max matching-level share rises from 33.3% to 38.5%) and slightly reduces Reasoning/Gate milling depth.
+- Adding Jinzo over Dasher preserves the Reasoning level profile but removes a Destiny Draw target; modeled post-Upstart opening Destiny Draw + D-HERO pairing fell by about 2.3 pp.
+- Broad-field conclusion: Jinzo is a strong matchup card but not a clear main-deck upgrade over the current all-comers 40. Do not promote it without a field becoming substantially more trap-heavy than the current assumed meta.
+
+Other flex conclusions:
+- Keep 1 Return from the Different Dimension. It is a distinct secondary banish payoff; extra copies are early bricks and it complements rather than duplicates the Dimension Fusion + Magical Stone recursion line.
+- Keep 1 Divine Sword - Phoenix Blade. A second copy approximately doubles early raw Blade access, but once the single Blade reaches the GY it is recursively reusable; the second copy lowers Diamond Dude Normal-Spell density or displaces a more broadly live payoff/removal card. Current 1-copy Blade remains preferred with 3 Trooper / 2 Dup / 3 MSE / Card Destruction / Vortex providing access and discard routes.
+- Keep 1 Lightning Vortex. It is especially valuable as a free Diamond Dude hit going second and can be recycled by Magical Stone Excavation; additional copies are more awkward when naturally drawn, especially going first.
+- Keep 1 Brain Control. It is an elite going-second tempo card and can turn an opposing face-up monster into Monster Gate fodder, but additional copies increase going-first deadness.
+- Keep Dasher and DMoC. Dasher preserves the seventh Destiny Draw target and provides a GY value body; DMoC remains the premium high-level Reasoning/Gate payoff and Spell-recursion backup under current text.
+- Do NOT add current-text Disk Commander merely because 3 copies are legal; without proof of pre-errata text it does not improve this DDT engine enough to justify the extra monster / lower Normal-Spell density.
+
+FINAL RECHECK CONCLUSION:
+- No change to the Eighth Audit ratio-locked 40.
+- DIAMOND DUDE TURBO remains the current overall #1 deck candidate for this confirmed pool under current-card-text assumptions.
+- Gravekeeper Royal Tribute + Guard is still the strongest natural counter and can be slightly favored head-to-head in the existing matchup model, but DDT retains the broader overall #1 ranking because of its redundant starter density, superior going-second explosiveness and higher OTK ceiling across the full field.
+- Confidence: high for the current pool/banlist and current-text assumption, but not tournament-proof. If YGO Reborn is proven to use pre-errata Disk Commander, DMoC or Makyura text, immediately reopen the entire FTK/DDT ranking.
+
+ELEVENTH AUDIT — MACRO MONARCH SLEEPER-META OPTIMIZATION — 2026-09-06
+-------------------------------------------------------------------
+User asked for a less-used high-win-rate meta deck using the confirmed YGO Reborn pool, then asked to optimize the proposed Macro Monarch list further.
+
+Key pool-specific discovery:
+- Helios - The Primordial Sun is confirmed in the reconstructed pool.
+- Under standard Macro Cosmos card text, activating Macro Cosmos can Special Summon 1 Helios - The Primordial Sun from hand or Deck. This converts Macro Cosmos from only a banish enabler into future tribute infrastructure as well.
+- Enemy Controller is confirmed in the pool and is unrestricted by the saved Reborn banlist.
+- D.D. Survivor, D.D. Scout Plane, Banisher of the Radiance, Macro Cosmos, Dimensional Fissure, Raiza, Thestalos, Mobius, Cyber Dragon, Brain Control and Soul Exchange are all confirmed/legal at the ratios below under the saved pool/banlist.
+
+Optimized all-comers Macro Monarch — 40 cards:
+MONSTERS — 16
+3 D.D. Survivor
+1 D.D. Scout Plane
+1 Helios - The Primordial Sun
+3 Banisher of the Radiance
+3 Raiza the Storm Monarch
+2 Thestalos the Firestorm Monarch
+1 Mobius the Frost Monarch
+2 Cyber Dragon
+
+SPELLS — 15
+3 Dimensional Fissure
+3 Brain Control
+2 Enemy Controller
+1 Soul Exchange
+3 Upstart Goblin
+1 Heavy Storm
+1 Mystical Space Typhoon
+1 Book of Moon
+
+TRAPS — 9
+3 Macro Cosmos
+2 Bottomless Trap Hole
+1 Torrential Tribute
+1 Mirror Force
+1 Ring of Destruction
+1 Solemn Judgment
+
+Changes from the first proposed Macro Monarch 40:
+-1 D.D. Scout Plane
+-1 D.D. Warrior Lady
+-1 Grand Convergence
+-1 Return from the Different Dimension
++1 Helios - The Primordial Sun
++1 Cyber Dragon (2 total)
++2 Enemy Controller (2 total)
+
+Why these changes:
+1. Helios makes Macro Cosmos itself produce tribute infrastructure under standard card text, while only requiring one Helios copy; a second Helios is not recommended.
+2. The second Scout Plane was the weakest recurring body when a banish enabler was not already established. One copy keeps the recursion angle without overloading on 800-ATK conditional bodies.
+3. The second Cyber Dragon materially improves going-second tribute access without consuming the Normal Summon.
+4. Enemy Controller is broadly live even without the steal mode and becomes especially powerful with D.D. Survivor: under Macro/Fissure, tributing Survivor for Controller's control-taking effect banishes Survivor, allowing Survivor to return in the End Phase while the stolen monster can be used as Monarch tribute material.
+5. Grand Convergence was cut because it requires Macro Cosmos specifically, not Fissure or Banisher, and therefore created too many conditional opening hands despite its high ceiling.
+6. Return from the Different Dimension was cut from the maximum-consistency all-comers build. It has a very high ceiling but is an early-game setup card; the second Enemy Controller produced more broadly live interaction across DDT, Gravekeeper, Monarch, Six Samurai and generic beatdown matchups. Return remains a valid high-ceiling flex if the field becomes slower/grindier.
+7. D.D. Warrior Lady was cut for the second Cyber Dragon because this list already has 3 Raiza, 3 Brain Control, 2 Enemy Controller, 2 Bottomless, Torrential, Mirror and Ring as monster interaction; the free 2100 body improves tribute conversion more often.
+
+Opening-hand Monte Carlo (1,000,000 hands; 3 Upstart Goblin treated as immediate cycling):
+- Banish-enabler access (Macro/Fissure/Banisher): ~77.4% in both original and optimized builds.
+- Monarch access: ~61.0% in both builds.
+- Two-or-more Monarch opening rate: ~17.7% in both builds.
+- Immediate going-second Monarch line via Monarch + Cyber/Brain/Soul: original ~29.9% -> optimized ~34.3%.
+- Broad Monarch + usable tribute-path proxy (Macro->Helios, direct going-second line, or recurring body + banish enabler): original ~42.6% -> optimized ~50.0%.
+- Macro Cosmos seen in the optimized opening, therefore able to represent a Helios body under standard card text: ~36.2%.
+- Obvious conditional-card opening proxy (original counted Return, stranded Grand Convergence, and Scout without an enabler; optimized counts only stranded Scout): original ~27.1% -> optimized ~4.0%. This is NOT a literal brick-rate statistic; it is a paired conditional-card comparison.
+
+Current conclusion:
+- For maximum broad-field no-side-deck consistency, promote this 16/15/9 Helios + 2 Cyber + 2 Enemy Controller Macro Monarch list over the first proposed version.
+- Keep 6 Monarchs: 3 Raiza / 2 Thestalos / 1 Mobius. Cutting to 5 materially lowers Monarch access (~61% to ~54% after Upstart cycling) and did not improve immediate going-second Monarch-line frequency enough to justify the loss.
+- Keep all 9 primary banish enablers (3 Macro / 3 Fissure / 3 Banisher); reducing Banisher count materially lowers early banish access.
+- One Scout Plane is preferred over zero for grind/recursion resilience, but do not return to 2 unless the field becomes substantially slower.
+- Return from the Different Dimension is the first high-ceiling flex to reconsider if actual games show the format is slower than the current assumed field.
+
+TWELFTH AUDIT — HELIOS VALIDITY / STRESS TEST — 2026-09-06
+-----------------------------------------------------------
+User specifically challenged whether Helios - The Primordial Sun is actually valid in optimized Macro Monarch and requested a stress test.
+
+Rules validity:
+- Macro Cosmos official/current text: on activation, it can Special Summon 1 Helios - The Primordial Sun from hand or Deck. Therefore the interaction is fully legal under standard/current card text.
+- Important correction: Macro Cosmos is a Trap, so Macro -> Helios is NOT an immediate opening-turn Monarch line. Going first, Macro must normally be Set, then can be activated on the opponent's turn; Helios is generally tribute material for the following turn. Going second, a newly Set Macro likewise cannot create a same-turn Helios tribute body.
+- Best sequencing when using Helios purely as tribute infrastructure is often activating Macro late in the opponent's turn (e.g. End Phase) so Helios cannot simply be attacked before the next turn; however this delays Macro's floodgate effect and may be strategically inferior when early graveyard denial matters.
+
+Pool-specific opening-hand stress test (3 Upstart treated as immediate cycling; effective 5 from 37 non-Upstarts):
+Current Helios build vs replacing Helios with a 3rd Cyber Dragon:
+- Monarch access: ~61.2% in both.
+- Banish-enabler access (Macro/Fissure/Banisher): ~77.4% in both.
+- Immediate going-second Monarch line via Monarch + Cyber/Brain/Soul: Helios build ~34.3%; 3rd Cyber build ~38.2% (+3.9 pp).
+- Helios is naturally drawn in ~13.5% of effective opening hands; ~9.4% draw Helios without Macro and ~4.0% draw Helios with no primary banish enabler at all.
+- 3rd Cyber raises Cyber-seen openings from ~25.5% to ~36.2%, while 2+ Cyber openings rise from only ~1.5% to ~4.2%.
+- Monarch + Cyber opening access rises from ~13.8% to ~19.7% with the 3rd Cyber.
+- Monarch + Macro appears ~19.6% of openings, but that Helios route is delayed because Macro is a Trap and therefore should not be counted as an immediate opening-turn tribute line.
+
+Interpretation:
+- Helios is a legitimate 1-card-value bonus when Macro resolves: Macro can fetch it from Deck/hand, so the interaction itself is real and useful.
+- The slot's weakness is drawing Helios without Macro; its early combat stats are poor and it is a much weaker standalone topdeck/normal summon than the deck's other bodies.
+- Historical Macro-Monarch deck discussion is consistent with this tradeoff: Helios was sometimes used for quick tribute fodder, but was also frequently cut because it is a dead/weak draw, while additional Cyber Dragon copies were commonly favored for cleaner tribute acceleration.
+
+Current optimization conclusion:
+- CUT Helios - The Primordial Sun from the maximum-win-rate all-comers Macro Monarch list.
+- ADD the 3rd Cyber Dragon.
+- This changes the optimized monster package to: 3 D.D. Survivor, 1 D.D. Scout Plane, 3 Banisher of the Radiance, 3 Raiza, 2 Thestalos, 1 Mobius, 3 Cyber Dragon (16 monsters total).
+- Keep 3 Macro Cosmos despite cutting Helios; Macro remains one of the deck's primary banish floodgates and does not need Helios to be worthwhile.
+- Helios remains a valid optional high-synergy flex if the user prefers the free Macro-generated body, but it is no longer the recommended maximum-broad-field-win-rate slot.
+
+ELEVENTH AUDIT — GRAVEKEEPER SANGAN / BACKROW ADAPTATION — 2026-09-06
+-------------------------------------------------------------------
+User reported a practical weakness in the 13-monster Guard Gravekeeper build: trap-heavy decks repeatedly trade Bottomless/Torrential-style backrow into Gravekeeper summons, causing the deck to run out of monsters. User also reported Breaker the Magical Warrior felt weak in practice as the utility monster.
+
+Recommended all-comers Sangan adaptation — 40 cards:
+MONSTERS — 13
+3 Gravekeeper's Commandant
+3 Gravekeeper's Spy
+3 Gravekeeper's Assailant
+1 Gravekeeper's Guard
+1 Sangan
+1 Neo-Spacian Grand Mole
+1 D.D. Warrior Lady
+
+SPELLS — 16
+3 Necrovalley
+3 Royal Tribute
+3 Terraforming
+3 Upstart Goblin
+1 Heavy Storm
+1 Mystical Space Typhoon
+1 Giant Trunade
+1 Book of Moon
+
+TRAPS — 11
+1 Deck Devastation Virus
+2 Anti-Spell Fragrance
+1 Dust Tornado
+2 Bottomless Trap Hole
+1 Royal Oppression
+1 Solemn Judgment
+1 Mirror Force
+1 Torrential Tribute
+1 Ring of Destruction
+
+Changes from the prior 13-monster Guard recommendation:
+-1 Breaker the Magical Warrior, +1 Sangan.
+-1 Nobleman of Crossout, +1 Giant Trunade.
+
+Reasoning:
+- Sangan preserves the 13-monster count that previously reduced monsterless starts to ~9.77% after Upstart cycling, so opening monster consistency is not reduced relative to the Guard build.
+- Sangan is below Bottomless Trap Hole's 1500-ATK threshold on summon and replaces itself when sent from field to GY, improving grind and reducing the practical 'run out of monsters' failure mode. It can search Spy, Guard, Assailant, Grand Mole, or D.D. Warrior Lady under current card-text assumptions; it cannot search Commandant (1600 ATK).
+- Removing Breaker loses one permanent S/T pop, so Giant Trunade replaces Nobleman to restore/improve proactive backrow clearing. Trunade is especially useful for opening a safe attack/summon window against multiple set traps while keeping Heavy Storm, MST, and Dust Tornado as permanent removal.
+- This variant intentionally sacrifices some Flip-monster coverage from Nobleman of Crossout in exchange for better broad anti-backrow tempo and monster longevity.
+- Do not treat Seven Tools/Trap Jammer as the preferred main-deck fix; they are narrower than Trunade. Do not main Royal Decree/Jinzo here without a much more trap-heavy field because they conflict with the deck's own dense Trap package or alter the engine substantially.
+
+Status:
+- This is the current recommended Gravekeeper list when the user specifically wants Sangan and is facing substantial backrow pressure.
+- It is a reasoned adaptation built on the previously modeled 13-monster Guard shell, not a new literal duel-engine simulation. If later head-to-head tests show Breaker/Nobleman outperform Sangan/Trunade across the broad field, revert accordingly.
+
+
+ELEVENTH AUDIT — ERRATA SANGAN CORRECTION — 2026-09-06
+-------------------------------------------------------
+User confirmed YGO Reborn uses the errata/current-text version of Sangan.
+
+Correction to prior Sangan recommendation:
+- Sangan still searches a 1500-or-less ATK monster when sent from field to GY, but under errata/current text the searched card/effects with that name cannot be activated for the rest of that turn, and Sangan is once per turn.
+- This means Sangan is NOT an immediate same-turn combo/tactical searcher. It is primarily a grind/replacement card in Gravekeepers.
+- In this shell the restriction is often manageable because Sangan commonly dies on the opponent's turn, after which Spy/Guard/Assailant/Grand Mole/D.D. Warrior Lady can be used normally on the following turn. If Sangan is sent on the user's own turn, the searched monster can still be Set/Normal Summoned where legal, but its activated effect is unavailable for the rest of that turn.
+- Necrovalley does not inherently shut off current-text Sangan merely because Sangan's effect activates in the GY; the effect searches from Deck to hand rather than moving a card out of the GY.
+- Net evaluation: Sangan remains a reasonable Breaker replacement for the specific 'run out of monsters vs trap-heavy decks' problem, because Bottomless cannot hit its 1000 ATK summon and destruction by Torrential/Mirror/etc. can replace it. However, errata makes it a smaller upgrade than previously implied. It should be treated as a grind-oriented variant, not a clear universal improvement over Breaker.
+- Current Sangan/backrow 40 (Sangan + Giant Trunade over Breaker + Nobleman) remains viable for a trap-heavy field, but confidence is moderate and matchup-specific. For broad all-comers play, Breaker remains defensible because it provides immediate permanent Spell/Trap removal.
+
+THIRTEENTH AUDIT — GADGET VS TROOPER SLEEPER-META OPTIMIZATION — 2026-09-06
+----------------------------------------------------------------------------
+User asked whether Card Trooper or Gadget can reach Tier 1–2 power in this exact YGO Reborn pool and requested the most cracked optimized build.
+
+Key pool/banlist confirmations:
+- Green Gadget, Red Gadget, Yellow Gadget and Ultimate Offering are confirmed in the 2,273-card MASTER.
+- Royal Oppression and Kaiser Colosseum are confirmed in pool and are absent from the saved Reborn banlist -> legal at 3.
+- Card Trooper, Cyber Valley, Cyber Dragon, Machine Duplication, Chimeratech Overdragon, Overload Fusion, Future Fusion and Cyber Phoenix are confirmed in pool.
+- Limiter Removal, Future Fusion, Overload Fusion, Dimension Fusion, Heavy Storm, Giant Trunade, MST, Premature Burial, Book of Moon, Torrential, Mirror, Ring, Solemn, Sangan, Breaker, Grand Mole, DD Warrior Lady, Pot of Avarice are used only at their saved legal limits.
+
+Broad-field conclusion:
+- GADGETS gain the larger hidden custom-format upgrade because they can abuse both Ultimate Offering and Royal Oppression without self-conflict: Offering creates repeated NORMAL Summons and Gadget searches, while Oppression attacks Special Summons/effects that Special Summon.
+- This gives Gadgets a much stronger DDT / Six Samurai / Zombies / Trooper-combo matchup than a normal historical Gadget list while preserving the 9-Gadget grind engine.
+- TROOPER / MACHINE DUPLICATION has the higher explosive ceiling: 3 Trooper + 3 Cyber Valley gives 6 Machine Duplication targets; Card Trooper mills Machine material for Overload Fusion -> Chimeratech Overdragon, while Limiter Removal provides a second OTK route. However it is materially more vulnerable to Royal Oppression, Macro/Fissure, Necrovalley, Royal Tribute/DDV and disruption of the Duplication target.
+- Therefore for maximum no-side broad-field win rate, promote Oppression/Offering Gadget over Trooper as the better sleeper-meta choice. Trooper remains a legitimate Tier-1.5/Tier-2 explosive rogue contender rather than the safer broad-field choice.
+
+POST-UPSTART OPENING REFERENCE (effective 5 cards from 37 non-Upstarts; exact hypergeometric):
+- 9-Gadget access: ~77.45%.
+- 3 Ultimate Offering access: ~36.16%.
+- Gadget + Offering: ~25.81%.
+- 3 Royal Oppression access: ~36.16%.
+- 3 Oppression + 2 Kaiser: at least one lock card ~53.80%.
+- Gadget + at least one Oppression/Kaiser: ~38.97%.
+- Opening 2+ copies of a 3-of continuous card (Offering or Oppression): only ~4.25%, supporting 3 copies for access despite redundancy.
+- Trooper/Cyber Valley Dup targets (6) access: ~61.02%.
+- 3 Machine Duplication access: ~36.16%.
+- Any Dup target + Machine Duplication: ~19.73%.
+- Card Trooper specifically + Machine Duplication: ~11.31%.
+- Any 6-target + Dup + the single Limiter Removal in the opening: ~1.87% (not the only OTK route; merely the raw three-piece opener).
+
+CURRENT MOST-CRACKED GADGET ALL-COMERS 40:
+MONSTERS — 13
+3 Green Gadget
+3 Red Gadget
+3 Yellow Gadget
+1 Breaker the Magical Warrior
+1 Neo-Spacian Grand Mole
+1 D.D. Warrior Lady
+1 Sangan
+
+SPELLS — 15
+3 Upstart Goblin
+2 Creature Swap
+2 Smashing Ground
+2 Kaiser Colosseum
+1 Lightning Vortex
+1 Limiter Removal
+1 Heavy Storm
+1 Mystical Space Typhoon
+1 Book of Moon
+1 Pot of Avarice
+
+TRAPS — 12
+3 Ultimate Offering
+3 Royal Oppression
+2 Bottomless Trap Hole
+1 Torrential Tribute
+1 Mirror Force
+1 Ring of Destruction
+1 Solemn Judgment
+
+Why this Gadget ratio:
+- Keep 9 Gadgets: dropping to 6 materially lowers opening Gadget access and shortens Offering chains.
+- Keep 3 Offering: Gadget+Offering opening access rises materially versus 2 copies, while 2+ Offering openings remain uncommon.
+- Keep 3 Oppression: Gadgets/Offering do not need Special Summons, so this shell exploits the format's strongest unrestricted low-setup lock with unusually little self-harm.
+- 2 Kaiser adds an immediate going-first board-count lock without overloading on redundant copies; it can be held or allowed to become weaker when Offering is used to swarm for a kill.
+- 2 Creature Swap turns a self-replacing low-ATK Gadget into permanent access to an opposing threat and is at the saved semi-limit.
+- Limiter Removal converts an Offering-built Machine board into an OTK threat.
+- Lightning Vortex is a one-copy reset that can discard an excess searched Gadget and then allow Offering to rebuild.
+- Pot of Avarice is retained as the grind/reload slot because 9 Gadgets fill the GY naturally; if actual games are too fast for Avarice, the first flex is Avarice -> 3rd Smashing Ground.
+- Banisher of the Radiance was considered but not promoted: it competes for the Normal Summon, raises monster density into Royal Tribute, and Oppression already attacks the dominant Special-Summon engines with less cost to the Gadget engine.
+
+CURRENT CRACKED TROOPER / MACHINE DUPLICATION ALTERNATIVE 40:
+MONSTERS — 13
+3 Card Trooper
+3 Cyber Valley
+3 Cyber Dragon
+2 Cyber Phoenix
+1 Sangan
+1 Jinzo
+
+SPELLS — 23
+3 Machine Duplication
+3 Upstart Goblin
+2 Brain Control
+3 Enemy Controller
+2 Smashing Ground
+1 Overload Fusion
+1 Future Fusion
+1 Limiter Removal
+1 Dimension Fusion
+1 Heavy Storm
+1 Giant Trunade
+1 Mystical Space Typhoon
+1 Premature Burial
+1 Book of Moon
+1 Lightning Vortex
+
+TRAPS — 4
+1 Torrential Tribute
+1 Mirror Force
+1 Ring of Destruction
+1 Solemn Judgment
+
+Trooper notes:
+- Chimeratech Overdragon is confirmed in pool, and Overload Fusion is Limited to 1 rather than Forbidden. Card Trooper milling Machines therefore creates a legitimate secondary OTK route.
+- 3 Trooper + 3 Cyber Valley justifies 3 Machine Duplication here; unlike DDT's 3-Trooper-only Dup engine, this shell has 6 live Dup targets.
+- Cyber Phoenix is a Machine body / Overload material that can protect attack-position Machines from targeting S/T effects and replace itself when destroyed by battle under standard text.
+- Future Fusion is included only as a one-copy high-ceiling setup card under current-text assumptions; pre-errata Future Fusion would raise this deck's ceiling and would require a separate rerank.
+- Do not add Royal Oppression to Trooper: it directly conflicts with Machine Duplication, Cyber Dragon, Chimeratech and Dimension Fusion.
+
+Tier judgment under current-text assumptions / no event data:
+- Oppression Offering Gadgets: low Tier 1 / Tier 1.5 candidate; strongest sleeper of these two for broad-field win rate, but Gravekeeper Royal Tribute + DDV remains a genuinely bad matchup.
+- Trooper Duplication / Chimeratech: Tier 1.5–2; higher OTK ceiling, less robust matchup spread, especially into Gravekeeper and Macro/Oppression decks.
+- Neither is promoted over DDT, Gravekeeper, D-HERO Monarch or optimized Macro Monarch on current evidence.
+
+FOURTEENTH AUDIT — SANGAN RECHECK / TRAP-RESISTANT BREAKER REPLACEMENT — 2026-09-06
+--------------------------------------------------------------------------------
+User asked whether errata/current-text Sangan is truly worth the Breaker slot and requested a better alternative if one exists.
+
+Pool/banlist recheck:
+- Elemental HERO Wildheart is confirmed in the 2,273-card MASTER.
+- Tenkabito Shien is also confirmed in the MASTER.
+- Injection Fairy Lily, Spirit Reaper, Mobius the Frost Monarch, Gravekeeper's Guard/Spear Soldier and Mystic Swordsman LV2 are confirmed candidates.
+- Saved banlist explicitly Limits Spirit Reaper to 1. Wildheart, Tenkabito, Injection Fairy Lily and Mobius are not listed in the saved banlist, so under the standing Reborn rule they are unrestricted up to 3 unless later corrected.
+
+Card-role comparison for the user's actual failure mode (trap-heavy decks, especially Bottomless/Torrential/Mirror/Ring, exhausting the Gravekeeper monster supply):
+1. Elemental HERO Wildheart is the best direct replacement candidate for Breaker/Sangan in this specific field. Its continuous Trap immunity means a successfully Normal Summoned Wildheart ignores Bottomless Trap Hole, Torrential Tribute, Mirror Force, Ring of Destruction, Sakuretsu-style traps and similar Trap effects while face-up. It does not solve Spell-based removal or a summon-negation Counter Trap such as Solemn Judgment, because its immunity is not active if the summon itself is negated.
+2. Tenkabito Shien provides the same trap-immunity role but is generally inferior to Wildheart here because the offensive stats are the same (1500 ATK) and Wildheart has the better DEF/body profile.
+3. Sangan remains better for pure grind/replacement value, but errata makes it indirect: it replaces itself when sent field->GY yet does not itself survive traps or remove backrow. Therefore it is no longer the preferred answer when the primary problem is traps removing every summoned monster.
+4. Mobius the Frost Monarch is the strongest permanent multi-backrow removal monster among these candidates, but it requires a Tribute Summon and therefore introduces a real conditional/dead-opening risk. Raw 5-card combinatorics with a 13-monster list containing 1 Mobius and 12 low-level monsters gives about a 2.67% opening specifically containing Mobius with no other monster, before considering Upstart sequencing. Better as a backrow/floodgate-heavy flex than the no-brick default.
+5. Spirit Reaper is excellent battle-grind insurance and Bottomless cannot hit its 300 ATK summon, but it is not true anti-trap protection and is Limited to 1.
+6. Injection Fairy Lily is Bottomless-safe on summon because of low printed ATK and can become a huge combat threat, but it still loses to many traps and costs 2000 LP per boost; it is an offensive flex, not the clean anti-trap solution.
+7. A second Gravekeeper's Guard / Spear Soldier improves archetype synergy, but neither directly solves trap removal; Guard remains the best generic 13th-monster consistency addition already established by prior testing.
+
+Consistency consequence:
+- Replacing Sangan with 1 Wildheart keeps the list at the same 13-monster count, so the prior ~9.77% monsterless-after-Upstart modeled opening rate remains structurally unchanged. Necrovalley + Royal Tribute access is likewise unchanged by this one-for-one monster swap.
+
+Current recommendation for the user's observed trap-heavy field:
+- Prefer 1 Elemental HERO Wildheart over 1 Sangan in the Breaker flex slot if the recurring losses are specifically Bottomless/Torrential/Mirror/Ring/Sakuretsu-style Trap exchanges.
+- Keep Giant Trunade over Nobleman of Crossout for this trap-heavy adaptation, preserving Heavy Storm + MST + Dust Tornado as permanent/general backrow interaction.
+- Recommended trap-pressure adaptation therefore becomes the 13-monster Guard shell with +1 Wildheart / -1 Breaker and +1 Giant Trunade / -1 Nobleman, rather than the Sangan variant.
+- Sangan remains a valid alternative only when the bigger issue is attrition/running out of monsters against mixed removal rather than Trap effects specifically.
+- For broad unknown all-comers play, Breaker is still defensible because it immediately removes continuous Spell/Trap cards; the Wildheart version is a matchup-informed optimization based on the user's actual field, not a claim that Wildheart is universally superior.
+
+FOURTEENTH AUDIT — GADGET LEGALITY / ERRATA / STRESS TEST — 2026-09-06
+---------------------------------------------------------------------
+User asked to verify the optimized Oppression/Offering Gadget deck for exact Reborn legality, current-text errata/rulings, and stress test the build.
+
+LEGALITY CHECK — REBORN CUSTOM BANLIST:
+- Green Gadget, Red Gadget, Yellow Gadget, Ultimate Offering, Royal Oppression, Kaiser Colosseum, Smashing Ground, Sangan, Creature Swap, Ring of Destruction and the rest of the proposed 40 are confirmed in the 2,273-card MASTER.
+- Breaker the Magical Warrior, Neo-Spacian Grand Mole, D.D. Warrior Lady, Sangan, Limiter Removal, Heavy Storm, Mystical Space Typhoon, Book of Moon, Ring of Destruction, Mirror Force, Torrential Tribute and Solemn Judgment are used at 1, matching the saved Limited list.
+- Creature Swap is used at 2, matching the saved Semi-Limited list.
+- Bottomless Trap Hole is used at 2, matching the user-confirmed Reborn Semi-Limited override.
+- Ultimate Offering, Royal Oppression, Kaiser Colosseum, Upstart Goblin and Smashing Ground do not appear on the saved Reborn restriction list; under the saved project rule they are legal up to 3. Do NOT substitute the real-world current TCG banlist for the custom Reborn banlist.
+
+CURRENT-TEXT / ERRATA POINTS THAT MATTER:
+1. Sangan current text: if sent from field to GY, search a 1500-or-less ATK monster, but cards/effects with that searched name cannot be activated for the rest of that turn; Sangan is once per turn. Therefore a Gadget searched by Sangan cannot immediately trigger its own search effect that same turn. Sangan remains mainly a delayed replacement/grind card here.
+2. Ring of Destruction current text is heavily errata'd: opponent's turn only; target opponent face-up monster with ATK <= opponent LP; destroy it, you take its original ATK first, then opponent takes the same damage; once per turn. It is still strong removal, but no longer the old unrestricted burn/finisher version.
+3. Ultimate Offering current text: during YOUR Main Phase or the OPPONENT'S Battle Phase, pay 500 LP to immediately Normal Summon/Set 1 monster. No once-per-turn clause. The repeated Gadget chain is legal during your Main Phase, but you cannot use Offering in arbitrary opponent phases.
+4. Royal Oppression current text: either player can pay 800 LP to negate a Special Summon or an effect that Special Summons and destroy those cards. The opponent can use your Oppression against your own Special Summons, but this Gadget build barely Special Summons, which is why 3 Oppression has unusually low self-conflict.
+5. Kaiser Colosseum current text only restricts the opponent while you control at least one monster and does not affect monsters already on the field before Kaiser is active. Therefore it is primarily a going-first/early-board lock, not a catch-up card. Two copies remain preferred over three.
+6. Creature Swap current text makes EACH PLAYER choose which monster they give. Therefore it is best when the opponent controls exactly one monster; it is not guaranteed to steal their best monster if they control multiple monsters.
+7. Limiter Removal current text doubles ATK only of Machines you currently control, then destroys those monsters in the End Phase. The 9 Gadgets are Machines, so the Offering swarm -> Limiter kill line is valid.
+8. Breaker/Grand Mole/D.D. Warrior Lady have no format-changing current-text issue found for this shell; use their normal current text.
+
+IMPLEMENTATION CAVEAT:
+- The connected GitHub repository YGO-REBORN-POOL contains the public card-pool text only, not duel-engine/card-script files, so it cannot independently prove which historical errata scripts the live game uses.
+- Current recommendation therefore remains under the project-wide CURRENT-CARD-TEXT assumption unless the user's in-game card text directly proves otherwise.
+
+OPENING-HAND STRESS TEST — 3 Upstart Goblin treated as immediate cycling (effective 5 cards from 37 non-Upstarts; exact hypergeometric):
+- At least 1 of the 9 Gadgets: 77.45%.
+- At least 1 monster among the 13 monsters: 90.25%; monsterless after Upstart cycling: 9.75%.
+- Gadget + Ultimate Offering: 25.81%.
+- At least 1 Royal Oppression: 36.16%.
+- At least 1 Oppression/Kaiser lock card (3 Oppression + 2 Kaiser): 53.80%.
+- Gadget + at least 1 Oppression/Kaiser: 38.97%.
+- Offering + Oppression in the same effective opener: 11.31%; these cards do not inherently conflict because Offering's Gadget summons are Normal Summons.
+- Opening 2+ copies of a specific 3-of continuous card (Offering or Oppression): 4.25%.
+- Opening 3+ among all 8 continuous engine/lock cards (3 Offering + 3 Oppression + 2 Kaiser): 5.69%; 4+ only 0.48%. This is noticeable but not high enough to justify reducing core access.
+- Kaiser seen with no monster: ~3.71%, reinforcing 2 rather than 3 Kaiser.
+- Sangan plus the 9 Gadgets gives ~81.48% access to either an immediate Gadget or delayed Sangan replacement, but Sangan is NOT counted as immediate Gadget access because it must first leave the field and its errata blocks same-turn activation of the searched card's effects.
+
+FINAL SLOT CORRECTION FROM STRESS TEST:
+- CUT 1 Pot of Avarice.
+- ADD the 3rd Smashing Ground.
+Reason: Avarice is slow in a fast no-side field and is especially poor against two major decks: Necrovalley can shut off the GY-recycling line, while Macro/Fissure can prevent enough monsters from reaching the GY. A third Smashing Ground raises opening access to Smashing from ~25.53% (2 copies) to ~36.16% (3 copies) and is immediately useful going second versus Monarchs, Six Samurai, Trooper, Earth Beatdown and generic established monsters.
+
+CURRENT VERIFIED / STRESS-TESTED OPPRESSION-OFFERING GADGET 40:
+MONSTERS — 13
+3 Green Gadget
+3 Red Gadget
+3 Yellow Gadget
+1 Breaker the Magical Warrior
+1 Neo-Spacian Grand Mole
+1 D.D. Warrior Lady
+1 Sangan
+
+SPELLS — 15
+3 Upstart Goblin
+2 Creature Swap
+3 Smashing Ground
+2 Kaiser Colosseum
+1 Lightning Vortex
+1 Limiter Removal
+1 Heavy Storm
+1 Mystical Space Typhoon
+1 Book of Moon
+
+TRAPS — 12
+3 Ultimate Offering
+3 Royal Oppression
+2 Bottomless Trap Hole
+1 Torrential Tribute
+1 Mirror Force
+1 Ring of Destruction
+1 Solemn Judgment
+
+MATCHUP STRESS / CURRENT JUDGMENT (interaction model, not literal duel-engine records):
+- DDT: favorable to strongly competitive because 3 Oppression attacks the deck's Special-Summon payoff while Gadgets maintain card flow.
+- Six Samurai: competitive/slightly favorable if Oppression/Bottomless/Torrential are established; dangerous when Samurai wins the die roll and swarms first.
+- Zombies/Safe Return: favorable because Oppression repeatedly attacks the revival engine.
+- Trooper/Machine Duplication: favorable when Oppression resolves; their Duplication/Chimeratech/Dimension Fusion lines are much more self-conflicted than this deck.
+- Macro Monarch: roughly competitive; Gadgets do not rely heavily on the GY, but Monarch tempo/Brain Control can punish low-stat boards.
+- D-HERO Monarch: roughly competitive to slightly unfavored depending on who establishes first; Gadget card flow is strong but Monarch tempo remains dangerous.
+- Earth Beatdown: competitive; 3 Smashing + 2 Swap + Mole/DDWL + battle traps materially improve the raw-stat matchup.
+- Gravekeeper Royal Tribute/DDV: still the clear bad matchup. Royal Tribute punishes the 13-monster density and DDV destroys all three Gadget names. This matchup is the main reason the deck is not promoted above the established top 4.
+
+CURRENT TIER CALL:
+- Oppression/Offering Gadget with 3 Smashing Ground: low Tier 1 / strong Tier 1.5 sleeper candidate for broad no-side play.
+- Legal under the saved Reborn pool/banlist exactly as listed above.
+- Under current-card-text assumptions, no discovered errata invalidates the core Offering/Oppression/Gadget gameplan.
+- If in-game YGO Reborn text for Sangan, Ring, Ultimate Offering, Royal Oppression, Kaiser Colosseum, or Creature Swap differs from current official text, reopen the list immediately.
+
+FOURTEENTH AUDIT — WILDHEART RULING / SLOT REFINEMENT — 2026-09-06
+--------------------------------------------------------------------
+User challenged whether Elemental HERO Wildheart is truly the right Breaker replacement in the Gravekeeper build.
+
+Ruling verification:
+- Elemental HERO Wildheart is confirmed in the Reborn pool.
+- Standard/current card text is "Unaffected by Trap effects."
+- Therefore, after Wildheart is successfully face-up on the field, Bottomless Trap Hole, Torrential Tribute, Mirror Force, Ring of Destruction, Sakuretsu Armor and similar Trap effects can be activated where legal but do not affect/remove Wildheart.
+- Summon-negation such as Solemn Judgment can still stop the summon because Wildheart is not yet successfully face-up on the field for its immunity to apply.
+
+Deckbuilding refinement:
+- Wildheart is a legitimate trap-heavy-field tech, not a universal automatic upgrade over Breaker.
+- Its drawbacks in Gravekeepers: only 1500 ATK, no Necrovalley stat boost, not a Gravekeeper for Spy synergy, not DARK for Deck Devastation Virus tribute purposes, and it is mediocre versus Spell/monster-effect removal and broad non-trap decks.
+- Errata Sangan remains a grind/replacement option but is not a clean tactical searcher.
+- A second Gravekeeper's Guard is the stronger broad-field synergistic alternative to Breaker if the goal is to keep the 13-monster consistency while preserving Gravekeeper/Spy synergy; Set Guard also avoids Bottomless on Set, and its Flip bounce remains useful even if it is later removed.
+- Recommended split by environment: trap-heavy room -> Wildheart is defensible/preferred matchup tech; broad all-comers -> second Gravekeeper's Guard is preferred over Wildheart, Sangan, or Breaker unless immediate permanent S/T removal is especially valuable.
+- Do not present Wildheart as unquestionably the final best slot without qualifying the matchup dependence.
+
+FIFTEENTH AUDIT — MACRO MONARCH + GADGET FURTHER OPTIMIZATION / HIGH-ATK STRESS — 2026-09-06
+------------------------------------------------------------------------------------------------
+User asked to optimize the current Macro Monarch and Oppression/Offering Gadget lists further, and specifically asked whether Gadgets struggle against high-ATK beaters.
+
+MACRO MONARCH — FURTHER OPTIMIZATION
+- Keep the 16-monster package established after the Helios correction:
+  3 D.D. Survivor
+  1 D.D. Scout Plane
+  3 Banisher of the Radiance
+  3 Cyber Dragon
+  3 Raiza the Storm Monarch
+  2 Thestalos the Firestorm Monarch
+  1 Mobius the Frost Monarch
+- New flex-slot correction: CUT 1 Ring of Destruction; ADD the 3rd Enemy Controller.
+- Reason: under current official text, Ring is opponent-turn-only, requires target ATK <= opponent LP, destroys while inflicting that monster's original ATK to the user first, and is therefore materially weaker/more LP-intensive than historical Ring. Enemy Controller is live as position interaction on either turn and its tribute/control mode has unusually strong synergy with D.D. Survivor/Scout under Macro/Fissure.
+- With a face-up Survivor under Macro/Fissure, tributing Survivor for Enemy Controller banishes it; the stolen opposing monster can then be used as Monarch tribute material on the user's turn, while Survivor can return in the End Phase under current text.
+- Exact post-Upstart opening proxy (effective 5 from 37 non-Upstarts): 3rd Enemy Controller raises E-Con access from ~25.53% to ~36.16%. A broad immediate-going-second Monarch-path proxy [Monarch + (Cyber/Brain/Soul OR E-Con + non-Cyber fodder)] rises from ~42.19% with 2 E-Con to ~43.97% with 3 E-Con. Opening 2+ copies of a 3-of remains only ~4.25%.
+- A 2nd Soul Exchange was also tested. It raises the same immediate-going-second Monarch-path proxy more, to ~45.23%, but is much more one-directional: it is poor on the opening turn going first, requires an opposing monster, and prevents the Battle Phase on the activation turn. For broad 50/50 all-comers play, 3 E-Con / 1 Soul is preferred over 2 E-Con / 2 Soul.
+- Zaborg was reviewed as a 6th-Monarch mix option but not promoted over the 2nd Thestalos. The existing 3 Raiza / 2 Thestalos / 1 Mobius split remains the broadest mix: Raiza is the premium universal tempo Monarch, Thestalos supplies hand pressure, and Mobius supplies dedicated backrow removal.
+
+CURRENT MAX-WIN-RATE MACRO MONARCH — 40
+MONSTERS — 16
+3 D.D. Survivor
+1 D.D. Scout Plane
+3 Banisher of the Radiance
+3 Cyber Dragon
+3 Raiza the Storm Monarch
+2 Thestalos the Firestorm Monarch
+1 Mobius the Frost Monarch
+
+SPELLS — 16
+3 Dimensional Fissure
+3 Brain Control
+3 Enemy Controller
+1 Soul Exchange
+3 Upstart Goblin
+1 Heavy Storm
+1 Mystical Space Typhoon
+1 Book of Moon
+
+TRAPS — 8
+3 Macro Cosmos
+2 Bottomless Trap Hole
+1 Torrential Tribute
+1 Mirror Force
+1 Solemn Judgment
+
+GADGETS — HIGH-ATK / REMOVAL STRESS
+- Gadgets themselves are low-ATK, so a large established monster can win combat if the control player has exhausted interaction. However this is NOT a structural high-ATK weakness in the optimized list because the deck is intentionally removal-dense rather than trying to battle over bosses naturally.
+- Before defensive traps, the list has 8 immediate/near-immediate high-ATK interaction cards: 3 generic single-monster removal slots, 2 Creature Swap, 1 Lightning Vortex, 1 Neo-Spacian Grand Mole, and 1 D.D. Warrior Lady. With 3 Upstart treated as cycling, access to at least one of these 8 cards is ~72.76% in an effective 5-card opener.
+- Counting Book of Moon plus 2 Bottomless, Torrential, Mirror, and Ring as additional conditional/defensive answers gives a conservative 14-card beater-interaction proxy, seen in ~92.28% of effective 5-card openings. This is NOT a literal 92.28% guaranteed answer rate because Swap, Bottomless, Mirror, Ring and Book are board/timing dependent; it demonstrates that raw ATK is heavily covered by deck construction.
+- Do NOT add Cyber Dragon to the broad-field Gadget build: a face-up Royal Oppression can be used by either player to negate Special Summons, so Cyber creates real self-conflict/topdeck awkwardness.
+- Do NOT main Injection Fairy Lily solely to solve high ATK: Lily can attack over bosses, but it consumes the Normal Summon and 2000 LP per boost; this deck already spends LP on Ultimate Offering, Royal Oppression and Solemn Judgment.
+- Spirit Reaper was considered over errata-Sangan. Reaper is better pure battle insurance and works nicely with a one-monster Kaiser board, but Sangan is still better broad-field engine smoothing/replacement because it can search a Gadget, Grand Mole or D.D. Warrior Lady when it dies on the opponent's turn. Keep Sangan unless high-ATK beatdown becomes a frequent field share.
+
+GADGET REMOVAL MIX CORRECTION
+- Replace the 3rd Smashing Ground with 1 Hammer Shot: 2 Smashing Ground + 1 Hammer Shot.
+- Hammer Shot is confirmed in the pool and absent from the saved Reborn restriction list. Current text destroys the Attack Position monster on the field with the highest ATK (choice if tied).
+- This specifically improves multi-monster boards where Smashing Ground's highest-DEF rule can remove the wrong body: examples include Raiza + Cyber Dragon, Grandmaster + Zanji, Goblin Attack Force + Berserk Gorilla, and Jinzo + Cyber Dragon. Hammer normally removes the true highest-ATK threat because Gadgets are only 1200–1400 ATK.
+- Keep only 1 Hammer: unlike Smashing, it can be dead/dangerous when the opponent's relevant monster is in Defense Position or when the user's own Attack Position monster is the highest ATK. A 2 Smashing / 1 Hammer split diversifies coverage without changing opening removal density.
+- Keep 2 Kaiser Colosseum. Cutting a Kaiser for more removal drops opening Oppression/Kaiser lock access from ~53.80% (5 lock cards) to ~45.55% (4 lock cards), too large a loss for an occasional raw-ATK problem that the deck already answers heavily.
+
+CURRENT MAX-WIN-RATE OPPRESSION/OFFERING GADGETS — 40
+MONSTERS — 13
+3 Green Gadget
+3 Red Gadget
+3 Yellow Gadget
+1 Breaker the Magical Warrior
+1 Neo-Spacian Grand Mole
+1 D.D. Warrior Lady
+1 Sangan
+
+SPELLS — 15
+3 Upstart Goblin
+2 Creature Swap
+2 Smashing Ground
+1 Hammer Shot
+2 Kaiser Colosseum
+1 Lightning Vortex
+1 Limiter Removal
+1 Heavy Storm
+1 Mystical Space Typhoon
+1 Book of Moon
+
+TRAPS — 12
+3 Ultimate Offering
+3 Royal Oppression
+2 Bottomless Trap Hole
+1 Torrential Tribute
+1 Mirror Force
+1 Ring of Destruction
+1 Solemn Judgment
+
+CURRENT JUDGMENT
+- Macro Monarch: the 3-E-Con / no-Ring configuration is now the preferred broad-field maximum-win-rate version under current-card-text assumptions.
+- Gadgets: do not add a beatstick by default. The 2 Smashing / 1 Hammer split is preferred while preserving 9 Gadgets, 3 Offering, 3 Oppression and 2 Kaiser.
+- Gadgets still dislike a large monster after their removal has been exhausted, but their actual matchup weakness remains Gravekeeper Royal Tribute + DDV, not generic high-ATK beatdown.
+- Reopen if in-game Reborn card text materially differs from current official text.
+
+SIXTEENTH AUDIT — FINAL MACRO/GADGET RE-OPTIMIZATION — 2026-09-06
+----------------------------------------------------------------
+User asked to optimize the latest Macro Monarch and Oppression/Offering Gadget lists one more time and return final lists.
+
+MACRO MONARCH FINAL RE-AUDIT:
+- No further core change is promoted beyond the prior 3-Enemy-Controller / no-Ring build.
+- Keep 3 D.D. Survivor / 1 D.D. Scout Plane. Cutting Scout reduces the recurring-body + banish-enabler opening proxy materially and weakens tribute recursion; adding more Scout lowers standalone card quality.
+- Keep all 9 primary banish enablers: 3 Macro Cosmos / 3 Dimensional Fissure / 3 Banisher of the Radiance. Cutting one lowers opening banish access from ~77.45% to ~72.76%.
+- Keep 3 Cyber Dragon; prior testing showed the 3rd Cyber materially improves immediate going-second Monarch access versus Helios/other bodies.
+- Keep 6 Monarchs at 3 Raiza / 2 Thestalos / 1 Mobius. Zaborg was rechecked but remains inferior to the second Thestalos for broad all-comers because Zaborg is board-dependent while Thestalos supplies live going-first hand pressure; Mobius remains the dedicated backrow answer.
+- Keep 3 Enemy Controller / 1 Soul Exchange. A second Soul Exchange improves some going-second tribute lines but is worse going first and forfeits the Battle Phase; third E-Con is live in more states and synergizes with banished Survivor/Scout recursion.
+- Do not add Royal Oppression: either player can use it, creating real conflict with Cyber Dragon and returning Survivor/Scout lines.
+- Do not re-add Grand Convergence, Return from the Different Dimension, Helios, or a second Scout in the maximum-consistency all-comers version.
+
+FINAL MACRO MONARCH 40:
+MONSTERS 16
+3 D.D. Survivor
+1 D.D. Scout Plane
+3 Banisher of the Radiance
+3 Cyber Dragon
+3 Raiza the Storm Monarch
+2 Thestalos the Firestorm Monarch
+1 Mobius the Frost Monarch
+SPELLS 16
+3 Dimensional Fissure
+3 Brain Control
+3 Enemy Controller
+1 Soul Exchange
+3 Upstart Goblin
+1 Heavy Storm
+1 Mystical Space Typhoon
+1 Book of Moon
+TRAPS 8
+3 Macro Cosmos
+2 Bottomless Trap Hole
+1 Torrential Tribute
+1 Mirror Force
+1 Solemn Judgment
+
+GADGET FINAL RE-AUDIT:
+- Keep 9 Gadgets, 3 Ultimate Offering, 3 Royal Oppression, 2 Kaiser Colosseum, 2 Creature Swap, and the 2 Smashing Ground / 1 Hammer Shot removal split.
+- Keep Sangan over Spirit Reaper for broad all-comers: Reaper is superior pure battle insurance, but errata-Sangan still improves engine smoothing and can search a Gadget, Grand Mole, or D.D. Warrior Lady when it dies on the opponent's turn.
+- Banisher of the Radiance was rechecked and remains unpromoted: it competes for the Normal Summon and is redundant with 3 Oppression in many of the matchups it would target.
+- FINAL TRAP FLEX CHANGE: CUT 1 Ring of Destruction; ADD 1 Compulsory Evacuation Device.
+- Compulsory is confirmed in the pool and absent from the saved Reborn restriction list, so it is legal up to 3 under the standing custom-banlist rule. Current text simply targets 1 monster on the field and returns it to the hand.
+- This is preferred to current-text Ring in Gadgets because the deck already spends LP on Ultimate Offering, Royal Oppression and Solemn Judgment. Compulsory has no LP cost, is chainable at flexible timing, answers high-ATK monsters regardless of ATK value, can interrupt Special-Summon boards, and can sometimes save/reuse the user's own Gadget. Its drawback is that it does not permanently answer Monarchs and other Normal Summons, so retain 2 Bottomless, 2 Smashing + 1 Hammer, Vortex, Mole and DDWL as the permanent removal core.
+- Widespread Ruin, Sakuretsu Armor and Pulling the Rug were reviewed but not promoted over Compulsory for the single flex slot: Widespread/Sakuretsu are attack-dependent; Pulling the Rug is powerful versus Monarch/Gadget summon effects but too narrow across DDT, Gravekeeper, Six Samurai and other broad-field matchups.
+
+FINAL OPPRESSION/OFFERING GADGETS 40:
+MONSTERS 13
+3 Green Gadget
+3 Red Gadget
+3 Yellow Gadget
+1 Breaker the Magical Warrior
+1 Neo-Spacian Grand Mole
+1 D.D. Warrior Lady
+1 Sangan
+SPELLS 15
+3 Upstart Goblin
+2 Creature Swap
+2 Smashing Ground
+1 Hammer Shot
+2 Kaiser Colosseum
+1 Lightning Vortex
+1 Limiter Removal
+1 Heavy Storm
+1 Mystical Space Typhoon
+1 Book of Moon
+TRAPS 12
+3 Ultimate Offering
+3 Royal Oppression
+2 Bottomless Trap Hole
+1 Torrential Tribute
+1 Mirror Force
+1 Compulsory Evacuation Device
+1 Solemn Judgment
+
+CURRENT CONCLUSION:
+- Macro Monarch: no further change found after re-testing the engine ratios; current 40 remains the maximum-broad-field-win-rate recommendation under current-card-text assumptions.
+- Gadgets: Ring -> Compulsory is the final broad-field improvement. The deck's low printed ATK is still not a structural weakness because removal density remains extremely high; its principal bad matchup remains Gravekeeper Royal Tribute + Deck Devastation Virus rather than generic big-beater decks.
+
+SEVENTEENTH AUDIT — ALL-COMERS CORRECTION / REMOVE BEATER BIAS — 2026-09-06
+----------------------------------------------------------------------------
+User clarified the optimization target: do NOT build around beating high-ATK monsters specifically; optimize both Macro Monarch and Gadgets for maximum broad-field / all-comers win rate.
+
+CORRECTION TO GADGET REMOVAL MIX:
+- REVERT the matchup-driven 2 Smashing Ground + 1 Hammer Shot split.
+- USE 3 Smashing Ground for the maximum-all-comers list.
+- Reason: Hammer Shot was promoted during a high-ATK-specific audit. Broadly, Smashing Ground is safer because it never risks destroying the user's own highest-ATK monster and it can answer face-up monsters in either battle position. Hammer Shot's upside of selecting the highest-ATK Attack Position monster is matchup-specific and can be dead or self-punishing in broader board states.
+- Keep Compulsory Evacuation Device over current-text Ring of Destruction as the single flexible trap slot. That change is not beater-specific: Compulsory has zero LP cost, flexible timing, and utility both offensively and defensively, while this Gadget shell already spends LP on Ultimate Offering, Royal Oppression and Solemn Judgment.
+- Keep 9 Gadgets / 3 Ultimate Offering / 3 Royal Oppression / 2 Kaiser Colosseum / 2 Creature Swap / 1 Lightning Vortex / 1 Limiter Removal / 1 Breaker / 1 Grand Mole / 1 D.D. Warrior Lady / 1 errata-Sangan. No beatstick is added.
+
+CURRENT MAXIMUM-ALL-COMERS GADGETS — 40:
+MONSTERS 13
+3 Green Gadget
+3 Red Gadget
+3 Yellow Gadget
+1 Breaker the Magical Warrior
+1 Neo-Spacian Grand Mole
+1 D.D. Warrior Lady
+1 Sangan
+SPELLS 15
+3 Upstart Goblin
+2 Creature Swap
+3 Smashing Ground
+2 Kaiser Colosseum
+1 Lightning Vortex
+1 Limiter Removal
+1 Heavy Storm
+1 Mystical Space Typhoon
+1 Book of Moon
+TRAPS 12
+3 Ultimate Offering
+3 Royal Oppression
+2 Bottomless Trap Hole
+1 Torrential Tribute
+1 Mirror Force
+1 Compulsory Evacuation Device
+1 Solemn Judgment
+
+MACRO MONARCH ALL-COMERS STATUS:
+- No change from the prior 3-Enemy-Controller / no-Ring configuration.
+- Keep 3 D.D. Survivor / 1 D.D. Scout Plane / 3 Banisher of the Radiance / 3 Cyber Dragon / 6 Monarchs at 3 Raiza, 2 Thestalos, 1 Mobius / 3 Dimensional Fissure / 3 Macro Cosmos / 3 Brain Control / 3 Enemy Controller / 1 Soul Exchange / 3 Upstart / Heavy / MST / Book / 2 Bottomless / Torrential / Mirror / Solemn.
+- This remains the maximum-broad-field recommendation under current-card-text assumptions.
+
+EIGHTEENTH AUDIT — CURRENT TOURNAMENT-WINNING GADGET LIST / REAL-WORLD EVIDENCE — 2026-09-06
+------------------------------------------------------------------------------------------------
+User supplied the current #1 Gadget deck screenshot from the updated Reborn event. The event field had only 3 Gadget players, while Perfect Circle had 15 entries and occupied places #2 through #8. This is materially stronger evidence than the prior theory-only Gadget shell.
+
+IMPORTANT IMAGE CORRECTION:
+- The two Monarchs in the winning screenshot are Mobius the Frost Monarch, NOT Raiza the Storm Monarch.
+- The exact visible 40 is:
+MONSTERS — 15
+3 Cyber Dragon
+3 Green Gadget
+3 Red Gadget
+3 Yellow Gadget
+2 Mobius the Frost Monarch
+1 Jinzo
+SPELLS — 11
+2 Brain Control
+1 Heavy Storm
+2 Lightning Vortex
+1 Pot of Avarice
+1 Premature Burial
+2 Shrink
+2 Smashing Ground
+TRAPS — 14
+1 Bottomless Trap Hole
+2 Sakuretsu Armor
+1 Mirror Force
+3 Phoenix Wing Wind Blast
+1 Ring of Destruction
+1 Solemn Judgment
+1 Torrential Tribute
+2 Ultimate Offering
+2 Waboku
+
+INTERPRETATION:
+- This winning deck is a tempo / card-advantage Gadget deck, not an Oppression/Kaiser lock deck.
+- 3 Cyber Dragon + 2 Mobius + 1 Jinzo gives substantial going-second pressure and tribute/backrow-control power.
+- 2 Brain Control supports stealing an opposing monster into Mobius/Jinzo tribute lines.
+- 3 Phoenix Wing Wind Blast and 2 Lightning Vortex exploit excess searched Gadgets as discard fuel; this is a stronger use of Gadget-generated card advantage than the earlier audit gave credit for.
+- 2 Ultimate Offering, rather than 3, indicates the winning shell treats Offering as a power extender rather than a core card that must be maximized.
+- The list deliberately omits Royal Oppression, Kaiser Colosseum, Upstart Goblin, Limiter Removal, Creature Swap, Sangan, Grand Mole, DDWL and Breaker. This supports a lower-synergy-tax, higher-live-card tempo philosophy.
+
+CURRENT RECOMMENDATION:
+- For Gadget, promote the tournament-winning tempo shell above the prior Oppression/Kaiser theoretical shell as the new baseline for maximum real-world broad-field win rate.
+- Do NOT blindly assume every individual slot is mathematically final; Ring vs a second Bottomless/other flex and Waboku/Sakuretsu/Book-type ratios can be tested later. But until paired testing proves an improvement, the exact winning 40 should be preferred to the unproven lock shell.
+- Macro Monarch is NOT changed by this evidence; its current 40 remains a separate Tier-1 candidate and still needs real-event testing.

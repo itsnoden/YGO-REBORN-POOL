@@ -1,0 +1,91 @@
+{
+  "page": 117,
+  "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=117&request_locale=en",
+  "total": 13918,
+  "records": [
+    {
+      "name": "Super Conductor Tyranno",
+      "cid": "6816",
+      "spec": "LIGHT Level 8 [\r\n\t\t\t\t\t\t\t\t\t\tDinosaur ／Effect ] ATK 3300 DEF 1400",
+      "attribute": "LIGHT",
+      "text": "Once per turn: You can Tribute 1 monster; inflict 1000 damage to your opponent. This card cannot declare an attack the turn this effect is activated.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6816&request_locale=en",
+      "retrieved_at": "2026-09-06T11:45:07.382819+00:00",
+      "page_sha256": "40ff818431f50e6a6c88944f39b93525fd16e8f5343a080258f5a5b744e678bc",
+      "text_sha256": "464aabcaccb248622658adc9498028c7771c29bfb74229847bd4d3f3be23f155",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=117&request_locale=en"
+    },
+    {
+      "name": "Super Rejuvenation",
+      "cid": "5346",
+      "spec": "SPELL Quick-Play",
+      "attribute": "SPELL",
+      "text": "During the End Phase of the turn this card was activated, draw a number of cards equal to the combined number of Dragon monsters you discarded or Tributed from your hand or field this turn.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5346&request_locale=en",
+      "retrieved_at": "2026-09-06T11:45:07.384301+00:00",
+      "page_sha256": "40ff818431f50e6a6c88944f39b93525fd16e8f5343a080258f5a5b744e678bc",
+      "text_sha256": "aed3f61afec510ca586f8c0f943f1106dfb49ccb6ce3539c3eeabc9ab138ca56",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=117&request_locale=en"
+    },
+    {
+      "name": "Super Robolady",
+      "cid": "5383",
+      "spec": "EARTH Level 6 [\r\n\t\t\t\t\t\t\t\t\t\tMachine ／Fusion／Effect ] ATK 1200 DEF 500",
+      "attribute": "EARTH",
+      "text": "\"Robolady\" + \"Roboyarou\"<br>You can Special Summon \"Super Roboyarou\" by returning this card from the field to the Extra Deck. You cannot use this effect during the same turn this monster is Special Summoned. In addition, increase the ATK of this monster by 1000 points during the Damage Step when this monster inflicts Direct Damage to your opponent's Life Points.",
+      "placement": "extra",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5383&request_locale=en",
+      "retrieved_at": "2026-09-06T11:45:07.384852+00:00",
+      "page_sha256": "40ff818431f50e6a6c88944f39b93525fd16e8f5343a080258f5a5b744e678bc",
+      "text_sha256": "d223d377095dff70dbaf302d7e03008e6ee3ea3f3a106ae2a66ec136878ad9c1",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=117&request_locale=en"
+    },
+    {
+      "name": "Super Roboyarou",
+      "cid": "5384",
+      "spec": "EARTH Level 6 [\r\n\t\t\t\t\t\t\t\t\t\tMachine ／Fusion／Effect ] ATK 1200 DEF 500",
+      "attribute": "EARTH",
+      "text": "\"Roboyarou\" + \"Robolady\"<br>You can Special Summon \"Super Robolady\" by returning this card from the field to the Extra Deck. You cannot use this effect during the same turn this monster is Special Summoned. In addition, increase the ATK of this monster by 1000 points during the Damage Step when this monster battles with a monster.",
+      "placement": "extra",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5384&request_locale=en",
+      "retrieved_at": "2026-09-06T11:45:07.385389+00:00",
+      "page_sha256": "40ff818431f50e6a6c88944f39b93525fd16e8f5343a080258f5a5b744e678bc",
+      "text_sha256": "e081a7b6c811052c8bd36d9051371be354cbd25641e80f653afbad2ce2379995",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=117&request_locale=en"
+    },
+    {
+      "name": "Super-Ancient Dinobeast",
+      "cid": "7802",
+      "spec": "EARTH Level 8 [\r\n\t\t\t\t\t\t\t\t\t\tDinosaur ／Effect ] ATK 2700 DEF 1400",
+      "attribute": "EARTH",
+      "text": "You can Tribute Summon this card in face-up Attack Position by Tributing 1 Dinosaur monster. When a Dinosaur monster(s) is Special Summoned from your GY while this monster is on the field (except during the Damage Step): You can draw 1 card.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=7802&request_locale=en",
+      "retrieved_at": "2026-09-06T11:45:07.386403+00:00",
+      "page_sha256": "40ff818431f50e6a6c88944f39b93525fd16e8f5343a080258f5a5b744e678bc",
+      "text_sha256": "10de7b7de2527eefdb74552d1d26a5dbc3a3cefe33ad61ffe3c480d95d2aa23b",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=117&request_locale=en"
+    },
+    {
+      "name": "Supercharge",
+      "cid": "6747",
+      "spec": "TRAP",
+      "attribute": "TRAP",
+      "text": "When your opponent declares an attack while the only monsters you control are Machine-Type \"roid\" monster(s): Draw 2 cards.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6747&request_locale=en",
+      "retrieved_at": "2026-09-06T11:45:07.387003+00:00",
+      "page_sha256": "40ff818431f50e6a6c88944f39b93525fd16e8f5343a080258f5a5b744e678bc",
+      "text_sha256": "275650eece7c74146bf0e3e569b67cabe6c7ccefafbf13863f2891d7b8b9b130",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=117&request_locale=en"
+    }
+  ]
+}

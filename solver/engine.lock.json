@@ -1,0 +1,14 @@
+{
+  "core": {
+    "url": "https://github.com/edo9300/ygopro-core.git",
+    "commit": "b8c05dff14da0b13608950a73906287dc0b601f9"
+  },
+  "scripts": {
+    "url": "https://github.com/ProjectIgnis/CardScripts.git",
+    "commit": "49b0af044cebcb92f3f23211ef436971e1fc16fb"
+  },
+  "database": {
+    "url": "https://github.com/ProjectIgnis/BabelCDB.git",
+    "commit": "9d7f8da324417ec7913b47c52273906c9ae3333b"
+  }
+}

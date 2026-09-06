@@ -1,0 +1,16 @@
+test_name_limit_shared_instances_and_duel_reset (test_solver.AccuracyTests.test_name_limit_shared_instances_and_duel_reset) ... ok
+test_no_fake_maximin (test_solver.AccuracyTests.test_no_fake_maximin) ... ok
+test_protocol_frames (test_solver.AccuracyTests.test_protocol_frames) ... ok
+test_stale_text_and_missing_rules_block (test_solver.AccuracyTests.test_stale_text_and_missing_rules_block) ... ok
+test_authoritative_overrides (test_solver.PoolTests.test_authoritative_overrides) ... ok
+test_duplicate_or_gap_fails (test_solver.PoolTests.test_duplicate_or_gap_fails) ... ok
+test_full_exact_import (test_solver.PoolTests.test_full_exact_import) ... ok
+test_forbidden_extra_unknown_rejected (test_solver.SearchTests.test_forbidden_extra_unknown_rejected) ... ok
+test_mutation_and_crossover_conserve_legality (test_solver.SearchTests.test_mutation_and_crossover_conserve_legality) ... ok
+test_saved_candidates_valid (test_solver.SearchTests.test_saved_candidates_valid) ... ok
+test_shared_name_limit (test_solver.SearchTests.test_shared_name_limit) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.087s
+
+OK

@@ -1,0 +1,21 @@
+{
+  "expected_pool": 2273,
+  "imported_pool": 2273,
+  "limits": {
+    "0": 34,
+    "1": 45,
+    "2": 11,
+    "3": 2183
+  },
+  "banlist_names_outside_pool": [
+    "ceasefire",
+    "cyber-stein"
+  ],
+  "inputs": {
+    "BANLIST_MASTER.txt": "506686d0d8acff506f57094f2275eaf047affc606284277165232b94cb538918",
+    "DECKBUILDING_FINDINGS_MASTER.txt": "9c43686cce0d83a54693eb03b2cfe250e718e2bbde8179e69def98f4ff2bedd3",
+    "MASTER.txt": "586d0de51a2dda1b9e750dcfecd700fdf010114e429e33d779380d9df5311a30"
+  },
+  "findings_policy": "Archived checkpoint only; NO rankings, decklists or heuristic weights imported into search.",
+  "text_policy": "Latest official English TCG text, per user instruction 2026-09-06; never historical errata."
+}

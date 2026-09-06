@@ -1,0 +1,91 @@
+{
+  "page": 52,
+  "url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=52&request_locale=en",
+  "total": 13918,
+  "records": [
+    {
+      "name": "Gigobyte",
+      "cid": "6019",
+      "spec": "WATER Level 1 [\r\n\t\t\t\t\t\t\t\t\t\tReptile ／Normal ] ATK 350 DEF 300",
+      "attribute": "WATER",
+      "text": "He has a tranquil soul, but carries a destiny that one day his heart shall be tainted by evil....",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6019&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:13.931694+00:00",
+      "page_sha256": "5365898ba6d688686de6b6497decfb88a781c7e6466e11772ee2266618ef859b",
+      "text_sha256": "559f83bd8b6bf1cca2c14ff9b59500b2888730b9649fc3cd4fbab82b90f755be",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=52&request_locale=en"
+    },
+    {
+      "name": "Gilasaurus",
+      "cid": "5256",
+      "spec": "EARTH Level 3 [\r\n\t\t\t\t\t\t\t\t\t\tDinosaur ／Effect ] ATK 1400 DEF 400",
+      "attribute": "EARTH",
+      "text": "You can Special Summon this card (from your hand). If Summoned this way: Activate this effect; your opponent can Special Summon 1 monster from their GY.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5256&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:13.937475+00:00",
+      "page_sha256": "5365898ba6d688686de6b6497decfb88a781c7e6466e11772ee2266618ef859b",
+      "text_sha256": "154fba4c65ac2717e3d9401ca96cf31b400fe19b1b694a52b0223929fc436697",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=52&request_locale=en"
+    },
+    {
+      "name": "Gilford the Legend",
+      "cid": "6456",
+      "spec": "EARTH Level 8 [\r\n\t\t\t\t\t\t\t\t\t\tWarrior ／Effect ] ATK 2600 DEF 2000",
+      "attribute": "EARTH",
+      "text": "Cannot be Special Summoned. When this card is Normal Summoned: You can equip as many Equip Spell Cards from your Graveyard as possible to a Warrior-Type monster(s) you control.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6456&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:13.943181+00:00",
+      "page_sha256": "5365898ba6d688686de6b6497decfb88a781c7e6466e11772ee2266618ef859b",
+      "text_sha256": "0ae80964d2384b4d8fcb094f9c5ac2df6483967d9421654b076a6bba1d48d5e8",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=52&request_locale=en"
+    },
+    {
+      "name": "Gilford the Lightning",
+      "cid": "5451",
+      "spec": "LIGHT Level 8 [\r\n\t\t\t\t\t\t\t\t\t\tWarrior ／Effect ] ATK 2800 DEF 1400",
+      "attribute": "LIGHT",
+      "text": "You can Tribute 3 monsters to Tribute Summon (but not Set) this card. If Summoned this way: Destroy all monsters your opponent controls.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5451&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:13.948934+00:00",
+      "page_sha256": "5365898ba6d688686de6b6497decfb88a781c7e6466e11772ee2266618ef859b",
+      "text_sha256": "3448980d79c1715a7231eaaec628019662143a1037c4969350bc6709334c7806",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=52&request_locale=en"
+    },
+    {
+      "name": "Giltia the D. Knight",
+      "cid": "4395",
+      "spec": "LIGHT Level 5 [\r\n\t\t\t\t\t\t\t\t\t\tWarrior ／Fusion ] ATK 1850 DEF 1500",
+      "attribute": "LIGHT",
+      "text": "\"Guardian of the Labyrinth\" + \"Protector of the Throne\"",
+      "placement": "extra",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4395&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:13.954703+00:00",
+      "page_sha256": "5365898ba6d688686de6b6497decfb88a781c7e6466e11772ee2266618ef859b",
+      "text_sha256": "b5a62801b212e8469b119b1494336bda1219e0f1777c8ebbad0c43303934eaea",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=52&request_locale=en"
+    },
+    {
+      "name": "Girochin Kuwagata",
+      "cid": "5136",
+      "spec": "WIND Level 4 [\r\n\t\t\t\t\t\t\t\t\t\tInsect ／Normal ] ATK 1700 DEF 1000",
+      "attribute": "WIND",
+      "text": "Despite its small size, this monster has powerful jaws that can rip metal to shreds.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5136&request_locale=en",
+      "retrieved_at": "2026-09-06T11:43:13.961385+00:00",
+      "page_sha256": "5365898ba6d688686de6b6497decfb88a781c7e6466e11772ee2266618ef859b",
+      "text_sha256": "5336adae892fe73d9482d40104ce6af98c21009b3f89c82ec1e9d5899fe0054c",
+      "verification": "official_current_text_retrieved",
+      "request_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&rp=100&page=52&request_locale=en"
+    }
+  ]
+}
