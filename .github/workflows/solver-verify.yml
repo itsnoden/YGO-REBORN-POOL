@@ -60,6 +60,17 @@ jobs:
             --seed 3000 \
             2>&1 | tee reports/ci_flow_probe.log
 
+      - name: Run paired stochastic pilot probe
+        run: |
+          python -m reborn.pilot_probe \
+            --library build/libocgcore.so \
+            --database vendor/database/cards.cdb \
+            --scripts vendor/scripts \
+            --pairs 4 \
+            --budget 5000 \
+            --seed 5000 \
+            2>&1 | tee reports/ci_pilot_probe.log
+
       - name: Capture pinned dependency heads
         if: always()
         run: |
@@ -76,7 +87,9 @@ jobs:
           name: solver-verification-${{ github.sha }}
           path: |
             solver/reports/flow_probe.json
+            solver/reports/pilot_probe.json
             solver/reports/ci_flow_probe.log
+            solver/reports/ci_pilot_probe.log
             solver/reports/ci_unit_tests.log
             solver/reports/ci_dependency_heads.txt
             solver/reports/engine_coverage.json
