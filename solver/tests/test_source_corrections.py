@@ -33,6 +33,18 @@ class SourceCorrectionTests(unittest.TestCase):
         self.assertEqual(applied[1]['to_name'], 'Wow Warrior')
         self.assertEqual(applied[1]['state'], 'applied')
 
+    def test_long_nose_is_replaced_by_reviewed_longnose_blue_mammoth(self):
+        cards, applied, _ = self._corrected_cards()
+        by_id = {c['id']: c for c in cards}
+        names = {key(c['name']) for c in cards}
+        self.assertEqual(by_id['reborn-1117']['name'], 'Longnose Blue Mammoth')
+        self.assertNotIn(key('Long Nose'), names)
+        self.assertIn(key('Longnose Blue Mammoth'), names)
+        self.assertIn(key('Great Long Nose'), names)
+        self.assertEqual(applied[2]['from_name'], 'Long Nose')
+        self.assertEqual(applied[2]['to_name'], 'Longnose Blue Mammoth')
+        self.assertEqual(applied[2]['state'], 'applied')
+
     def test_corrections_are_idempotent_for_already_corrected_cache(self):
         cards, _, spec = self._corrected_cards()
         second = apply_source_corrections(cards, spec)
@@ -40,6 +52,7 @@ class SourceCorrectionTests(unittest.TestCase):
         names = {key(c['name']) for c in cards}
         self.assertNotIn(key('Double Summon'), names)
         self.assertNotIn(key('Worm Warrior'), names)
+        self.assertNotIn(key('Long Nose'), names)
 
     def test_correction_refuses_unexpected_source_row(self):
         cards = [{'id': 'reborn-0530', 'name': 'Something Else'}]
