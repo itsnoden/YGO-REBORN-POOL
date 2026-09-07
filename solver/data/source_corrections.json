@@ -1,0 +1,14 @@
+{
+  "corrections": [
+    {
+      "reborn_id": "reborn-0530",
+      "from_name": "Double Summon",
+      "to_name": "Dragged Down into the Grave",
+      "status": "user_confirmed_source_correction",
+      "evidence": "Frame 145 / 00:36.00 / screen row 1 C6. The prior Double Summon transcription was challenged and re-opened against the source; the user identified the tile as Dragged Down into the Grave. The persistent Library MASTER records card #530 as Dragged Down into the Grave and explicitly states Double Summon is not in the confirmed Reborn pool.",
+      "effective_date": "2026-09-07",
+      "prohibited_stale_name": "Double Summon"
+    }
+  ],
+  "policy": "Source corrections change identity only when backed by explicit authoritative re-verification. They are hard pool constraints, not strategy priors."
+}
