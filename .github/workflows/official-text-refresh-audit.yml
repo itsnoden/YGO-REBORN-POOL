@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
 
+# Rerun after reviewed official `(Updated from: ...)` display-name parser fix.
 jobs:
   refresh:
     runs-on: ubuntu-latest
