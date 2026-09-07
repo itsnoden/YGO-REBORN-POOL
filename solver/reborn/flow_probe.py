@@ -1,7 +1,7 @@
 """Drive generated decks through the real engine until a win or a strict blocker.
 
-This is a correctness/protocol coverage probe, NOT a strength evaluator.  The
-baseline policy is intentionally conservative and deterministic.  Results from
+This is a correctness/protocol coverage probe, NOT a strength evaluator. The
+baseline policy is intentionally conservative and deterministic. Results from
 this module must never be interpreted as deck win rates or search priors.
 """
 import argparse
@@ -57,10 +57,6 @@ def run_one(library, database, scripts, deck0, deck1, mapped, seed, budget=5000)
             decision = extract_decision(messages)
             if decision is not None:
                 row['decisions'] += 1
-
-                # Build the same information-safe state/prompt objects a future
-                # learned pilot will consume. Neither object affects this
-                # conservative baseline's action choice.
                 observation = observation_for(duel, decision.player, tracker)
                 _assert_filtered_observation(observation)
                 row['observation_checks'] += 1
@@ -117,20 +113,29 @@ def main():
                        blocker=f'{type(exc).__name__}: {exc}')
         results.append(row)
 
+    completed = sum(bool(r.get('completed')) for r in results)
+    observation_checks = sum(r.get('observation_checks', 0) for r in results)
+    policy_view_checks = sum(r.get('policy_view_checks', 0) for r in results)
+    decisions = sum(r.get('decisions', 0) for r in results)
     report = {
         'purpose': 'protocol_observation_prompt_filter_and_complete_duel_correctness_only',
         'strength_evidence': False,
-        'profile': 'experimental_current_tcg_not_reborn_confirmed',
+        'profile': 'reborn',
         'baseline_policy': 'deterministic_conservative_legal_actions',
         'attempted': len(results),
-        'completed': sum(bool(r.get('completed')) for r in results),
-        'observation_checks': sum(r.get('observation_checks', 0) for r in results),
-        'policy_view_checks': sum(r.get('policy_view_checks', 0) for r in results),
+        'completed': completed,
+        'decisions': decisions,
+        'observation_checks': observation_checks,
+        'policy_view_checks': policy_view_checks,
         'results': results,
         'note': 'Do not use these outcomes as deck rankings, win rates, or search priors.',
     }
     dump(ROOT/'reports/flow_probe.json', report)
-    print(json.dumps({k: report[k] for k in ('attempted', 'completed', 'observation_checks', 'policy_view_checks')}))
+    print(json.dumps({k: report[k] for k in ('attempted', 'completed', 'decisions', 'observation_checks', 'policy_view_checks')}))
+    if completed != len(results):
+        raise SystemExit(f'conservative flow coverage failed: completed {completed}/{len(results)} games')
+    if observation_checks != decisions or policy_view_checks != decisions:
+        raise SystemExit('not every decision received a filtered observation and prompt audit')
 
 
 if __name__ == '__main__':
