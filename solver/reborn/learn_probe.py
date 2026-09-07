@@ -1,9 +1,8 @@
-"""Train the first from-scratch pilot on complete engine self-play.
+"""Train the first from-scratch pilot on complete YGO Reborn engine self-play.
 
-This is an experimental pilot-training smoke test under the explicitly
-uncertified current-TCG rules profile. It proves learning data can flow from
-safe observations to outcomes; it does NOT establish deck strength, pilot
-optimality, or a #1 deck.
+This is a pilot-training correctness smoke test under the user-confirmed Reborn
+rules profile. It proves learning data can flow from safe observations to duel
+outcomes; it does NOT establish deck strength, pilot optimality, or a #1 deck.
 """
 import argparse
 from collections import Counter
@@ -104,29 +103,34 @@ def main():
                        blocker=f'{type(exc).__name__}: {exc}')
         results.append(row)
 
-    policy_path = ROOT/'reports/learned_policy_experimental.json'
+    policy_path = ROOT/'reports/learned_policy_reborn_smoke.json'
     policy.save(policy_path)
     decision_types = Counter()
     for row in results: decision_types.update(row.get('decision_types', {}))
+    completed = sum(bool(r.get('completed')) for r in results)
     report = {
         'purpose': 'from_scratch_policy_training_smoke_only',
         'strength_evidence': False,
         'deck_ranking_evidence': False,
-        'profile': 'experimental_current_tcg_not_reborn_confirmed',
+        'profile': 'reborn',
         'external_strategy_priors': False,
         'policy': 'sparse_softmax_reinforce_v1',
         'attempted': len(results),
-        'completed': sum(bool(r.get('completed')) for r in results),
+        'completed': completed,
         'learned_decisions': sum(r.get('learned_decisions', 0) for r in results),
         'fallback_decisions': sum(r.get('fallback_decisions', 0) for r in results),
         'weight_count': len(policy.weights),
         'decision_types': dict(sorted(decision_types.items())),
-        'policy_file': 'reports/learned_policy_experimental.json',
+        'policy_file': 'reports/learned_policy_reborn_smoke.json',
         'results': results,
-        'note': 'Training outcomes update pilot weights only. Do not use these games to rank decks.',
+        'note': 'Training outcomes update pilot weights only. Do not use these smoke games to rank decks.',
     }
     dump(ROOT/'reports/learn_probe.json', report)
     print(json.dumps({k: report[k] for k in ('attempted','completed','learned_decisions','fallback_decisions','weight_count')}))
+    if completed != len(results):
+        raise SystemExit(f'learning smoke failed: completed {completed}/{len(results)} games')
+    if report['learned_decisions'] <= 0 or report['weight_count'] <= 0:
+        raise SystemExit('learning smoke completed games but produced no learned policy updates')
 
 
 if __name__ == '__main__':
