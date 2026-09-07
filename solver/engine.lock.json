@@ -5,7 +5,7 @@
   },
   "scripts": {
     "url": "https://github.com/ProjectIgnis/CardScripts.git",
-    "commit": "49b0af044cebcb92f3f23211ef436971e1fc16fb"
+    "commit": "14064037f42d0ae0bb9f8577d7eba2baad95e633"
   },
   "database": {
     "url": "https://github.com/ProjectIgnis/BabelCDB.git",
