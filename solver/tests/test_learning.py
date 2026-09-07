@@ -19,6 +19,24 @@ def observation(viewer=0):
             'players': [player(0), player(1)], 'chains': []}
 
 
+def select_card_decision(count, minimum, maximum):
+    msg = bytearray([15, 0, 0])
+    msg += struct.pack('<III', minimum, maximum, count)
+    for i in range(count):
+        msg += struct.pack('<IBBII', 100 + i, 0, 2, i, 8)
+    decision = parse_decision(bytes(msg))
+    prompt = {
+        'kind': 'select_card', 'player': 0, 'minimum': minimum, 'maximum': maximum,
+        'cancelable': False,
+        'cards': [
+            {'controller': 0, 'location': 2, 'sequence': i, 'code': 100 + i}
+            for i in range(count)
+        ],
+        'actions': [], 'meta': {},
+    }
+    return decision, prompt
+
+
 class LearningTests(unittest.TestCase):
     def test_zero_weights_start_uniform(self):
         policy = SparsePolicy(seed=1)
@@ -47,6 +65,17 @@ class LearningTests(unittest.TestCase):
         self.assertFalse(any('card:999' in f for f in first))
         self.assertTrue(any(f == 'card:123' for f in second))
 
+    def test_complex_features_use_only_safe_option_view(self):
+        policy = SparsePolicy(seed=3)
+        prompt = {'kind': 'tribute'}
+        option = {
+            'label': 'select_tributes', 'selected_count': 1,
+            'selected_cards': [{'controller': 0, 'location': 4, 'sequence': 0, 'code': 321}],
+        }
+        features = policy.complex_features(prompt, observation(0), option)
+        self.assertIn('card:321', features)
+        self.assertFalse(any('release' in f or 'sum_param' in f for f in features))
+
     def test_learning_pilot_maps_filtered_action_index_to_response(self):
         decision = parse_decision(bytes([13, 0]) + struct.pack('<Q', 99))
         prompt = {
@@ -62,25 +91,23 @@ class LearningTests(unittest.TestCase):
         self.assertEqual(pilot.learned_decisions, 1)
         self.assertEqual(len(pilot.steps), 1)
 
-    def test_learning_fallback_receives_observation_not_prompt(self):
-        msg = bytearray([15, 0, 0])
-        msg += struct.pack('<III', 2, 2, 2)
-        for code, seq in ((100, 0), (200, 1)):
-            msg += struct.pack('<IBBII', code, 0, 2, seq, 8)
-        decision = parse_decision(bytes(msg))
-        prompt = {
-            'kind': 'select_card', 'player': 0, 'minimum': 2, 'maximum': 2,
-            'cancelable': False,
-            'cards': [
-                {'controller': 0, 'location': 2, 'sequence': 0, 'code': 100},
-                {'controller': 0, 'location': 2, 'sequence': 1, 'code': 200},
-            ],
-            'actions': [], 'meta': {},
-        }
+    def test_small_multicard_selection_is_learned(self):
+        decision, prompt = select_card_decision(2, 2, 2)
         pilot = LearningPilot(SparsePolicy(seed=6), seed=7)
         response = pilot.choose(decision, prompt, observation(0))
         self.assertEqual(response[:8], struct.pack('<iI', 2, 2))
+        self.assertEqual(pilot.fallback_decisions, 0)
+        self.assertEqual(pilot.learned_decisions, 1)
+        self.assertEqual(pilot.complex_learned_decisions, 1)
+
+    def test_unbounded_complex_prompt_still_uses_observation_fallback(self):
+        # C(13,6)=1716, above the default complete-option cap of 512.
+        decision, prompt = select_card_decision(13, 6, 6)
+        pilot = LearningPilot(SparsePolicy(seed=8), seed=9)
+        response = pilot.choose(decision, prompt, observation(0))
+        self.assertEqual(response[:4], struct.pack('<i', 2))
         self.assertEqual(pilot.fallback_decisions, 1)
+        self.assertEqual(pilot.fallback_kinds['select_card'], 1)
         self.assertEqual(pilot.learned_decisions, 0)
 
 
