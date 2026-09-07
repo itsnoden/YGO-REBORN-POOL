@@ -101,7 +101,7 @@ jobs:
             solver/reports/flow_probe.json
             solver/reports/pilot_probe.json
             solver/reports/learn_probe.json
-            solver/reports/learned_policy_experimental.json
+            solver/reports/learned_policy_reborn_smoke.json
             solver/reports/ci_flow_probe.log
             solver/reports/ci_pilot_probe.log
             solver/reports/ci_learn_probe.log
