@@ -1,28 +1,59 @@
 """Policy-driven legal pilot that learns only from filtered self-play data."""
 from __future__ import annotations
 
+from collections import Counter
+
 from .effects import UnsupportedInteraction
 from .learning import PolicyStep
+from .legal_options import enumerate_policy_options
 from .pilot import StochasticLegalPilot
-from .protocol import encode_card_selection
 
 
 class LearningPilot:
-    def __init__(self, policy, seed=1):
+    def __init__(self, policy, seed=1, max_complex_options=512):
         self.policy = policy
         self.fallback = StochasticLegalPilot(seed)
+        self.max_complex_options = int(max_complex_options)
         self.steps = []
         self.learned_decisions = 0
+        self.complex_learned_decisions = 0
         self.fallback_decisions = 0
+        self.fallback_kinds = Counter()
 
     def reset_episode(self):
         self.steps = []
         self.learned_decisions = 0
+        self.complex_learned_decisions = 0
         self.fallback_decisions = 0
+        self.fallback_kinds = Counter()
+
+    def _learn(self, player, option_features):
+        if not option_features:
+            raise UnsupportedInteraction('learning pilot received empty option set')
+        chosen = self.policy.sample(option_features)
+        self.steps.append(PolicyStep(player, option_features, chosen))
+        self.learned_decisions += 1
+        return chosen
 
     def choose(self, decision, prompt, observation):
         if prompt.get('player') != decision.player or observation.get('viewer') != decision.player:
             raise UnsupportedInteraction('learning pilot received mismatched player data')
+
+        # First expand implicit combinatorial response families when (and only
+        # when) their complete legal action set is bounded. Raw legality helpers
+        # are used inside legal_options.py but never enter the option view or
+        # policy features.
+        complex_options = enumerate_policy_options(
+            decision, prompt, max_options=self.max_complex_options
+        )
+        if complex_options is not None:
+            option_features = [
+                self.policy.complex_features(prompt, observation, option.view)
+                for option in complex_options
+            ]
+            chosen = self._learn(decision.player, option_features)
+            self.complex_learned_decisions += 1
+            return complex_options[chosen].response
 
         # Most strategic engine prompts already expose an explicit legal action
         # list. Score only the filtered policy-view actions; use the raw Decision
@@ -34,30 +65,15 @@ class LearningPilot:
                 self.policy.action_features(prompt, observation, action)
                 for action in prompt['actions']
             ]
-            chosen = self.policy.sample(option_features)
-            self.steps.append(PolicyStep(decision.player, option_features, chosen))
-            self.learned_decisions += 1
+            chosen = self._learn(decision.player, option_features)
             return decision.actions[chosen].response
 
-        # Single-card targeting/search prompts can be learned safely too. The
-        # candidate code is present only when policy_view judged it visible.
-        if decision.kind == 'select_card' and decision.minimum == 1 and decision.maximum == 1 and decision.cards:
-            if len(prompt.get('cards', ())) != len(decision.cards):
-                raise UnsupportedInteraction('filtered card count differs from referee card count')
-            option_features = [
-                self.policy.card_features(prompt, observation, card)
-                for card in prompt['cards']
-            ]
-            chosen = self.policy.sample(option_features)
-            self.steps.append(PolicyStep(decision.player, option_features, chosen))
-            self.learned_decisions += 1
-            return encode_card_selection(decision, [chosen])
-
-        # Complex combinatorial legality (sum/counter/tribute/multi-card/place)
-        # stays in a non-learning legal fallback until it has a safe action-set
-        # enumerator. Pass the information-safe observation, not the prompt; the
-        # fallback's privacy assertion is intentionally keyed to observation.viewer.
+        # Unbounded combinatorial prompts stay on the seeded legal fallback. The
+        # information-safe observation, not raw prompt/referee metadata, is sent
+        # to that fallback. Track the exact remaining families so future work can
+        # target the real uncovered strategic surface.
         self.fallback_decisions += 1
+        self.fallback_kinds[decision.kind] += 1
         return self.fallback.choose(decision, observation)
 
     def finish(self, winner):
