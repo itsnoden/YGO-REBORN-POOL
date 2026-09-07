@@ -39,6 +39,19 @@
       "verification": "official_current_text_retrieved",
       "updated_from": "Kinetic Soldier"
     },
+    "Dragged Down into the Grave": {
+      "name": "Dragged Down into the Grave",
+      "official_display_name": "Dragged Down into the Grave",
+      "cid": "5352",
+      "spec": "SPELL Normal",
+      "attribute": "SPELL",
+      "text": "Both players reveal their hands, each chooses 1 card from their opponent's hand, then you discard the chosen cards from both players' hands, then both players draw 1 card.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5352&ope=2&request_locale=en",
+      "text_sha256": "ceac3f827d611261ab638863dd60a584b598c11ee262b6d29821e8ef456bfd6d",
+      "verification": "official_current_text_retrieved_after_source_correction",
+      "pool_identity_source": "user_confirmed_source_correction"
+    },
     "Hidden Spellbook": {
       "name": "Hidden Spellbook",
       "official_display_name": "Hidden Spellbook (Updated from: Hidden Book of Spell)",
@@ -131,6 +144,19 @@
       "text_sha256": "42b4c2c4807cebd79095cac302aa516a42461d8764b90c58f6e93aa0f8f98fb8",
       "verification": "official_current_text_retrieved",
       "updated_from": "Oscillo Hero #2"
+    },
+    "Wow Warrior": {
+      "name": "Wow Warrior",
+      "official_display_name": "Wow Warrior",
+      "cid": "4552",
+      "spec": "WATER Level 4 [ Fish / Normal ] ATK 1250 DEF 900",
+      "attribute": "WATER",
+      "text": "A fish with arms, legs, and some very sharp teeth.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4552&ope=2&request_locale=en",
+      "text_sha256": "7994bca6669fc9273fa048e1029b14be852532ad2a44b8dcded8f26ceef4fa8f",
+      "verification": "official_current_text_retrieved_after_source_correction",
+      "pool_identity_source": "source_video_visual_correction"
     }
   },
   "note": "Compact verified official records fill gaps in the committed processed snapshot. Sources are current Yu-Gi-Oh! Neuron card-detail pages. These records provide card identity/text only and contain no strategy or metagame information."
