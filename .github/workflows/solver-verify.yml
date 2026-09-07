@@ -184,7 +184,7 @@ jobs:
             --library build/libocgcore.so \
             --database vendor/database/cards.cdb \
             --scripts vendor/scripts \
-            --blocks 3 \
+            --blocks 6 \
             --train-games 16 \
             --train-decks 4 \
             --eval-decks 2 \
