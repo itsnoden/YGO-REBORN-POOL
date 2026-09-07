@@ -1,10 +1,17 @@
 """Validate durable, hash-bound reviews of non-exact current card text.
 
-This module does not infer semantic equivalence. A human/AI rules review may be
-recorded separately only after the wording pair has been examined. The review is
-accepted solely while the exact Reborn identity, engine passcode, and normalized
-SHA-256 hashes of both texts still match. Any upstream/database/official-text
-change therefore makes the old review stale automatically.
+This module never infers semantic equivalence. A rules review can resolve a
+lexical blocker in exactly two ways:
+
+1. the current official text and engine display text are behaviorally equivalent
+   wording; or
+2. the display text is genuinely stale/non-equivalent, but the exact executable
+   Lua implementation has been directly reviewed and matches current official
+   behavior.
+
+Both review types are bound to the exact Reborn identity, passcode, and normalized
+hashes of the text pair. Implementation reviews are additionally bound to the
+exact script SHA-256, so a script change automatically makes the review stale.
 """
 from __future__ import annotations
 
@@ -14,6 +21,11 @@ import json
 
 from .import_pool import ROOT, dump
 from .text_audit import _text_key, classify_text_pair
+
+
+WORDING_REVIEW_STATUS = 'behavior_equivalent_wording_reviewed'
+IMPLEMENTATION_REVIEW_STATUS = 'implementation_matches_official_reviewed'
+VALID_REVIEW_STATUSES = {WORDING_REVIEW_STATUS, IMPLEMENTATION_REVIEW_STATUS}
 
 
 def normalized_text_sha256(text):
@@ -30,6 +42,7 @@ def load_reviews(path=None):
 def validate_review(review, card, entry):
     official = (card.get('official') or {}).get('text') or ''
     engine = entry.get('engine_text') or ''
+    status = review.get('status')
     expected = {
         'reborn_id': entry['reborn_id'],
         'passcode': int(entry['passcode']),
@@ -37,15 +50,22 @@ def validate_review(review, card, entry):
         'engine_text_sha256': normalized_text_sha256(engine),
     }
     mismatches = []
+
+    if status not in VALID_REVIEW_STATUSES:
+        mismatches.append('status')
+    if status == IMPLEMENTATION_REVIEW_STATUS:
+        script_sha = entry.get('script_sha256')
+        if not script_sha:
+            mismatches.append('current_script_sha256_missing')
+        else:
+            expected['script_sha256'] = script_sha
+
     for key, value in expected.items():
         recorded = review.get(key)
         if key == 'passcode' and recorded is not None:
             recorded = int(recorded)
         if recorded != value:
             mismatches.append(key)
-    valid_status = review.get('status') == 'behavior_equivalent_wording_reviewed'
-    if not valid_status:
-        mismatches.append('status')
     return not mismatches, expected, mismatches
 
 
@@ -54,6 +74,8 @@ def build_review_report(cards, mapped, reviews=None):
     by_id = {card['id']: card for card in cards}
     mapped_by_id = {row['reborn_id']: row for row in mapped}
     valid = []
+    valid_wording = []
+    valid_implementation = []
     stale = []
     orphan = []
 
@@ -74,6 +96,8 @@ def build_review_report(cards, mapped, reviews=None):
             'rationale': review.get('rationale'),
             'evidence': review.get('evidence'),
             'expected_hashes': expected,
+            'script_source': entry.get('script_source'),
+            'script_path': entry.get('script_path'),
         }
         if ok:
             # A valid review may clear only a real lexical wording mismatch. It
@@ -82,6 +106,10 @@ def build_review_report(cards, mapped, reviews=None):
             category = classify_text_pair(official, entry.get('engine_text') or '')
             if category == 'lexical_difference_requires_audit':
                 valid.append(row)
+                if review.get('status') == WORDING_REVIEW_STATUS:
+                    valid_wording.append(row)
+                else:
+                    valid_implementation.append(row)
             else:
                 row['mismatches'] = ['current_pair_not_lexical_difference']
                 stale.append(row)
@@ -101,19 +129,26 @@ def build_review_report(cards, mapped, reviews=None):
     unresolved = sorted(lexical_ids - reviewed_ids)
 
     return {
-        'purpose': 'hash_bound_rules_text_review_not_strategy_prior',
+        'purpose': 'hash_bound_rules_text_and_implementation_review_not_strategy_prior',
         'lexical_effect_rows': len(lexical_ids),
+        # Backward-compatible total accepted reviews.
         'valid_behavior_equivalence_reviews': len(valid),
+        'valid_wording_equivalence_reviews': len(valid_wording),
+        'valid_implementation_behavior_reviews': len(valid_implementation),
         'stale_or_invalid_reviews': len(stale),
         'orphan_reviews': len(orphan),
         'unresolved_lexical_behavior_blockers': len(unresolved),
         'valid_reviews': valid,
+        'valid_wording_reviews': valid_wording,
+        'valid_implementation_reviews': valid_implementation,
         'stale_reviews': stale,
         'orphan_review_rows': orphan,
         'unresolved_reborn_ids': unresolved,
         'note': (
-            'A valid review clears only the text-wording audit for the exact hash-bound pair. '
-            'It does not certify the Lua implementation, interactions, pilot skill, or deck strength. '
+            'A wording review clears only the text-wording audit for its exact hash-bound pair. '
+            'An implementation review is additionally bound to the exact executable script SHA-256 and is used '
+            'only when display text is stale/non-equivalent but the reviewed Lua behavior matches current official '
+            'behavior. Neither review type certifies unrelated interactions, pilot skill, or deck strength. '
             'Upstream script drift remains a separate mandatory certification gate.'
         ),
     }
@@ -130,6 +165,8 @@ def main():
     print(json.dumps({
         'lexical_effect_rows': report['lexical_effect_rows'],
         'valid_reviews': report['valid_behavior_equivalence_reviews'],
+        'valid_wording_reviews': report['valid_wording_equivalence_reviews'],
+        'valid_implementation_reviews': report['valid_implementation_behavior_reviews'],
         'stale_reviews': report['stale_or_invalid_reviews'],
         'unresolved': report['unresolved_lexical_behavior_blockers'],
     }))
