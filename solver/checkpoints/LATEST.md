@@ -1,85 +1,94 @@
-# Checkpoint 0004 — 2026-09-06/07
+# Checkpoint 0005 — 2026-09-06/07
 
-Status: complete-duel protocol/observation coverage is live-verified under the
-user-confirmed YGO Reborn rules profile, and the first zero-prior learning smoke
-completes full games and updates a policy. **No strongest deck has been
-established yet.**
+Status: the first frozen-policy held-out pilot evaluation now completes cleanly
+under the user-confirmed YGO Reborn rules profile. The deterministic Double Spell
+stack-overflow blocker is fixed through a reviewed solver-side override. The
+current sparse learner **is not strong enough to rank decks**. **No strongest
+deck has been established yet.**
 
-Read the full checkpoint at `checkpoints/0004.md` and the durable duel findings at
+Read the full checkpoint at `checkpoints/0005.md` and the durable duel findings at
 `reports/DUEL_OBSERVATIONS.md` before continuing.
 
-## Current verified milestone
+## Canonical strict run
 
-GitHub Actions `Solver Verify` run **#42** (`run_id=34070493121`) rebuilt the exact
-pinned engine dependencies and passed all strict gates:
+GitHub Actions `Solver Verify` run **#60** (`run_id=34072551222`) on commit
+`599d96ae47aa4280df00afb49ca280491e8d0e52` passed the full pipeline.
 
-- **41/41 unit tests passed**
-- conservative correctness: **8/8 games**, **2,983 decisions**, with a filtered
-  observation and filtered prompt audit on all 2,983 decisions
-- paired stochastic coverage: **8/8 games**, **8,096 decisions**, with all 8,096
-  observation/prompt audits passing
-- zero-prior learning smoke: **8/8 games**, **9,132 decisions**, **8,634 learned
-  decisions**, **498 legality-fallback decisions**, **1,463 nonzero weights**
+- **44/44 unit tests passed**
+- conservative correctness: **8/8**, **2,983** decisions with 2,983 safe
+  observation/prompt audits
+- stochastic coverage: **8/8**, **8,096** decisions with all privacy audits
+- learning smoke: **8/8**, **8,634 learned decisions**, **498 fallbacks**,
+  **1,463 nonzero weights**
+- deterministic Double Spell reproducer: completed with no blocker after
+  **2,625 process calls**
+- held-out pilot evaluation: **8/8**, **10,402 privacy-checked decisions**,
+  zero blockers, frozen policy unchanged
 
-Pinned dependency heads:
+Artifact id: `10000962499`
+Digest: `sha256:bf4dea9e46d381050f367d6e1b0237ade23b9ecfa705b911a2bc9f100322fa4b`
 
+Pinned heads remain:
 - core `b8c05dff14da0b13608950a73906287dc0b601f9`
-- scripts `49b0af044cebcb92f3f23211ef436971e1fc16fb`
-- database `9d7f8da324417ec7913b47c52273906c9ae3333b`
+- CardScripts `49b0af044cebcb92f3f23211ef436971e1fc16fb`
+- BabelCDB `9d7f8da324417ec7913b47c52273906c9ae3333b`
 
-Artifact id: `10000303579`; digest:
-`sha256:a96eecb6fcb7ad80ec242395993a43a0d47fba91b0b19aaf31b3f1f583a73c38`.
+## Double Spell blocker resolved
 
-## Rules/profile authority
+Previous held-out runs failed deterministically on candidate
+`593df70fb35282f5`, seed `21101`, learned seat 1, with `C stack overflow`.
+Detailed diagnostics isolated the recursion to `c24096228.lua` (**Double Spell**)
+re-entering `CheckActivateEffect` while testing a GY Double Spell, with
+`c96947648.lua` (**Salvage**) in the state.
 
-The solver now uses `reborn` by default. The user confirmed the implemented
-current-TCG/MR5-style profile matches YGO Reborn: 8,000 LP, 5-card opening hand,
-normal draw 1, no first-turn draw, and the current pinned-core field/TCG SEGOC
-flags already used by the project.
+Added `solver/script_overrides/c24096228.lua` with a narrow recursion guard and
+changed `ocgcore.py` to prefer reviewed solver overrides before pinned upstream
+scripts. Ordinary scripts still fall back to the exact pinned CardScripts tree.
+Three regression tests cover override presence/precedence/fallback.
 
-Latest official card text/errata remains a separate binding requirement and must
-always be used.
+Do not treat this as blanket certification of every Double Spell edge case; its
+latest-errata behavior remains part of the text/behavior audit.
 
-## Important invalidated evidence
+## Held-out pilot result
 
-Do **not** reuse run #31 (`run_id=34069085396`) as a successful result. Its GitHub
-job was green but stochastic/learning reports were 0/8 because filtered prompt
-objects were routed into a pilot path expecting viewer observations. That bug is
-fixed, regression-tested and strict probes now fail CI if requested games do not
-all complete. Run #42 is the post-fix replacement.
+Training: 16/16 games, four generated training candidates, 15,425 learned
+choices, 843 fallbacks, 891 frozen weights.
+
+Held-out mirror evaluation on different candidates/seeds with learned pilot
+swapped between seats:
+- **8/8 completed**
+- learned pilot: **2 wins, 6 losses, 0 draws**
+- raw held-out win rate vs zero-prior stochastic legal pilot: **25%**
+- 10,402 observation checks / 10,402 policy-view checks
+
+This is **pilot-skill evidence only** and it is a negative result for the current
+learner. Do not use it as deck-strength evidence or feed it into candidate
+ranking, payoff matrices, mutation fitness, or the double oracle.
 
 ## Engine/text audit still open
 
 - exact Reborn pool: 2,273 titles
 - engine mapped: 2,251
-- engine-name mismatches: 22
-- mapped scripts: 1,880
-- scriptless Normal Monsters: 370
-- strict missing-script effect card: Red-Eyes Darkness Metal Dragon
-- exact official/engine text matches: 1,938
+- engine-name mismatches/unmapped: 22
+- exact official/engine text equality: 1,938
 - non-exact text comparisons to audit: 313
-
-Do not silently fall back to historical/pre-errata scripts.
-
-## Evidence boundary
-
-The completed games establish engine/protocol/privacy/learning data flow, **not
-deck strength**. Stochastic winners and learning-smoke winners are debug-only.
-There is still no certified deck win-rate table, no certified payoff matrix, no
-validated strongest pilot and no #1 deck.
+- Red-Eyes Darkness Metal Dragon latest-errata script-path blocker remains
+- never silently fall back to historical/pre-errata scripts
 
 ## Resume
 
-1. Build **frozen-policy held-out evaluation**: train on one seed set, freeze,
-   evaluate against the zero-prior stochastic baseline on disjoint seeds with
-   paired seats. This measures pilot skill only.
-2. Improve the pilot if it does not show held-out improvement; do not promote
-   weak self-play results into deck rankings.
-3. Add safe learned action enumeration for complex fallback decisions.
-4. Reconcile the 22 engine-name mismatches, 313 text differences and the
-   Red-Eyes Darkness Metal Dragon latest-errata script-path blocker.
-5. Add Extra Deck construction/optimization.
-6. Once pilot skill and interaction coverage are sufficient, create certified
-   paired-seat payoff data for adversarial best-response/double-oracle deck search.
-7. Preserve the project constraints: exact 2,273-card pool, Reborn banlist,
-   actual rules, latest errata always, and no human/community/metagame priors.
+1. Improve the pilot before any deck ranking. The current held-out score is 2-6
+   versus the stochastic legal baseline.
+2. Safely enumerate complex legal action sets so multi-card/tribute/counter/sum/
+   place/select-unselect decisions can be learned instead of randomized fallback.
+3. Improve zero-prior credit assignment/state representation and repeat frozen
+   paired-seat held-out evaluation on disjoint seeds.
+4. Continue the 22-name / 313-text / latest-errata audit, including REDMD and
+   reviewed Double Spell semantics.
+5. Add Extra Deck generation/optimization.
+6. Only after pilot competence and errata/interaction gates are strong enough,
+   generate certified paired-seat payoff data and run adversarial best-response /
+   double-oracle deck search.
+7. Preserve constraints: exact 2,273-card pool, Reborn banlist, certified Reborn
+   rules, latest errata always, actual Yu-Gi-Oh rules, and no human/community/
+   tournament/metagame priors.
