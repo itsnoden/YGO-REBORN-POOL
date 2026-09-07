@@ -1,5 +1,17 @@
 {
   "aliases": {
+    "Cemetery Bomb": {
+      "engine_name": "Cemetary Bomb",
+      "status": "reviewed_pool_title_spelling_identity",
+      "evidence": "Pool entry uses Cemetery Bomb; official Yu-Gi-Oh! TCG card database current title is Cemetary Bomb, cid=6148. The pool has no separate Cemetary Bomb entry.",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6148&ope=2&request_locale=en"
+    },
+    "Fallen Down": {
+      "engine_name": "Falling Down",
+      "status": "reviewed_pool_title_spelling_identity",
+      "evidence": "Pool entry uses Fallen Down in the F section; official Yu-Gi-Oh! TCG card database current title is Falling Down, cid=5786. The pool has no separate Falling Down entry.",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5786&ope=2&request_locale=en"
+    },
     "Firedarts": {
       "engine_name": "Fire Darts",
       "status": "reviewed_current_name_identity",
@@ -24,17 +36,17 @@
       "evidence": "Official database states Card Name updated from Marie the Fallen One on November 18, 2016, cid=5209",
       "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5209&ope=2&request_locale=en"
     },
-    "Super Vehicroid - Jumbo Drill": {
-      "engine_name": "Super Vehicroid Jumbo Drill",
-      "status": "reviewed_current_name_identity",
-      "evidence": "Official Yu-Gi-Oh! TCG card database current title, cid=6739",
-      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6739&ope=2&request_locale=en"
+    "Raging Spirit": {
+      "engine_name": "Radiant Spirit",
+      "status": "reviewed_pool_title_spelling_identity",
+      "evidence": "Pool entry Raging Spirit appears between Radiant Mirror Force and Rafflesia Seduction; official Yu-Gi-Oh! TCG card database current title is Radiant Spirit, cid=6986. The pool has no separate Radiant Spirit entry.",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6986&ope=2&request_locale=en"
     },
-    "The King of Yamimakai": {
-      "engine_name": "King of Yamimakai",
+    "Red-Eyes B. Dragon": {
+      "engine_name": "Red-Eyes Black Dragon",
       "status": "reviewed_current_name_identity",
-      "evidence": "Official Yu-Gi-Oh! TCG card database current title, cid=4091",
-      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4091&ope=2&request_locale=en"
+      "evidence": "Official Yu-Gi-Oh! TCG card database current title for cid=4088 is Red-Eyes Black Dragon; the pool uses the legacy abbreviated Red-Eyes B. Dragon title.",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4088&ope=2&request_locale=en"
     },
     "Reliable Guardian": {
       "engine_name": "The Reliable Guardian",
@@ -48,11 +60,47 @@
       "evidence": "Official Yu-Gi-Oh! TCG card database current title, cid=5982",
       "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5982&ope=2&request_locale=en"
     },
+    "Sniper Hunter": {
+      "engine_name": "Snipe Hunter",
+      "status": "reviewed_pool_title_spelling_identity",
+      "evidence": "Pool entry Sniper Hunter appears between Snatch Steal and Sogen; official Yu-Gi-Oh! TCG card database current title is Snipe Hunter, cid=6879. The pool has no separate Snipe Hunter entry.",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6879&ope=2&request_locale=en"
+    },
+    "Stone Shooter": {
+      "engine_name": "Storm Shooter",
+      "status": "reviewed_pool_title_spelling_identity",
+      "evidence": "Pool entry Stone Shooter appears after Stop Defense and before Storming Wynn; official Yu-Gi-Oh! TCG card database current title is Storm Shooter, cid=6896. The pool has no separate Storm Shooter entry.",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6896&ope=2&request_locale=en"
+    },
+    "Super Vehicroid - Jumbo Drill": {
+      "engine_name": "Super Vehicroid Jumbo Drill",
+      "status": "reviewed_current_name_identity",
+      "evidence": "Official Yu-Gi-Oh! TCG card database current title, cid=6739",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6739&ope=2&request_locale=en"
+    },
+    "Teya": {
+      "engine_name": "Teva",
+      "status": "reviewed_pool_title_spelling_identity",
+      "evidence": "Pool entry Teya appears after Terrorking Salmon and before The 13th Grave; official Yu-Gi-Oh! TCG card database current title is Teva, cid=5933. The pool has no separate Teva entry.",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5933&ope=2&request_locale=en"
+    },
+    "The King of Yamimakai": {
+      "engine_name": "King of Yamimakai",
+      "status": "reviewed_current_name_identity",
+      "evidence": "Official Yu-Gi-Oh! TCG card database current title, cid=4091",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4091&ope=2&request_locale=en"
+    },
     "Three-Hump Lacooda": {
       "engine_name": "3-Hump Lacooda",
       "status": "reviewed_current_name_identity",
       "evidence": "Official Yu-Gi-Oh! TCG card database current title, cid=6032",
       "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6032&ope=2&request_locale=en"
+    },
+    "Twin-Headed Beast": {
+      "engine_name": "Twinheaded Beast",
+      "status": "reviewed_current_name_identity",
+      "evidence": "Official Yu-Gi-Oh! TCG card database current title is Twinheaded Beast, cid=5923; the pool uses the hyphenated title and has no separate Twinheaded Beast entry.",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5923&ope=2&request_locale=en"
     },
     "Vampire Orchis": {
       "engine_name": "Vampiric Orchis",
@@ -66,6 +114,14 @@
       "status": "do_not_map_to_level_down_interrobang",
       "reason": "Official Yu-Gi-Oh! site identifies Level Down! as an anime card not part of the TCG; Level Down!? is a separate TCG Quick-Play Spell with a different effect.",
       "source_url": "https://yugioh.com/cards/level-down"
+    },
+    "Long Nose": {
+      "status": "do_not_map_to_great_long_nose",
+      "reason": "Great Long Nose is already a separate confirmed pool entry (849), while Long Nose is separately confirmed at entry 1117. Treating them as one engine identity would collapse two distinct pool cards."
+    },
+    "Red-Eyes Black Chick": {
+      "status": "do_not_map_to_black_dragons_chick",
+      "reason": "Black Dragon's Chick is already a separate confirmed pool entry (200), while Red-Eyes Black Chick is separately confirmed at entry 1535. Treating them as one engine identity would collapse two distinct pool cards."
     }
   },
   "note": "Aliases are identity corrections only, never strategy priors. Unlisted fuzzy suggestions remain blocked."
