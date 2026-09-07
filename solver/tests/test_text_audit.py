@@ -7,6 +7,16 @@ class TextAuditTests(unittest.TestCase):
     def test_exact_text_is_exact(self):
         self.assertEqual(classify_text_pair('Draw 1 card.', 'Draw 1 card.'), 'exact')
 
+    def test_official_html_br_is_normalized_as_line_break(self):
+        self.assertEqual(
+            classify_text_pair('First effect.<br>Second effect.', 'First effect.\nSecond effect.'),
+            'exact',
+        )
+        self.assertEqual(
+            classify_text_pair('First effect.<BR />Second effect.', 'First effect. Second effect.'),
+            'exact',
+        )
+
     def test_punctuation_case_only_is_not_certified_exact(self):
         self.assertEqual(
             classify_text_pair('Target 1 monster; destroy it.', 'TARGET 1 monster: destroy it!'),
@@ -25,8 +35,8 @@ class TextAuditTests(unittest.TestCase):
             'missing_latest_official_text',
         )
 
-    def test_lexical_tokens_ignore_only_case_and_punctuation(self):
-        self.assertEqual(lexical_tokens('GY; 1 Card!'), ('gy', '1', 'card'))
+    def test_lexical_tokens_ignore_only_case_punctuation_and_br_presentation(self):
+        self.assertEqual(lexical_tokens('GY;<br>1 Card!'), ('gy', '1', 'card'))
 
     def test_report_prioritizes_lexical_differences(self):
         cards = [
