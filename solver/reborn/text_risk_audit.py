@@ -1,12 +1,9 @@
-"""Risk-prioritize non-exact card-effect text without certifying semantics.
+"""Risk-prioritize unresolved lexical card-effect differences.
 
-This is an audit scheduler, not a strategy model and not a rules equivalence
-checker. It compares latest verified text against pinned-engine text and raises
-objective flags when lexical differences touch mechanics that commonly change a
-legal game state: numeric values, activation/use limits, targeting, locations,
-actions such as Summon/destroy/banish/negate, timing windows, and player scope.
-
-Every lexical difference remains an audit blocker regardless of tier.
+This is an audit scheduler, not a strategy model and not a semantic equivalence
+checker. Presentation-only and explicitly canonical old/current rules vocabulary
+are filtered by text_audit first; this module ranks only the lexical rows that
+still require review.
 """
 from __future__ import annotations
 
@@ -16,7 +13,7 @@ import json
 import re
 
 from .import_pool import ROOT, dump
-from .text_audit import lexical_tokens
+from .text_audit import classify_text_pair, lexical_tokens
 
 
 TOKEN_CANONICAL = {
@@ -123,13 +120,7 @@ def build_risk_report(cards, mapped):
         official_record = card.get('official') or {}
         official = official_record.get('text') or ''
         engine = entry.get('engine_text') or ''
-        if not official:
-            # Non-TCG reviewed implementations such as Level Down! are handled by
-            # their separate provenance gate, not by pretending a TCG text exists.
-            continue
-        if ' '.join(official.replace('\r', ' ').split()) == ' '.join(engine.replace('\r', ' ').split()):
-            continue
-        if lexical_tokens(official) == lexical_tokens(engine):
+        if classify_text_pair(official, engine) != 'lexical_difference_requires_audit':
             continue
         risk = classify_risk(official, engine)
         counts[risk['risk_tier']] += 1
@@ -159,10 +150,9 @@ def build_risk_report(cards, mapped):
         'counts': dict(sorted(counts.items())),
         'rows': rows,
         'note': (
-            'All rows remain behavior/errata audit blockers. Risk tier only schedules review. '
-            'Common grammatical inflections of mechanical verbs are normalized before signal comparison. '
-            'Full verified-current and pinned-engine texts are retained in each row for deterministic review. '
-            'No card is certified equivalent from token signals, and no deck-strength prior is used.'
+            'Only unresolved lexical rows from text_audit are ranked here. Presentation-only and explicit '
+            'legacy/current rules-terminology equivalences are excluded before risk scheduling. Risk tier only '
+            'schedules review; it never certifies semantics or deck strength.'
         ),
     }
 
