@@ -120,7 +120,8 @@ def build_risk_report(cards, mapped):
         if entry.get('normal_monster'):
             continue
         card = by_id[entry['reborn_id']]
-        official = (card.get('official') or {}).get('text') or ''
+        official_record = card.get('official') or {}
+        official = official_record.get('text') or ''
         engine = entry.get('engine_text') or ''
         if not official:
             # Non-TCG reviewed implementations such as Level Down! are handled by
@@ -137,6 +138,10 @@ def build_risk_report(cards, mapped):
             'name': entry['name'],
             'engine_name': entry.get('engine_name'),
             'passcode': entry.get('passcode'),
+            'official_display_name': official_record.get('official_display_name') or official_record.get('name'),
+            'official_source_url': official_record.get('source_url'),
+            'official_text': official,
+            'engine_text': engine,
             **risk,
         })
 
@@ -156,6 +161,7 @@ def build_risk_report(cards, mapped):
         'note': (
             'All rows remain behavior/errata audit blockers. Risk tier only schedules review. '
             'Common grammatical inflections of mechanical verbs are normalized before signal comparison. '
+            'Full verified-current and pinned-engine texts are retained in each row for deterministic review. '
             'No card is certified equivalent from token signals, and no deck-strength prior is used.'
         ),
     }
