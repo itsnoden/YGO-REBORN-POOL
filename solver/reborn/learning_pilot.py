@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from collections import Counter
+import struct
 
 from .effects import UnsupportedInteraction
 from .learning import PolicyStep
@@ -34,6 +35,30 @@ class LearningPilot:
         self.steps.append(PolicyStep(player, option_features, chosen))
         self.learned_decisions += 1
         return chosen
+
+    def choose_announce_card(self, decision, prompt, observation, legal_codes):
+        """Learn a declaration from a complete database-verified Reborn legal set.
+
+        Card codes here are legal public choices produced by the announce-card
+        legality evaluator, not hidden referee state or strategic annotations.
+        """
+        if decision.kind != 'announce_card':
+            raise UnsupportedInteraction('announce-card chooser received wrong decision kind')
+        if prompt.get('player') != decision.player or observation.get('viewer') != decision.player:
+            raise UnsupportedInteraction('learning pilot received mismatched player data')
+        codes = tuple(int(code) for code in legal_codes)
+        if not codes:
+            raise UnsupportedInteraction('announce-card chooser received no legal codes')
+        option_features = [
+            self.policy.action_features(
+                prompt, observation,
+                {'label': 'announce_card', 'card': {'code': code}},
+            )
+            for code in codes
+        ]
+        chosen = self._learn(decision.player, option_features)
+        self.complex_learned_decisions += 1
+        return struct.pack('<i', codes[chosen])
 
     def choose(self, decision, prompt, observation):
         if prompt.get('player') != decision.player or observation.get('viewer') != decision.player:
