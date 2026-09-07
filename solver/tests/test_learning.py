@@ -3,7 +3,7 @@ import unittest
 
 from reborn.learning import SparsePolicy, PolicyStep
 from reborn.learning_pilot import LearningPilot
-from reborn.protocol import parse_decision
+from reborn.protocol import parse_decision, Decision
 
 
 def observation(viewer=0):
@@ -92,7 +92,7 @@ class LearningTests(unittest.TestCase):
         self.assertEqual(len(pilot.steps), 1)
 
     def test_announce_card_is_a_learned_legal_choice(self):
-        decision = parse_decision(bytes([142, 0, 1]) + struct.pack('<Q', 123))
+        decision = Decision('announce_card', 0, meta={'opcodes': [123]})
         prompt = {
             'kind': 'announce_card', 'player': 0, 'minimum': 0, 'maximum': 0,
             'cancelable': False, 'cards': [], 'actions': [], 'meta': {},
