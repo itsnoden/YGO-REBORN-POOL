@@ -2,9 +2,11 @@ import json
 import unittest
 
 from reborn.engine_bridge import (
-    mapping_suggestions, reviewed_alias_match, unique_exact_text_match,
+    _whitelist_lines, mapping_suggestions, reviewed_alias_match,
+    unique_exact_text_match,
 )
 from reborn.import_pool import ROOT
+from reborn.verified_data import load_identity_aliases
 
 
 class EngineBridgeSuggestionTests(unittest.TestCase):
@@ -68,6 +70,36 @@ class EngineBridgeSuggestionTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             reviewed_alias_match('Old Name', records, aliases, blocked_ids={10})
 
+    def test_shared_identity_alias_can_reuse_already_mapped_id_only(self):
+        records = {'current name': [{'id': 10, 'name': 'Current Name', 'alias': 0}]}
+        aliases = {'Legacy Name': {
+            'engine_name': 'Current Name',
+            'status': 'reviewed_shared_current_identity',
+            'allow_shared_engine_identity': True,
+        }}
+        # Reserved-but-not-yet-mapped is still blocked.
+        with self.assertRaises(ValueError):
+            reviewed_alias_match(
+                'Legacy Name', records, aliases, blocked_ids={10}, shared_ids=set()
+            )
+        # Reuse is permitted only once the same identity is already mapped.
+        match, spec = reviewed_alias_match(
+            'Legacy Name', records, aliases, blocked_ids={10}, shared_ids={10}
+        )
+        self.assertEqual(match['id'], 10)
+        self.assertTrue(spec['allow_shared_engine_identity'])
+
+    def test_whitelist_deduplicates_shared_passcode_and_keeps_strictest_limit(self):
+        rows = [
+            {'passcode': 10, 'copy_limit': 3, 'engine_name': 'Current Name'},
+            {'passcode': 10, 'copy_limit': 1, 'engine_name': 'Current Name'},
+            {'passcode': 20, 'copy_limit': 2, 'engine_name': 'Other Name'},
+        ]
+        self.assertEqual(
+            _whitelist_lines(rows),
+            ['10 1 -- Current Name', '20 2 -- Other Name'],
+        )
+
     def test_identity_alias_file_keeps_level_down_distinct(self):
         data = json.loads((ROOT/'data/identity_aliases.json').read_text())
         self.assertNotIn('Level Down!', data['aliases'])
@@ -93,18 +125,17 @@ class EngineBridgeSuggestionTests(unittest.TestCase):
             expected,
         )
 
-    def test_distinct_pool_cards_are_not_collapsed_by_aliases(self):
-        data = json.loads((ROOT/'data/identity_aliases.json').read_text())
-        self.assertNotIn('Long Nose', data['aliases'])
-        self.assertNotIn('Red-Eyes Black Chick', data['aliases'])
+    def test_long_nose_remains_distinct_but_red_eyes_chick_is_shared_identity(self):
+        aliases, non_aliases = load_identity_aliases()
+        self.assertNotIn('Long Nose', aliases)
         self.assertEqual(
-            data['explicit_non_aliases']['Long Nose']['status'],
+            non_aliases['Long Nose']['status'],
             'do_not_map_to_great_long_nose',
         )
-        self.assertEqual(
-            data['explicit_non_aliases']['Red-Eyes Black Chick']['status'],
-            'do_not_map_to_black_dragons_chick',
-        )
+        self.assertNotIn('Red-Eyes Black Chick', non_aliases)
+        chick = aliases['Red-Eyes Black Chick']
+        self.assertEqual(chick['engine_name'], "Black Dragon's Chick")
+        self.assertTrue(chick['allow_shared_engine_identity'])
 
 
 if __name__ == '__main__':
