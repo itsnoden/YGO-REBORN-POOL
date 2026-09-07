@@ -13,6 +13,7 @@ from .effects import UnsupportedInteraction
 from .rules import get_profile
 
 U8=C.c_uint8;U16=C.c_uint16;U32=C.c_uint32;U64=C.c_uint64;I32=C.c_int32;PTR=C.c_void_p
+SCRIPT_OVERRIDE_DIR=Path(__file__).resolve().parents[1]/'script_overrides'
 
 
 class CardData(C.Structure):
@@ -47,6 +48,18 @@ def split_messages(data):
         if size<1 or offset+size>len(data):raise ValueError('Invalid message length')
         result.append(data[offset:offset+size]);offset+=size
     return result
+
+
+def resolve_script_path(scripts,filename,overrides=SCRIPT_OVERRIDE_DIR):
+    """Resolve an exact script name, preferring reviewed solver overrides."""
+    scripts=Path(scripts)
+    for source,path in (
+        ('override',Path(overrides)/filename),
+        ('root',scripts/filename),
+        ('official',scripts/'official'/filename),
+    ):
+        if path.is_file():return source,path
+    return None,None
 
 
 class Duel:
@@ -89,15 +102,15 @@ class Duel:
             try:
                 filename=name.decode()
                 if Path(filename).name!=filename:raise ValueError('Unexpected script path')
-                path=self.scripts/filename
-                if not path.is_file():path=self.scripts/'official'/filename
-                if not path.is_file():return 0
+                source,path=resolve_script_path(self.scripts,filename)
+                if path is None:return 0
                 code=None
                 stem=Path(filename).stem
                 if stem.startswith('c') and stem[1:].isdigit():code=int(stem[1:])
                 self.loaded_scripts.append({
                     'process_call':self.process_calls,
                     'filename':filename,
+                    'source':source,
                     'code':code,
                     'name':self.names.get(code) if code is not None else None,
                 })
@@ -131,6 +144,7 @@ class Duel:
             recent=[]
             for item in self.loaded_scripts[-20:]:
                 label=item['filename']
+                if item.get('source')=='override':label+=' [solver override]'
                 if item.get('name'):label+=f" [{item['name']}]"
                 recent.append(label)
             context='\nrecent loaded scripts: '+', '.join(recent) if recent else ''
