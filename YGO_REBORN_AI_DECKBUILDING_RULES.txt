@@ -1,0 +1,113 @@
+YGO REBORN — DURABLE AI DECKBUILDING / SOLVER RULES
+===================================================
+
+PURPOSE
+-------
+This file is a mandatory handoff for future ChatGPT/Codex/YGO Reborn analysis chats.
+Read and follow these rules BEFORE recommending, optimizing, ranking, or testing decks.
+
+AUTHORITATIVE PROJECT SOURCES
+-----------------------------
+1. Use ONLY the exact YGO Reborn card pool for this project.
+2. Use the YGO Reborn banlist as the legality authority.
+3. Use the actual Yu-Gi-Oh! game rules.
+4. Use the correct/current card text and errata for cards unless this project explicitly records a format-specific override.
+5. Before producing a final deck list, verify every card is in-pool and the number of copies is legal.
+
+MANDATORY STRATEGIC INDEPENDENCE
+--------------------------------
+The goal is for the AI/system to discover the strongest legal decks independently from the game itself.
+
+DO NOT use any of the following to generate, guide, rank, or validate deck strategy:
+- Human tournament decklists
+- Historical decklists
+- Historical format reputation
+- Tournament tops/results
+- Reddit or forum opinions
+- Tier lists
+- Community consensus
+- YouTube/deck-profile opinions
+- Published metagame data
+- "This deck was historically good" reasoning
+- Human popularity or conventional ratios
+
+External sources may be used ONLY when needed to verify objective facts such as official card text, errata, rulings, mechanics, or rules. They must NOT be used as strategic deckbuilding guidance.
+
+SEARCH OBJECTIVE
+----------------
+Do not merely optimize familiar archetypes. Search the FULL legal pool for the highest-win-rate strategy possible, including unusual engines, hybrid shells, low-piece-count interactions, lock structures, recursion loops, resource engines, hand disruption, tempo packages, and combinations humans may have overlooked.
+
+A named archetype supplied by the user is a candidate, not an assumption that it is the best deck in the format.
+
+PRIMARY OPTIMIZATION TARGET
+---------------------------
+Optimize for actual expected match win rate / game win rate under the exact pool and banlist, not for familiarity, aesthetics, historical correctness, or resemblance to real-world lists.
+
+When evaluating candidates, explicitly reason about factors such as:
+- Opening-hand consistency
+- Brick/dead-card rate
+- Effective copies of starters and interaction
+- Card advantage and resource conversion
+- Tempo and board control
+- Removal quality and coverage
+- Threat density
+- Resilience to removal and disruption
+- Recovery after losing the first board
+- Recursion and inevitability
+- Going-first strength
+- Going-second strength
+- Ability to beat large monsters
+- Ability to beat heavy backrow/trap decks
+- Ability to beat flip/control strategies
+- Ability to beat tribute/Monarch-style pressure
+- Ability to pressure slow or greedy engines
+- Vulnerability to commonly available generic answers in THIS pool
+- Ceiling versus floor
+- Mulligan is NOT assumed unless the actual rules provide one
+
+AI STRATEGIC ANALYSIS STANDARD
+------------------------------
+Use AI strategic analysis rather than human precedent. Conclusions should be supported by concrete game states, legal sequences, probabilities, hand structures, resource trades, matchup interactions, and adversarial reasoning.
+
+Do not say a deck is better merely because human players historically used it more successfully.
+
+When no complete automated duel simulator is available, it is acceptable to use AI-only analysis such as:
+- Opening-hand enumeration/sampling
+- Draw/access probability calculations
+- Dead-card and duplicate analysis
+- Legal-sequence analysis
+- Interaction mapping
+- Resource-exchange analysis
+- Adversarial scenario testing
+- Internal candidate-vs-candidate matchup reasoning
+
+Do NOT describe those methods as games played against real humans unless real human games actually occurred.
+
+STRONGEST-DECK CLAIMS
+---------------------
+Do not declare a deck "the strongest" merely because it looks powerful or because it wins a few favorable scenarios.
+
+Before establishing a strongest deck, compare it against multiple independently discovered strategy families and stress-test its weak points. Treat rankings as provisional until sufficient cross-family adversarial testing has been performed.
+
+If evidence is incomplete, say the conclusion is provisional and continue searching rather than forcing certainty.
+
+DECK LIST RULES
+---------------
+- Every final deck must be legal under the project pool and banlist.
+- Never silently import a card because it existed in real Yu-Gi-Oh! at the time.
+- Never assume a historical ratio is optimal.
+- Every slot is open to replacement if another legal card improves expected win rate.
+- Side-deck-only thinking must not contaminate a requested main-deck optimization unless the user explicitly asks for side decking.
+- Do not add matchup-specific cards merely because the user mentioned a matchup unless they improve the overall objective the user specified.
+
+PROJECT CONTINUITY
+------------------
+Future chats should read this file together with the current card-pool MASTER, BANLIST MASTER, and deckbuilding findings/checkpoint files before continuing analysis.
+
+Meaningful discoveries, corrected assumptions, tested candidate lists, failed ideas, and solver checkpoints should be written back to durable project files so later chats resume rather than restart.
+
+CURRENT USER PREFERENCE
+-----------------------
+The user specifically wants the AI to try to find what humans may have missed. Human deckbuilding history is not the benchmark. The benchmark is the strongest strategy the rules, exact pool, banlist, and card text actually permit.
+
+When the user asks for the "best" deck, interpret that as: independently search for the deck with the highest expected performance under this exact format, then support the result with AI-derived evidence.
