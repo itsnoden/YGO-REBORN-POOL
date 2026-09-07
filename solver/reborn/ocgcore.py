@@ -73,7 +73,6 @@ class Duel:
                 r=self.data.get(code)
                 if r is None:self.errors.append(f'Missing engine data {code}');return
                 codes=[];bits=r['setcode']
-                # SQLite may expose signed 64-bit values; normalize before shifts.
                 bits &= (1<<64)-1
                 while bits:codes.append(bits&0xffff);bits>>=16
                 array=(U16*(len(codes)+1))(*codes,0);self.arrays.append(array)
@@ -86,7 +85,6 @@ class Duel:
             try:
                 filename=name.decode()
                 if Path(filename).name!=filename:raise ValueError('Unexpected script path')
-                # Never search pre-errata, unofficial, rush or skill card folders.
                 path=self.scripts/filename
                 if not path.is_file():path=self.scripts/'official'/filename
                 if not path.is_file():return 0
@@ -101,11 +99,10 @@ class Duel:
         def done(payload,data):pass
         self.callbacks=(reader,script_reader,log,done)
         rng=random.Random(seed)
-        # Experimental current-TCG profile. Reborn certification remains required.
-        profile=get_profile('experimental_current_tcg')
+        profile=get_profile('reborn')
         if flags is None:flags=profile['flags']
         self.flags=flags
-        self.profile_name='experimental_current_tcg'
+        self.profile_name='reborn'
         opts=Options((U64*4)(*[rng.getrandbits(64) for _ in range(4)]),flags,
                      Player(profile['starting_lp'],profile['opening_hand'],profile['draw_per_turn']),
                      Player(profile['starting_lp'],profile['opening_hand'],profile['draw_per_turn']),
