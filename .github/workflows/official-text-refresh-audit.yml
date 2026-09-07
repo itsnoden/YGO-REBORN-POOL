@@ -1,0 +1,65 @@
+name: Official Text Refresh Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/official-text-refresh-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: solver
+        shell: bash
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: solver/requirements.txt
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Refresh latest official card-text snapshot
+        run: |
+          set -o pipefail
+          python -m reborn.official --workers 8 --refresh 2>&1 | tee reports/ci_official_refresh.log
+
+      - name: Rebuild pinned engine dependencies
+        run: python -m reborn.bootstrap_engine
+
+      - name: Reconcile refreshed official texts with pinned engine
+        run: python -m reborn.engine_bridge --database vendor/database/cards.cdb --scripts vendor/scripts --core vendor/core
+
+      - name: Prioritize refreshed text differences
+        run: |
+          set -o pipefail
+          python -m reborn.text_audit 2>&1 | tee reports/ci_refreshed_text_audit.log
+
+      - name: Upload refreshed official audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-text-refresh-audit-${{ github.sha }}
+          path: |
+            solver/data/processed/cards.json
+            solver/data/processed/engine_cards.json
+            solver/reports/text_coverage.json
+            solver/reports/text_difference_audit.json
+            solver/reports/engine_coverage.json
+            solver/reports/ci_official_refresh.log
+            solver/reports/ci_refreshed_text_audit.log
+          if-no-files-found: warn
+          retention-days: 14
