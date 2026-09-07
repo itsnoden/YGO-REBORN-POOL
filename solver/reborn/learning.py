@@ -81,6 +81,50 @@ class SparsePolicy:
         features += [f'location:{card.get("location")}', f'controller_rel:{"self" if card.get("controller") == observation["viewer"] else "opp"}']
         return tuple(features)
 
+    def complex_features(self, prompt, observation, option):
+        """Features for a completely enumerated implicit legal response.
+
+        ``option`` comes from legal_options.py and contains only safe data copied
+        from the filtered prompt or from the player's selected response itself.
+        Referee helper values used to prove legality never enter this function.
+        """
+        state = self._state_features(observation)
+        kind = prompt['kind']; label = option.get('label', 'complex')
+        features = list(state)
+        features += [f'kind:{kind}', f'label:{label}', f'kind_label:{kind}|{label}']
+        if option.get('selected_count') is not None:
+            features.append(f'selected_count:{option["selected_count"]}')
+
+        selected = option.get('selected_cards', ())
+        for card in selected:
+            if 'code' in card:
+                code = card['code']
+                features += [f'card:{code}', f'card_label:{code}|{label}']
+            features += [
+                f'selected_location:{card.get("location")}',
+                f'selected_controller_rel:{"self" if card.get("controller") == observation["viewer"] else "opp"}',
+            ]
+
+        ordered = option.get('ordered_cards', ())
+        for position, card in enumerate(ordered):
+            if 'code' in card:
+                features.append(f'order:{position}|card:{card["code"]}')
+            else:
+                features.append(f'order:{position}|location:{card.get("location")}')
+
+        for place in option.get('places', ()):
+            if len(place) == 3:
+                con, loc, seq = place
+                rel = 'self' if con == observation['viewer'] else 'opp'
+                features.append(f'place:{rel}|{loc}|{seq}')
+
+        allocations = option.get('allocations')
+        if allocations is not None:
+            features.append('allocation:' + ','.join(str(int(v)) for v in allocations))
+        if option.get('announced_mask') is not None:
+            features.append(f'announced_mask:{int(option["announced_mask"])}')
+        return tuple(features)
+
     def score(self, features):
         return sum(self.weights.get(feature, 0.0) for feature in features)
 
@@ -121,7 +165,7 @@ class SparsePolicy:
 
     def to_dict(self):
         return {
-            'policy': 'sparse_softmax_reinforce_v1',
+            'policy': 'sparse_softmax_reinforce_v2_complex_actions',
             'seed': self.seed,
             'temperature': self.temperature,
             'learning_rate': self.learning_rate,
