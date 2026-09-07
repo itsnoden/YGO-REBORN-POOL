@@ -1,10 +1,18 @@
 """Prioritize latest-official-text vs pinned-engine text differences.
 
-This module is deliberately conservative. It never declares a non-exact text
-comparison behaviorally equivalent. It only separates non-exact comparisons
-whose case/punctuation/spacing differ while the same alphanumeric token sequence
-is preserved from comparisons with actual lexical token changes. The latter are
-higher-priority errata/behavior audit targets.
+This module is deliberately conservative about effect text. It never declares a
+non-exact Effect/Spell/Trap text comparison behaviorally equivalent. It only
+separates:
+
+- exact text,
+- punctuation/case/spacing-only differences,
+- actual lexical differences requiring behavior/errata audit,
+- missing latest-official text,
+- and non-exact Normal Monster lore.
+
+Normal Monster description text has no card effect to execute, so lore wording
+cannot change duel behavior. It remains a provenance/text-quality issue, but it
+must not inflate the behavior-changing errata blocker queue.
 """
 from __future__ import annotations
 
@@ -67,6 +75,8 @@ def build_report(cards, mapped):
         official = (card.get('official') or {}).get('text') or ''
         engine = entry.get('engine_text') or ''
         category = classify_text_pair(official, engine)
+        if category != 'exact' and entry.get('normal_monster'):
+            category = 'normal_monster_lore_only_not_behavior_blocker'
         counts[category] += 1
         if category == 'exact':
             continue
@@ -77,6 +87,7 @@ def build_report(cards, mapped):
             'name': entry['name'],
             'engine_name': entry.get('engine_name'),
             'passcode': entry.get('passcode'),
+            'normal_monster': bool(entry.get('normal_monster')),
             'category': category,
             'official_token_count': len(official_tokens),
             'engine_token_count': len(engine_tokens),
@@ -87,24 +98,38 @@ def build_report(cards, mapped):
             'latest_official_text_sha256': entry.get('latest_official_text_sha256'),
         })
 
-    # Lowest lexical similarity first gives the next audit a deterministic queue.
+    # Real lexical effect-text differences first. Formatting/provenance-only rows
+    # remain visible after the behavior blockers.
+    priority = {
+        'lexical_difference_requires_audit': 0,
+        'missing_latest_official_text': 1,
+        'token_sequence_identical_formatting_only': 2,
+        'normal_monster_lore_only_not_behavior_blocker': 3,
+    }
     rows.sort(key=lambda row: (
-        0 if row['category'] == 'lexical_difference_requires_audit' else 1,
+        priority.get(row['category'], 9),
         row['token_sequence_similarity'],
         row['name'].casefold(),
     ))
+    behavior_blockers = sum(
+        counts.get(name, 0) for name in (
+            'lexical_difference_requires_audit',
+            'missing_latest_official_text',
+        )
+    )
     return {
         'purpose': 'text_difference_prioritization_not_behavior_certification',
         'mapped_cards': len(mapped),
         'counts': dict(sorted(counts.items())),
         'nonexact_rows': len(rows),
+        'behavior_text_audit_blockers': behavior_blockers,
         'rows': rows,
         'note': (
             'Only exact text equality is an exact-text match. '
-            'token_sequence_identical_formatting_only means the same case-insensitive '
-            'alphanumeric token sequence survived after punctuation/spacing removal; '
-            'it is a prioritization aid, not a ruling or behavior-equivalence certificate. '
-            'Every lexical_difference_requires_audit remains an errata/implementation audit blocker.'
+            'token_sequence_identical_formatting_only is a prioritization aid, not a ruling. '
+            'Every lexical_difference_requires_audit remains an errata/implementation audit blocker. '
+            'normal_monster_lore_only_not_behavior_blocker is separated because a Normal Monster has no '
+            'effect text to execute; lore provenance may still be audited but cannot alter duel behavior.'
         ),
     }
 
@@ -122,8 +147,10 @@ def main():
         'mapped_cards': report['mapped_cards'],
         'exact': report['counts'].get('exact', 0),
         'formatting_only_nonexact': report['counts'].get('token_sequence_identical_formatting_only', 0),
+        'normal_monster_lore_only': report['counts'].get('normal_monster_lore_only_not_behavior_blocker', 0),
         'lexical_audit': report['counts'].get('lexical_difference_requires_audit', 0),
         'missing_official': report['counts'].get('missing_latest_official_text', 0),
+        'behavior_text_audit_blockers': report['behavior_text_audit_blockers'],
     }))
 
 
