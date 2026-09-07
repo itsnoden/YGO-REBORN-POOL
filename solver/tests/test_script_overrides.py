@@ -1,7 +1,9 @@
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
+from reborn.import_pool import ROOT
 from reborn.ocgcore import SCRIPT_OVERRIDE_DIR, resolve_script_path
 
 
@@ -25,6 +27,16 @@ class ScriptOverrideTests(unittest.TestCase):
         self.assertIn('SetCountLimit(1,{id,1})', text)
         self.assertIn('not c:IsCode(id)', text)
         self.assertIn('LOCATION_GRAVE|LOCATION_HAND', text)
+
+    def test_engine_bridge_reports_redmd_override_as_available_unvalidated(self):
+        rows = json.loads((ROOT/'data/processed/engine_cards.json').read_text())
+        redmd = next(r for r in rows if r['name'] == 'Red-Eyes Darkness Metal Dragon')
+        self.assertEqual(redmd['script_source'], 'reviewed_override')
+        self.assertEqual(redmd['status'], 'reviewed_override_unvalidated')
+        self.assertEqual(redmd['script_path'], 'script_overrides/c88264978.lua')
+        coverage = json.loads((ROOT/'reports/engine_coverage.json').read_text())
+        self.assertNotIn('Red-Eyes Darkness Metal Dragon', coverage['missing_script'])
+        self.assertGreaterEqual(coverage['reviewed_overrides'], 1)
 
     def test_reviewed_override_precedes_pinned_official_script(self):
         with tempfile.TemporaryDirectory() as td, tempfile.TemporaryDirectory() as od:
