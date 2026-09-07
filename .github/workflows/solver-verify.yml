@@ -71,6 +71,18 @@ jobs:
             --seed 5000 \
             2>&1 | tee reports/ci_pilot_probe.log
 
+      - name: Run from-scratch learning smoke probe
+        run: |
+          python -m reborn.learn_probe \
+            --library build/libocgcore.so \
+            --database vendor/database/cards.cdb \
+            --scripts vendor/scripts \
+            --games 8 \
+            --budget 5000 \
+            --seed 7000 \
+            --policy-seed 20260906 \
+            2>&1 | tee reports/ci_learn_probe.log
+
       - name: Capture pinned dependency heads
         if: always()
         run: |
@@ -88,8 +100,11 @@ jobs:
           path: |
             solver/reports/flow_probe.json
             solver/reports/pilot_probe.json
+            solver/reports/learn_probe.json
+            solver/reports/learned_policy_experimental.json
             solver/reports/ci_flow_probe.log
             solver/reports/ci_pilot_probe.log
+            solver/reports/ci_learn_probe.log
             solver/reports/ci_unit_tests.log
             solver/reports/ci_dependency_heads.txt
             solver/reports/engine_coverage.json
