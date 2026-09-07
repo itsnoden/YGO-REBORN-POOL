@@ -8,11 +8,13 @@ separates:
 - punctuation/case/spacing-only differences,
 - actual lexical differences requiring behavior/errata audit,
 - missing latest-official text,
+- reviewed non-TCG text provenance,
 - and non-exact Normal Monster lore.
 
 Normal Monster description text has no card effect to execute, so lore wording
-cannot change duel behavior. It remains a provenance/text-quality issue, but it
-must not inflate the behavior-changing errata blocker queue.
+cannot change duel behavior. Reviewed anime/game-only cards have no TCG official
+text by definition; an exact match to their separately reviewed nonstandard
+record is therefore tracked as provenance rather than a missing-TCG-text blocker.
 """
 from __future__ import annotations
 
@@ -74,9 +76,15 @@ def build_report(cards, mapped):
         card = by_id[entry['reborn_id']]
         official = (card.get('official') or {}).get('text') or ''
         engine = entry.get('engine_text') or ''
-        category = classify_text_pair(official, engine)
-        if category != 'exact' and entry.get('normal_monster'):
-            category = 'normal_monster_lore_only_not_behavior_blocker'
+        if (
+            entry.get('mapping_source') == 'reviewed_nonstandard_card'
+            and entry.get('nonstandard_text_match')
+        ):
+            category = 'reviewed_nonstandard_text_not_tcg_blocker'
+        else:
+            category = classify_text_pair(official, engine)
+            if category != 'exact' and entry.get('normal_monster'):
+                category = 'normal_monster_lore_only_not_behavior_blocker'
         counts[category] += 1
         if category == 'exact':
             continue
@@ -96,6 +104,8 @@ def build_report(cards, mapped):
             ) if official_tokens or engine_tokens else 1.0,
             'first_token_difference': _first_token_difference(official, engine),
             'latest_official_text_sha256': entry.get('latest_official_text_sha256'),
+            'nonstandard_status': entry.get('nonstandard_status'),
+            'nonstandard_implementation_source': entry.get('nonstandard_implementation_source'),
         })
 
     # Real lexical effect-text differences first. Formatting/provenance-only rows
@@ -103,8 +113,9 @@ def build_report(cards, mapped):
     priority = {
         'lexical_difference_requires_audit': 0,
         'missing_latest_official_text': 1,
-        'token_sequence_identical_formatting_only': 2,
-        'normal_monster_lore_only_not_behavior_blocker': 3,
+        'reviewed_nonstandard_text_not_tcg_blocker': 2,
+        'token_sequence_identical_formatting_only': 3,
+        'normal_monster_lore_only_not_behavior_blocker': 4,
     }
     rows.sort(key=lambda row: (
         priority.get(row['category'], 9),
@@ -125,11 +136,13 @@ def build_report(cards, mapped):
         'behavior_text_audit_blockers': behavior_blockers,
         'rows': rows,
         'note': (
-            'Only exact text equality is an exact-text match. '
+            'Only exact TCG text equality is an exact-text match. '
             'token_sequence_identical_formatting_only is a prioritization aid, not a ruling. '
             'Every lexical_difference_requires_audit remains an errata/implementation audit blocker. '
-            'normal_monster_lore_only_not_behavior_blocker is separated because a Normal Monster has no '
-            'effect text to execute; lore provenance may still be audited but cannot alter duel behavior.'
+            'reviewed_nonstandard_text_not_tcg_blocker is reserved for explicit anime/game-only identities whose '
+            'engine text exactly matches their separately reviewed nonstandard record; no TCG text is expected. '
+            'normal_monster_lore_only_not_behavior_blocker is separated because a Normal Monster has no effect '
+            'text to execute; lore provenance may still be audited but cannot alter duel behavior.'
         ),
     }
 
@@ -148,6 +161,7 @@ def main():
         'exact': report['counts'].get('exact', 0),
         'formatting_only_nonexact': report['counts'].get('token_sequence_identical_formatting_only', 0),
         'normal_monster_lore_only': report['counts'].get('normal_monster_lore_only_not_behavior_blocker', 0),
+        'reviewed_nonstandard_text': report['counts'].get('reviewed_nonstandard_text_not_tcg_blocker', 0),
         'lexical_audit': report['counts'].get('lexical_difference_requires_audit', 0),
         'missing_official': report['counts'].get('missing_latest_official_text', 0),
         'behavior_text_audit_blockers': report['behavior_text_audit_blockers'],
