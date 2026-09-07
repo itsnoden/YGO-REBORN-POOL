@@ -115,6 +115,24 @@ jobs:
             --policy-seed 20260906 \
             2>&1 | tee reports/ci_pilot_eval.log
 
+      - name: Run multi-block held-out pilot benchmark
+        run: |
+          set -o pipefail
+          python -m reborn.pilot_benchmark \
+            --library build/libocgcore.so \
+            --database vendor/database/cards.cdb \
+            --scripts vendor/scripts \
+            --blocks 3 \
+            --train-games 16 \
+            --train-decks 4 \
+            --eval-decks 2 \
+            --pairs-per-deck 6 \
+            --budget 5000 \
+            --train-seed 31000 \
+            --eval-seed 41000 \
+            --policy-seed 20260907 \
+            2>&1 | tee reports/ci_pilot_benchmark.log
+
       - name: Capture pinned dependency heads
         if: always()
         run: |
@@ -135,6 +153,7 @@ jobs:
             solver/reports/learn_probe.json
             solver/reports/crash_probe.json
             solver/reports/pilot_eval.json
+            solver/reports/pilot_benchmark.json
             solver/reports/learned_policy_reborn_smoke.json
             solver/reports/heldout_policy_reborn.json
             solver/reports/ci_flow_probe.log
@@ -142,6 +161,7 @@ jobs:
             solver/reports/ci_learn_probe.log
             solver/reports/ci_crash_probe.log
             solver/reports/ci_pilot_eval.log
+            solver/reports/ci_pilot_benchmark.log
             solver/reports/ci_unit_tests.log
             solver/reports/ci_dependency_heads.txt
             solver/reports/engine_coverage.json
