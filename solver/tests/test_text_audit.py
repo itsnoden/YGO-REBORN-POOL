@@ -49,6 +49,33 @@ class TextAuditTests(unittest.TestCase):
         self.assertEqual(report['behavior_text_audit_blockers'], 1)
         self.assertEqual(report['rows'][0]['name'], 'C')
 
+    def test_reviewed_nonstandard_exact_record_is_not_tcg_missing_text_blocker(self):
+        cards = [{'id': 'u', 'official': None}]
+        mapped = [
+            {'reborn_id': 'u', 'name': 'Anime Card', 'engine_name': 'Anime Card', 'passcode': 100,
+             'normal_monster': False, 'engine_text': 'Reviewed anime effect.',
+             'mapping_source': 'reviewed_nonstandard_card', 'nonstandard_text_match': True,
+             'nonstandard_status': 'reviewed_anime_only_card',
+             'nonstandard_implementation_source': 'reviewed-source',
+             'latest_official_text_sha256': None},
+        ]
+        report = build_report(cards, mapped)
+        self.assertEqual(report['counts']['reviewed_nonstandard_text_not_tcg_blocker'], 1)
+        self.assertEqual(report['behavior_text_audit_blockers'], 0)
+        self.assertEqual(report['rows'][0]['category'], 'reviewed_nonstandard_text_not_tcg_blocker')
+
+    def test_nonstandard_without_exact_review_still_blocks(self):
+        cards = [{'id': 'u', 'official': None}]
+        mapped = [
+            {'reborn_id': 'u', 'name': 'Anime Card', 'engine_name': 'Anime Card', 'passcode': 101,
+             'normal_monster': False, 'engine_text': 'Unverified anime effect.',
+             'mapping_source': 'reviewed_nonstandard_card', 'nonstandard_text_match': False,
+             'latest_official_text_sha256': None},
+        ]
+        report = build_report(cards, mapped)
+        self.assertEqual(report['counts']['missing_latest_official_text'], 1)
+        self.assertEqual(report['behavior_text_audit_blockers'], 1)
+
     def test_normal_monster_lore_difference_is_not_behavior_blocker(self):
         cards = [
             {'id': 'n', 'official': {'text': 'A blue mammoth swings its nose.', 'text_sha256': 'n'}},
