@@ -11,6 +11,7 @@ import struct
 from .announce import choose_declarable
 from .effects import UnsupportedInteraction
 from .import_pool import ROOT, dump
+from .observation import PublicTracker, observation_for
 from .ocgcore import Duel
 from .protocol_extra import extract_decision, conservative_response
 from .search import validate
@@ -18,9 +19,28 @@ from .search import validate
 MSG_WIN = 5
 
 
+def _assert_filtered_observation(observation):
+    """Fail closed if an anonymous opponent zone accidentally exposes a code."""
+    viewer = observation['viewer']
+    for player, row in enumerate(observation['players']):
+        if player == viewer:
+            continue
+        for card in row['hand']:
+            if card.get('hidden'):
+                if 'code' in card:
+                    raise UnsupportedInteraction('opponent hidden hand code leaked')
+        for card in row['extra']:
+            if card.get('hidden'):
+                if 'code' in card:
+                    raise UnsupportedInteraction('opponent hidden Extra Deck code leaked')
+    return True
+
+
 def run_one(library, database, scripts, deck0, deck1, mapped, seed, budget=5000):
-    row = dict(seed=seed, status='pending', steps=0, decisions=0, message_types=[], blocker=None)
+    row = dict(seed=seed, status='pending', steps=0, decisions=0,
+               observation_checks=0, message_types=[], blocker=None)
     allowed_codes = [entry['passcode'] for entry in mapped.values()]
+    tracker = PublicTracker()
     with Duel(library, database, scripts, seed=seed) as duel:
         for player, deck in enumerate((deck0, deck1)):
             for index, cid in enumerate(deck):
@@ -28,6 +48,7 @@ def run_one(library, database, scripts, deck0, deck1, mapped, seed, budget=5000)
         duel.start()
         for step in range(budget):
             status, messages = duel.process()
+            tracker.consume(messages)
             row['steps'] = step + 1
             row['message_types'].extend(m[0] for m in messages if m)
             wins = [m for m in messages if m and m[0] == MSG_WIN]
@@ -38,6 +59,14 @@ def run_one(library, database, scripts, deck0, deck1, mapped, seed, budget=5000)
             if decision is not None:
                 row['decisions'] += 1
                 decision.view_for(decision.player)
+
+                # Build the same information-safe state object a future pilot
+                # will consume. This is a live ABI/privacy assertion, not a
+                # strength feature and must not affect the baseline's choices.
+                observation = observation_for(duel, decision.player, tracker)
+                _assert_filtered_observation(observation)
+                row['observation_checks'] += 1
+
                 if decision.kind == 'announce_card':
                     code = choose_declarable(database, decision.meta['opcodes'], allowed_codes)
                     response = struct.pack('<i', code)
@@ -88,17 +117,18 @@ def main():
         results.append(row)
 
     report = {
-        'purpose': 'protocol_and_complete_duel_correctness_only',
+        'purpose': 'protocol_observation_and_complete_duel_correctness_only',
         'strength_evidence': False,
         'profile': 'experimental_current_tcg_not_reborn_confirmed',
         'baseline_policy': 'deterministic_conservative_legal_actions',
         'attempted': len(results),
         'completed': sum(bool(r.get('completed')) for r in results),
+        'observation_checks': sum(r.get('observation_checks', 0) for r in results),
         'results': results,
         'note': 'Do not use these outcomes as deck rankings, win rates, or search priors.',
     }
     dump(ROOT/'reports/flow_probe.json', report)
-    print(json.dumps({k: report[k] for k in ('attempted', 'completed')}))
+    print(json.dumps({k: report[k] for k in ('attempted', 'completed', 'observation_checks')}))
 
 
 if __name__ == '__main__':
