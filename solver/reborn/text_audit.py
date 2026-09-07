@@ -1,20 +1,10 @@
 """Prioritize latest-official-text vs pinned-engine text differences.
 
 This module is deliberately conservative about effect text. It never declares a
-non-exact Effect/Spell/Trap text comparison behaviorally equivalent. It only
-separates:
-
-- exact text,
-- presentation-only differences (case, punctuation, spacing, HTML line breaks),
-- actual lexical differences requiring behavior/errata audit,
-- missing latest-official text,
-- reviewed non-TCG text provenance,
-- and non-exact Normal Monster lore.
-
-Normal Monster description text has no card effect to execute, so lore wording
-cannot change duel behavior. Reviewed anime/game-only cards have no TCG official
-text by definition; an exact match to their separately reviewed nonstandard
-record is therefore tracked as provenance rather than a missing-TCG-text blocker.
+non-exact Effect/Spell/Trap wording behaviorally equivalent from similarity. It
+separates exact/presentation differences, a tiny allowlist of mechanically
+identical legacy/current rules terminology, true lexical differences requiring
+review, reviewed non-TCG provenance, and Normal Monster lore.
 """
 from __future__ import annotations
 
@@ -28,22 +18,60 @@ from .import_pool import ROOT, dump
 
 
 _BR_RE = re.compile(r'<br\s*/?>', re.IGNORECASE)
+_RACE_TERMINALS = {
+    'aqua', 'beast', 'warrior', 'god', 'cyberse', 'dinosaur', 'dragon', 'fairy',
+    'fiend', 'fish', 'illusion', 'insect', 'machine', 'plant', 'psychic', 'pyro',
+    'reptile', 'rock', 'serpent', 'spellcaster', 'thunder', 'wyrm', 'zombie',
+}
 
 
 def _text_key(text):
-    # Neuron/official snapshots can encode line breaks as literal HTML <br>
-    # while BabelCDB stores the same boundary as a newline. A line break has no
-    # rules semantics, so normalize only that known presentation tag to space.
+    # Neuron can encode line breaks as literal HTML <br> while BabelCDB stores
+    # the same boundary as a newline. Normalize only that known presentation tag.
     text = _BR_RE.sub(' ', text or '')
     return ' '.join(text.replace('\r', ' ').split())
 
 
 def lexical_tokens(text):
+    """Literal words after presentation normalization; no rules synonyms."""
     return tuple(re.findall(r'[a-z0-9]+', _text_key(text).casefold()))
 
 
+def rules_terminology_tokens(text):
+    """Canonicalize only established old/current Yu-Gi-Oh rules vocabulary.
+
+    This intentionally does NOT normalize general synonyms such as select/target,
+    choose/reveal, send/destroy, or timing language. Those remain audit blockers.
+    """
+    source = lexical_tokens(text)
+    out = []
+    i = 0
+    while i < len(source):
+        token = source[i]
+        if token == 'graveyard':
+            out.append('gy')
+            i += 1
+            continue
+        if i + 1 < len(source) and token == 'life' and source[i + 1] in {'point', 'points'}:
+            out.append('lp')
+            i += 2
+            continue
+        # Legacy race wording such as "Machine-Type monster" is the same race
+        # terminology as current "Machine monster". Do not remove generic
+        # "Type" elsewhere (e.g. "declare 1 Type of monster").
+        if (
+            token == 'type' and i > 0 and source[i - 1] in _RACE_TERMINALS
+            and i + 1 < len(source) and source[i + 1] in {'monster', 'monsters'}
+        ):
+            i += 1
+            continue
+        out.append(token)
+        i += 1
+    return tuple(out)
+
+
 def classify_text_pair(official_text, engine_text):
-    """Return a prioritization label, never a semantic certification."""
+    """Return a conservative audit category, never a free-form semantic guess."""
     official = _text_key(official_text)
     engine = _text_key(engine_text)
     if not official:
@@ -52,6 +80,8 @@ def classify_text_pair(official_text, engine_text):
         return 'exact'
     if lexical_tokens(official) == lexical_tokens(engine):
         return 'token_sequence_identical_formatting_only'
+    if rules_terminology_tokens(official) == rules_terminology_tokens(engine):
+        return 'rules_terminology_equivalent_only'
     return 'lexical_difference_requires_audit'
 
 
@@ -115,14 +145,13 @@ def build_report(cards, mapped):
             'nonstandard_implementation_source': entry.get('nonstandard_implementation_source'),
         })
 
-    # Real lexical effect-text differences first. Formatting/provenance-only rows
-    # remain visible after the behavior blockers.
     priority = {
         'lexical_difference_requires_audit': 0,
         'missing_latest_official_text': 1,
         'reviewed_nonstandard_text_not_tcg_blocker': 2,
-        'token_sequence_identical_formatting_only': 3,
-        'normal_monster_lore_only_not_behavior_blocker': 4,
+        'rules_terminology_equivalent_only': 3,
+        'token_sequence_identical_formatting_only': 4,
+        'normal_monster_lore_only_not_behavior_blocker': 5,
     }
     rows.sort(key=lambda row: (
         priority.get(row['category'], 9),
@@ -143,14 +172,11 @@ def build_report(cards, mapped):
         'behavior_text_audit_blockers': behavior_blockers,
         'rows': rows,
         'note': (
-            'Only exact normalized TCG text equality is an exact-text match. Literal HTML br line-break tags are '
-            'normalized to whitespace because they are presentation only. '
-            'token_sequence_identical_formatting_only is a prioritization aid, not a ruling. '
-            'Every lexical_difference_requires_audit remains an errata/implementation audit blocker. '
-            'reviewed_nonstandard_text_not_tcg_blocker is reserved for explicit anime/game-only identities whose '
-            'engine text exactly matches their separately reviewed nonstandard record; no TCG text is expected. '
-            'normal_monster_lore_only_not_behavior_blocker is separated because a Normal Monster has no effect '
-            'text to execute; lore provenance may still be audited but cannot alter duel behavior.'
+            'HTML br line breaks are presentation-only. The rules-terminology category is restricted to an '
+            'explicit canonical vocabulary: Graveyard/GY, Life Point(s)/LP, and legacy Race-Type monster wording. '
+            'Generic synonyms, targeting/timing language, and effect operations are never normalized here. '
+            'Every lexical_difference_requires_audit remains a blocker unless separately hash-bound reviewed. '
+            'Reviewed non-TCG exact records and Normal Monster lore are tracked outside the TCG behavior blocker count.'
         ),
     }
 
@@ -162,12 +188,12 @@ def main():
     cards = json.loads((ROOT/'data/processed/cards.json').read_text())
     mapped = json.loads((ROOT/'data/processed/engine_cards.json').read_text())
     report = build_report(cards, mapped)
-    output = ROOT/a.output
-    dump(output, report)
+    dump(ROOT/a.output, report)
     print(json.dumps({
         'mapped_cards': report['mapped_cards'],
         'exact': report['counts'].get('exact', 0),
         'formatting_only_nonexact': report['counts'].get('token_sequence_identical_formatting_only', 0),
+        'rules_terminology_only': report['counts'].get('rules_terminology_equivalent_only', 0),
         'normal_monster_lore_only': report['counts'].get('normal_monster_lore_only_not_behavior_blocker', 0),
         'reviewed_nonstandard_text': report['counts'].get('reviewed_nonstandard_text_not_tcg_blocker', 0),
         'lexical_audit': report['counts'].get('lexical_difference_requires_audit', 0),
