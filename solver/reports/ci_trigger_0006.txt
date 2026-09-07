@@ -1,0 +1,2 @@
+CI probe trigger for stochastic paired-seat adversarial coverage.
+This file carries no deck-strength evidence.
