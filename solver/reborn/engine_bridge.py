@@ -1,4 +1,4 @@
-"""Join exact Reborn titles to standard EDOPro IDs; audit text/script coverage."""
+"""Join exact Reborn identities to pinned ocgcore data; audit coverage."""
 import argparse
 from difflib import SequenceMatcher
 import hashlib
@@ -7,8 +7,15 @@ import re
 import sqlite3
 import subprocess
 from pathlib import Path
-from .import_pool import ROOT,dump,key
-from .verified_data import apply_verified_official_records, load_identity_aliases
+from .import_pool import (
+    ROOT, apply_source_corrections, dump, key, load_source_corrections,
+)
+from .verified_data import (
+    apply_nonstandard_card_records,
+    apply_verified_official_records,
+    load_identity_aliases,
+    nonstandard_engine_rows,
+)
 
 
 def text_key(text):
@@ -81,7 +88,7 @@ def reviewed_alias_match(pool_name, records, aliases, blocked_ids=(), shared_ids
     Ordinary aliases may never collide with an already reserved/mapped engine ID.
     A much narrower exception exists for an alias explicitly marked as the same
     current card identity: it may reuse an ID only after that exact engine ID has
-    already been mapped by another pool record.  This preserves source records
+    already been mapped by another pool record. This preserves source records
     while making both names share one rules identity and one deck-name limit.
     """
     spec = aliases.get(pool_name)
@@ -108,13 +115,7 @@ def reviewed_alias_match(pool_name, records, aliases, blocked_ids=(), shared_ids
 
 
 def _whitelist_lines(mapped):
-    """Emit one whitelist row per current engine identity.
-
-    Multiple reviewed source labels may map to one current card identity.  Their
-    combined deck-name group is already capped at 3 by search.validate; the
-    ocgcore whitelist must likewise contain the passcode only once.  Use the
-    strictest source copy limit if duplicate labels disagree.
-    """
+    """Emit one whitelist row per current engine identity."""
     by_passcode = {}
     for row in mapped:
         if row['copy_limit'] <= 0:
@@ -137,10 +138,25 @@ def main():
     aliases,non_aliases=_load_identity_aliases()
     con=sqlite3.connect(db);con.row_factory=sqlite3.Row
     records={};all_records=[]
+    existing_ids=set()
     for r in con.execute('SELECT d.*,t.name,t.desc FROM datas d JOIN texts t USING(id)'):
         row=dict(r);all_records.append(row);records.setdefault(key(r['name']),[]).append(row)
+        existing_ids.add(int(row['id']))
+
+    # Exact reviewed anime/game-only cards may be absent from the pinned Babel
+    # database. Add only explicit records from data/nonstandard_cards.json.
+    nonstandard_rows=nonstandard_engine_rows()
+    for row in nonstandard_rows:
+        rid=int(row['id'])
+        if rid in existing_ids:
+            raise ValueError(f'nonstandard engine id collides with pinned database: {rid}')
+        all_records.append(row);records.setdefault(key(row['name']),[]).append(row)
+        existing_ids.add(rid)
+
     cards=json.loads((ROOT/'data/processed/cards.json').read_text())
+    applied_source_corrections=apply_source_corrections(cards,load_source_corrections())
     applied_official_overlays=apply_verified_official_records(cards)
+    applied_nonstandard_overlays=apply_nonstandard_card_records(cards)
     mapped=[];missing=[]
 
     # Exact-title matches have priority over every fallback, independent of pool
@@ -161,7 +177,11 @@ def main():
         text_candidates=[]
         if len(primary)==1:
             r=primary[0]
-            mapping_source='exact_title'
+            mapping_source=(
+                'reviewed_nonstandard_card'
+                if r.get('_nonstandard_pool_name') == c['name']
+                else 'exact_title'
+            )
         else:
             blocked=reserved_exact_ids|used_ids
             r,alias_spec=reviewed_alias_match(
@@ -219,24 +239,33 @@ def main():
         if implementation is None:
             status='normal_monster_no_script' if is_normal else 'missing_script'
         official=c.get('official') or {}
-        text_match=bool(official) and text_key(official.get('text',''))==text_key(r['desc'])
+        nonstandard=c.get('nonstandard') or {}
+        official_text_match=bool(official) and text_key(official.get('text',''))==text_key(r['desc'])
+        nonstandard_text_match=(
+            mapping_source=='reviewed_nonstandard_card'
+            and bool(nonstandard.get('text'))
+            and text_key(nonstandard.get('text',''))==text_key(r['desc'])
+        )
         entry=dict(reborn_id=c['id'],name=c['name'],passcode=rid,copy_limit=c['copy_limit'],
              mapping_source=mapping_source,engine_name=r['name'],
              identity_alias_status=alias_spec.get('status') if alias_spec else None,
              identity_alias_evidence=alias_spec.get('evidence') if alias_spec else None,
              identity_alias_source_url=alias_spec.get('source_url') if alias_spec else None,
              shared_engine_identity=bool(alias_spec and alias_spec.get('allow_shared_engine_identity')),
-             data={k:v for k,v in r.items() if k not in ('name','desc')},
+             nonstandard_status=r.get('_nonstandard_status'),
+             nonstandard_implementation_source=r.get('_nonstandard_implementation_source'),
+             data={k:v for k,v in r.items() if k not in ('name','desc') and not k.startswith('_')},
              script_path=script_path,script_source=script_source,
              script_sha256=hashlib.sha256(implementation.read_bytes()).hexdigest() if implementation else None,
-             normal_monster=is_normal,official_text_match=text_match,
+             normal_monster=is_normal,official_text_match=official_text_match,
+             nonstandard_text_match=nonstandard_text_match,
              engine_text=r['desc'],latest_official_text_sha256=official.get('text_sha256'),
              status=status)
         mapped.append(entry)
         c['engine']={k:v for k,v in entry.items() if k not in ('data','engine_text')}
         c['deck_name_group']=str(r['alias'] or rid)
         # Placement is determined by authoritative official text/verified factual
-        # overlay when present; never promote from simulator title similarity.
+        # overlay or explicit reviewed non-TCG record, never title similarity.
     con.close()
     dump(ROOT/'data/processed/cards.json',cards)
     dump(ROOT/'data/processed/engine_cards.json',mapped)
@@ -244,11 +273,20 @@ def main():
     for name,path,url in [('core',core,'https://github.com/edo9300/ygopro-core.git'),
                           ('scripts',scripts,'https://github.com/ProjectIgnis/CardScripts.git'),
                           ('database',db.parent,'https://github.com/ProjectIgnis/BabelCDB.git')]:
-        locks[name]=dict(url=url,commit=subprocess.check_output(['git','-C',str(path),'rev-parse','HEAD',],text=True).strip())
+        locks[name]=dict(url=url,commit=subprocess.check_output(['git','-C',str(path),'rev-parse','HEAD'],text=True).strip())
     dump(ROOT/'engine.lock.json',locks)
     dump(ROOT/'reports/engine_coverage.json',dict(mapped=len(mapped),unmapped=missing,
+        source_corrections_applied=applied_source_corrections,
         verified_official_overlays_applied=applied_official_overlays,
+        nonstandard_overlays_applied=applied_nonstandard_overlays,
         exact_title_mappings=sum(r['mapping_source']=='exact_title' for r in mapped),
+        reviewed_nonstandard_mappings=sum(r['mapping_source']=='reviewed_nonstandard_card' for r in mapped),
+        reviewed_nonstandard_cards=[
+            {'reborn_id':r['reborn_id'],'pool_name':r['name'],'engine_name':r['engine_name'],
+             'engine_id':r['passcode'],'status':r['nonstandard_status'],
+             'implementation_source':r['nonstandard_implementation_source']}
+            for r in mapped if r['mapping_source']=='reviewed_nonstandard_card'
+        ],
         reviewed_identity_alias_mappings=sum(r['mapping_source']=='reviewed_identity_alias' for r in mapped),
         reviewed_shared_identity_alias_mappings=sum(r['mapping_source']=='reviewed_shared_identity_alias' for r in mapped),
         reviewed_identity_aliases=[
@@ -269,13 +307,15 @@ def main():
         normal_without_script=sum(r['status']=='normal_monster_no_script' for r in mapped),
         missing_script=[r['name'] for r in mapped if r['status']=='missing_script'],
         exact_official_text_matches=sum(r['official_text_match'] for r in mapped),
-        text_differences=[r['name'] for r in mapped if not r['official_text_match']],
+        reviewed_nonstandard_text_matches=sum(r['nonstandard_text_match'] for r in mapped),
+        text_differences=[r['name'] for r in mapped if not r['official_text_match'] and not r['nonstandard_text_match']],
         certified_interactions=0,
         note=(
             'Implementation availability, including reviewed overrides, is not Reborn correctness certification. '
-            'Reviewed aliases are explicit audited identity corrections only; same-card shared aliases may reuse an '
-            'already mapped passcode and share one deck-name limit. Unique exact latest-official-text fallback can '
-            'resolve renamed titles; fuzzy title suggestions remain advisory only.'
+            'Source corrections are hard pool-identity constraints. Reviewed aliases are explicit audited identity '
+            'corrections only; same-card shared aliases may reuse an already mapped passcode and share one deck-name '
+            'limit. Reviewed non-TCG cards are exact Reborn identities with separate provenance and must never be '
+            'substituted for similarly named TCG cards. Fuzzy suggestions remain advisory only.'
         )))
     # Whitelist mode is crucial: cards not present here must not default to 3.
     lines=['# Reborn exact pool; latest standard scripts plus reviewed solver overrides','!Reborn solver 2026-09-06','$whitelist']
