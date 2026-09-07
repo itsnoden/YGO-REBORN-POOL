@@ -60,7 +60,10 @@ def run_game(library, database, scripts, decks, mapped, seed, budget=5000):
                     code = choose_declarable(database, decision.meta['opcodes'], allowed_codes)
                     response = struct.pack('<i', code)
                 else:
-                    response = pilots[decision.player].choose(decision, prompt)
+                    # StochasticLegalPilot consumes the information-safe state
+                    # observation. The filtered prompt is audited separately above
+                    # for future learning policies and must not replace observation.
+                    response = pilots[decision.player].choose(decision, observation)
                 duel.respond(response)
                 continue
             if status != 2:
@@ -113,15 +116,16 @@ def main():
     for row in results:
         all_decisions.update(row.get('decision_types', {}))
         all_messages.update({int(k): v for k, v in row.get('message_types', {}).items()})
+    completed = sum(bool(r.get('completed')) for r in results)
     report = {
         'purpose': 'stochastic_legal_pilot_adversarial_coverage_only',
         'strength_evidence': False,
         'search_prior': False,
-        'profile': 'experimental_current_tcg_not_reborn_confirmed',
+        'profile': 'reborn',
         'pilot': 'seeded_stochastic_legal_no_card_specific_preferences',
         'paired_seats': True,
         'attempted': len(results),
-        'completed': sum(bool(r.get('completed')) for r in results),
+        'completed': completed,
         'observation_checks': sum(r.get('observation_checks', 0) for r in results),
         'policy_view_checks': sum(r.get('policy_view_checks', 0) for r in results),
         'decision_types': dict(sorted(all_decisions.items())),
@@ -131,6 +135,8 @@ def main():
     }
     dump(ROOT/'reports/pilot_probe.json', report)
     print(json.dumps({k: report[k] for k in ('attempted','completed','observation_checks','policy_view_checks','decision_types')}))
+    if completed != len(results):
+        raise SystemExit(f'stochastic pilot coverage failed: completed {completed}/{len(results)} games')
 
 
 if __name__ == '__main__':
