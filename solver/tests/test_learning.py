@@ -62,6 +62,27 @@ class LearningTests(unittest.TestCase):
         self.assertEqual(pilot.learned_decisions, 1)
         self.assertEqual(len(pilot.steps), 1)
 
+    def test_learning_fallback_receives_observation_not_prompt(self):
+        msg = bytearray([15, 0, 0])
+        msg += struct.pack('<III', 2, 2, 2)
+        for code, seq in ((100, 0), (200, 1)):
+            msg += struct.pack('<IBBII', code, 0, 2, seq, 8)
+        decision = parse_decision(bytes(msg))
+        prompt = {
+            'kind': 'select_card', 'player': 0, 'minimum': 2, 'maximum': 2,
+            'cancelable': False,
+            'cards': [
+                {'controller': 0, 'location': 2, 'sequence': 0, 'code': 100},
+                {'controller': 0, 'location': 2, 'sequence': 1, 'code': 200},
+            ],
+            'actions': [], 'meta': {},
+        }
+        pilot = LearningPilot(SparsePolicy(seed=6), seed=7)
+        response = pilot.choose(decision, prompt, observation(0))
+        self.assertEqual(response[:8], struct.pack('<iI', 2, 2))
+        self.assertEqual(pilot.fallback_decisions, 1)
+        self.assertEqual(pilot.learned_decisions, 0)
+
 
 if __name__ == '__main__':
     unittest.main()
