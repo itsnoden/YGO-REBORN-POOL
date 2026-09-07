@@ -34,13 +34,19 @@ def parse_pool(text, expected=2273):
     return rows
 
 
-def apply_source_corrections(cards, spec):
-    """Apply explicit source re-verifications before legality/text processing.
+def load_source_corrections():
+    path = ROOT/'data/source_corrections.json'
+    return json.loads(path.read_text()) if path.exists() else {}
 
-    This layer exists because the repository raw MASTER can lag a later visual
-    correction that has already been accepted into the persistent authoritative
-    Library MASTER. Corrections must identify the exact Reborn row and expected
-    stale title so an unrelated future edit cannot be silently overwritten.
+
+def apply_source_corrections(cards, spec):
+    """Apply explicit source re-verifications before any solver use.
+
+    The operation is intentionally idempotent.  A stage may receive either the
+    stale repository cache or a card list already corrected by an earlier stage.
+    The exact Reborn row must contain either the reviewed stale title or the
+    reviewed corrected title; any third value is rejected so unrelated edits can
+    never be silently overwritten.
     """
     by_id = {c['id']: c for c in cards}
     applied = []
@@ -49,20 +55,27 @@ def apply_source_corrections(cards, spec):
         if rid not in by_id:
             raise ValueError(f'source correction references unknown pool id {rid}')
         card = by_id[rid]
-        expected = correction['from_name']
-        if key(card['name']) != key(expected):
+        stale = correction['from_name']
+        current = correction['to_name']
+        observed = key(card['name'])
+        if observed == key(stale):
+            card['name'] = current
+            state = 'applied'
+        elif observed == key(current):
+            state = 'already_corrected'
+        else:
             raise ValueError(
-                f'source correction {rid} expected stale title {expected!r}, found {card["name"]!r}'
+                f'source correction {rid} expected {stale!r} or {current!r}, found {card["name"]!r}'
             )
-        card['name'] = correction['to_name']
         card['source_correction'] = {
             k: v for k, v in correction.items() if k not in {'reborn_id', 'from_name', 'to_name'}
         }
         applied.append({
             'reborn_id': rid,
-            'from_name': expected,
-            'to_name': correction['to_name'],
+            'from_name': stale,
+            'to_name': current,
             'status': correction.get('status'),
+            'state': state,
         })
 
     names = [key(c['name']) for c in cards]
@@ -98,7 +111,7 @@ def main():
     raw = ROOT / 'data/raw'
     cards = parse_pool((raw/'MASTER.txt').read_text())
     correction_path = ROOT/'data/source_corrections.json'
-    correction_spec = json.loads(correction_path.read_text()) if correction_path.exists() else {}
+    correction_spec = load_source_corrections()
     applied_corrections = apply_source_corrections(cards, correction_spec)
     limits = parse_limits((raw/'BANLIST_MASTER.txt').read_text())
     for card in cards:
