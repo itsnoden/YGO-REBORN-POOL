@@ -19,6 +19,27 @@
       "implementation_source": "https://github.com/ProjectIgnis/CardScripts/blob/master/unofficial/c100000250.lua",
       "implementation_note": "Project Ignis maintains Level Down! separately from official TCG Level Down!? (90500169). Reviewed for the Reborn pool because the pool explicitly contains Level Down!.",
       "placement": "main"
+    },
+    "Longnose Blue Mammoth": {
+      "engine_id": 25737191,
+      "engine_name": "Longnose Blue Mammoth",
+      "status": "reviewed_video_game_only_normal_monster",
+      "data": {
+        "alias": 0,
+        "setcode": 0,
+        "type": 17,
+        "level": 3,
+        "attribute": 1,
+        "race": 65536,
+        "atk": 800,
+        "def": 900
+      },
+      "text": "A mammoth with thick fur, it attacks and hits by swinging its long nose.",
+      "card_profile_source": "https://yugioh.fandom.com/wiki/Longnose_Blue_Mammoth",
+      "identity_cross_reference": "https://www.pojo.com/yu-gi-oh/PriceGuide/YGO_XREF.htm",
+      "dm4_password_source": "https://www.imasaragame.com/yugioh4/en/pass9.html",
+      "implementation_note": "Video-game-only Normal Monster; no effect script is required. Passcode 25737191, EARTH/Dinosaur/Level 3, ATK 800/DEF 900. Reborn source row is corrected from the shortened label Long Nose to this reviewed identity.",
+      "placement": "main"
     }
   },
   "policy": "Nonstandard records are allowed only for exact Reborn pool cards with independently reviewed identity/behavior evidence. They must never be substituted for a different TCG card merely because the name is similar."
