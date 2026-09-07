@@ -7,9 +7,8 @@ outcomes; it does NOT establish deck strength, pilot optimality, or a #1 deck.
 import argparse
 from collections import Counter
 import json
-import struct
 
-from .announce import choose_declarable
+from .announce import enumerate_declarable
 from .effects import UnsupportedInteraction
 from .import_pool import ROOT, dump
 from .learning import SparsePolicy
@@ -57,10 +56,8 @@ def run_training_game(library, database, scripts, decks, mapped, policy, seed, b
                 prompt = policy_prompt_view(decision, observation)
                 assert_no_hidden_code_leak(prompt, observation)
                 if decision.kind == 'announce_card':
-                    code = choose_declarable(database, decision.meta['opcodes'], allowed_codes)
-                    response = struct.pack('<i', code)
-                    pilot.fallback_decisions += 1
-                    pilot.fallback_kinds['announce_card'] += 1
+                    legal_codes = enumerate_declarable(database, decision.meta['opcodes'], allowed_codes)
+                    response = pilot.choose_announce_card(decision, prompt, observation, legal_codes)
                 else:
                     response = pilot.choose(decision, prompt, observation)
                 duel.respond(response); continue
@@ -120,7 +117,7 @@ def main():
         'deck_ranking_evidence': False,
         'profile': 'reborn',
         'external_strategy_priors': False,
-        'policy': 'sparse_softmax_reinforce_v2_complex_actions',
+        'policy': policy.to_dict()['policy'],
         'attempted': len(results),
         'completed': completed,
         'learned_decisions': sum(r.get('learned_decisions', 0) for r in results),
@@ -141,5 +138,4 @@ def main():
         raise SystemExit('learning smoke completed games but produced no learned policy updates')
 
 
-if __name__ == '__main__':
-    main()
+if __name__=='__main__':main()
