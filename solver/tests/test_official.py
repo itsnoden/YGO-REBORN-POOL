@@ -1,6 +1,10 @@
 import unittest
 
-from reborn.official import allowed_official_names, resolve_official_record
+from reborn.official import (
+    allowed_official_names,
+    resolve_official_record,
+    split_official_display_name,
+)
 
 
 class OfficialIdentityAliasTests(unittest.TestCase):
@@ -36,6 +40,18 @@ class OfficialIdentityAliasTests(unittest.TestCase):
         record, source = resolve_official_record(card, matched, {})
         self.assertIsNone(record)
         self.assertIsNone(source)
+
+    def test_official_updated_from_suffix_is_provenance_not_current_name(self):
+        current, previous = split_official_display_name(
+            'Slime Toad (Updated from: Frog the Jam)'
+        )
+        self.assertEqual(current, 'Slime Toad')
+        self.assertEqual(previous, 'Frog the Jam')
+
+    def test_arbitrary_parenthetical_card_name_is_not_stripped(self):
+        current, previous = split_official_display_name('Card Name (Alpha)')
+        self.assertEqual(current, 'Card Name (Alpha)')
+        self.assertIsNone(previous)
 
 
 if __name__ == '__main__':
