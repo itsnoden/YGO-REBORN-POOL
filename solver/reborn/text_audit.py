@@ -5,7 +5,7 @@ non-exact Effect/Spell/Trap text comparison behaviorally equivalent. It only
 separates:
 
 - exact text,
-- punctuation/case/spacing-only differences,
+- presentation-only differences (case, punctuation, spacing, HTML line breaks),
 - actual lexical differences requiring behavior/errata audit,
 - missing latest-official text,
 - reviewed non-TCG text provenance,
@@ -27,8 +27,15 @@ import re
 from .import_pool import ROOT, dump
 
 
+_BR_RE = re.compile(r'<br\s*/?>', re.IGNORECASE)
+
+
 def _text_key(text):
-    return ' '.join((text or '').replace('\r', ' ').split())
+    # Neuron/official snapshots can encode line breaks as literal HTML <br>
+    # while BabelCDB stores the same boundary as a newline. A line break has no
+    # rules semantics, so normalize only that known presentation tag to space.
+    text = _BR_RE.sub(' ', text or '')
+    return ' '.join(text.replace('\r', ' ').split())
 
 
 def lexical_tokens(text):
@@ -136,7 +143,8 @@ def build_report(cards, mapped):
         'behavior_text_audit_blockers': behavior_blockers,
         'rows': rows,
         'note': (
-            'Only exact TCG text equality is an exact-text match. '
+            'Only exact normalized TCG text equality is an exact-text match. Literal HTML br line-break tags are '
+            'normalized to whitespace because they are presentation only. '
             'token_sequence_identical_formatting_only is a prioritization aid, not a ruling. '
             'Every lexical_difference_requires_audit remains an errata/implementation audit blocker. '
             'reviewed_nonstandard_text_not_tcg_blocker is reserved for explicit anime/game-only identities whose '
