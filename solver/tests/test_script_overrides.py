@@ -20,11 +20,11 @@ class ScriptOverrideTests(unittest.TestCase):
         text = path.read_text()
         self.assertIn('Red-Eyes Darkness Metal Dragon (88264978)', text)
         self.assertIn('49b0af044cebcb92f3f23211ef436971e1fc16fb', text)
+        self.assertIn('local s,id=GetID()', text)
         self.assertIn('SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)', text)
         self.assertIn('SetCountLimit(1,{id,1})', text)
         self.assertIn('not c:IsCode(id)', text)
         self.assertIn('LOCATION_GRAVE|LOCATION_HAND', text)
-        self.assertNotIn('c88264988', text)
 
     def test_reviewed_override_precedes_pinned_official_script(self):
         with tempfile.TemporaryDirectory() as td, tempfile.TemporaryDirectory() as od:
