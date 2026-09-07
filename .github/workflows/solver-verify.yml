@@ -89,6 +89,15 @@ jobs:
             --policy-seed 20260906 \
             2>&1 | tee reports/ci_learn_probe.log
 
+      - name: Run deterministic held-out crash diagnostic
+        run: |
+          set -o pipefail
+          python -m reborn.crash_probe \
+            --library build/libocgcore.so \
+            --database vendor/database/cards.cdb \
+            --scripts vendor/scripts \
+            2>&1 | tee reports/ci_crash_probe.log
+
       - name: Run held-out pilot skill evaluation
         run: |
           set -o pipefail
@@ -124,12 +133,14 @@ jobs:
             solver/reports/flow_probe.json
             solver/reports/pilot_probe.json
             solver/reports/learn_probe.json
+            solver/reports/crash_probe.json
             solver/reports/pilot_eval.json
             solver/reports/learned_policy_reborn_smoke.json
             solver/reports/heldout_policy_reborn.json
             solver/reports/ci_flow_probe.log
             solver/reports/ci_pilot_probe.log
             solver/reports/ci_learn_probe.log
+            solver/reports/ci_crash_probe.log
             solver/reports/ci_pilot_eval.log
             solver/reports/ci_unit_tests.log
             solver/reports/ci_dependency_heads.txt
