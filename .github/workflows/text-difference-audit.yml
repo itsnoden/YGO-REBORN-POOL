@@ -7,7 +7,13 @@ on:
       - 'solver/reborn/text_audit.py'
       - 'solver/tests/test_text_audit.py'
       - 'solver/reborn/engine_bridge.py'
+      - 'solver/reborn/verified_data.py'
       - 'solver/data/identity_aliases.json'
+      - 'solver/data/shared_identity_aliases.json'
+      - 'solver/data/source_corrections.json'
+      - 'solver/data/nonstandard_cards.json'
+      - 'solver/data/verified_official_records.json'
+      - 'solver/data/verified_alias_official_records.json'
       - '.github/workflows/text-difference-audit.yml'
   workflow_dispatch:
 
