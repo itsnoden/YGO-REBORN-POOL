@@ -1,8 +1,8 @@
-"""Explicit ocgcore rules profiles; no profile is silently called 'Reborn'.
+"""Explicit ocgcore rules profiles for YGO Reborn.
 
-Values mirror the exact pinned ygopro-core ocgapi_constants.h.  The currently
-used profile is an experimental MR5/TCG profile pending Reborn-format rule
-certification. Latest card errata is a separate user-fixed requirement.
+Values mirror the exact pinned ygopro-core ocgapi_constants.h. The user confirmed
+on 2026-09-06 that the current MR5/TCG profile used by the solver matches YGO
+Reborn. Latest card errata remains a separate fixed project requirement.
 """
 
 DUEL_OCG_OBSOLETE_IGNITION = 0x100
@@ -35,21 +35,29 @@ DUEL_MODE_MR5 = (
     DUEL_TRAP_MONSTERS_NOT_USE_ZONE | DUEL_TRIGGER_ONLY_IN_LOCATION
 )
 
-# This exactly equals the flags already used by Duel.__init__ before this module
-# was introduced. It remains explicitly experimental until the format's rule era
-# is certified; do not rename it to REBORN_FLAGS without evidence.
-EXPERIMENTAL_CURRENT_TCG_FLAGS = (
+REBORN_FLAGS = (
     DUEL_MODE_MR5 | DUEL_TCG_SEGOC_NONPUBLIC | DUEL_TCG_SEGOC_FIRSTTRIGGER
 )
 
 PROFILES = {
-    'experimental_current_tcg': {
-        'flags': EXPERIMENTAL_CURRENT_TCG_FLAGS,
+    'reborn': {
+        'flags': REBORN_FLAGS,
         'starting_lp': 8000,
         'opening_hand': 5,
         'draw_per_turn': 1,
         'first_turn_draw': False,
-        'certified_for_reborn': False,
+        'certified_for_reborn': True,
+        'certification_source': 'user-confirmed YGO Reborn format rules, 2026-09-06',
+    },
+    # Retained as an alias for reproducibility of older checkpoint/report labels.
+    'experimental_current_tcg': {
+        'flags': REBORN_FLAGS,
+        'starting_lp': 8000,
+        'opening_hand': 5,
+        'draw_per_turn': 1,
+        'first_turn_draw': False,
+        'certified_for_reborn': True,
+        'certification_source': 'superseded label; same flags as reborn',
     },
     'mr1_reference': {
         'flags': DUEL_MODE_MR1,
