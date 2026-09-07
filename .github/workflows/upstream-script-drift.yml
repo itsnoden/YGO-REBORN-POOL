@@ -1,0 +1,70 @@
+name: Upstream Script Drift Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'solver/reborn/upstream_drift_audit.py'
+      - 'solver/tests/test_upstream_drift_audit.py'
+      - 'solver/engine.lock.json'
+      - 'solver/reborn/engine_bridge.py'
+      - 'solver/reborn/verified_data.py'
+      - 'solver/data/identity_aliases.json'
+      - 'solver/data/shared_identity_aliases.json'
+      - 'solver/data/source_corrections.json'
+      - 'solver/data/nonstandard_cards.json'
+      - 'solver/data/verified_official_records.json'
+      - 'solver/data/verified_alias_official_records.json'
+      - '.github/workflows/upstream-script-drift.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: solver
+        shell: bash
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: solver/requirements.txt
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Rebuild pinned engine dependencies
+        run: python -m reborn.bootstrap_engine
+
+      - name: Reconcile pinned simulator IDs
+        run: python -m reborn.engine_bridge --database vendor/database/cards.cdb --scripts vendor/scripts --core vendor/core
+
+      - name: Run upstream drift unit tests
+        run: python -m unittest discover -s tests -p 'test_upstream_drift_audit.py' -v
+
+      - name: Audit newer Project Ignis scripts against Reborn pool
+        run: |
+          set -o pipefail
+          python -m reborn.upstream_drift_audit --scripts vendor/scripts 2>&1 | tee reports/ci_upstream_script_drift.log
+
+      - name: Upload upstream drift audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: upstream-script-drift-${{ github.sha }}
+          path: |
+            solver/reports/upstream_script_drift.json
+            solver/reports/ci_upstream_script_drift.log
+            solver/reports/engine_coverage.json
+          if-no-files-found: warn
+          retention-days: 14
