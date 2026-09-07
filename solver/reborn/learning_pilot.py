@@ -55,9 +55,10 @@ class LearningPilot:
 
         # Complex combinatorial legality (sum/counter/tribute/multi-card/place)
         # stays in a non-learning legal fallback until it has a safe action-set
-        # enumerator. Hidden referee helper values never become policy features.
+        # enumerator. Pass the information-safe observation, not the prompt; the
+        # fallback's privacy assertion is intentionally keyed to observation.viewer.
         self.fallback_decisions += 1
-        return self.fallback.choose(decision, prompt)
+        return self.fallback.choose(decision, observation)
 
     def finish(self, winner):
         self.policy.update_episode(self.steps, winner)
