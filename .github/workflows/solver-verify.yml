@@ -115,6 +115,29 @@ jobs:
             --policy-seed 20260907 \
             2>&1 | tee reports/ci_counterfactual_train_probe.log
 
+      - name: Run held-out counterfactual pilot A/B evaluation
+        run: |
+          set -o pipefail
+          python -m reborn.counterfactual_ab_eval \
+            --library build/libocgcore.so \
+            --database vendor/database/cards.cdb \
+            --scripts vendor/scripts \
+            --train-games 16 \
+            --train-decks 4 \
+            --eval-decks 2 \
+            --pairs-per-deck 4 \
+            --budget 5000 \
+            --train-seed 71000 \
+            --cf-seed 72000 \
+            --eval-seed 73000 \
+            --policy-seed 20260907 \
+            --cf-sources 2 \
+            --cf-targets 2 \
+            --cf-max-options 3 \
+            --cf-rollouts 3 \
+            --cf-continuation-seed 74000 \
+            2>&1 | tee reports/ci_counterfactual_ab_eval.log
+
       - name: Run from-scratch learning smoke probe
         run: |
           set -o pipefail
@@ -193,6 +216,9 @@ jobs:
             solver/reports/counterfactual_probe.json
             solver/reports/counterfactual_train_probe.json
             solver/reports/counterfactual_policy_smoke.json
+            solver/reports/counterfactual_ab_eval.json
+            solver/reports/counterfactual_ab_control_policy.json
+            solver/reports/counterfactual_ab_treatment_policy.json
             solver/reports/learn_probe.json
             solver/reports/crash_probe.json
             solver/reports/pilot_eval.json
@@ -204,6 +230,7 @@ jobs:
             solver/reports/ci_replay_probe.log
             solver/reports/ci_counterfactual_probe.log
             solver/reports/ci_counterfactual_train_probe.log
+            solver/reports/ci_counterfactual_ab_eval.log
             solver/reports/ci_learn_probe.log
             solver/reports/ci_crash_probe.log
             solver/reports/ci_pilot_eval.log
