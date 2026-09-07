@@ -8,6 +8,7 @@ import sqlite3
 import subprocess
 from pathlib import Path
 from .import_pool import ROOT,dump,key
+from .verified_data import apply_verified_official_records, load_identity_aliases
 
 
 def text_key(text):
@@ -71,15 +72,18 @@ def _exact_primary(matches):
 
 
 def _load_identity_aliases():
-    path = ROOT/'data/identity_aliases.json'
-    if not path.exists():
-        return {}, {}
-    data = json.loads(path.read_text())
-    return data.get('aliases', {}), data.get('explicit_non_aliases', {})
+    return load_identity_aliases()
 
 
-def reviewed_alias_match(pool_name, records, aliases, blocked_ids=()):
-    """Resolve only an explicitly reviewed pool-title identity alias."""
+def reviewed_alias_match(pool_name, records, aliases, blocked_ids=(), shared_ids=()):
+    """Resolve only an explicitly reviewed pool-title identity alias.
+
+    Ordinary aliases may never collide with an already reserved/mapped engine ID.
+    A much narrower exception exists for an alias explicitly marked as the same
+    current card identity: it may reuse an ID only after that exact engine ID has
+    already been mapped by another pool record.  This preserves source records
+    while making both names share one rules identity and one deck-name limit.
+    """
     spec = aliases.get(pool_name)
     if not spec:
         return None, None
@@ -92,11 +96,37 @@ def reviewed_alias_match(pool_name, records, aliases, blocked_ids=()):
             f'reviewed alias {pool_name!r}->{target_name!r} resolved to {len(primary)} primary engine cards'
         )
     row = primary[0]
-    if int(row['id']) in {int(v) for v in blocked_ids}:
+    rid = int(row['id'])
+    blocked = {int(v) for v in blocked_ids}
+    shared = {int(v) for v in shared_ids}
+    allow_shared = bool(spec.get('allow_shared_engine_identity')) and rid in shared
+    if rid in blocked and not allow_shared:
         raise ValueError(
             f'reviewed alias {pool_name!r}->{target_name!r} collides with a reserved/used engine ID'
         )
     return row, spec
+
+
+def _whitelist_lines(mapped):
+    """Emit one whitelist row per current engine identity.
+
+    Multiple reviewed source labels may map to one current card identity.  Their
+    combined deck-name group is already capped at 3 by search.validate; the
+    ocgcore whitelist must likewise contain the passcode only once.  Use the
+    strictest source copy limit if duplicate labels disagree.
+    """
+    by_passcode = {}
+    for row in mapped:
+        if row['copy_limit'] <= 0:
+            continue
+        rid = int(row['passcode'])
+        current = by_passcode.get(rid)
+        if current is None or int(row['copy_limit']) < int(current['copy_limit']):
+            by_passcode[rid] = row
+    return [
+        f"{rid} {row['copy_limit']} -- {row['engine_name']}"
+        for rid, row in sorted(by_passcode.items())
+    ]
 
 
 def main():
@@ -109,11 +139,13 @@ def main():
     records={};all_records=[]
     for r in con.execute('SELECT d.*,t.name,t.desc FROM datas d JOIN texts t USING(id)'):
         row=dict(r);all_records.append(row);records.setdefault(key(r['name']),[]).append(row)
-    cards=json.loads((ROOT/'data/processed/cards.json').read_text());mapped=[];missing=[]
+    cards=json.loads((ROOT/'data/processed/cards.json').read_text())
+    applied_official_overlays=apply_verified_official_records(cards)
+    mapped=[];missing=[]
 
     # Exact-title matches have priority over every fallback, independent of pool
-    # ordering. Reserve their IDs up front so aliases cannot steal an ID from a
-    # separate exact-title card later in the pool.
+    # ordering. Reserve their IDs up front so ordinary aliases cannot steal an ID
+    # from a separate exact-title card later in the pool.
     reserved_exact_ids=set()
     for c in cards:
         primary=_exact_primary(records.get(key(c['name']),[]))
@@ -132,9 +164,15 @@ def main():
             mapping_source='exact_title'
         else:
             blocked=reserved_exact_ids|used_ids
-            r,alias_spec=reviewed_alias_match(c['name'],records,aliases,blocked)
+            r,alias_spec=reviewed_alias_match(
+                c['name'],records,aliases,blocked,shared_ids=used_ids
+            )
             if r is not None:
-                mapping_source='reviewed_identity_alias'
+                mapping_source=(
+                    'reviewed_shared_identity_alias'
+                    if alias_spec.get('allow_shared_engine_identity')
+                    else 'reviewed_identity_alias'
+                )
             else:
                 official_text=(c.get('official') or {}).get('text')
                 r,text_candidates=unique_exact_text_match(official_text,all_records,blocked)
@@ -153,7 +191,11 @@ def main():
                         identity_blocker=non_alias,
                     ));continue
         rid=int(r['id'])
-        if rid in used_ids:
+        shared_duplicate=(
+            rid in used_ids and alias_spec is not None
+            and bool(alias_spec.get('allow_shared_engine_identity'))
+        )
+        if rid in used_ids and not shared_duplicate:
             raise RuntimeError(f'duplicate engine mapping {rid} for {c["name"]}')
         used_ids.add(rid)
         upstream=scripts/'official'/f"c{rid}.lua"
@@ -176,23 +218,25 @@ def main():
         is_normal=bool(r['type']&0x10) and not bool(r['type']&0x20)
         if implementation is None:
             status='normal_monster_no_script' if is_normal else 'missing_script'
-        text_match=bool(c.get('official')) and text_key(c['official']['text'])==text_key(r['desc'])
+        official=c.get('official') or {}
+        text_match=bool(official) and text_key(official.get('text',''))==text_key(r['desc'])
         entry=dict(reborn_id=c['id'],name=c['name'],passcode=rid,copy_limit=c['copy_limit'],
              mapping_source=mapping_source,engine_name=r['name'],
              identity_alias_status=alias_spec.get('status') if alias_spec else None,
              identity_alias_evidence=alias_spec.get('evidence') if alias_spec else None,
              identity_alias_source_url=alias_spec.get('source_url') if alias_spec else None,
+             shared_engine_identity=bool(alias_spec and alias_spec.get('allow_shared_engine_identity')),
              data={k:v for k,v in r.items() if k not in ('name','desc')},
              script_path=script_path,script_source=script_source,
              script_sha256=hashlib.sha256(implementation.read_bytes()).hexdigest() if implementation else None,
              normal_monster=is_normal,official_text_match=text_match,
-             engine_text=r['desc'],latest_official_text_sha256=c['official']['text_sha256'] if c.get('official') else None,
+             engine_text=r['desc'],latest_official_text_sha256=official.get('text_sha256'),
              status=status)
         mapped.append(entry)
         c['engine']={k:v for k,v in entry.items() if k not in ('data','engine_text')}
         c['deck_name_group']=str(r['alias'] or rid)
-        # Placement is determined by authoritative official text when present;
-        # do not silently promote missing official matches using simulator data.
+        # Placement is determined by authoritative official text/verified factual
+        # overlay when present; never promote from simulator title similarity.
     con.close()
     dump(ROOT/'data/processed/cards.json',cards)
     dump(ROOT/'data/processed/engine_cards.json',mapped)
@@ -200,21 +244,25 @@ def main():
     for name,path,url in [('core',core,'https://github.com/edo9300/ygopro-core.git'),
                           ('scripts',scripts,'https://github.com/ProjectIgnis/CardScripts.git'),
                           ('database',db.parent,'https://github.com/ProjectIgnis/BabelCDB.git')]:
-        locks[name]=dict(url=url,commit=subprocess.check_output(['git','-C',str(path),'rev-parse','HEAD'],text=True).strip())
+        locks[name]=dict(url=url,commit=subprocess.check_output(['git','-C',str(path),'rev-parse','HEAD',],text=True).strip())
     dump(ROOT/'engine.lock.json',locks)
     dump(ROOT/'reports/engine_coverage.json',dict(mapped=len(mapped),unmapped=missing,
+        verified_official_overlays_applied=applied_official_overlays,
         exact_title_mappings=sum(r['mapping_source']=='exact_title' for r in mapped),
         reviewed_identity_alias_mappings=sum(r['mapping_source']=='reviewed_identity_alias' for r in mapped),
+        reviewed_shared_identity_alias_mappings=sum(r['mapping_source']=='reviewed_shared_identity_alias' for r in mapped),
         reviewed_identity_aliases=[
             {'reborn_id':r['reborn_id'],'pool_name':r['name'],'engine_name':r['engine_name'],
-             'passcode':r['passcode'],'status':r['identity_alias_status']}
-            for r in mapped if r['mapping_source']=='reviewed_identity_alias'
+             'passcode':r['passcode'],'status':r['identity_alias_status'],
+             'shared_engine_identity':r['shared_engine_identity']}
+            for r in mapped if r['mapping_source'] in {'reviewed_identity_alias','reviewed_shared_identity_alias'}
         ],
         exact_text_fallback_mappings=sum(r['mapping_source']=='unique_exact_latest_official_text' for r in mapped),
         exact_text_fallbacks=[
             {'reborn_id':r['reborn_id'],'pool_name':r['name'],'engine_name':r['engine_name'],'passcode':r['passcode']}
             for r in mapped if r['mapping_source']=='unique_exact_latest_official_text'
         ],
+        unique_engine_identities=len({r['passcode'] for r in mapped}),
         scripts=sum(bool(r['script_path']) for r in mapped),
         upstream_scripts=sum(r['script_source']=='upstream_official' for r in mapped),
         reviewed_overrides=sum(r['script_source']=='reviewed_override' for r in mapped),
@@ -225,12 +273,13 @@ def main():
         certified_interactions=0,
         note=(
             'Implementation availability, including reviewed overrides, is not Reborn correctness certification. '
-            'Reviewed identity aliases are explicit audited identity corrections only. Unique exact latest-official-text '
-            'fallback can resolve renamed titles; fuzzy title suggestions remain advisory only.'
+            'Reviewed aliases are explicit audited identity corrections only; same-card shared aliases may reuse an '
+            'already mapped passcode and share one deck-name limit. Unique exact latest-official-text fallback can '
+            'resolve renamed titles; fuzzy title suggestions remain advisory only.'
         )))
     # Whitelist mode is crucial: cards not present here must not default to 3.
     lines=['# Reborn exact pool; latest standard scripts plus reviewed solver overrides','!Reborn solver 2026-09-06','$whitelist']
-    lines += [f"{r['passcode']} {r['copy_limit']} -- {r['name']}" for r in mapped if r['copy_limit']>0]
+    lines += _whitelist_lines(mapped)
     (ROOT/'data/processed/reborn.lflist.conf').write_text('\n'.join(lines)+'\n')
 
 
