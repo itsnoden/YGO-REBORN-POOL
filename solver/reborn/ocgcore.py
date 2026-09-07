@@ -1,7 +1,7 @@
 """Headless ctypes bridge for pinned ocgcore API 11.0.
 
 Raw engine messages are privileged referee data. NEVER give this raw stream to
-a learning policy: observation filtering must be implemented before self-play.
+a learning policy: use observation.py + policy_view.py first.
 """
 import ctypes as C
 import json
@@ -10,6 +10,7 @@ import sqlite3
 import struct
 from pathlib import Path
 from .effects import UnsupportedInteraction
+from .rules import get_profile
 
 U8=C.c_uint8;U16=C.c_uint16;U32=C.c_uint32;U64=C.c_uint64;I32=C.c_int32;PTR=C.c_void_p
 
@@ -100,10 +101,14 @@ class Duel:
         def done(payload,data):pass
         self.callbacks=(reader,script_reader,log,done)
         rng=random.Random(seed)
-        # Experimental current TCG profile. Reborn confirmation remains required.
-        if flags is None:flags=0x800|0x2000|0x4000|0x8000|0x20000|0x100000000|0x200000000
+        # Experimental current-TCG profile. Reborn certification remains required.
+        profile=get_profile('experimental_current_tcg')
+        if flags is None:flags=profile['flags']
         self.flags=flags
-        opts=Options((U64*4)(*[rng.getrandbits(64) for _ in range(4)]),flags,Player(8000,5,1),Player(8000,5,1),
+        self.profile_name='experimental_current_tcg'
+        opts=Options((U64*4)(*[rng.getrandbits(64) for _ in range(4)]),flags,
+                     Player(profile['starting_lp'],profile['opening_hand'],profile['draw_per_turn']),
+                     Player(profile['starting_lp'],profile['opening_hand'],profile['draw_per_turn']),
                      reader,None,script_reader,None,log,None,done,None,0)
         status=self.lib.OCG_CreateDuel(C.byref(self.handle),C.byref(opts))
         if status!=0:raise RuntimeError(f'OCG_CreateDuel: {status}')
