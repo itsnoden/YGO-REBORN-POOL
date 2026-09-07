@@ -22,6 +22,16 @@ CURRENT HARD POOL CORRECTIONS
 - These are objective pool-identity corrections, not strategic priors.
 - The effective pool remains 2,273 cards because each stale title is replaced by the corrected card identity rather than deleting the stable row.
 
+MANDATORY ENGINE / ERRATA CERTIFICATION GATES
+---------------------------------------------
+- Do not treat current displayed card-text equality as sufficient proof that simulator behavior is current. Lua implementation bugs/fixes can change gameplay without changing the displayed text.
+- Before a solver baseline is eligible for certified deck-strength work, run the Project Ignis upstream script drift audit against the exact mapped Reborn passcodes.
+- Any newer Project Ignis official CardScript touching a Reborn passcode is a review blocker until the change is understood and either the pinned script revision is advanced and re-verified or a documented project-specific decision is recorded.
+- Advancing a dependency pin must preserve reproducibility by pinning an exact commit SHA and rerunning the canonical solver verification.
+- The latest-official-text audit remains a separate gate. Text mismatches are review candidates, not automatic proof that the Lua behavior is wrong.
+- Normal Monster lore-only differences and formatting-only differences must not be counted as gameplay/errata blockers.
+- Never certify the strongest deck while unresolved engine behavior or latest-errata blockers could materially change legal plays or game outcomes.
+
 MANDATORY STRATEGIC INDEPENDENCE
 --------------------------------
 The goal is for the AI/system to discover the strongest legal decks independently from the game itself.
