@@ -1,0 +1,25 @@
+{
+  "cards": {
+    "Level Down!": {
+      "engine_id": 100000250,
+      "engine_name": "Level Down!",
+      "status": "reviewed_anime_only_card",
+      "data": {
+        "alias": 0,
+        "setcode": 0,
+        "type": 2,
+        "level": 0,
+        "attribute": 0,
+        "race": 0,
+        "atk": 0,
+        "def": 0
+      },
+      "text": "Reveal 1 \"LV\" monster in your hand, and reduce its Level by 2 until the End Phase.",
+      "card_profile_source": "https://www.yugioh.com/cards/level-down",
+      "implementation_source": "https://github.com/ProjectIgnis/CardScripts/blob/master/unofficial/c100000250.lua",
+      "implementation_note": "Project Ignis maintains Level Down! separately from official TCG Level Down!? (90500169). Reviewed for the Reborn pool because the pool explicitly contains Level Down!.",
+      "placement": "main"
+    }
+  },
+  "policy": "Nonstandard records are allowed only for exact Reborn pool cards with independently reviewed identity/behavior evidence. They must never be substituted for a different TCG card merely because the name is similar."
+}
