@@ -30,6 +30,10 @@ class StochasticLegalPilot:
             raise UnsupportedInteraction('pilot received an empty legal choice set')
         return values[self.rng.randrange(len(values))]
 
+    def choose_announce_card(self, legal_codes):
+        """Choose uniformly from a complete externally verified legal code set."""
+        return struct.pack('<i', int(self._choice(legal_codes)))
+
     def _card_selection(self, decision):
         if decision.cancelable and self.rng.random() < 0.08:
             return encode_card_selection(decision, None)
@@ -131,7 +135,7 @@ class StochasticLegalPilot:
         if kind == 'announce_attribute':
             return struct.pack('<I', self._bits(decision.meta['available'], decision.minimum))
         if kind == 'announce_card':
-            raise UnsupportedInteraction('announce-card requires a database-backed resolver')
+            raise UnsupportedInteraction('announce-card requires a database-backed legal-code set')
         if kind in {'announce_number', 'rock_paper_scissors'}:
             return self._choice(decision.actions).response
         if decision.actions:
