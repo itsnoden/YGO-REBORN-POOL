@@ -33,10 +33,23 @@ def load_identity_aliases():
 
 
 def load_verified_official_records():
-    path = ROOT/'data/verified_official_records.json'
-    if not path.exists():
-        return {}
-    return json.loads(path.read_text()).get('records', {})
+    """Merge durable objective official-text overlays with collision guards."""
+    records = {}
+    for filename in (
+        'verified_official_records.json',
+        'verified_alias_official_records.json',
+    ):
+        path = ROOT/'data'/filename
+        if not path.exists():
+            continue
+        batch = json.loads(path.read_text()).get('records', {})
+        duplicate = sorted(set(records) & set(batch))
+        if duplicate:
+            raise ValueError(
+                f'duplicate verified official record keys across overlays: {duplicate}'
+            )
+        records.update(batch)
+    return records
 
 
 def apply_verified_official_records(cards):
