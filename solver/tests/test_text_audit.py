@@ -1,6 +1,8 @@
 import unittest
 
-from reborn.text_audit import build_report, classify_text_pair, lexical_tokens
+from reborn.text_audit import (
+    build_report, classify_text_pair, lexical_tokens, rules_terminology_tokens,
+)
 
 
 class TextAuditTests(unittest.TestCase):
@@ -23,6 +25,28 @@ class TextAuditTests(unittest.TestCase):
             'token_sequence_identical_formatting_only',
         )
 
+    def test_established_rules_vocabulary_is_separate_non_blocker(self):
+        pairs = [
+            ('Send this card to the GY.', 'Send this card to the Graveyard.'),
+            ('Pay 500 LP.', 'Pay 500 Life Points.'),
+            ('Target 1 Machine monster.', 'Target 1 Machine-Type monster.'),
+        ]
+        for modern, legacy in pairs:
+            with self.subTest(modern=modern):
+                self.assertEqual(
+                    classify_text_pair(modern, legacy),
+                    'rules_terminology_equivalent_only',
+                )
+
+    def test_generic_type_language_is_not_removed(self):
+        modern = 'Declare 1 Type of monster.'
+        changed = 'Declare 1 monster.'
+        self.assertNotEqual(rules_terminology_tokens(modern), rules_terminology_tokens(changed))
+        self.assertEqual(
+            classify_text_pair(modern, changed),
+            'lexical_difference_requires_audit',
+        )
+
     def test_lexical_change_stays_audit_blocker(self):
         self.assertEqual(
             classify_text_pair('Destroy 1 monster.', 'Banish 1 monster.'),
@@ -43,6 +67,7 @@ class TextAuditTests(unittest.TestCase):
             {'id': 'a', 'official': {'text': 'Draw 1 card.', 'text_sha256': 'a'}},
             {'id': 'b', 'official': {'text': 'Target 1 monster; destroy it.', 'text_sha256': 'b'}},
             {'id': 'c', 'official': {'text': 'Destroy 1 monster.', 'text_sha256': 'c'}},
+            {'id': 'd', 'official': {'text': 'Send it to the GY.', 'text_sha256': 'd'}},
         ]
         mapped = [
             {'reborn_id': 'a', 'name': 'A', 'engine_name': 'A', 'passcode': 1,
@@ -51,10 +76,13 @@ class TextAuditTests(unittest.TestCase):
              'normal_monster': False, 'engine_text': 'TARGET 1 monster: destroy it!', 'latest_official_text_sha256': 'b'},
             {'reborn_id': 'c', 'name': 'C', 'engine_name': 'C', 'passcode': 3,
              'normal_monster': False, 'engine_text': 'Banish 1 monster.', 'latest_official_text_sha256': 'c'},
+            {'reborn_id': 'd', 'name': 'D', 'engine_name': 'D', 'passcode': 4,
+             'normal_monster': False, 'engine_text': 'Send it to the Graveyard.', 'latest_official_text_sha256': 'd'},
         ]
         report = build_report(cards, mapped)
         self.assertEqual(report['counts']['exact'], 1)
         self.assertEqual(report['counts']['token_sequence_identical_formatting_only'], 1)
+        self.assertEqual(report['counts']['rules_terminology_equivalent_only'], 1)
         self.assertEqual(report['counts']['lexical_difference_requires_audit'], 1)
         self.assertEqual(report['behavior_text_audit_blockers'], 1)
         self.assertEqual(report['rows'][0]['name'], 'C')
