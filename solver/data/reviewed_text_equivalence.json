@@ -1,5 +1,29 @@
 {
   "reviews": {
+    "reborn-0048": {
+      "reborn_id": "reborn-0048",
+      "passcode": 68170903,
+      "official_text_sha256": "cc98fa1b23bdb2a01dfe836da2291c6c2c91c597965dda6b0bfd025dd1360db3",
+      "engine_text_sha256": "350bf6a9496cf21ac1b949203c851d2317da918a8e54729abae0944f4a14fd58",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Both texts prohibit selecting face-down monsters as attack targets for the remainder of the turn. Current pinned Lua registers EFFECT_CANNOT_SELECT_BATTLE_TARGET for face-down monsters through the End Phase.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5332&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c68170903.lua"
+      ]
+    },
+    "reborn-0398": {
+      "reborn_id": "reborn-0398",
+      "passcode": 4614116,
+      "official_text_sha256": "e8d98c64ab12e34e625245735e024417ea9451aecded8b22fb429729eda24208",
+      "engine_text_sha256": "9819211c7bfbafce9463c836f61f7dca772b51c1fd8ca292ecfeedf0627c825f",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Both wordings make Dark Energy equippable only to a Fiend and grant that equipped monster +300 ATK and +300 DEF. Current pinned Lua enforces the Fiend equip filter and both 300-point updates.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4309&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c4614116.lua"
+      ]
+    },
     "reborn-0467": {
       "reborn_id": "reborn-0467",
       "passcode": 9637706,
@@ -48,6 +72,18 @@
         "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c74270067.lua"
       ]
     },
+    "reborn-1689": {
+      "reborn_id": "reborn-1689",
+      "passcode": 45986603,
+      "official_text_sha256": "fed98a95fe0cc5be508d12d7e2d5f6b62e732d104d3d84645d3112d1079ad986",
+      "engine_text_sha256": "d6628281497bae3fd27264bc1124c2d7acccb341bec5aa2138ec37a974bbac6a",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Equip-only-to-an-opponent's-monster and equip-only-to-a-monster-the-opponent-controls are equivalent restrictions. 'Once per turn during your opponent's Standby Phase' and 'during each opponent Standby Phase' both produce one 1000-LP recovery in each such Standby Phase. Current pinned Lua uses a forced Standby trigger with count limit 1.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4898&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c45986603.lua"
+      ]
+    },
     "reborn-1695": {
       "reborn_id": "reborn-1695",
       "passcode": 35346968,
@@ -84,6 +120,18 @@
         "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c15090429.lua"
       ]
     },
+    "reborn-2057": {
+      "reborn_id": "reborn-2057",
+      "passcode": 81383947,
+      "official_text_sha256": "6743ae38f091e92ed2cdd689500627d563ddc5bbd6466f028164ad42eb12fc23",
+      "engine_text_sha256": "870d5927e57ffd1138e85a062c82af409d6a0864232ce1d7adb728fa96013e6a",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "'Monsters on your side of the field' and 'monsters you control' identify the same set here; increasing Life Points and gaining LP are the same recovery operation. Both grant 400 per controlled monster during your Standby Phase. Current pinned Lua counts the controller's Monster Zone and recovers 400 per monster.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5975&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c81383947.lua"
+      ]
+    },
     "reborn-2061": {
       "reborn_id": "reborn-2061",
       "passcode": 77754944,
@@ -95,7 +143,31 @@
         "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4692&request_locale=en",
         "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c77754944.lua"
       ]
+    },
+    "reborn-2069": {
+      "reborn_id": "reborn-2069",
+      "passcode": 89258225,
+      "official_text_sha256": "13f241a60a30bb8cd50000a8cee9d8b790ccba8651abbcfbcc763b9f0ce075b6",
+      "engine_text_sha256": "3a5475f1ca080297c0bff82c698ab46742608be2aecd963c87f64f280da72b09",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Both texts require Tributing this face-up monster, select/target one face-up Fiend on the field, and give that monster +700 ATK/DEF while it remains face-up. Current pinned Lua uses SelfTribute cost, a face-up Fiend target, and 700 ATK/DEF updates reset when normal face-up continuity ends.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5305&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c89258225.lua"
+      ]
+    },
+    "reborn-2155": {
+      "reborn_id": "reborn-2155",
+      "passcode": 58921041,
+      "official_text_sha256": "828f48886758f31989247ad810032c1d41ef2f745a9378081e044677d41fb00f",
+      "engine_text_sha256": "0c591d3e4e44e4a0c88a254189f0c588ee655dbe40b7a07e14a5caadf8408f57",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Both texts force both players to Set Spell Cards before activation and prevent a newly Set Spell from being activated until that player's next turn. The second wording simply expands the same rule into two sentences. Current pinned Lua flags Set Spells and prevents their activation until the required next-turn reset.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5008&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c58921041.lua"
+      ]
     }
   },
-  "note": "Conservative ledger for manually reviewed latest-official-text versus pinned-engine wording equivalence. A review is valid only while its exact Reborn ID, passcode, normalized official-text SHA-256, and normalized engine-text SHA-256 still match. This file records factual rules/text review only and must never contain deck strength, metagame, or strategy priors."
+  "note": "Conservative ledger for manually reviewed latest-official-text versus pinned-engine wording equivalence or exact script-hash-bound implementation review. Reviews are factual rules/text/implementation evidence only and must never contain deck strength, metagame, or strategy priors."
 }
