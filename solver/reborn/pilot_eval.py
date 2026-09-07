@@ -68,7 +68,9 @@ def run_eval_game(library, database, scripts, deck, mapped, frozen_policy,
         'steps': 0,
         'decisions': 0,
         'learned_decisions': 0,
+        'complex_learned_decisions': 0,
         'learned_fallback_decisions': 0,
+        'fallback_kinds': {},
         'observation_checks': 0,
         'policy_view_checks': 0,
         'blocker': None,
@@ -97,7 +99,9 @@ def run_eval_game(library, database, scripts, deck, mapped, frozen_policy,
                     row.update(
                         status='completed', completed=True,
                         learned_decisions=learned.learned_decisions,
+                        complex_learned_decisions=learned.complex_learned_decisions,
                         learned_fallback_decisions=learned.fallback_decisions,
+                        fallback_kinds=dict(sorted(learned.fallback_kinds.items())),
                         decision_types=dict(sorted(decision_types.items())),
                     )
                     break
@@ -124,6 +128,7 @@ def run_eval_game(library, database, scripts, deck, mapped, frozen_policy,
                         response = struct.pack('<i', code)
                         if decision.player == learned_seat:
                             learned.fallback_decisions += 1
+                            learned.fallback_kinds['announce_card'] += 1
                     elif decision.player == learned_seat:
                         response = learned.choose(decision, prompt, observation)
                     else:
@@ -142,7 +147,9 @@ def run_eval_game(library, database, scripts, deck, mapped, frozen_policy,
             status='blocked', completed=False,
             blocker=f'{type(exc).__name__}: {exc}',
             learned_decisions=learned.learned_decisions,
+            complex_learned_decisions=learned.complex_learned_decisions,
             learned_fallback_decisions=learned.fallback_decisions,
+            fallback_kinds=dict(sorted(learned.fallback_kinds.items())),
             decision_types=dict(sorted(decision_types.items())),
             recent_decisions=recent_decisions,
         )
@@ -247,9 +254,12 @@ def main():
     learned_draws = sum(r.get('learned_result') == 'draw' for r in eval_results)
     planned_eval_games = a.eval_decks * a.pairs_per_deck * 2
 
-    decision_types = Counter()
+    decision_types = Counter(); eval_fallback_kinds = Counter(); train_fallback_kinds = Counter()
     for row in eval_results:
         decision_types.update(row.get('decision_types', {}))
+        eval_fallback_kinds.update(row.get('fallback_kinds', {}))
+    for row in train_results:
+        train_fallback_kinds.update(row.get('fallback_kinds', {}))
     raw_rate = learned_wins / completed if completed else None
     report = {
         'purpose': 'heldout_pilot_skill_evaluation_only',
@@ -258,6 +268,7 @@ def main():
         'strength_evidence_for_decks': False,
         'pilot_skill_evidence': 'preliminary_heldout' if completed == planned_eval_games else False,
         'external_strategy_priors': False,
+        'policy': 'sparse_softmax_reinforce_v2_complex_actions',
         'training': {
             'planned_games': a.train_games,
             'games': len(train_results),
@@ -265,7 +276,9 @@ def main():
             'candidate_ids': [cid for cid, _ in train_pool],
             'seed_start': a.train_seed,
             'learned_decisions': sum(r.get('learned_decisions', 0) for r in train_results),
+            'complex_learned_decisions': sum(r.get('complex_learned_decisions', 0) for r in train_results),
             'fallback_decisions': sum(r.get('fallback_decisions', 0) for r in train_results),
+            'fallback_kinds': dict(sorted(train_fallback_kinds.items())),
             'weight_count': len(policy.weights),
         },
         'evaluation': {
@@ -280,7 +293,9 @@ def main():
             'learned_win_rate': raw_rate,
             'learned_win_wilson95_lower': wilson_lower(learned_wins, completed) if completed else None,
             'learned_decisions': sum(r.get('learned_decisions', 0) for r in eval_results),
+            'complex_learned_decisions': sum(r.get('complex_learned_decisions', 0) for r in eval_results),
             'learned_fallback_decisions': sum(r.get('learned_fallback_decisions', 0) for r in eval_results),
+            'fallback_kinds': dict(sorted(eval_fallback_kinds.items())),
             'observation_checks': sum(r.get('observation_checks', 0) for r in eval_results),
             'policy_view_checks': sum(r.get('policy_view_checks', 0) for r in eval_results),
             'decision_types': dict(sorted(decision_types.items())),
@@ -299,8 +314,12 @@ def main():
     print(json.dumps({
         'train_completed': report['training']['completed'],
         'train_planned': a.train_games,
+        'train_complex_learned': report['training']['complex_learned_decisions'],
+        'train_fallback': report['training']['fallback_decisions'],
         'eval_completed': completed,
         'eval_planned': planned_eval_games,
+        'eval_complex_learned': report['evaluation']['complex_learned_decisions'],
+        'eval_fallback': report['evaluation']['learned_fallback_decisions'],
         'learned_wins': learned_wins,
         'learned_losses': learned_losses,
         'learned_draws': learned_draws,
