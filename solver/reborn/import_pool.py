@@ -96,6 +96,16 @@ def apply_source_corrections(cards, spec):
         stale = correction.get('prohibited_stale_name')
         if stale and key(stale) in names:
             raise ValueError(f'prohibited stale pool title survived correction: {stale}')
+
+    # A cached processed record can also carry a legality value computed for the
+    # stale identity. If this is a processed card list, recalculate every limit
+    # from the authoritative Reborn banlist after correcting names.
+    if any('copy_limit' in c for c in cards):
+        limits = parse_limits((ROOT/'data/raw/BANLIST_MASTER.txt').read_text())
+        for card in cards:
+            limit = limits.get(key(card['name']), 3)
+            card['copy_limit'] = limit
+            card['legal'] = limit > 0
     return applied
 
 
