@@ -1,4 +1,101 @@
 {
-  "reviews": {},
+  "reviews": {
+    "reborn-0467": {
+      "reborn_id": "reborn-0467",
+      "passcode": 9637706,
+      "official_text_sha256": "e7b84ab5b92933f6251c5177e59c74e44da1c393d0bcee9012bdae3535f092a6",
+      "engine_text_sha256": "3fdfaf30152ebbd34424fbce264137b23e81c3c9bb22a396336941108cf34fb6",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Current official 'damage from a card effect becomes 0' and legacy engine 'take no effect damage' express the same continuous prevention result. Current pinned Project Ignis implementation explicitly converts effect damage to 0 and registers no-effect-damage handling for the controller.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6340&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c9637706.lua"
+      ]
+    },
+    "reborn-0504": {
+      "reborn_id": "reborn-0504",
+      "passcode": 23557835,
+      "official_text_sha256": "e5fc9fbea4a480808c9c25a0921dced53ddd2fb86aaadf71a99e55026505b7bf",
+      "engine_text_sha256": "0e64ee16a892f8b6b8ee89dd6cb37a077bcb3d522cc5881dea4b06d2212fb159",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The pair differs only by current terminology: LP/Life Points, each player/both players, and banished/removed from play. Both require paying 2000 LP and each player Special Summoning as many of their eligible banished monsters as possible. Current pinned Lua implements that same operation for both players.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5906&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c23557835.lua"
+      ]
+    },
+    "reborn-0786": {
+      "reborn_id": "reborn-0786",
+      "passcode": 98299011,
+      "official_text_sha256": "2f18618c3072c3f444c160c93b57f5fdf2f9056189022e02bb4ae3bb2959474f",
+      "engine_text_sha256": "9315876790a9017980cdbda82f959218b66a7e98beedb827b41e0af165b3ff77",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Gain 300 LP for each monster on the field is identical in amount and counted set to increasing Life Points by 300 for each monster on the field. Current pinned Lua counts both Monster Zones and recovers 300 times that count.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4986&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c98299011.lua"
+      ]
+    },
+    "reborn-1447": {
+      "reborn_id": "reborn-1447",
+      "passcode": 74270067,
+      "official_text_sha256": "4ff0e7722e6541abba9ea02eaee614fe2f03c0c129fd36e72d59c7700b380336",
+      "engine_text_sha256": "59c83bd96cc872e6ad3bbc6a70c4be00059fd13c7f39e67a173f88f1cb97e407",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Current official 'damage to you from card effects becomes 0 until the end of this turn' and legacy engine 'take no effect damage until the end of this turn' express the same temporary effect-damage prevention. Current pinned Lua registers the damage-to-0/no-effect-damage effects through the End Phase.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6224&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c74270067.lua"
+      ]
+    },
+    "reborn-1695": {
+      "reborn_id": "reborn-1695",
+      "passcode": 35346968,
+      "official_text_sha256": "5cb3120fa8f0e25dce01e118920f537c695eab02b51dfde853f9ebede6b15e87",
+      "engine_text_sha256": "9022cf017408d27caf1f94937c47becdf4329603a6cd1e21fe73b5004f6e594b",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Both texts grant exactly 500 LP each time the controller draws one or more cards; 'a card(s)' and 'a card (or cards)' are wording variants of the same draw event. Current pinned Lua recovers 500 once for each controller EVENT_DRAW.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5125&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c35346968.lua"
+      ]
+    },
+    "reborn-1993": {
+      "reborn_id": "reborn-1993",
+      "passcode": 92084010,
+      "official_text_sha256": "0745bcff267625bff2f3ddb11c238e92677c73f4c5955f3f8926db926edac518",
+      "engine_text_sha256": "9a7999950fac5af67bd271fd225423339ee1e998448b6f3c41a0e6ea7b8a9ad9",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Both texts make this single monster count as 2 Tributes specifically for the Tribute Summon of a WATER monster. Current pinned Lua registers EFFECT_DOUBLE_TRIBUTE conditioned on the Summoned monster being WATER.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6120&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c92084010.lua"
+      ]
+    },
+    "reborn-2052": {
+      "reborn_id": "reborn-2052",
+      "passcode": 15090429,
+      "official_text_sha256": "d15e5a3cf108de48097e0a8795f7101f21be6c4cfba6d4f8441c17b5ed7ac2f6",
+      "engine_text_sha256": "4623fb0955ed8fba1e93e159cabcc3ce825b0aae446b60c893a5a4e536d2ae45",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Both texts make this single monster count as 2 Tributes specifically for the Tribute Summon of a WIND monster. Current pinned Lua registers EFFECT_DOUBLE_TRIBUTE conditioned on the Summoned monster being WIND.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6259&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c15090429.lua"
+      ]
+    },
+    "reborn-2061": {
+      "reborn_id": "reborn-2061",
+      "passcode": 77754944,
+      "official_text_sha256": "1a462eb58895c1b9597a7aeafe437f8e89f4c8a8e411e6eec0c640d7b4d5dcf1",
+      "engine_text_sha256": "dd832e841c3663693ccb816bc97fae720622c9daa0b6ad652df5df9306b6b54f",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The only substantive-looking text delta is the explicit numeral '1' before the highest-ATK Attack Position monster. Both wordings destroy exactly one highest-ATK Attack Position monster, with player choice only when tied. Current pinned Lua computes the max-ATK group and selects exactly one if tied.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4692&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c77754944.lua"
+      ]
+    }
+  },
   "note": "Conservative ledger for manually reviewed latest-official-text versus pinned-engine wording equivalence. A review is valid only while its exact Reborn ID, passcode, normalized official-text SHA-256, and normalized engine-text SHA-256 still match. This file records factual rules/text review only and must never contain deck strength, metagame, or strategy priors."
 }
