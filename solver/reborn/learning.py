@@ -4,8 +4,9 @@ No card values, deck archetypes, tournament priors or human heuristics are baked
 in. Features are derived only from information-safe observations and filtered
 legal prompts. Card/action preferences can emerge only from simulated outcomes.
 
-This is infrastructure, not evidence that the pilot is strong. Training under an
-uncertified rules profile must remain labelled experimental.
+This is infrastructure, not evidence that the pilot is strong. The duel backend
+uses the user-confirmed YGO Reborn rules profile; training quality must still be
+validated independently before any deck-strength conclusions are allowed.
 """
 from __future__ import annotations
 
@@ -116,7 +117,6 @@ class SparsePolicy:
                 if not delta: continue
                 for feature in features:
                     self.weights[feature] = self.weights.get(feature, 0.0) + delta
-        # Drop numerical dust so saved policies stay compact and deterministic.
         self.weights = {k: v for k, v in self.weights.items() if abs(v) >= 1e-12}
 
     def to_dict(self):
