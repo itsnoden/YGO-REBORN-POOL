@@ -8,6 +8,8 @@ player's already-filtered observation/prompt becomes a policy feature.
 
 A branch outcome comes from one realized hidden state, so it is training evidence
 only.  It must never be queried as a live action oracle during held-out play.
+Multiple matched continuation seeds reduce stochastic continuation noise without
+changing the hidden duel realization at the target information set.
 """
 from __future__ import annotations
 
@@ -60,7 +62,8 @@ def _outcome_value(winner, player):
 
 
 def _train_target(policy, library, database, scripts, seed, deck, mapped,
-                  history, target_index, budget):
+                  history, target_index, budget, rollout_count,
+                  continuation_seed_base):
     target = history[target_index]
     safe = json.loads(target['safe_fingerprint'])
     observation = safe['observation']
@@ -77,31 +80,47 @@ def _train_target(policy, library, database, scripts, seed, deck, mapped,
     unique = _unique_actions(target)
     features = []
     branches = []
+    continuation_seeds = [
+        continuation_seed_base + target_index * 1009 + rollout
+        for rollout in range(rollout_count)
+    ]
     for choice in unique:
         action_index = choice['decision_action_index']
         action_view = prompt_actions[action_index]
         option_features = policy.action_features(prompt, observation, action_view)
-        branch = _run_branch(
-            library, database, scripts, seed, deck, mapped, history,
-            target_index, choice['response_hex'], budget,
-        )
+        rollouts = []
+        for continuation_seed in continuation_seeds:
+            branch = _run_branch(
+                library, database, scripts, seed, deck, mapped, history,
+                target_index, choice['response_hex'], budget,
+                continuation_seed=continuation_seed,
+            )
+            rollouts.append({
+                'continuation_seed': continuation_seed,
+                'winner': branch['winner'],
+                'value_for_actor': _outcome_value(branch['winner'], player),
+                'steps': branch['steps'],
+                'safe_checks': branch['safe_checks'],
+            })
+        values = [row['value_for_actor'] for row in rollouts]
         features.append(option_features)
         branches.append({
             **choice,
             'label': action_view.get('label'),
-            'winner': branch['winner'],
-            'value_for_actor': _outcome_value(branch['winner'], player),
-            'steps': branch['steps'],
-            'safe_checks': branch['safe_checks'],
+            'rollouts': rollouts,
+            'mean_value_for_actor': sum(values) / len(values),
+            'wins_for_actor': sum(value == 1 for value in values),
+            'losses_for_actor': sum(value == -1 for value in values),
+            'draws': sum(value == 0 for value in values),
         })
 
-    values = [row['value_for_actor'] for row in branches]
+    values = [row['mean_value_for_actor'] for row in branches]
     best = max(values)
     best_indices = [i for i, value in enumerate(values) if value == best]
     before = policy.probabilities(features)
     updated = False
     preferred = None
-    # A unique simulator-best action gives an unambiguous label. Tied outcomes
+    # A unique simulator-best average gives an unambiguous label. Tied averages
     # are deliberately skipped instead of injecting an arbitrary tie-break prior.
     if len(best_indices) == 1 and any(value < best for value in values):
         preferred = best_indices[0]
@@ -117,6 +136,8 @@ def _train_target(policy, library, database, scripts, seed, deck, mapped,
         'kind': target['decision']['kind'],
         'player': player,
         'option_count': len(branches),
+        'rollouts_per_option': rollout_count,
+        'continuation_seeds': continuation_seeds,
         'branches': branches,
         'unique_best': len(best_indices) == 1,
         'updated': updated,
@@ -135,10 +156,12 @@ def main():
     p.add_argument('--budget', type=int, default=5000)
     p.add_argument('--targets', type=int, default=2)
     p.add_argument('--max-options', type=int, default=3)
+    p.add_argument('--rollouts', type=int, default=3)
     p.add_argument('--policy-seed', type=int, default=20260907)
+    p.add_argument('--continuation-seed', type=int, default=64000)
     a = p.parse_args()
-    if a.targets < 1 or a.max_options < 2:
-        raise ValueError('targets must be positive and max-options >= 2')
+    if a.targets < 1 or a.max_options < 2 or a.rollouts < 1:
+        raise ValueError('targets/rollouts must be positive and max-options >= 2')
 
     candidate_id, deck, mapped = _load_deck()
     policy = SparsePolicy(seed=a.policy_seed, temperature=1.0, learning_rate=0.05)
@@ -149,6 +172,7 @@ def main():
         'external_strategy_priors': False,
         'live_rollout_policy': False,
         'hidden_state_used_as_policy_feature': False,
+        'matched_continuation_seeds_across_actions': True,
         'candidate': candidate_id,
         'seed': a.seed,
         'status': 'pending',
@@ -169,7 +193,8 @@ def main():
         rows = [
             _train_target(
                 policy, a.library, a.database, a.scripts, a.seed, deck, mapped,
-                recorded['history'], index, a.budget,
+                recorded['history'], index, a.budget, a.rollouts,
+                a.continuation_seed,
             )
             for index in selected
         ]
@@ -182,13 +207,15 @@ def main():
             branchable_targets=len(candidates),
             selected_targets=selected,
             targets_completed=len(rows),
+            rollouts_per_option=a.rollouts,
             preference_updates=updates,
             weight_count=len(policy.weights),
             rows=rows,
             note=(
                 'Labels come only from matched ocgcore branch outcomes. A realized hidden state affects '
                 'the training label as simulation noise but is never present in policy features. '
-                'This smoke run is not held-out pilot-skill or deck-strength evidence.'
+                'Matched continuation seeds reduce post-branch stochastic noise. This smoke run is not '
+                'held-out pilot-skill or deck-strength evidence.'
             ),
         )
         policy.save(ROOT/'reports/counterfactual_policy_smoke.json')
@@ -201,6 +228,7 @@ def main():
         'status': report['status'],
         'targets_completed': report.get('targets_completed', 0),
         'preference_updates': report.get('preference_updates', 0),
+        'rollouts_per_option': report.get('rollouts_per_option', 0),
         'weight_count': report.get('weight_count', 0),
     }))
     if not report.get('completed'):
