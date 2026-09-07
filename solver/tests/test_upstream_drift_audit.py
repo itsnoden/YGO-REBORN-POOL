@@ -15,7 +15,7 @@ class UpstreamDriftAuditTests(unittest.TestCase):
         self.assertEqual(script_passcodes(paths), {123, 456789})
 
     def test_script_passcodes_accepts_windows_separators(self):
-        self.assertEqual(script_passcodes([r'official\\c12345678.lua']), {12345678})
+        self.assertEqual(script_passcodes([r'official\c12345678.lua']), {12345678})
 
     def test_intersection_reports_only_changed_reborn_cards(self):
         mapped = [
