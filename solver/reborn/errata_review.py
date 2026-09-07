@@ -26,6 +26,10 @@ from .text_audit import _text_key, classify_text_pair
 WORDING_REVIEW_STATUS = 'behavior_equivalent_wording_reviewed'
 IMPLEMENTATION_REVIEW_STATUS = 'implementation_matches_official_reviewed'
 VALID_REVIEW_STATUSES = {WORDING_REVIEW_STATUS, IMPLEMENTATION_REVIEW_STATUS}
+DEFAULT_REVIEW_PATHS = (
+    ROOT/'data/reviewed_text_equivalence.json',
+    ROOT/'data/reviewed_implementation_equivalence.json',
+)
 
 
 def normalized_text_sha256(text):
@@ -33,10 +37,24 @@ def normalized_text_sha256(text):
 
 
 def load_reviews(path=None):
-    path = path or (ROOT/'data/reviewed_text_equivalence.json')
-    if not path.exists():
-        return {}
-    return json.loads(path.read_text()).get('reviews', {})
+    """Load one explicit ledger, or merge the two canonical review ledgers.
+
+    Duplicate review keys are rejected instead of silently allowing one ledger to
+    override another. This keeps wording reviews and implementation reviews
+    separately auditable while presenting one validation set to the gate.
+    """
+    paths = (path,) if path is not None else DEFAULT_REVIEW_PATHS
+    merged = {}
+    for review_path in paths:
+        review_path = review_path if hasattr(review_path, 'exists') else ROOT/review_path
+        if not review_path.exists():
+            continue
+        rows = json.loads(review_path.read_text()).get('reviews', {})
+        duplicate = set(merged) & set(rows)
+        if duplicate:
+            raise ValueError(f'duplicate errata review keys across ledgers: {sorted(duplicate)}')
+        merged.update(rows)
+    return merged
 
 
 def validate_review(review, card, entry):
