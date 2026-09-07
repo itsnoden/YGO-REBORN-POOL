@@ -23,6 +23,7 @@ jobs:
     defaults:
       run:
         working-directory: solver
+        shell: bash
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -47,10 +48,13 @@ jobs:
         run: python -m reborn.engine_bridge --database vendor/database/cards.cdb --scripts vendor/scripts --core vendor/core
 
       - name: Run unit tests
-        run: python -m unittest discover -s tests -v 2>&1 | tee reports/ci_unit_tests.log
+        run: |
+          set -o pipefail
+          python -m unittest discover -s tests -v 2>&1 | tee reports/ci_unit_tests.log
 
       - name: Run strict duel-flow probe
         run: |
+          set -o pipefail
           python -m reborn.flow_probe \
             --library build/libocgcore.so \
             --database vendor/database/cards.cdb \
@@ -62,6 +66,7 @@ jobs:
 
       - name: Run paired stochastic pilot probe
         run: |
+          set -o pipefail
           python -m reborn.pilot_probe \
             --library build/libocgcore.so \
             --database vendor/database/cards.cdb \
@@ -73,6 +78,7 @@ jobs:
 
       - name: Run from-scratch learning smoke probe
         run: |
+          set -o pipefail
           python -m reborn.learn_probe \
             --library build/libocgcore.so \
             --database vendor/database/cards.cdb \
@@ -85,6 +91,7 @@ jobs:
 
       - name: Run held-out pilot skill evaluation
         run: |
+          set -o pipefail
           python -m reborn.pilot_eval \
             --library build/libocgcore.so \
             --database vendor/database/cards.cdb \
