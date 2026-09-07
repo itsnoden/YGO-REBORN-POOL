@@ -21,6 +21,17 @@ class VerifiedDataTests(unittest.TestCase):
         self.assertEqual(chick['cid'], '6109')
         self.assertEqual(chick['placement'], 'main')
 
+    def test_corrected_source_identities_have_current_official_records(self):
+        records = load_verified_official_records()
+        dragged = records['Dragged Down into the Grave']
+        wow = records['Wow Warrior']
+        self.assertEqual(dragged['cid'], '5352')
+        self.assertIn('Both players reveal their hands', dragged['text'])
+        self.assertEqual(dragged['placement'], 'main')
+        self.assertEqual(wow['cid'], '4552')
+        self.assertEqual(wow['spec'], 'WATER Level 4 [ Fish / Normal ] ATK 1250 DEF 900')
+        self.assertEqual(wow['placement'], 'main')
+
     def test_verified_record_fills_missing_official_and_placement_only(self):
         cards = [
             {'name': 'Red-Eyes Black Chick', 'official': None, 'placement': None},
