@@ -15,6 +15,24 @@ from bs4 import BeautifulSoup
 from .import_pool import ROOT, dump, key
 
 BASE = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action'
+UPDATED_FROM_RE = re.compile(r'^(.*?)\s+\(Updated from:\s*(.*?)\)\s*$')
+
+
+def split_official_display_name(display_name):
+    """Return the current official name plus any explicit previous-name note.
+
+    Neuron currently renders renamed cards as, for example,
+    ``Slime Toad (Updated from: Frog the Jam)`` inside ``.card_name``.  The
+    parenthetical is provenance, not part of the current card name.  Matching the
+    whole display string creates false missing-text records for otherwise exact
+    pool titles.  Strip only this exact official suffix; do not remove arbitrary
+    parentheticals from card names.
+    """
+    display = ' '.join(str(display_name or '').split())
+    match = UPDATED_FROM_RE.match(display)
+    if not match:
+        return display, None
+    return match.group(1).strip(), match.group(2).strip()
 
 
 def _load_identity_aliases():
@@ -53,21 +71,40 @@ def parse_page(html, url, allowed):
         name_node = row.select_one('.card_name')
         if not name_node:
             continue
-        name = name_node.get_text(' ', strip=True)
+        display_name = name_node.get_text(' ', strip=True)
+        name, updated_from = split_official_display_name(display_name)
         if key(name) not in allowed:
             continue
-        spec = row.select_one('.box_card_spec').get_text(' ', strip=True)
-        body = row.select_one('.box_card_text').get_text(' ', strip=True)
-        cid = row.select_one('input.cid')['value']
-        attr = row.select_one('.box_card_attribute').get_text(' ', strip=True)
+        spec_node = row.select_one('.box_card_spec')
+        body_node = row.select_one('.box_card_text')
+        cid_node = row.select_one('input.cid')
+        attr_node = row.select_one('.box_card_attribute')
+        if not (spec_node and body_node and cid_node and attr_node):
+            continue
+        spec = spec_node.get_text(' ', strip=True)
+        body = body_node.get_text(' ', strip=True)
+        cid = cid_node['value']
+        attr = attr_node.get_text(' ', strip=True)
         extra = any(word in spec for word in ('Fusion', 'Synchro', 'Xyz', 'Link'))
         placement = 'extra' if extra else ('excluded' if 'Token' in spec else 'main')
-        records.append(dict(name=name, cid=cid, spec=spec, attribute=attr, text=body,
-            placement=placement, source_url=f'{BASE}?ope=2&cid={cid}&request_locale=en',
+        record = dict(
+            name=name,
+            official_display_name=display_name,
+            cid=cid,
+            spec=spec,
+            attribute=attr,
+            text=body,
+            placement=placement,
+            source_url=f'{BASE}?ope=2&cid={cid}&request_locale=en',
             retrieved_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
             page_sha256=hashlib.sha256(html).hexdigest(),
             text_sha256=hashlib.sha256(body.encode()).hexdigest(),
-            verification='official_current_text_retrieved', request_url=url))
+            verification='official_current_text_retrieved',
+            request_url=url,
+        )
+        if updated_from:
+            record['updated_from'] = updated_from
+        records.append(record)
     count = re.search(r'Search Results:\s*[\d,]+\s*-\s*[\d,]+\s*of\s*([\d,]+)', soup.get_text(' ',strip=True))
     return records, int(count[1].replace(',','')) if count else None
 
@@ -137,9 +174,10 @@ def main():
         reviewed_identity_alias_matches=alias_matches,
         missing=[c['name'] for c in cards if not c['official']],conflicts=conflicts,errors=errors,
         note=(
-            'Latest official text snapshot. Reviewed identity aliases may resolve a legacy pool title to its '
-            'current official name; unreviewed fuzzy names are never accepted. Refresh and invalidate affected '
-            'implementations before new promoted runs.'
+            'Latest official text snapshot. Official `(Updated from: ...)` display suffixes are retained as '
+            'provenance but are not treated as part of the current card name. Reviewed identity aliases may '
+            'resolve a legacy pool title to its current official name; unreviewed fuzzy names are never accepted. '
+            'Refresh and invalidate affected implementations before new promoted runs.'
         )))
 
 
