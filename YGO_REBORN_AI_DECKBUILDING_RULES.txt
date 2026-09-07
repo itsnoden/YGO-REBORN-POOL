@@ -13,6 +13,14 @@ AUTHORITATIVE PROJECT SOURCES
 3. Use the actual Yu-Gi-Oh! game rules.
 4. Use the correct/current card text and errata for cards unless this project explicitly records a format-specific override.
 5. Before producing a final deck list, verify every card is in-pool and the number of copies is legal.
+6. Apply durable source corrections in `solver/data/source_corrections.json` before any pool use. These corrections override stale transcription rows while preserving stable Reborn IDs.
+
+CURRENT HARD POOL CORRECTIONS
+-----------------------------
+- `Double Summon` is NOT in the effective YGO Reborn pool. Stable row `reborn-0530` is corrected to `Dragged Down into the Grave`. Never reintroduce Double Summon from the stale raw visual transcription.
+- `Worm Warrior` is a stale transcription. Stable row `reborn-2083` is corrected to `Wow Warrior` from authoritative source-video verification.
+- These are objective pool-identity corrections, not strategic priors.
+- The effective pool remains 2,273 cards because each stale title is replaced by the corrected card identity rather than deleting the stable row.
 
 MANDATORY STRATEGIC INDEPENDENCE
 --------------------------------
@@ -102,7 +110,7 @@ DECK LIST RULES
 
 PROJECT CONTINUITY
 ------------------
-Future chats should read this file together with the current card-pool MASTER, BANLIST MASTER, and deckbuilding findings/checkpoint files before continuing analysis.
+Future chats should read this file together with the current card-pool MASTER, `solver/data/source_corrections.json`, BANLIST MASTER, and deckbuilding findings/checkpoint files before continuing analysis.
 
 Meaningful discoveries, corrected assumptions, tested candidate lists, failed ideas, and solver checkpoints should be written back to durable project files so later chats resume rather than restart.
 
