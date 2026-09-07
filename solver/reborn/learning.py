@@ -178,23 +178,17 @@ class SparsePolicy:
         if not steps: return
         if scale is None:
             scale = 1.0 / math.sqrt(len(steps))
+        lr = self.learning_rate * scale
         for step in steps:
             reward = 1.0 if step.player == winner else -1.0
-            if reward > 0:
-                self._apply_choice_gradient(step.option_features, step.chosen, scale)
-            else:
-                # For a losing player's sampled action, descend its log
-                # probability.  This retains the original symmetric REINFORCE
-                # update rather than pretending another option is known-best.
-                probs = self.probabilities(step.option_features)
-                lr = self.learning_rate * scale
-                for index, features in enumerate(step.option_features):
-                    coefficient = -((1.0 if index == step.chosen else 0.0) - probs[index])
-                    delta = lr * coefficient
-                    if not delta: continue
-                    for feature in features:
-                        self.weights[feature] = self.weights.get(feature, 0.0) + delta
-                self.weights = {k: v for k, v in self.weights.items() if abs(v) >= 1e-12}
+            probs = self.probabilities(step.option_features)
+            for index, features in enumerate(step.option_features):
+                coefficient = reward * ((1.0 if index == step.chosen else 0.0) - probs[index])
+                delta = lr * coefficient
+                if not delta: continue
+                for feature in features:
+                    self.weights[feature] = self.weights.get(feature, 0.0) + delta
+        self.weights = {k: v for k, v in self.weights.items() if abs(v) >= 1e-12}
 
     def to_dict(self):
         return {
