@@ -21,6 +21,7 @@ on:
       - 'solver/data/verified_official_records.json'
       - 'solver/data/verified_alias_official_records.json'
       - 'solver/data/reviewed_text_equivalence.json'
+      - 'solver/data/reviewed_implementation_equivalence.json'
       - '.github/workflows/text-difference-audit.yml'
   workflow_dispatch:
 
