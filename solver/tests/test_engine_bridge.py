@@ -76,6 +76,36 @@ class EngineBridgeSuggestionTests(unittest.TestCase):
             'do_not_map_to_level_down_interrobang',
         )
 
+    def test_reviewed_pool_identity_aliases_are_explicit(self):
+        data = json.loads((ROOT/'data/identity_aliases.json').read_text())
+        expected = {
+            'Cemetery Bomb': 'Cemetary Bomb',
+            'Fallen Down': 'Falling Down',
+            'Raging Spirit': 'Radiant Spirit',
+            'Red-Eyes B. Dragon': 'Red-Eyes Black Dragon',
+            'Sniper Hunter': 'Snipe Hunter',
+            'Stone Shooter': 'Storm Shooter',
+            'Teya': 'Teva',
+            'Twin-Headed Beast': 'Twinheaded Beast',
+        }
+        self.assertEqual(
+            {name: data['aliases'][name]['engine_name'] for name in expected},
+            expected,
+        )
+
+    def test_distinct_pool_cards_are_not_collapsed_by_aliases(self):
+        data = json.loads((ROOT/'data/identity_aliases.json').read_text())
+        self.assertNotIn('Long Nose', data['aliases'])
+        self.assertNotIn('Red-Eyes Black Chick', data['aliases'])
+        self.assertEqual(
+            data['explicit_non_aliases']['Long Nose']['status'],
+            'do_not_map_to_great_long_nose',
+        )
+        self.assertEqual(
+            data['explicit_non_aliases']['Red-Eyes Black Chick']['status'],
+            'do_not_map_to_black_dragons_chick',
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
