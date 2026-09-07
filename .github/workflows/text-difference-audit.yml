@@ -10,8 +10,10 @@ on:
       - 'solver/tests/test_text_audit.py'
       - 'solver/tests/test_text_risk_audit.py'
       - 'solver/tests/test_errata_review.py'
+      - 'solver/tests/test_*override.py'
       - 'solver/reborn/engine_bridge.py'
       - 'solver/reborn/verified_data.py'
+      - 'solver/script_overrides/**'
       - 'solver/data/identity_aliases.json'
       - 'solver/data/shared_identity_aliases.json'
       - 'solver/data/source_corrections.json'
@@ -58,6 +60,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_text_audit.py' -v
           python -m unittest discover -s tests -p 'test_text_risk_audit.py' -v
           python -m unittest discover -s tests -p 'test_errata_review.py' -v
+          python -m unittest discover -s tests -p 'test_*override.py' -v
 
       - name: Prioritize text differences
         run: |
@@ -79,5 +82,6 @@ jobs:
             solver/reports/ci_text_risk_audit.log
             solver/reports/ci_errata_review.log
             solver/reports/engine_coverage.json
+            solver/data/processed/engine_cards.json
           if-no-files-found: warn
           retention-days: 14
