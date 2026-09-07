@@ -11,9 +11,8 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 import json
-import struct
 
-from .announce import choose_declarable
+from .announce import enumerate_declarable
 from .effects import UnsupportedInteraction
 from .import_pool import ROOT, dump
 from .learn_probe import run_training_game
@@ -124,11 +123,13 @@ def run_eval_game(library, database, scripts, deck, mapped, frozen_policy,
                     row['policy_view_checks'] += 1
 
                     if decision.kind == 'announce_card':
-                        code = choose_declarable(database, decision.meta['opcodes'], allowed_codes)
-                        response = struct.pack('<i', code)
+                        legal_codes = enumerate_declarable(database, decision.meta['opcodes'], allowed_codes)
                         if decision.player == learned_seat:
-                            learned.fallback_decisions += 1
-                            learned.fallback_kinds['announce_card'] += 1
+                            response = learned.choose_announce_card(
+                                decision, prompt, observation, legal_codes
+                            )
+                        else:
+                            response = baseline.choose_announce_card(legal_codes)
                     elif decision.player == learned_seat:
                         response = learned.choose(decision, prompt, observation)
                     else:
@@ -268,7 +269,7 @@ def main():
         'strength_evidence_for_decks': False,
         'pilot_skill_evidence': 'preliminary_heldout' if completed == planned_eval_games else False,
         'external_strategy_priors': False,
-        'policy': 'sparse_softmax_reinforce_v2_complex_actions',
+        'policy': policy.to_dict()['policy'],
         'training': {
             'planned_games': a.train_games,
             'games': len(train_results),
