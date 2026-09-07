@@ -1,0 +1,2 @@
+CI trigger for filtered policy prompts, explicit rules profile, stochastic coverage, and from-scratch learning smoke.
+No deck-strength claim is attached to this trigger.
