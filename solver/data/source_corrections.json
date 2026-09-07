@@ -17,6 +17,20 @@
       "evidence": "In the authoritative slower pool video W-section, the tile between Worm Drake and Wretched Ghost of the Attic visibly shows Wow Warrior: a WATER/Fish Normal Monster. The prior transcription 'Worm Warrior' is therefore a title error, not a separate card identity.",
       "effective_date": "2026-09-07",
       "prohibited_stale_name": "Worm Warrior"
+    },
+    {
+      "reborn_id": "reborn-1117",
+      "from_name": "Long Nose",
+      "to_name": "Longnose Blue Mammoth",
+      "status": "reviewed_legacy_video_game_identity_correction",
+      "evidence": "The authoritative Reborn source orders this tile between Lone Wolf and Lord D., while Great Long Nose is independently present as a separate pool card. Independent legacy Yu-Gi-Oh card/passcode references place Long-Nosed Blue Mammoth (passcode 25737191) exactly between Lone Wolf and Lord of D., and Duel Monsters 4 identifies #887/passcode 25737191 as Longnose Blue Mammoth, a Level 3 EARTH Dinosaur Normal Monster with 800 ATK / 900 DEF. This resolves the shortened pool label without collapsing it into Great Long Nose.",
+      "evidence_urls": [
+        "https://www.pojo.com/yu-gi-oh/PriceGuide/YGO_XREF.htm",
+        "https://www.imasaragame.com/yugioh4/en/pass9.html",
+        "https://yugioh.fandom.com/wiki/Longnose_Blue_Mammoth"
+      ],
+      "effective_date": "2026-09-07",
+      "prohibited_stale_name": "Long Nose"
     }
   ],
   "policy": "Source corrections change identity only when backed by explicit authoritative re-verification. They are hard pool constraints, not strategy priors."
