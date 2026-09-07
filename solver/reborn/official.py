@@ -13,6 +13,7 @@ import time
 import urllib.request
 from bs4 import BeautifulSoup
 from .import_pool import ROOT, dump, key
+from .verified_data import load_identity_aliases
 
 BASE = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action'
 UPDATED_FROM_RE = re.compile(r'^(.*?)\s+\(Updated from:\s*(.*?)\)\s*$')
@@ -36,10 +37,8 @@ def split_official_display_name(display_name):
 
 
 def _load_identity_aliases():
-    path = ROOT/'data/identity_aliases.json'
-    if not path.exists():
-        return {}
-    return json.loads(path.read_text()).get('aliases', {})
+    aliases, _ = load_identity_aliases()
+    return aliases
 
 
 def allowed_official_names(cards, aliases):
@@ -61,7 +60,10 @@ def resolve_official_record(card, matched, aliases):
     if not spec:
         return None, None
     record = matched.get(key(spec.get('engine_name', '')))
-    return (record, 'reviewed_identity_alias') if record is not None else (None, None)
+    if record is None:
+        return None, None
+    source = 'reviewed_shared_identity_alias' if spec.get('allow_shared_engine_identity') else 'reviewed_identity_alias'
+    return record, source
 
 
 def parse_page(html, url, allowed):
@@ -161,12 +163,13 @@ def main():
         if record and key(record['name']) not in conflicts:
             stored=dict(record)
             stored['pool_identity_source']=source
-            if source == 'reviewed_identity_alias':
+            if source in {'reviewed_identity_alias','reviewed_shared_identity_alias'}:
                 stored['pool_legacy_name']=card['name']
                 alias_matches.append({
                     'pool_name':card['name'],
                     'official_current_name':record['name'],
                     'cid':record['cid'],
+                    'identity_source':source,
                 })
             card['official']=stored;card['placement']=stored['placement']
     dump(ROOT/'data/processed/cards.json',cards)
@@ -175,9 +178,9 @@ def main():
         missing=[c['name'] for c in cards if not c['official']],conflicts=conflicts,errors=errors,
         note=(
             'Latest official text snapshot. Official `(Updated from: ...)` display suffixes are retained as '
-            'provenance but are not treated as part of the current card name. Reviewed identity aliases may '
-            'resolve a legacy pool title to its current official name; unreviewed fuzzy names are never accepted. '
-            'Refresh and invalidate affected implementations before new promoted runs.'
+            'provenance but are not treated as part of the current card name. Reviewed identity aliases, including '
+            'explicit same-card shared identities, may resolve a legacy pool title to its current official name; '
+            'unreviewed fuzzy names are never accepted. Refresh and invalidate affected implementations before new promoted runs.'
         )))
 
 
