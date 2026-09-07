@@ -30,6 +30,7 @@ DEFAULT_REVIEW_PATHS = (
     ROOT/'data/reviewed_text_equivalence.json',
     ROOT/'data/reviewed_implementation_equivalence.json',
 )
+REVIEW_BATCH_DIR = ROOT/'data/errata_review_batches'
 
 
 def normalized_text_sha256(text):
@@ -37,13 +38,17 @@ def normalized_text_sha256(text):
 
 
 def load_reviews(path=None):
-    """Load one explicit ledger, or merge the two canonical review ledgers.
+    """Load one explicit ledger, or merge all canonical review ledgers/batches.
 
     Duplicate review keys are rejected instead of silently allowing one ledger to
-    override another. This keeps wording reviews and implementation reviews
-    separately auditable while presenting one validation set to the gate.
+    override another. This keeps review batches separately auditable while
+    presenting one validation set to the certification gate.
     """
-    paths = (path,) if path is not None else DEFAULT_REVIEW_PATHS
+    if path is not None:
+        paths = (path,)
+    else:
+        batch_paths = tuple(sorted(REVIEW_BATCH_DIR.glob('*.json'))) if REVIEW_BATCH_DIR.exists() else ()
+        paths = DEFAULT_REVIEW_PATHS + batch_paths
     merged = {}
     for review_path in paths:
         review_path = review_path if hasattr(review_path, 'exists') else ROOT/review_path
@@ -118,8 +123,6 @@ def build_review_report(cards, mapped, reviews=None):
             'script_path': entry.get('script_path'),
         }
         if ok:
-            # A valid review may clear only a real lexical wording mismatch. It
-            # cannot convert missing text or already-exact text into a review.
             official = (card.get('official') or {}).get('text') or ''
             category = classify_text_pair(official, entry.get('engine_text') or '')
             if category == 'lexical_difference_requires_audit':
@@ -149,7 +152,6 @@ def build_review_report(cards, mapped, reviews=None):
     return {
         'purpose': 'hash_bound_rules_text_and_implementation_review_not_strategy_prior',
         'lexical_effect_rows': len(lexical_ids),
-        # Backward-compatible total accepted reviews.
         'valid_behavior_equivalence_reviews': len(valid),
         'valid_wording_equivalence_reviews': len(valid_wording),
         'valid_implementation_behavior_reviews': len(valid_implementation),
