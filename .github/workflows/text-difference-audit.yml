@@ -6,8 +6,10 @@ on:
     paths:
       - 'solver/reborn/text_audit.py'
       - 'solver/reborn/text_risk_audit.py'
+      - 'solver/reborn/errata_review.py'
       - 'solver/tests/test_text_audit.py'
       - 'solver/tests/test_text_risk_audit.py'
+      - 'solver/tests/test_errata_review.py'
       - 'solver/reborn/engine_bridge.py'
       - 'solver/reborn/verified_data.py'
       - 'solver/data/identity_aliases.json'
@@ -16,6 +18,7 @@ on:
       - 'solver/data/nonstandard_cards.json'
       - 'solver/data/verified_official_records.json'
       - 'solver/data/verified_alias_official_records.json'
+      - 'solver/data/reviewed_text_equivalence.json'
       - '.github/workflows/text-difference-audit.yml'
   workflow_dispatch:
 
@@ -54,12 +57,14 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_text_audit.py' -v
           python -m unittest discover -s tests -p 'test_text_risk_audit.py' -v
+          python -m unittest discover -s tests -p 'test_errata_review.py' -v
 
       - name: Prioritize text differences
         run: |
           set -o pipefail
           python -m reborn.text_audit 2>&1 | tee reports/ci_text_difference_audit.log
           python -m reborn.text_risk_audit 2>&1 | tee reports/ci_text_risk_audit.log
+          python -m reborn.errata_review 2>&1 | tee reports/ci_errata_review.log
 
       - name: Upload text audit
         if: always()
@@ -69,8 +74,10 @@ jobs:
           path: |
             solver/reports/text_difference_audit.json
             solver/reports/text_risk_audit.json
+            solver/reports/errata_review.json
             solver/reports/ci_text_difference_audit.log
             solver/reports/ci_text_risk_audit.log
+            solver/reports/ci_errata_review.log
             solver/reports/engine_coverage.json
           if-no-files-found: warn
           retention-days: 14
