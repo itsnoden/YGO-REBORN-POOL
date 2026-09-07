@@ -5,18 +5,31 @@ from reborn.import_pool import ROOT, apply_source_corrections, key, parse_pool
 
 
 class SourceCorrectionTests(unittest.TestCase):
-    def test_double_summon_is_replaced_by_dragged_down(self):
+    def _corrected_cards(self):
         raw = (ROOT/'data/raw/MASTER.txt').read_text()
         cards = parse_pool(raw)
         spec = json.loads((ROOT/'data/source_corrections.json').read_text())
         applied = apply_source_corrections(cards, spec)
+        return cards, applied
 
+    def test_double_summon_is_replaced_by_dragged_down(self):
+        cards, applied = self._corrected_cards()
         self.assertEqual(len(cards), 2273)
         by_id = {c['id']: c for c in cards}
         self.assertEqual(by_id['reborn-0530']['name'], 'Dragged Down into the Grave')
         self.assertNotIn(key('Double Summon'), {key(c['name']) for c in cards})
         self.assertEqual(applied[0]['from_name'], 'Double Summon')
         self.assertEqual(applied[0]['to_name'], 'Dragged Down into the Grave')
+
+    def test_worm_warrior_is_replaced_by_wow_warrior(self):
+        cards, applied = self._corrected_cards()
+        by_id = {c['id']: c for c in cards}
+        names = {key(c['name']) for c in cards}
+        self.assertEqual(by_id['reborn-2083']['name'], 'Wow Warrior')
+        self.assertNotIn(key('Worm Warrior'), names)
+        self.assertIn(key('Wow Warrior'), names)
+        self.assertEqual(applied[1]['from_name'], 'Worm Warrior')
+        self.assertEqual(applied[1]['to_name'], 'Wow Warrior')
 
     def test_correction_refuses_unexpected_source_row(self):
         cards = [{'id': 'reborn-0530', 'name': 'Something Else'}]
