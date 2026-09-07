@@ -41,11 +41,21 @@ def _find_branch(history):
 
 
 def _run_branch(library, database, scripts, seed, deck, mapped, history,
-                target_index, alternative_hex, budget):
+                target_index, alternative_hex, budget, continuation_seed=None):
+    """Replay to one exact decision, branch, then finish with safe stochastic play.
+
+    ``seed`` fixes the underlying duel realization and therefore the recorded
+    pre-branch information set. ``continuation_seed`` controls only the two
+    zero-prior continuation pilots after divergence.  Counterfactual training
+    can therefore compare actions under matched continuation randomness without
+    changing the hidden cards that were realized before the target decision.
+    """
     allowed_codes = [entry['passcode'] for entry in mapped.values()]
+    if continuation_seed is None:
+        continuation_seed = seed
     pilots = [
-        StochasticLegalPilot(seed * 109 + 1009),
-        StochasticLegalPilot(seed * 109 + 2027),
+        StochasticLegalPilot(continuation_seed * 109 + 1009),
+        StochasticLegalPilot(continuation_seed * 109 + 2027),
     ]
     tracker = PublicTracker()
     cursor = 0
@@ -64,6 +74,7 @@ def _run_branch(library, database, scripts, seed, deck, mapped, history,
                     'winner': wins[0][1] if len(wins[0]) >= 2 else None,
                     'steps': step + 1,
                     'safe_checks': safe_checks,
+                    'continuation_seed': continuation_seed,
                 }
 
             decision = extract_decision(messages)
@@ -157,6 +168,7 @@ def main():
             branch_winner=branched['winner'],
             branch_steps=branched['steps'],
             branch_safe_checks=branched['safe_checks'],
+            continuation_seed=branched['continuation_seed'],
         )
     except Exception as exc:
         report.update(status='blocked', completed=False,
