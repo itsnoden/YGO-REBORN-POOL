@@ -1,31 +1,45 @@
-# Checkpoint 0009 — 2026-09-07
+# Checkpoint 0010 — 2026-09-07
 
-Status: corrected pool identities are enforced end-to-end and Solver Verify **#154** passed. `Double Summon` is absent from the effective pool; stable row `reborn-0530` is corrected to `Dragged Down into the Grave`. `Worm Warrior` is corrected to `Wow Warrior`. Reviewed overlays cover `Red-Eyes Black Chick` and non-TCG `Level Down!`. Only **Long Nose** remains unmapped. Canonical pilot remains uncertified for deck ranking. **No strongest deck has been established yet.**
+Status: **100% of the effective 2,273-card Reborn pool is mapped**, current Project Ignis CardScripts behavior is pinned and fully re-verified, and the behavior-text audit is down to **186 unresolved lexical effect rows**. Canonical pilot remains uncertified for deck ranking. **No strongest deck has been established yet.**
 
-Read full details in `checkpoints/0009.md` and obey repository-root `YGO_REBORN_AI_DECKBUILDING_RULES.txt` plus `solver/data/source_corrections.json` before continuing.
+Read full details in `checkpoints/0010.md` and obey repository-root `YGO_REBORN_AI_DECKBUILDING_RULES.txt`, `solver/data/source_corrections.json`, and the current BANLIST authority before continuing.
 
 ## Canonical verified baseline
 
-Solver Verify #154 (`run_id=34116624958`, commit `c26b73a7135719a8d5d1176a59298e285744ebb4`) passed the full pipeline.
+Solver Verify #185 (`run_id=34122051457`, commit `e89bc1af711b68bb949519b6b777393bab9908d3`) passed the complete pipeline.
 
 - effective pool: **2,273**
-- mapped: **2,272 / 2,273**
-- unmapped: **Long Nose only**
-- missing scripts among mapped cards: **0**
-- source correction `reborn-0530`: `Double Summon` -> `Dragged Down into the Grave`
-- source correction `reborn-2083`: `Worm Warrior` -> `Wow Warrior`
+- mapped: **2,273 / 2,273**
+- unmapped: **0**
+- missing scripts: **0**
+- `Double Summon` absent; `reborn-0530` is `Dragged Down into the Grave`
+- `reborn-2083`: `Wow Warrior`
+- `reborn-1117`: `Longnose Blue Mammoth`
+- current CardScripts pin: `14064037f42d0ae0bb9f8577d7eba2baad95e633`
+- upstream Reborn-affecting script drift after pin: **0**
 - canonical pilot benchmark: **76-60-8 / 144**, zero fallbacks; still not deck-ranking certification
 
-## Pilot experiment conclusion
+## Text / errata gate
 
-The minimal chain-context feature looked strong in the first cohort but did not replicate materially across 192 games per arm: control **98-91-3**, treatment **100-89-3**. Do **not** promote it.
+Text Difference Audit #18 (`run_id=34122051459`) passed:
+- exact current-text matches: **2,017**
+- unresolved lexical behavior rows: **186**
+- review priority: **110 high / 29 medium / 47 low**
+- presentation-only: **44**
+- rules-terminology-only: **17**
+- Normal Monster lore-only: **7**
+- reviewed non-TCG exact provenance: **2**
+- missing-official behavior blockers: **0**
+
+A hash-bound errata review ledger is mandatory. No row may be cleared from similarity alone; accepted reviews bind the exact Reborn ID/passcode/current official-text hash/engine-text hash and automatically become stale if text changes.
 
 ## Resume
 
-1. Keep `Double Summon` out of every Reborn deck/candidate/simulation; use `Dragged Down into the Grave` at row 530.
-2. Resolve `Long Nose` from authoritative identity evidence only; never collapse it into `Great Long Nose`, which is a separate pool entry.
-3. Continue the latest-errata/text audit (current canonical non-exact queue: 322).
-4. Improve pilot generalization only via controlled A/B tests with no human strategy priors.
-5. Add Extra Deck generation/optimization once pilot/errata gates are strong enough.
-6. Only then run certified payoff matrices and adversarial/double-oracle deck search.
-7. Never claim a strongest deck prematurely.
+1. Keep `Double Summon` out of every Reborn candidate/simulation.
+2. Start direct card-by-card review of the **110 high-risk lexical rows** using current official text plus current pinned Project Ignis behavior.
+3. Save only evidence-backed implementation fixes or hash-bound equivalence reviews; re-run audits after each batch.
+4. Continue upstream script-drift checks as Project Ignis advances.
+5. Canonical pilot is still not certified for deck ranking; improve it only via controlled no-human-prior A/B tests.
+6. Add Extra Deck generation/optimization after errata/pilot gates are strong enough.
+7. Only then run certified payoff matrices and adversarial/double-oracle deck search.
+8. Never claim a strongest deck prematurely.
