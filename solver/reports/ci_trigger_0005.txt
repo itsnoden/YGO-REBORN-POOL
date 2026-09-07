@@ -1,0 +1,2 @@
+CI probe trigger for latest main: announce-card evaluator plus information-safe observation ABI checks.
+This file contains no duel-strength evidence.
