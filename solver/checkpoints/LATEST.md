@@ -1,65 +1,85 @@
-# Checkpoint 0003 — 2026-09-06
+# Checkpoint 0004 — 2026-09-06/07
 
-Status: first strict legal-action protocol layer implemented and published; a
-complete-duel correctness probe now exists. No strongest deck has been established.
+Status: complete-duel protocol/observation coverage is live-verified under the
+user-confirmed YGO Reborn rules profile, and the first zero-prior learning smoke
+completes full games and updates a policy. **No strongest deck has been
+established yet.**
 
-## New work in this checkpoint
+Read the full checkpoint at `checkpoints/0004.md` and the durable duel findings at
+`reports/DUEL_OBSERVATIONS.md` before continuing.
 
-- Added `reborn/protocol.py`, derived from the exact pinned ygopro-core protocol
-  layout at core commit `b8c05dff14da0b13608950a73906287dc0b601f9`.
-- Implemented strict parser/response support for:
-  - `MSG_SELECT_IDLECMD`
-  - `MSG_SELECT_BATTLECMD`
-  - `MSG_SELECT_EFFECTYN`
-  - `MSG_SELECT_YESNO`
-  - `MSG_SELECT_OPTION`
-  - `MSG_SELECT_CARD`
-  - `MSG_SELECT_CHAIN`
-  - `MSG_SELECT_PLACE`
-  - `MSG_SELECT_DISFIELD`
-  - `MSG_SELECT_POSITION`
-- Added legal response encoders for command choices, card-index selections and
-  field-zone selections. Invalid counts, indices, duplicate selections and
-  forbidden zones raise instead of being guessed.
-- Added an explicit privacy boundary: parsed decision views can only be
-  materialized for the player who owns the prompt. Raw engine messages remain
-  privileged referee data and are not policy observations.
-- Added `tests/test_protocol.py`. The six focused protocol tests passed in the
-  implementation workspace before publication.
-- Added `reborn/flow_probe.py`, which advances generated candidate pairs using a
-  deterministic conservative legal-action baseline. It stops on unsupported
-  prompts, missing scripts, retries or nonterminal unexplained engine stops.
-- Updated `docs/ENGINE.md` with the new rebuild/probe path and strict rules for
-  interpreting its output.
+## Current verified milestone
 
-## Important evidence boundary
+GitHub Actions `Solver Verify` run **#42** (`run_id=34070493121`) rebuilt the exact
+pinned engine dependencies and passed all strict gates:
 
-`flow_probe` is **not a deck-strength evaluator**. The baseline intentionally
-prefers passing/ending phases and exists only to discover protocol and engine
-coverage blockers. Even a completed duel from this probe is not a certified
-win-rate sample and must not feed deck ranking, mutation selection, the oracle,
-or any search prior.
+- **41/41 unit tests passed**
+- conservative correctness: **8/8 games**, **2,983 decisions**, with a filtered
+  observation and filtered prompt audit on all 2,983 decisions
+- paired stochastic coverage: **8/8 games**, **8,096 decisions**, with all 8,096
+  observation/prompt audits passing
+- zero-prior learning smoke: **8/8 games**, **9,132 decisions**, **8,634 learned
+  decisions**, **498 legality-fallback decisions**, **1,463 nonzero weights**
 
-No complete duel from the pinned engine has been recorded in the repository yet,
-because the live pinned dependency rebuild/probe has not been executed after this
-code publication. Therefore there are still **zero certified completed duels,
-zero certified win rates and no #1 deck**.
+Pinned dependency heads:
+
+- core `b8c05dff14da0b13608950a73906287dc0b601f9`
+- scripts `49b0af044cebcb92f3f23211ef436971e1fc16fb`
+- database `9d7f8da324417ec7913b47c52273906c9ae3333b`
+
+Artifact id: `10000303579`; digest:
+`sha256:a96eecb6fcb7ad80ec242395993a43a0d47fba91b0b19aaf31b3f1f583a73c38`.
+
+## Rules/profile authority
+
+The solver now uses `reborn` by default. The user confirmed the implemented
+current-TCG/MR5-style profile matches YGO Reborn: 8,000 LP, 5-card opening hand,
+normal draw 1, no first-turn draw, and the current pinned-core field/TCG SEGOC
+flags already used by the project.
+
+Latest official card text/errata remains a separate binding requirement and must
+always be used.
+
+## Important invalidated evidence
+
+Do **not** reuse run #31 (`run_id=34069085396`) as a successful result. Its GitHub
+job was green but stochastic/learning reports were 0/8 because filtered prompt
+objects were routed into a pilot path expecting viewer observations. That bug is
+fixed, regression-tested and strict probes now fail CI if requested games do not
+all complete. Run #42 is the post-fix replacement.
+
+## Engine/text audit still open
+
+- exact Reborn pool: 2,273 titles
+- engine mapped: 2,251
+- engine-name mismatches: 22
+- mapped scripts: 1,880
+- scriptless Normal Monsters: 370
+- strict missing-script effect card: Red-Eyes Darkness Metal Dragon
+- exact official/engine text matches: 1,938
+- non-exact text comparisons to audit: 313
+
+Do not silently fall back to historical/pre-errata scripts.
+
+## Evidence boundary
+
+The completed games establish engine/protocol/privacy/learning data flow, **not
+deck strength**. Stochastic winners and learning-smoke winners are debug-only.
+There is still no certified deck win-rate table, no certified payoff matrix, no
+validated strongest pilot and no #1 deck.
 
 ## Resume
 
-1. Rebuild the exact pinned core/scripts/database from `engine.lock.json`.
-2. Run `python -m unittest discover -s tests -v` and then `reborn.flow_probe`.
-3. Inspect the first unsupported prompt family in `reports/flow_probe.json` and
-   implement it from pinned core source, with regression tests, before proceeding.
-4. Continue until diverse candidate pairs can complete full games without retry,
-   unsupported-prompt, script or hidden-information failures.
-5. Add public-state querying/observation filtering beyond prompt ownership before
-   any learned or search pilot can consume duel state.
-6. Only after that, build paired-seat pilots, adversarial self-play, held-out
-   evaluation and certified payoff matrices for the double-oracle search.
-
-The existing source constraints remain unchanged: use only the exact 2,273-card
-Reborn pool, Reborn banlist, actual Yu-Gi-Oh rules and latest official errata.
-Simulator code/card data may implement those rules/effects; do not use tournament
-decks, historical decklists, Reddit, tier lists, community strategy priors or
-outside metagame data.
+1. Build **frozen-policy held-out evaluation**: train on one seed set, freeze,
+   evaluate against the zero-prior stochastic baseline on disjoint seeds with
+   paired seats. This measures pilot skill only.
+2. Improve the pilot if it does not show held-out improvement; do not promote
+   weak self-play results into deck rankings.
+3. Add safe learned action enumeration for complex fallback decisions.
+4. Reconcile the 22 engine-name mismatches, 313 text differences and the
+   Red-Eyes Darkness Metal Dragon latest-errata script-path blocker.
+5. Add Extra Deck construction/optimization.
+6. Once pilot skill and interaction coverage are sufficient, create certified
+   paired-seat payoff data for adversarial best-response/double-oracle deck search.
+7. Preserve the project constraints: exact 2,273-card pool, Reborn banlist,
+   actual rules, latest errata always, and no human/community/metagame priors.
