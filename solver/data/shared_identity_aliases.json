@@ -1,0 +1,13 @@
+{
+  "aliases": {
+    "Red-Eyes Black Chick": {
+      "engine_name": "Black Dragon's Chick",
+      "status": "reviewed_shared_current_identity",
+      "allow_shared_engine_identity": true,
+      "evidence": "The Reborn pool contains both the current English title Black Dragon's Chick and the legacy/alternate English title Red-Eyes Black Chick. Current Yu-Gi-Oh! Neuron identifies Black Dragon's Chick as passcode 36262024, while legacy card references identify Red-Eyes Black Chick / Red-Eyes B. Chick as alternate English names of that same card/passcode. Treat the two pool labels as one current card identity for rules and the shared 3-copy deck-name limit, while preserving both Reborn source records.",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6109&ope=2&request_locale=en",
+      "legacy_identity_source_url": "https://yugioh.fandom.com/wiki/Black_Dragon%27s_Chick"
+    }
+  },
+  "note": "Shared identity aliases are exceptional, explicitly reviewed same-card identities. They may reuse an already-mapped engine passcode and must share the deck-name copy-limit group. They are factual identity corrections only, never strategy priors."
+}
