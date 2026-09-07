@@ -99,6 +99,22 @@ jobs:
             --seed 53000 \
             2>&1 | tee reports/ci_counterfactual_probe.log
 
+      - name: Run offline counterfactual training smoke probe
+        run: |
+          set -o pipefail
+          python -m reborn.counterfactual_train_probe \
+            --library build/libocgcore.so \
+            --database vendor/database/cards.cdb \
+            --scripts vendor/scripts \
+            --budget 5000 \
+            --seed 54000 \
+            --targets 2 \
+            --max-options 3 \
+            --rollouts 3 \
+            --continuation-seed 64000 \
+            --policy-seed 20260907 \
+            2>&1 | tee reports/ci_counterfactual_train_probe.log
+
       - name: Run from-scratch learning smoke probe
         run: |
           set -o pipefail
@@ -175,6 +191,8 @@ jobs:
             solver/reports/pilot_probe.json
             solver/reports/replay_probe.json
             solver/reports/counterfactual_probe.json
+            solver/reports/counterfactual_train_probe.json
+            solver/reports/counterfactual_policy_smoke.json
             solver/reports/learn_probe.json
             solver/reports/crash_probe.json
             solver/reports/pilot_eval.json
@@ -185,6 +203,7 @@ jobs:
             solver/reports/ci_pilot_probe.log
             solver/reports/ci_replay_probe.log
             solver/reports/ci_counterfactual_probe.log
+            solver/reports/ci_counterfactual_train_probe.log
             solver/reports/ci_learn_probe.log
             solver/reports/ci_crash_probe.log
             solver/reports/ci_pilot_eval.log
