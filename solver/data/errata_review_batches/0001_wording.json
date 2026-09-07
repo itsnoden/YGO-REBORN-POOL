@@ -1,0 +1,53 @@
+{
+  "reviews": {
+    "reborn-0013": {
+      "reborn_id": "reborn-0013",
+      "passcode": 63176202,
+      "official_text_sha256": "084b658fd7a31a2e65ea4308912efbc685467966d9fae20988bdeab4e2176a8a",
+      "engine_text_sha256": "1c035bba71794bfd66b083faf7e27a0a0de07067661a7c781f00a31ff3289248",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Great Shogun Shien's current official wording explicitly says the replacement Six Samurai must be face-up, while Babel's shorter text omits that adjective. The current pinned Lua's replacement filter requires c:IsFaceup() and a Six Samurai, so executable behavior matches the stricter official meaning. Its Special Summon condition likewise requires two face-up Six Samurai and its opponent Spell/Trap activation limiter implements the same one-per-turn restriction.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6969&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c63176202.lua"
+      ]
+    },
+    "reborn-0503": {
+      "reborn_id": "reborn-0503",
+      "passcode": 95194279,
+      "official_text_sha256": "88621d839793a5844e00a4b16b1a0ef02367586b459a3cfa45c5868b467eb65b",
+      "engine_text_sha256": "527d54900a0d6fb0e9b650ab0541575e5052e88804f08c74b9f2508fd9ef5004",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The legacy text's 'removed from play monster' and current text's 'your banished monster' describe the same intended target here. Current pinned Lua requires the controller to have no cards in their GY and selects only from that player's banished zone before Special Summoning the target to their field.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5848&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c95194279.lua"
+      ]
+    },
+    "reborn-0821": {
+      "reborn_id": "reborn-0821",
+      "passcode": 13944422,
+      "official_text_sha256": "4d861d8bd4b3eb3aa91c0fd82f1ac6aba6f121db9b00dfbcba5b68dea5a55036",
+      "engine_text_sha256": "b07d77e63c2dc3a311c28b9a61a944ef310a01495398958d9d52b31faa4f07a8",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Current 'If this card is Summoned' is the modern umbrella wording for the older Normal/Flip/Special Summoned enumeration. Both award 1000 LP on any of those Summons and inflict 2000 damage when the card is destroyed and sent to the GY. Current pinned Lua registers all three Summon-success events and checks destruction before the GY damage trigger.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5695&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c13944422.lua"
+      ]
+    },
+    "reborn-1787": {
+      "reborn_id": "reborn-1787",
+      "passcode": 97705809,
+      "official_text_sha256": "275650eece7c74146bf0e3e569b67cabe6c7ccefafbf13863f2891d7b8b9b130",
+      "engine_text_sha256": "1c0627c70edad2a8b87d445069995282baf5b6718add831fa72c65e518cea7fb",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The current and legacy texts both require an opponent attack declaration while every monster you control is a Machine 'roid', with at least one such monster, then draw 2. Current pinned Lua explicitly requires a nonempty Monster Zone and rejects any face-down, non-roid, or non-Machine monster before drawing 2.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6747&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c97705809.lua"
+      ]
+    }
+  },
+  "note": "Direct high-risk wording reviews. Each row remains valid only while its exact official/engine text hashes and identity remain unchanged."
+}
