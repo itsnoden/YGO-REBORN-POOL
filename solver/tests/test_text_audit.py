@@ -36,17 +36,47 @@ class TextAuditTests(unittest.TestCase):
         ]
         mapped = [
             {'reborn_id': 'a', 'name': 'A', 'engine_name': 'A', 'passcode': 1,
-             'engine_text': 'Draw 1 card.', 'latest_official_text_sha256': 'a'},
+             'normal_monster': False, 'engine_text': 'Draw 1 card.', 'latest_official_text_sha256': 'a'},
             {'reborn_id': 'b', 'name': 'B', 'engine_name': 'B', 'passcode': 2,
-             'engine_text': 'TARGET 1 monster: destroy it!', 'latest_official_text_sha256': 'b'},
+             'normal_monster': False, 'engine_text': 'TARGET 1 monster: destroy it!', 'latest_official_text_sha256': 'b'},
             {'reborn_id': 'c', 'name': 'C', 'engine_name': 'C', 'passcode': 3,
-             'engine_text': 'Banish 1 monster.', 'latest_official_text_sha256': 'c'},
+             'normal_monster': False, 'engine_text': 'Banish 1 monster.', 'latest_official_text_sha256': 'c'},
         ]
         report = build_report(cards, mapped)
         self.assertEqual(report['counts']['exact'], 1)
         self.assertEqual(report['counts']['token_sequence_identical_formatting_only'], 1)
         self.assertEqual(report['counts']['lexical_difference_requires_audit'], 1)
+        self.assertEqual(report['behavior_text_audit_blockers'], 1)
         self.assertEqual(report['rows'][0]['name'], 'C')
+
+    def test_normal_monster_lore_difference_is_not_behavior_blocker(self):
+        cards = [
+            {'id': 'n', 'official': {'text': 'A blue mammoth swings its nose.', 'text_sha256': 'n'}},
+        ]
+        mapped = [
+            {'reborn_id': 'n', 'name': 'Normal', 'engine_name': 'Normal', 'passcode': 7,
+             'normal_monster': True, 'engine_text': 'Old translated flavor text.',
+             'latest_official_text_sha256': 'n'},
+        ]
+        report = build_report(cards, mapped)
+        self.assertEqual(
+            report['counts']['normal_monster_lore_only_not_behavior_blocker'], 1
+        )
+        self.assertEqual(report['behavior_text_audit_blockers'], 0)
+        self.assertEqual(report['rows'][0]['category'], 'normal_monster_lore_only_not_behavior_blocker')
+
+    def test_normal_monster_missing_lore_is_still_not_behavior_blocker(self):
+        cards = [{'id': 'n', 'official': None}]
+        mapped = [
+            {'reborn_id': 'n', 'name': 'Normal', 'engine_name': 'Normal', 'passcode': 8,
+             'normal_monster': True, 'engine_text': 'Legacy flavor text.',
+             'latest_official_text_sha256': None},
+        ]
+        report = build_report(cards, mapped)
+        self.assertEqual(
+            report['counts']['normal_monster_lore_only_not_behavior_blocker'], 1
+        )
+        self.assertEqual(report['behavior_text_audit_blockers'], 0)
 
 
 if __name__ == '__main__':
