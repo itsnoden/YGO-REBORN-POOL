@@ -1,0 +1,4 @@
+{
+  "reviews": {},
+  "note": "Conservative ledger for manually reviewed latest-official-text versus pinned-engine wording equivalence. A review is valid only while its exact Reborn ID, passcode, normalized official-text SHA-256, and normalized engine-text SHA-256 still match. This file records factual rules/text review only and must never contain deck strength, metagame, or strategy priors."
+}
