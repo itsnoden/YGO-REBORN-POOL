@@ -53,6 +53,14 @@ class LearningTests(unittest.TestCase):
         policy.update_episode([PolicyStep(1, options, 0)], winner=0, scale=1.0)
         self.assertLess(policy.score(options[0]) - policy.score(options[1]), 1.0)
 
+    def test_counterfactual_preference_reinforces_simulator_winner(self):
+        policy = SparsePolicy(seed=14, learning_rate=1.0)
+        options = [('branch:a',), ('branch:b',), ('branch:c',)]
+        policy.update_preference(options, preferred=1, scale=1.0)
+        probs = policy.probabilities(options)
+        self.assertGreater(probs[1], probs[0])
+        self.assertGreater(probs[1], probs[2])
+
     def test_features_use_filtered_prompt_not_hidden_raw_code(self):
         policy = SparsePolicy(seed=2)
         prompt = {'kind': 'select_card', 'cards': [
