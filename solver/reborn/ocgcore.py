@@ -127,7 +127,14 @@ class Duel:
         self.check_errors()
 
     def check_errors(self):
-        if self.errors:raise UnsupportedInteraction('\n'.join(self.errors))
+        if self.errors:
+            recent=[]
+            for item in self.loaded_scripts[-20:]:
+                label=item['filename']
+                if item.get('name'):label+=f" [{item['name']}]"
+                recent.append(label)
+            context='\nrecent loaded scripts: '+', '.join(recent) if recent else ''
+            raise UnsupportedInteraction('\n'.join(self.errors)+context)
 
     def debug_snapshot(self):
         return {
