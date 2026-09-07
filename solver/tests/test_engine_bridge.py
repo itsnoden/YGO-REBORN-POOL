@@ -1,6 +1,10 @@
+import json
 import unittest
 
-from reborn.engine_bridge import mapping_suggestions, unique_exact_text_match
+from reborn.engine_bridge import (
+    mapping_suggestions, reviewed_alias_match, unique_exact_text_match,
+)
+from reborn.import_pool import ROOT
 
 
 class EngineBridgeSuggestionTests(unittest.TestCase):
@@ -50,6 +54,27 @@ class EngineBridgeSuggestionTests(unittest.TestCase):
         match, candidates = unique_exact_text_match('Exact text.', rows, blocked_ids={10})
         self.assertIsNone(match)
         self.assertEqual(candidates, [])
+
+    def test_reviewed_alias_requires_exact_reviewed_target(self):
+        records = {'current name': [{'id': 10, 'name': 'Current Name', 'alias': 0}]}
+        aliases = {'Old Name': {'engine_name': 'Current Name', 'status': 'reviewed'}}
+        match, spec = reviewed_alias_match('Old Name', records, aliases)
+        self.assertEqual(match['id'], 10)
+        self.assertEqual(spec['status'], 'reviewed')
+
+    def test_reviewed_alias_rejects_reserved_collision(self):
+        records = {'current name': [{'id': 10, 'name': 'Current Name', 'alias': 0}]}
+        aliases = {'Old Name': {'engine_name': 'Current Name', 'status': 'reviewed'}}
+        with self.assertRaises(ValueError):
+            reviewed_alias_match('Old Name', records, aliases, blocked_ids={10})
+
+    def test_identity_alias_file_keeps_level_down_distinct(self):
+        data = json.loads((ROOT/'data/identity_aliases.json').read_text())
+        self.assertNotIn('Level Down!', data['aliases'])
+        self.assertEqual(
+            data['explicit_non_aliases']['Level Down!']['status'],
+            'do_not_map_to_level_down_interrobang',
+        )
 
 
 if __name__ == '__main__':
