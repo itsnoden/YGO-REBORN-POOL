@@ -1,0 +1,122 @@
+{
+  "records": {
+    "Cemetery Bomb": {
+      "name": "Cemetary Bomb",
+      "text": "Inflict 100 damage to your opponent for each card in their Graveyard.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6148&ope=2&request_locale=en",
+      "text_sha256": "ace6f3e96dfa8946a7fae8e7351a2ab790bb8008fb6d34f4baadcaac2a83c5f4",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Fallen Down": {
+      "name": "Falling Down",
+      "text": "Activate this card by targeting an opponent's monster; equip this card to it. Take control of it. Destroy this card unless you control an \"Archfiend\" card. During each of your opponent's Standby Phases: You take 800 damage.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5786&ope=2&request_locale=en",
+      "text_sha256": "558017ddc27a553528751b3f18226179f48b207347d88f3dcd4a7cd9a2a5b492",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Firedarts": {
+      "name": "Fire Darts",
+      "text": "You can only activate this card when you have no cards in your hand. Roll a six-sided die 3 times, and inflict damage to your opponent's Life Points equal to the total result of the die rolls x 100 points.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6438&ope=2&request_locale=en",
+      "text_sha256": "02269b3c7b33d4b2eff1bdf9590264dd704194640bdf5bf3e0a0d4f865ce1969",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Lord D.": {
+      "name": "Lord of D.",
+      "text": "Neither player can target Dragon monsters on the field with card effects.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4747&ope=2&request_locale=en",
+      "text_sha256": "bb0ac27d523ba9cc45a73e91de3c6098e6e8b6879539020d99d6ef8377cd4f1c",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Raging Spirit": {
+      "name": "Radiant Spirit",
+      "text": "When this card is destroyed by battle and sent to the Graveyard, destroy all face-down and non-LIGHT monsters.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6986&ope=2&request_locale=en",
+      "text_sha256": "92da791f10bddb9bface7187b043d074cc14ed00a2a35d370befaf77098fc8d4",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Reliable Guardian": {
+      "name": "The Reliable Guardian",
+      "text": "Increase 1 face-up monster's DEF by 700 points until the end of this turn.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4906&ope=2&request_locale=en",
+      "text_sha256": "9b6035d040ff682ec37547b0908ccd8d7668ad0ce6d6cb155c4fdb7b2283b108",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Sanctuary in the Sky": {
+      "name": "The Sanctuary in the Sky",
+      "text": "Battle damage to the controller of a Fairy monster from a battle involving that monster becomes 0.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5982&ope=2&request_locale=en",
+      "text_sha256": "c053f0e88c5e9be8af8b22882b26dcd00b16de87b42f6c93facb7c46dedfdfaa",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Sniper Hunter": {
+      "name": "Snipe Hunter",
+      "text": "You can discard 1 card, then target 1 card on the field; roll a six-sided die, and destroy that target unless you roll a 1 or 6.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6879&ope=2&request_locale=en",
+      "text_sha256": "e552c0050415da2e12f99c11298a0318334fb576484c2ae552bfc5c5a1f3acc3",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Stone Shooter": {
+      "name": "Storm Shooter",
+      "text": "Once per turn, you can select and activate 1 of these effects:\n●Move this card to an adjacent (horizontal) unoccupied Monster Card Zone.\n●Return 1 Spell, Trap or Monster Card on your opponent's side of the field in the same column as this card to its owner's hand.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6896&ope=2&request_locale=en",
+      "text_sha256": "0ac9f4bf7280cc2542e9063ce6790453ccd2e5f678f8e5ad795b899b69add085",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Super Vehicroid - Jumbo Drill": {
+      "name": "Super Vehicroid Jumbo Drill",
+      "text": "\"Steamroid\" + \"Drillroid\" + \"Submarineroid\"\nA Fusion Summon of this card can only be conducted with the above Fusion Material Monsters. During battle between this attacking card and a Defense Position monster whose DEF is lower than the ATK of this card, inflict the difference as Battle Damage to your opponent.",
+      "placement": "extra",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6739&ope=2&request_locale=en",
+      "text_sha256": "b16ac22f3482171dbdebe7507f8cd5e9fac93b6f9c2469314c22ff3abfca7853",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Teya": {
+      "name": "Teva",
+      "text": "When this card is Tribute Summoned successfully, your opponent cannot declare an attack during his/her next turn.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5933&ope=2&request_locale=en",
+      "text_sha256": "82704a5e7b436d84780b20e765b67cc7324ef5925d3da6ed829665515ae0c942",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Three-Hump Lacooda": {
+      "name": "3-Hump Lacooda",
+      "text": "If there are 3 face-up \"3-Hump Lacooda\" cards on your side of the field, Tribute 2 of them to draw 3 cards.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6032&ope=2&request_locale=en",
+      "text_sha256": "556384d2b212df6e12a8e9fa47e6618dcf2884855112e42597c589782365e897",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    },
+    "Twin-Headed Beast": {
+      "name": "Twinheaded Beast",
+      "text": "This card can attack twice during the same Battle Phase.",
+      "placement": "main",
+      "source_url": "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5923&ope=2&request_locale=en",
+      "text_sha256": "25007f5711a26ba56b5ac89119be58a3cbb69bdfd695eaaa774195017d7ea594",
+      "verification": "official_current_text_retrieved_for_reviewed_alias",
+      "pool_identity_source": "reviewed_identity_alias"
+    }
+  },
+  "note": "Objective current Yu-Gi-Oh! Neuron text records for Reborn legacy/spelling aliases already reviewed in identity_aliases.json. No deck, metagame, or strategy information is present."
+}
