@@ -51,13 +51,7 @@ def mapping_suggestions(name, rows, limit=5):
 
 
 def unique_exact_text_match(official_text, rows, blocked_ids=()):
-    """Return one primary engine row only when latest official text is unique.
-
-    This is deliberately much stricter than fuzzy title matching.  It exists to
-    recover verified renames/legacy titles without guessing.  IDs already
-    reserved by another exact-title pool card are excluded so two Reborn titles
-    cannot silently collapse onto the same engine card.
-    """
+    """Return one primary engine row only when latest official text is unique."""
     if not official_text:
         return None, []
     wanted = text_key(official_text)
@@ -76,11 +70,41 @@ def _exact_primary(matches):
     return matches if len(matches) == 1 else [r for r in matches if r['alias'] == 0]
 
 
+def _load_identity_aliases():
+    path = ROOT/'data/identity_aliases.json'
+    if not path.exists():
+        return {}, {}
+    data = json.loads(path.read_text())
+    return data.get('aliases', {}), data.get('explicit_non_aliases', {})
+
+
+def reviewed_alias_match(pool_name, records, aliases, blocked_ids=()):
+    """Resolve only an explicitly reviewed pool-title identity alias."""
+    spec = aliases.get(pool_name)
+    if not spec:
+        return None, None
+    target_name = spec.get('engine_name')
+    if not target_name:
+        raise ValueError(f'reviewed alias {pool_name!r} has no engine_name')
+    primary = _exact_primary(records.get(key(target_name), []))
+    if len(primary) != 1:
+        raise ValueError(
+            f'reviewed alias {pool_name!r}->{target_name!r} resolved to {len(primary)} primary engine cards'
+        )
+    row = primary[0]
+    if int(row['id']) in {int(v) for v in blocked_ids}:
+        raise ValueError(
+            f'reviewed alias {pool_name!r}->{target_name!r} collides with a reserved/used engine ID'
+        )
+    return row, spec
+
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--database',required=True)
     p.add_argument('--scripts',required=True);p.add_argument('--core',required=True);a=p.parse_args()
     db=Path(a.database).resolve();scripts=Path(a.scripts).resolve();core=Path(a.core).resolve()
     overrides=ROOT/'script_overrides'
+    aliases,non_aliases=_load_identity_aliases()
     con=sqlite3.connect(db);con.row_factory=sqlite3.Row
     records={};all_records=[]
     for r in con.execute('SELECT d.*,t.name,t.desc FROM datas d JOIN texts t USING(id)'):
@@ -88,8 +112,8 @@ def main():
     cards=json.loads((ROOT/'data/processed/cards.json').read_text());mapped=[];missing=[]
 
     # Exact-title matches have priority over every fallback, independent of pool
-    # ordering.  Reserve their IDs up front so a legacy-title fallback cannot
-    # steal an ID from a separate exact-title card later in the pool.
+    # ordering. Reserve their IDs up front so aliases cannot steal an ID from a
+    # separate exact-title card later in the pool.
     reserved_exact_ids=set()
     for c in cards:
         primary=_exact_primary(records.get(key(c['name']),[]))
@@ -101,24 +125,33 @@ def main():
         matches=records.get(key(c['name']),[])
         primary=_exact_primary(matches)
         mapping_source=None
+        alias_spec=None
         text_candidates=[]
         if len(primary)==1:
             r=primary[0]
             mapping_source='exact_title'
         else:
             blocked=reserved_exact_ids|used_ids
-            official_text=(c.get('official') or {}).get('text')
-            r,text_candidates=unique_exact_text_match(official_text,all_records,blocked)
+            r,alias_spec=reviewed_alias_match(c['name'],records,aliases,blocked)
             if r is not None:
-                mapping_source='unique_exact_latest_official_text'
+                mapping_source='reviewed_identity_alias'
             else:
-                missing.append(dict(
-                    id=c['id'],name=c['name'],candidate_ids=[r['id'] for r in matches],
-                    exact_text_candidate_ids=[row['id'] for row in text_candidates],
-                    exact_text_candidate_names=[row['name'] for row in text_candidates],
-                    suggestions=mapping_suggestions(c['name'], all_records, 5),
-                    mapping_status='unverified_suggestions_only',
-                ));continue
+                official_text=(c.get('official') or {}).get('text')
+                r,text_candidates=unique_exact_text_match(official_text,all_records,blocked)
+                if r is not None:
+                    mapping_source='unique_exact_latest_official_text'
+                else:
+                    non_alias=non_aliases.get(c['name'])
+                    missing.append(dict(
+                        id=c['id'],name=c['name'],candidate_ids=[r['id'] for r in matches],
+                        exact_text_candidate_ids=[row['id'] for row in text_candidates],
+                        exact_text_candidate_names=[row['name'] for row in text_candidates],
+                        suggestions=mapping_suggestions(c['name'], all_records, 5),
+                        mapping_status=(
+                            non_alias.get('status') if non_alias else 'unverified_suggestions_only'
+                        ),
+                        identity_blocker=non_alias,
+                    ));continue
         rid=int(r['id'])
         if rid in used_ids:
             raise RuntimeError(f'duplicate engine mapping {rid} for {c["name"]}')
@@ -146,6 +179,9 @@ def main():
         text_match=bool(c.get('official')) and text_key(c['official']['text'])==text_key(r['desc'])
         entry=dict(reborn_id=c['id'],name=c['name'],passcode=rid,copy_limit=c['copy_limit'],
              mapping_source=mapping_source,engine_name=r['name'],
+             identity_alias_status=alias_spec.get('status') if alias_spec else None,
+             identity_alias_evidence=alias_spec.get('evidence') if alias_spec else None,
+             identity_alias_source_url=alias_spec.get('source_url') if alias_spec else None,
              data={k:v for k,v in r.items() if k not in ('name','desc')},
              script_path=script_path,script_source=script_source,
              script_sha256=hashlib.sha256(implementation.read_bytes()).hexdigest() if implementation else None,
@@ -168,6 +204,12 @@ def main():
     dump(ROOT/'engine.lock.json',locks)
     dump(ROOT/'reports/engine_coverage.json',dict(mapped=len(mapped),unmapped=missing,
         exact_title_mappings=sum(r['mapping_source']=='exact_title' for r in mapped),
+        reviewed_identity_alias_mappings=sum(r['mapping_source']=='reviewed_identity_alias' for r in mapped),
+        reviewed_identity_aliases=[
+            {'reborn_id':r['reborn_id'],'pool_name':r['name'],'engine_name':r['engine_name'],
+             'passcode':r['passcode'],'status':r['identity_alias_status']}
+            for r in mapped if r['mapping_source']=='reviewed_identity_alias'
+        ],
         exact_text_fallback_mappings=sum(r['mapping_source']=='unique_exact_latest_official_text' for r in mapped),
         exact_text_fallbacks=[
             {'reborn_id':r['reborn_id'],'pool_name':r['name'],'engine_name':r['engine_name'],'passcode':r['passcode']}
@@ -183,8 +225,8 @@ def main():
         certified_interactions=0,
         note=(
             'Implementation availability, including reviewed overrides, is not Reborn correctness certification. '
-            'Unique exact latest-official-text fallback can resolve renamed titles; fuzzy title suggestions remain '
-            'advisory only and never authorize an automatic mapping.'
+            'Reviewed identity aliases are explicit audited identity corrections only. Unique exact latest-official-text '
+            'fallback can resolve renamed titles; fuzzy title suggestions remain advisory only.'
         )))
     # Whitelist mode is crucial: cards not present here must not default to 3.
     lines=['# Reborn exact pool; latest standard scripts plus reviewed solver overrides','!Reborn solver 2026-09-06','$whitelist']
