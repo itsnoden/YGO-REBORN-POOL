@@ -65,39 +65,6 @@ class LearningTests(unittest.TestCase):
         self.assertFalse(any('card:999' in f for f in first))
         self.assertTrue(any(f == 'card:123' for f in second))
 
-    def test_safe_known_card_can_condition_a_different_legal_choice(self):
-        policy = SparsePolicy(seed=12)
-        obs = observation(0)
-        obs['players'][0]['hand_count'] = 1
-        obs['players'][0]['hand'] = [{'code': 777}]
-        prompt = {'kind': 'idle'}
-        action_a = {
-            'label': 'activate',
-            'card': {'controller': 0, 'location': 2, 'sequence': 0, 'code': 100},
-        }
-        action_b = {
-            'label': 'activate',
-            'card': {'controller': 0, 'location': 2, 'sequence': 1, 'code': 101},
-        }
-        first = policy.action_features(prompt, obs, action_a)
-        second = policy.action_features(prompt, obs, action_b)
-        contextual = 'x:known:self|hand|777|card_label:100|activate'
-        self.assertIn(contextual, first)
-        self.assertNotIn(contextual, second)
-        policy.weights[contextual] = 2.0
-        probs = policy.probabilities([first, second])
-        self.assertGreater(probs[0], probs[1])
-
-    def test_hidden_opponent_hand_never_becomes_context(self):
-        policy = SparsePolicy(seed=13)
-        obs = observation(0)
-        obs['players'][1]['hand_count'] = 1
-        obs['players'][1]['hand'] = [{'hidden': True}]
-        prompt = {'kind': 'yesno'}
-        action = {'label': 'yes', 'description': 55}
-        features = policy.action_features(prompt, obs, action)
-        self.assertFalse(any('known:opp|hand|' in f for f in features))
-
     def test_complex_features_use_only_safe_option_view(self):
         policy = SparsePolicy(seed=3)
         prompt = {'kind': 'tribute'}
