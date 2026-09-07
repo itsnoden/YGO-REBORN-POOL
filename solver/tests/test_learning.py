@@ -91,6 +91,22 @@ class LearningTests(unittest.TestCase):
         self.assertEqual(pilot.learned_decisions, 1)
         self.assertEqual(len(pilot.steps), 1)
 
+    def test_announce_card_is_a_learned_legal_choice(self):
+        decision = parse_decision(bytes([142, 0, 1]) + struct.pack('<Q', 123))
+        prompt = {
+            'kind': 'announce_card', 'player': 0, 'minimum': 0, 'maximum': 0,
+            'cancelable': False, 'cards': [], 'actions': [], 'meta': {},
+        }
+        policy = SparsePolicy(seed=10)
+        pilot = LearningPilot(policy, seed=11)
+        legal = [101, 202, 303]
+        response = pilot.choose_announce_card(decision, prompt, observation(0), legal)
+        self.assertIn(response, tuple(struct.pack('<i', code) for code in legal))
+        self.assertEqual(pilot.learned_decisions, 1)
+        self.assertEqual(pilot.complex_learned_decisions, 1)
+        self.assertEqual(pilot.fallback_decisions, 0)
+        self.assertEqual(len(pilot.steps), 1)
+
     def test_small_multicard_selection_is_learned(self):
         decision, prompt = select_card_decision(2, 2, 2)
         pilot = LearningPilot(SparsePolicy(seed=6), seed=7)
