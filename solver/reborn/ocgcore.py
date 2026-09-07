@@ -53,6 +53,7 @@ class Duel:
     def __init__(self,library,database,scripts,seed=1,flags=None):
         self.lib=C.CDLL(str(Path(library).resolve()));self.scripts=Path(scripts).resolve()
         self.logs=[];self.errors=[];self.arrays=[];self.closed=False;self.handle=PTR()
+        self.process_calls=0;self.loaded_scripts=[]
         self.lib.OCG_GetVersion.argtypes=[C.POINTER(C.c_int),C.POINTER(C.c_int)]
         major=C.c_int();minor=C.c_int();self.lib.OCG_GetVersion(C.byref(major),C.byref(minor))
         if (major.value,minor.value)!=(11,0):raise RuntimeError('Unsupported ocgcore ABI')
@@ -66,7 +67,10 @@ class Duel:
         self.lib.OCG_DuelSetResponse.argtypes=[PTR,PTR,U32]
         self.lib.OCG_DuelQueryCount.argtypes=[PTR,U8,U32];self.lib.OCG_DuelQueryCount.restype=U32
         con=sqlite3.connect(database);con.row_factory=sqlite3.Row
-        self.data={r['id']:dict(r) for r in con.execute('SELECT * FROM datas')};con.close()
+        self.data={r['id']:dict(r) for r in con.execute('SELECT * FROM datas')}
+        try:self.names={r['id']:r['name'] for r in con.execute('SELECT id,name FROM texts')}
+        except sqlite3.Error:self.names={}
+        con.close()
         @READ
         def reader(payload,code,out):
             try:
@@ -88,12 +92,21 @@ class Duel:
                 path=self.scripts/filename
                 if not path.is_file():path=self.scripts/'official'/filename
                 if not path.is_file():return 0
+                code=None
+                stem=Path(filename).stem
+                if stem.startswith('c') and stem[1:].isdigit():code=int(stem[1:])
+                self.loaded_scripts.append({
+                    'process_call':self.process_calls,
+                    'filename':filename,
+                    'code':code,
+                    'name':self.names.get(code) if code is not None else None,
+                })
                 data=path.read_bytes()
                 return self.lib.OCG_LoadScript(handle,data,len(data),name)
             except Exception as exc:self.errors.append(repr(exc));return 0
         @LOG
         def log(payload,message,kind):
-            self.logs.append(dict(kind=kind,message=message.decode(errors='replace')))
+            self.logs.append(dict(process_call=self.process_calls,kind=kind,message=message.decode(errors='replace')))
             if kind==0:self.errors.append(self.logs[-1]['message'])
         @DONE
         def done(payload,data):pass
@@ -116,6 +129,13 @@ class Duel:
     def check_errors(self):
         if self.errors:raise UnsupportedInteraction('\n'.join(self.errors))
 
+    def debug_snapshot(self):
+        return {
+            'process_calls':self.process_calls,
+            'recent_logs':self.logs[-32:],
+            'loaded_scripts':self.loaded_scripts[-128:],
+        }
+
     def add(self,code,player,location=1,sequence=0):
         if code not in self.data:raise UnsupportedInteraction(f'Unknown passcode {code}')
         info=NewCard(player,0,code,player,location,sequence,8)
@@ -124,6 +144,7 @@ class Duel:
     def start(self):self.lib.OCG_StartDuel(self.handle);self.check_errors()
 
     def process(self):
+        self.process_calls+=1
         status=self.lib.OCG_DuelProcess(self.handle);size=U32()
         ptr=self.lib.OCG_DuelGetMessage(self.handle,C.byref(size))
         messages=split_messages(C.string_at(ptr,size.value)) if size.value else []
