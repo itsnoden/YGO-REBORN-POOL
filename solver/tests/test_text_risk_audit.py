@@ -1,6 +1,6 @@
 import unittest
 
-from reborn.text_risk_audit import classify_risk
+from reborn.text_risk_audit import build_risk_report, classify_risk
 
 
 class TextRiskAuditTests(unittest.TestCase):
@@ -29,6 +29,21 @@ class TextRiskAuditTests(unittest.TestCase):
         self.assertEqual(row['risk_tier'], 'low')
         self.assertFalse(row['numeric_sequence_changed'])
         self.assertEqual(row['changed_signal_groups'], [])
+
+    def test_risk_report_excludes_rules_terminology_only_rows(self):
+        cards = [
+            {'id': 'a', 'official': {'text': 'Send it to the GY.'}},
+            {'id': 'b', 'official': {'text': 'Destroy 1 monster.'}},
+        ]
+        mapped = [
+            {'reborn_id': 'a', 'name': 'A', 'engine_name': 'A', 'passcode': 1,
+             'normal_monster': False, 'engine_text': 'Send it to the Graveyard.'},
+            {'reborn_id': 'b', 'name': 'B', 'engine_name': 'B', 'passcode': 2,
+             'normal_monster': False, 'engine_text': 'Banish 1 monster.'},
+        ]
+        report = build_risk_report(cards, mapped)
+        self.assertEqual(report['lexical_effect_rows_prioritized'], 1)
+        self.assertEqual(report['rows'][0]['name'], 'B')
 
 
 if __name__ == '__main__':
