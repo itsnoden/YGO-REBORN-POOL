@@ -1,4 +1,4 @@
-"""Train the first from-scratch pilot on complete YGO Reborn engine self-play.
+"""Train the from-scratch pilot on complete YGO Reborn engine self-play.
 
 This is a pilot-training correctness smoke test under the user-confirmed Reborn
 rules profile. It proves learning data can flow from safe observations to duel
@@ -28,7 +28,8 @@ def run_training_game(library, database, scripts, decks, mapped, policy, seed, b
     pilot = LearningPilot(policy, seed=seed * 17 + 3)
     tracker = PublicTracker(); decision_types = Counter()
     row = {'seed': seed, 'status': 'pending', 'steps': 0, 'decisions': 0,
-           'learned_decisions': 0, 'fallback_decisions': 0, 'blocker': None}
+           'learned_decisions': 0, 'complex_learned_decisions': 0,
+           'fallback_decisions': 0, 'fallback_kinds': {}, 'blocker': None}
     with Duel(library, database, scripts, seed=seed) as duel:
         for player, deck in enumerate(decks):
             for index, cid in enumerate(deck):
@@ -44,7 +45,9 @@ def run_training_game(library, database, scripts, decks, mapped, policy, seed, b
                 row.update(status='completed', completed=True,
                            winner_seat_debug_only=winner,
                            learned_decisions=pilot.learned_decisions,
+                           complex_learned_decisions=pilot.complex_learned_decisions,
                            fallback_decisions=pilot.fallback_decisions,
+                           fallback_kinds=dict(sorted(pilot.fallback_kinds.items())),
                            decision_types=dict(sorted(decision_types.items())))
                 return row
             decision = extract_decision(messages)
@@ -57,6 +60,7 @@ def run_training_game(library, database, scripts, decks, mapped, policy, seed, b
                     code = choose_declarable(database, decision.meta['opcodes'], allowed_codes)
                     response = struct.pack('<i', code)
                     pilot.fallback_decisions += 1
+                    pilot.fallback_kinds['announce_card'] += 1
                 else:
                     response = pilot.choose(decision, prompt, observation)
                 duel.respond(response); continue
@@ -105,8 +109,10 @@ def main():
 
     policy_path = ROOT/'reports/learned_policy_reborn_smoke.json'
     policy.save(policy_path)
-    decision_types = Counter()
-    for row in results: decision_types.update(row.get('decision_types', {}))
+    decision_types = Counter(); fallback_kinds = Counter()
+    for row in results:
+        decision_types.update(row.get('decision_types', {}))
+        fallback_kinds.update(row.get('fallback_kinds', {}))
     completed = sum(bool(r.get('completed')) for r in results)
     report = {
         'purpose': 'from_scratch_policy_training_smoke_only',
@@ -114,11 +120,13 @@ def main():
         'deck_ranking_evidence': False,
         'profile': 'reborn',
         'external_strategy_priors': False,
-        'policy': 'sparse_softmax_reinforce_v1',
+        'policy': 'sparse_softmax_reinforce_v2_complex_actions',
         'attempted': len(results),
         'completed': completed,
         'learned_decisions': sum(r.get('learned_decisions', 0) for r in results),
+        'complex_learned_decisions': sum(r.get('complex_learned_decisions', 0) for r in results),
         'fallback_decisions': sum(r.get('fallback_decisions', 0) for r in results),
+        'fallback_kinds': dict(sorted(fallback_kinds.items())),
         'weight_count': len(policy.weights),
         'decision_types': dict(sorted(decision_types.items())),
         'policy_file': 'reports/learned_policy_reborn_smoke.json',
@@ -126,7 +134,7 @@ def main():
         'note': 'Training outcomes update pilot weights only. Do not use these smoke games to rank decks.',
     }
     dump(ROOT/'reports/learn_probe.json', report)
-    print(json.dumps({k: report[k] for k in ('attempted','completed','learned_decisions','fallback_decisions','weight_count')}))
+    print(json.dumps({k: report[k] for k in ('attempted','completed','learned_decisions','complex_learned_decisions','fallback_decisions','fallback_kinds','weight_count')}))
     if completed != len(results):
         raise SystemExit(f'learning smoke failed: completed {completed}/{len(results)} games')
     if report['learned_decisions'] <= 0 or report['weight_count'] <= 0:
