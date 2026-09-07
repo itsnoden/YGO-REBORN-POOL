@@ -48,7 +48,6 @@ def run_eval_game(library, database, scripts, deck, mapped, frozen_policy,
         raise ValueError('learned_seat must be 0 or 1')
     allowed_codes = [entry['passcode'] for entry in mapped.values()]
 
-    # Evaluation gets a fresh RNG but an exact frozen copy of the trained weights.
     eval_policy = SparsePolicy(
         seed=seed * 1009 + learned_seat,
         temperature=frozen_policy.temperature,
@@ -60,6 +59,7 @@ def run_eval_game(library, database, scripts, deck, mapped, frozen_policy,
     baseline = StochasticLegalPilot(seed * 103 + 31 + learned_seat)
     tracker = PublicTracker()
     decision_types = Counter()
+    recent_decisions = []
     row = {
         'seed': seed,
         'learned_seat': learned_seat,
@@ -74,69 +74,91 @@ def run_eval_game(library, database, scripts, deck, mapped, frozen_policy,
         'blocker': None,
     }
 
-    with Duel(library, database, scripts, seed=seed) as duel:
-        # Mirror deck: both pilots receive identical deck composition.
-        for player in (0, 1):
-            for index, cid in enumerate(deck):
-                duel.add(mapped[cid]['passcode'], player, sequence=index)
-        duel.start()
+    try:
+        with Duel(library, database, scripts, seed=seed) as duel:
+            for player in (0, 1):
+                for index, cid in enumerate(deck):
+                    duel.add(mapped[cid]['passcode'], player, sequence=index)
+            duel.start()
 
-        for step in range(budget):
-            status, messages = duel.process(); tracker.consume(messages)
-            row['steps'] = step + 1
-            wins = [m for m in messages if m and m[0] == MSG_WIN]
-            if wins:
-                winner = wins[0][1] if len(wins[0]) >= 2 else None
-                row['winner_seat_debug_only'] = winner
-                if winner == learned_seat:
-                    row['learned_result'] = 'win'
-                elif winner == 1 - learned_seat:
-                    row['learned_result'] = 'loss'
-                else:
-                    row['learned_result'] = 'draw'
-                row.update(
-                    status='completed', completed=True,
-                    learned_decisions=learned.learned_decisions,
-                    learned_fallback_decisions=learned.fallback_decisions,
-                    decision_types=dict(sorted(decision_types.items())),
-                )
-                break
+            for step in range(budget):
+                status, messages = duel.process(); tracker.consume(messages)
+                row['steps'] = step + 1
+                wins = [m for m in messages if m and m[0] == MSG_WIN]
+                if wins:
+                    winner = wins[0][1] if len(wins[0]) >= 2 else None
+                    row['winner_seat_debug_only'] = winner
+                    if winner == learned_seat:
+                        row['learned_result'] = 'win'
+                    elif winner == 1 - learned_seat:
+                        row['learned_result'] = 'loss'
+                    else:
+                        row['learned_result'] = 'draw'
+                    row.update(
+                        status='completed', completed=True,
+                        learned_decisions=learned.learned_decisions,
+                        learned_fallback_decisions=learned.fallback_decisions,
+                        decision_types=dict(sorted(decision_types.items())),
+                    )
+                    break
 
-            decision = extract_decision(messages)
-            if decision is not None:
-                row['decisions'] += 1
-                decision_types[decision.kind] += 1
-                observation = observation_for(duel, decision.player, tracker)
-                row['observation_checks'] += 1
-                prompt = policy_prompt_view(decision, observation)
-                assert_no_hidden_code_leak(prompt, observation)
-                row['policy_view_checks'] += 1
+                decision = extract_decision(messages)
+                if decision is not None:
+                    row['decisions'] += 1
+                    decision_types[decision.kind] += 1
+                    recent_decisions.append({
+                        'step': step + 1,
+                        'player': decision.player,
+                        'kind': decision.kind,
+                    })
+                    if len(recent_decisions) > 32:
+                        recent_decisions.pop(0)
+                    observation = observation_for(duel, decision.player, tracker)
+                    row['observation_checks'] += 1
+                    prompt = policy_prompt_view(decision, observation)
+                    assert_no_hidden_code_leak(prompt, observation)
+                    row['policy_view_checks'] += 1
 
-                if decision.kind == 'announce_card':
-                    code = choose_declarable(database, decision.meta['opcodes'], allowed_codes)
-                    response = struct.pack('<i', code)
-                    if decision.player == learned_seat:
-                        learned.fallback_decisions += 1
-                elif decision.player == learned_seat:
-                    response = learned.choose(decision, prompt, observation)
-                else:
-                    response = baseline.choose(decision, observation)
-                duel.respond(response)
-                continue
+                    if decision.kind == 'announce_card':
+                        code = choose_declarable(database, decision.meta['opcodes'], allowed_codes)
+                        response = struct.pack('<i', code)
+                        if decision.player == learned_seat:
+                            learned.fallback_decisions += 1
+                    elif decision.player == learned_seat:
+                        response = learned.choose(decision, prompt, observation)
+                    else:
+                        response = baseline.choose(decision, observation)
+                    duel.respond(response)
+                    continue
 
-            if status != 2:
-                raise UnsupportedInteraction(
-                    f'engine stopped without win/decision: status={status}, messages={[m[0] for m in messages if m]}'
-                )
-        else:
-            raise UnsupportedInteraction(f'held-out evaluation exceeded {budget} engine steps')
+                if status != 2:
+                    raise UnsupportedInteraction(
+                        f'engine stopped without win/decision: status={status}, messages={[m[0] for m in messages if m]}'
+                    )
+            else:
+                raise UnsupportedInteraction(f'held-out evaluation exceeded {budget} engine steps')
+    except Exception as exc:
+        row.update(
+            status='blocked', completed=False,
+            blocker=f'{type(exc).__name__}: {exc}',
+            learned_decisions=learned.learned_decisions,
+            learned_fallback_decisions=learned.fallback_decisions,
+            decision_types=dict(sorted(decision_types.items())),
+            recent_decisions=recent_decisions,
+        )
+        return row
 
     if eval_policy.weights != weights_before:
-        raise UnsupportedInteraction('frozen evaluation policy mutated')
-    if row.get('status') != 'completed':
-        raise UnsupportedInteraction('held-out game did not complete')
-    if row['observation_checks'] != row['decisions'] or row['policy_view_checks'] != row['decisions']:
-        raise UnsupportedInteraction('not every held-out decision passed privacy observation/prompt checks')
+        row.update(status='blocked', completed=False,
+                   blocker='UnsupportedInteraction: frozen evaluation policy mutated')
+    elif row.get('status') != 'completed':
+        row.update(status='blocked', completed=False,
+                   blocker='UnsupportedInteraction: held-out game did not complete')
+    elif row['observation_checks'] != row['decisions'] or row['policy_view_checks'] != row['decisions']:
+        row.update(status='blocked', completed=False,
+                   blocker='UnsupportedInteraction: not every held-out decision passed privacy checks')
+    if not row.get('completed'):
+        row['recent_decisions'] = recent_decisions
     return row
 
 
@@ -180,67 +202,66 @@ def main():
         if game % 2:
             seat0, seat1 = seat1, seat0
         seed = a.train_seed + game
-        row = {
-            'game': game,
-            'seat0': seat0[0],
-            'seat1': seat1[0],
-            'seed': seed,
-        }
-        row.update(run_training_game(
-            a.library, a.database, a.scripts,
-            (seat0[1], seat1[1]), mapped, policy, seed, a.budget,
-        ))
-        if not row.get('completed'):
-            raise UnsupportedInteraction(f'training game {game} did not complete')
+        row = {'game': game, 'seat0': seat0[0], 'seat1': seat1[0], 'seed': seed}
+        try:
+            row.update(run_training_game(
+                a.library, a.database, a.scripts,
+                (seat0[1], seat1[1]), mapped, policy, seed, a.budget,
+            ))
+        except Exception as exc:
+            row.update(status='blocked', completed=False,
+                       blocker=f'{type(exc).__name__}: {exc}')
         train_results.append(row)
+        if not row.get('completed'):
+            break
 
+    training_complete = len(train_results) == a.train_games and all(r.get('completed') for r in train_results)
     if not policy.weights:
-        raise UnsupportedInteraction('training completed without nonzero policy weights')
+        training_complete = False
     trained_weights = dict(policy.weights)
     policy_path = ROOT/'reports/heldout_policy_reborn.json'
     policy.save(policy_path)
 
     eval_results = []
-    for deck_index, (candidate_id, deck) in enumerate(eval_pool):
-        for pair in range(a.pairs_per_deck):
-            seed = a.eval_seed + deck_index * 100 + pair
-            # Same mirror deck and same engine seed; learned policy alternates seat.
-            for learned_seat in (0, 1):
-                row = {
-                    'candidate': candidate_id,
-                    'pair': pair,
-                    'seed': seed,
-                    'learned_seat': learned_seat,
-                }
-                row.update(run_eval_game(
-                    a.library, a.database, a.scripts, deck, mapped,
-                    policy, learned_seat, seed, a.budget,
-                ))
-                eval_results.append(row)
+    if training_complete:
+        for deck_index, (candidate_id, deck) in enumerate(eval_pool):
+            for pair in range(a.pairs_per_deck):
+                seed = a.eval_seed + deck_index * 100 + pair
+                for learned_seat in (0, 1):
+                    row = {
+                        'candidate': candidate_id,
+                        'pair': pair,
+                        'seed': seed,
+                        'learned_seat': learned_seat,
+                    }
+                    row.update(run_eval_game(
+                        a.library, a.database, a.scripts, deck, mapped,
+                        policy, learned_seat, seed, a.budget,
+                    ))
+                    eval_results.append(row)
 
-    if policy.weights != trained_weights:
-        raise UnsupportedInteraction('training policy changed during frozen held-out evaluation')
-
+    policy_frozen = policy.weights == trained_weights
     completed = sum(bool(r.get('completed')) for r in eval_results)
     learned_wins = sum(r.get('learned_result') == 'win' for r in eval_results)
     learned_losses = sum(r.get('learned_result') == 'loss' for r in eval_results)
     learned_draws = sum(r.get('learned_result') == 'draw' for r in eval_results)
-    if completed != len(eval_results):
-        raise UnsupportedInteraction(f'held-out evaluation completed {completed}/{len(eval_results)} games')
+    planned_eval_games = a.eval_decks * a.pairs_per_deck * 2
 
     decision_types = Counter()
     for row in eval_results:
         decision_types.update(row.get('decision_types', {}))
-    raw_rate = learned_wins / completed if completed else 0.0
+    raw_rate = learned_wins / completed if completed else None
     report = {
         'purpose': 'heldout_pilot_skill_evaluation_only',
         'profile': 'reborn',
         'deck_ranking_evidence': False,
         'strength_evidence_for_decks': False,
-        'pilot_skill_evidence': 'preliminary_heldout',
+        'pilot_skill_evidence': 'preliminary_heldout' if completed == planned_eval_games else False,
         'external_strategy_priors': False,
         'training': {
+            'planned_games': a.train_games,
             'games': len(train_results),
+            'completed': sum(bool(r.get('completed')) for r in train_results),
             'candidate_ids': [cid for cid, _ in train_pool],
             'seed_start': a.train_seed,
             'learned_decisions': sum(r.get('learned_decisions', 0) for r in train_results),
@@ -250,37 +271,49 @@ def main():
         'evaluation': {
             'mirror_candidate_ids': [cid for cid, _ in eval_pool],
             'pairs_per_deck': a.pairs_per_deck,
+            'planned_games': planned_eval_games,
             'games': completed,
             'seed_start': a.eval_seed,
             'learned_wins': learned_wins,
             'learned_losses': learned_losses,
             'learned_draws': learned_draws,
             'learned_win_rate': raw_rate,
-            'learned_win_wilson95_lower': wilson_lower(learned_wins, completed),
+            'learned_win_wilson95_lower': wilson_lower(learned_wins, completed) if completed else None,
             'learned_decisions': sum(r.get('learned_decisions', 0) for r in eval_results),
             'learned_fallback_decisions': sum(r.get('learned_fallback_decisions', 0) for r in eval_results),
             'observation_checks': sum(r.get('observation_checks', 0) for r in eval_results),
             'policy_view_checks': sum(r.get('policy_view_checks', 0) for r in eval_results),
             'decision_types': dict(sorted(decision_types.items())),
+            'blocked': sum(not bool(r.get('completed')) for r in eval_results),
         },
+        'policy_frozen_during_evaluation': policy_frozen,
         'policy_file': 'reports/heldout_policy_reborn.json',
         'train_results': train_results,
         'eval_results': eval_results,
         'note': (
             'Mirror decks and paired learned-seat swaps isolate pilot behavior from deck composition. '
-            'This small held-out experiment is pilot-skill evidence only and must not rank decks.'
+            'This experiment measures pilot skill only and must not rank decks. Blockers are persisted before failure.'
         ),
     }
     dump(ROOT/'reports/pilot_eval.json', report)
     print(json.dumps({
-        'train_games': len(train_results),
-        'eval_games': completed,
+        'train_completed': report['training']['completed'],
+        'train_planned': a.train_games,
+        'eval_completed': completed,
+        'eval_planned': planned_eval_games,
         'learned_wins': learned_wins,
         'learned_losses': learned_losses,
         'learned_draws': learned_draws,
         'learned_win_rate': raw_rate,
         'weight_count': len(policy.weights),
     }))
+
+    if not training_complete:
+        raise SystemExit('held-out pilot training did not complete cleanly')
+    if not policy_frozen:
+        raise SystemExit('held-out evaluation mutated frozen training weights')
+    if completed != planned_eval_games:
+        raise SystemExit(f'held-out evaluation completed {completed}/{planned_eval_games} games')
 
 
 if __name__ == '__main__':
