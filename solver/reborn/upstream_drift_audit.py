@@ -22,7 +22,8 @@ SCRIPT_RE = re.compile(r'(?:^|/)official/c(\d+)\.lua$')
 def script_passcodes(paths):
     ids = set()
     for path in paths:
-        match = SCRIPT_RE.search(str(path).replace('\\', '/'))
+        normalized = str(path).replace('\\', '/')
+        match = SCRIPT_RE.search(normalized)
         if match:
             ids.add(int(match.group(1)))
     return ids
