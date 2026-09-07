@@ -13,6 +13,7 @@ from .effects import UnsupportedInteraction
 from .import_pool import ROOT, dump
 from .observation import PublicTracker, observation_for
 from .ocgcore import Duel
+from .policy_view import policy_prompt_view, assert_no_hidden_code_leak
 from .protocol_extra import extract_decision, conservative_response
 from .search import validate
 
@@ -26,19 +27,17 @@ def _assert_filtered_observation(observation):
         if player == viewer:
             continue
         for card in row['hand']:
-            if card.get('hidden'):
-                if 'code' in card:
-                    raise UnsupportedInteraction('opponent hidden hand code leaked')
+            if card.get('hidden') and 'code' in card:
+                raise UnsupportedInteraction('opponent hidden hand code leaked')
         for card in row['extra']:
-            if card.get('hidden'):
-                if 'code' in card:
-                    raise UnsupportedInteraction('opponent hidden Extra Deck code leaked')
+            if card.get('hidden') and 'code' in card:
+                raise UnsupportedInteraction('opponent hidden Extra Deck code leaked')
     return True
 
 
 def run_one(library, database, scripts, deck0, deck1, mapped, seed, budget=5000):
     row = dict(seed=seed, status='pending', steps=0, decisions=0,
-               observation_checks=0, message_types=[], blocker=None)
+               observation_checks=0, policy_view_checks=0, message_types=[], blocker=None)
     allowed_codes = [entry['passcode'] for entry in mapped.values()]
     tracker = PublicTracker()
     with Duel(library, database, scripts, seed=seed) as duel:
@@ -58,14 +57,16 @@ def run_one(library, database, scripts, deck0, deck1, mapped, seed, budget=5000)
             decision = extract_decision(messages)
             if decision is not None:
                 row['decisions'] += 1
-                decision.view_for(decision.player)
 
-                # Build the same information-safe state object a future pilot
-                # will consume. This is a live ABI/privacy assertion, not a
-                # strength feature and must not affect the baseline's choices.
+                # Build the same information-safe state/prompt objects a future
+                # learned pilot will consume. Neither object affects this
+                # conservative baseline's action choice.
                 observation = observation_for(duel, decision.player, tracker)
                 _assert_filtered_observation(observation)
                 row['observation_checks'] += 1
+                policy_view = policy_prompt_view(decision, observation)
+                assert_no_hidden_code_leak(policy_view, observation)
+                row['policy_view_checks'] += 1
 
                 if decision.kind == 'announce_card':
                     code = choose_declarable(database, decision.meta['opcodes'], allowed_codes)
@@ -117,18 +118,19 @@ def main():
         results.append(row)
 
     report = {
-        'purpose': 'protocol_observation_and_complete_duel_correctness_only',
+        'purpose': 'protocol_observation_prompt_filter_and_complete_duel_correctness_only',
         'strength_evidence': False,
         'profile': 'experimental_current_tcg_not_reborn_confirmed',
         'baseline_policy': 'deterministic_conservative_legal_actions',
         'attempted': len(results),
         'completed': sum(bool(r.get('completed')) for r in results),
         'observation_checks': sum(r.get('observation_checks', 0) for r in results),
+        'policy_view_checks': sum(r.get('policy_view_checks', 0) for r in results),
         'results': results,
         'note': 'Do not use these outcomes as deck rankings, win rates, or search priors.',
     }
     dump(ROOT/'reports/flow_probe.json', report)
-    print(json.dumps({k: report[k] for k in ('attempted', 'completed', 'observation_checks')}))
+    print(json.dumps({k: report[k] for k in ('attempted', 'completed', 'observation_checks', 'policy_view_checks')}))
 
 
 if __name__ == '__main__':
