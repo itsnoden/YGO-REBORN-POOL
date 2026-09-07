@@ -1,7 +1,9 @@
 """Join exact Reborn titles to standard EDOPro IDs; audit text/script coverage."""
 import argparse
+from difflib import SequenceMatcher
 import hashlib
 import json
+import re
 import sqlite3
 import subprocess
 from pathlib import Path
@@ -12,22 +14,62 @@ def text_key(text):
     return ' '.join(text.replace('\r',' ').split())
 
 
+def _name_shape(name):
+    """Comparison-only normalized title; never authorizes an engine mapping."""
+    return re.sub(r'[^a-z0-9]+', '', key(name))
+
+
+def _name_tokens(name):
+    return set(re.findall(r'[a-z0-9]+', key(name)))
+
+
+def mapping_suggestions(name, rows, limit=5):
+    """Rank likely database titles for manual audit without auto-mapping them."""
+    source_shape = _name_shape(name)
+    source_tokens = _name_tokens(name)
+    scored = []
+    seen = set()
+    for row in rows:
+        rid = int(row['id'])
+        if rid in seen:
+            continue
+        seen.add(rid)
+        candidate_name = row['name']
+        target_shape = _name_shape(candidate_name)
+        sequence = SequenceMatcher(None, source_shape, target_shape).ratio() if source_shape and target_shape else 0.0
+        target_tokens = _name_tokens(candidate_name)
+        union = source_tokens | target_tokens
+        token_jaccard = len(source_tokens & target_tokens) / len(union) if union else 0.0
+        # Ranking aid only. Exact mapping still requires explicit verification.
+        score = max(sequence, 0.65 * sequence + 0.35 * token_jaccard)
+        scored.append((score, candidate_name.casefold(), rid, candidate_name))
+    scored.sort(key=lambda item: (-item[0], item[1], item[2]))
+    return [
+        {'id': rid, 'name': candidate_name, 'similarity': round(score, 4)}
+        for score, _, rid, candidate_name in scored[:max(0, int(limit))]
+    ]
+
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--database',required=True)
     p.add_argument('--scripts',required=True);p.add_argument('--core',required=True);a=p.parse_args()
     db=Path(a.database).resolve();scripts=Path(a.scripts).resolve();core=Path(a.core).resolve()
     overrides=ROOT/'script_overrides'
     con=sqlite3.connect(db);con.row_factory=sqlite3.Row
-    records={}
+    records={};all_records=[]
     for r in con.execute('SELECT d.*,t.name,t.desc FROM datas d JOIN texts t USING(id)'):
-        records.setdefault(key(r['name']),[]).append(dict(r))
+        row=dict(r);all_records.append(row);records.setdefault(key(r['name']),[]).append(row)
     cards=json.loads((ROOT/'data/processed/cards.json').read_text());mapped=[];missing=[]
     for c in cards:
         matches=records.get(key(c['name']),[])
         # Standard card only; alternate art can alias to the same primary.
         primary=matches if len(matches)==1 else [r for r in matches if r['alias']==0]
         if len(primary)!=1:
-            missing.append(dict(id=c['id'],name=c['name'],candidate_ids=[r['id'] for r in matches]));continue
+            missing.append(dict(
+                id=c['id'],name=c['name'],candidate_ids=[r['id'] for r in matches],
+                suggestions=mapping_suggestions(c['name'], all_records, 5),
+                mapping_status='unverified_suggestions_only',
+            ));continue
         r=primary[0]
         upstream=scripts/'official'/f"c{r['id']}.lua"
         override=overrides/f"c{r['id']}.lua"
@@ -62,6 +104,7 @@ def main():
         c['deck_name_group']=str(r['alias'] or r['id'])
         # Placement is determined by authoritative official text when present;
         # do not silently promote missing official matches using simulator data.
+    con.close()
     dump(ROOT/'data/processed/cards.json',cards)
     dump(ROOT/'data/processed/engine_cards.json',mapped)
     locks={}
@@ -79,7 +122,10 @@ def main():
         exact_official_text_matches=sum(r['official_text_match'] for r in mapped),
         text_differences=[r['name'] for r in mapped if not r['official_text_match']],
         certified_interactions=0,
-        note='Implementation availability, including reviewed overrides, is not Reborn correctness certification.'))
+        note=(
+            'Implementation availability, including reviewed overrides, is not Reborn correctness certification. '
+            'Unmapped title suggestions are ranking aids only and never authorize an automatic mapping.'
+        )))
     # Whitelist mode is crucial: cards not present here must not default to 3.
     lines=['# Reborn exact pool; latest standard scripts plus reviewed solver overrides','!Reborn solver 2026-09-06','$whitelist']
     lines += [f"{r['passcode']} {r['copy_limit']} -- {r['name']}" for r in mapped if r['copy_limit']>0]
