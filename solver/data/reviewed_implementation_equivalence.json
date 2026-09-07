@@ -1,0 +1,20 @@
+{
+  "reviews": {
+    "reborn-2228": {
+      "reborn_id": "reborn-2228",
+      "passcode": 73414375,
+      "official_text_sha256": "b32feab181e70e44296211fcdcf46b05e2a0b294d68c0491946c1b8ba0c09fb0",
+      "engine_text_sha256": "4fb9305bc4277df930eccac645e9c8389fd6aeb9cd2a94728977fa7fad616cfe",
+      "script_sha256": "60678ac2489585d9b4d2b94601ca16c7d50c1123469721235123dacb9be062a4",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Babel's display text incorrectly says each player may banish up to 3 cards, while current official English restricts the selection to monsters. Upstream Project Ignis official/c73414375.lua used aux.SpElimFilter without first requiring IsMonster(), which permitted non-Monster cards in the GY. The reviewed Reborn override adds c:IsMonster() and preserves the remaining upstream operation, including Spirit Elimination-compatible MZONE/GY handling. This review therefore certifies only this exact executable script against the current official monster-only behavior; the stale engine display text itself is not treated as equivalent.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5597&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c73414375.lua",
+        "solver/script_overrides/c73414375.lua",
+        "solver/tests/test_dimension_jar_override.py"
+      ]
+    }
+  },
+  "note": "Hash-bound reviews for cases where current engine display text is genuinely stale/non-equivalent but the exact executable implementation has been directly verified or narrowly corrected to match current official behavior. Every review is bound to official text, engine display text, passcode, Reborn ID, and exact script SHA-256."
+}
