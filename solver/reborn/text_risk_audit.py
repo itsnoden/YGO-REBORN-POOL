@@ -19,33 +19,52 @@ from .import_pool import ROOT, dump
 from .text_audit import lexical_tokens
 
 
+TOKEN_CANONICAL = {
+    'targets': 'target', 'targeting': 'target', 'targeted': 'target',
+    'summoned': 'summon', 'summons': 'summon', 'summoning': 'summon',
+    'destroyed': 'destroy', 'destroys': 'destroy', 'destroying': 'destroy',
+    'banished': 'banish', 'banishes': 'banish', 'banishing': 'banish',
+    'removed': 'remove', 'removes': 'remove', 'removing': 'remove',
+    'sent': 'send', 'sends': 'send', 'sending': 'send',
+    'discarded': 'discard', 'discards': 'discard', 'discarding': 'discard',
+    'returned': 'return', 'returns': 'return', 'returning': 'return',
+    'shuffled': 'shuffle', 'shuffles': 'shuffle', 'shuffling': 'shuffle',
+    'draws': 'draw', 'drawing': 'draw',
+    'negated': 'negate', 'negates': 'negate', 'negating': 'negate',
+    'gained': 'gain', 'gains': 'gain', 'gaining': 'gain',
+    'lost': 'lose', 'loses': 'lose', 'losing': 'lose',
+    'paid': 'pay', 'pays': 'pay', 'paying': 'pay',
+    'equipped': 'equip', 'equips': 'equip', 'equipping': 'equip',
+    'changed': 'change', 'changes': 'change', 'changing': 'change',
+    'controls': 'control', 'controlled': 'control', 'controlling': 'control',
+    'attacks': 'attack', 'attacked': 'attack', 'attacking': 'attack',
+    'zones': 'zone',
+}
+
 SIGNAL_GROUPS = {
     'frequency_or_restriction': {
         'once', 'twice', 'only', 'cannot', 'must', 'either', 'neither', 'except',
     },
-    'targeting': {'target', 'targets', 'targeting'},
+    'targeting': {'target'},
     'summoning': {
-        'summon', 'summoned', 'summons', 'special', 'normal', 'flip', 'fusion',
-        'ritual', 'tribute',
+        'summon', 'special', 'normal', 'flip', 'fusion', 'ritual', 'tribute',
     },
     'state_change': {
-        'destroy', 'destroyed', 'banish', 'banished', 'remove', 'removed', 'send',
-        'sent', 'discard', 'discarded', 'return', 'returned', 'shuffle', 'draw',
-        'negate', 'negated', 'gain', 'gains', 'lose', 'loses', 'pay', 'equip',
-        'change', 'control',
+        'destroy', 'banish', 'remove', 'send', 'discard', 'return', 'shuffle',
+        'draw', 'negate', 'gain', 'lose', 'pay', 'equip', 'change', 'control',
     },
     'timing': {
         'when', 'if', 'during', 'after', 'before', 'until', 'end', 'start',
         'standby', 'main', 'battle', 'damage', 'step', 'phase', 'turn',
     },
     'location': {
-        'hand', 'deck', 'graveyard', 'gy', 'field', 'zone', 'zones', 'removed',
-        'banished', 'extra',
+        'hand', 'deck', 'graveyard', 'gy', 'field', 'zone', 'removed', 'banished',
+        'extra',
     },
     'player_or_scope': {
         'you', 'your', 'opponent', 'both', 'each', 'all', 'any', 'one', 'another',
     },
-    'battle_stats': {'atk', 'def', 'attack', 'attacks', 'battle', 'damage', 'level'},
+    'battle_stats': {'atk', 'def', 'attack', 'battle', 'damage', 'level'},
 }
 
 HIGH_GROUPS = {
@@ -53,13 +72,17 @@ HIGH_GROUPS = {
 }
 
 
+def _canonical_tokens(tokens):
+    return tuple(TOKEN_CANONICAL.get(token, token) for token in tokens)
+
+
 def _numbers(tokens):
     return tuple(token for token in tokens if re.fullmatch(r'\d+', token))
 
 
 def _changed_signal_groups(official_tokens, engine_tokens):
-    official = set(official_tokens)
-    engine = set(engine_tokens)
+    official = set(_canonical_tokens(official_tokens))
+    engine = set(_canonical_tokens(engine_tokens))
     changed = []
     for group, words in SIGNAL_GROUPS.items():
         if (official & words) != (engine & words):
@@ -132,6 +155,7 @@ def build_risk_report(cards, mapped):
         'rows': rows,
         'note': (
             'All rows remain behavior/errata audit blockers. Risk tier only schedules review. '
+            'Common grammatical inflections of mechanical verbs are normalized before signal comparison. '
             'No card is certified equivalent from token signals, and no deck-strength prior is used.'
         ),
     }
