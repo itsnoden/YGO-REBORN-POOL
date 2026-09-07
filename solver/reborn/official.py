@@ -1,6 +1,7 @@
 """Read only official card-search pages. Never read member decks or legality icons.
 
-Only exact normalized pool matches are persisted; no outside-pool cards enter search.
+Only exact normalized pool matches or explicitly reviewed identity aliases are
+persisted; no outside-pool cards enter search.
 """
 import argparse
 import concurrent.futures
@@ -14,6 +15,35 @@ from bs4 import BeautifulSoup
 from .import_pool import ROOT, dump, key
 
 BASE = 'https://www.db.yugioh-card.com/yugiohdb/card_search.action'
+
+
+def _load_identity_aliases():
+    path = ROOT/'data/identity_aliases.json'
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text()).get('aliases', {})
+
+
+def allowed_official_names(cards, aliases):
+    """Names the official crawler may retain; aliases must be pre-reviewed."""
+    out = {key(c['name']) for c in cards}
+    for card in cards:
+        spec = aliases.get(card['name'])
+        if spec and spec.get('engine_name'):
+            out.add(key(spec['engine_name']))
+    return out
+
+
+def resolve_official_record(card, matched, aliases):
+    """Resolve exact current official record for one pool card."""
+    direct = matched.get(key(card['name']))
+    if direct is not None:
+        return direct, 'exact_pool_title'
+    spec = aliases.get(card['name'])
+    if not spec:
+        return None, None
+    record = matched.get(key(spec.get('engine_name', '')))
+    return (record, 'reviewed_identity_alias') if record is not None else (None, None)
 
 
 def parse_page(html, url, allowed):
@@ -64,7 +94,8 @@ def main():
     parser.add_argument('--refresh',action='store_true')
     args=parser.parse_args()
     cards=json.loads((ROOT/'data/processed/cards.json').read_text())
-    allowed={key(c['name']) for c in cards}
+    aliases=_load_identity_aliases()
+    allowed=allowed_official_names(cards, aliases)
     cache=ROOT/'data/official_pages';cache.mkdir(exist_ok=True)
     first=fetch_page(1,allowed)
     if 'error' in first:
@@ -87,14 +118,29 @@ def main():
             if k in matched and matched[k]['text_sha256']!=record['text_sha256']:
                 conflicts.append(k)
             matched[k]=record
+    alias_matches=[]
     for card in cards:
-        record=matched.get(key(card['name']))
-        if record and key(card['name']) not in conflicts:
-            card['official']=record;card['placement']=record['placement']
+        record, source=resolve_official_record(card, matched, aliases)
+        if record and key(record['name']) not in conflicts:
+            stored=dict(record)
+            stored['pool_identity_source']=source
+            if source == 'reviewed_identity_alias':
+                stored['pool_legacy_name']=card['name']
+                alias_matches.append({
+                    'pool_name':card['name'],
+                    'official_current_name':record['name'],
+                    'cid':record['cid'],
+                })
+            card['official']=stored;card['placement']=stored['placement']
     dump(ROOT/'data/processed/cards.json',cards)
     dump(ROOT/'reports/text_coverage.json',dict(total=len(cards),matched=sum(bool(c['official']) for c in cards),
+        reviewed_identity_alias_matches=alias_matches,
         missing=[c['name'] for c in cards if not c['official']],conflicts=conflicts,errors=errors,
-        note='Latest text snapshot; refresh and invalidate affected implementations before new promoted runs.'))
+        note=(
+            'Latest official text snapshot. Reviewed identity aliases may resolve a legacy pool title to its '
+            'current official name; unreviewed fuzzy names are never accepted. Refresh and invalidate affected '
+            'implementations before new promoted runs.'
+        )))
 
 
 if __name__=='__main__':main()
