@@ -76,6 +76,18 @@ jobs:
             --seed 5000 \
             2>&1 | tee reports/ci_pilot_probe.log
 
+      - name: Verify deterministic response-history replay
+        run: |
+          set -o pipefail
+          python -m reborn.replay_probe \
+            --library build/libocgcore.so \
+            --database vendor/database/cards.cdb \
+            --scripts vendor/scripts \
+            --count 2 \
+            --budget 5000 \
+            --seed 52000 \
+            2>&1 | tee reports/ci_replay_probe.log
+
       - name: Run from-scratch learning smoke probe
         run: |
           set -o pipefail
@@ -150,6 +162,7 @@ jobs:
           path: |
             solver/reports/flow_probe.json
             solver/reports/pilot_probe.json
+            solver/reports/replay_probe.json
             solver/reports/learn_probe.json
             solver/reports/crash_probe.json
             solver/reports/pilot_eval.json
@@ -158,6 +171,7 @@ jobs:
             solver/reports/heldout_policy_reborn.json
             solver/reports/ci_flow_probe.log
             solver/reports/ci_pilot_probe.log
+            solver/reports/ci_replay_probe.log
             solver/reports/ci_learn_probe.log
             solver/reports/ci_crash_probe.log
             solver/reports/ci_pilot_eval.log
