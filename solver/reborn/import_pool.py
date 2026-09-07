@@ -39,10 +39,20 @@ def load_source_corrections():
     return json.loads(path.read_text()) if path.exists() else {}
 
 
+def _invalidate_identity_cache(card):
+    """Remove data that belonged to the superseded card identity."""
+    card['official'] = None
+    card['placement'] = None
+    card['effects'] = []
+    card['implementation_status'] = 'unimplemented'
+    for field in ('engine','deck_name_group','nonstandard'):
+        card.pop(field,None)
+
+
 def apply_source_corrections(cards, spec):
     """Apply explicit source re-verifications before any solver use.
 
-    The operation is intentionally idempotent.  A stage may receive either the
+    The operation is intentionally idempotent. A stage may receive either the
     stale repository cache or a card list already corrected by an earlier stage.
     The exact Reborn row must contain either the reviewed stale title or the
     reviewed corrected title; any third value is rejected so unrelated edits can
@@ -60,6 +70,7 @@ def apply_source_corrections(cards, spec):
         observed = key(card['name'])
         if observed == key(stale):
             card['name'] = current
+            _invalidate_identity_cache(card)
             state = 'applied'
         elif observed == key(current):
             state = 'already_corrected'
