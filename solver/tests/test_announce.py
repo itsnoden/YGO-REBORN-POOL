@@ -1,7 +1,10 @@
+import sqlite3
+import tempfile
 import unittest
 
 from reborn.announce import (
-    declarable, OPCODE_ISCODE, OPCODE_ISTYPE, OPCODE_ISSETCARD,
+    declarable, enumerate_declarable, choose_declarable,
+    OPCODE_ISCODE, OPCODE_ISTYPE, OPCODE_ISSETCARD,
     OPCODE_AND, OPCODE_ALLOW_ALIASES, OPCODE_ALLOW_TOKENS,
     TYPE_MONSTER, TYPE_TOKEN,
 )
@@ -36,6 +39,25 @@ class AnnounceTests(unittest.TestCase):
     def test_setcode(self):
         self.assertTrue(declarable(self.row, [0x20, OPCODE_ISSETCARD]))
         self.assertFalse(declarable(self.row, [0x30, OPCODE_ISSETCARD]))
+
+    def test_enumerates_complete_allowed_database_subset(self):
+        with tempfile.NamedTemporaryFile(suffix='.cdb') as tmp:
+            con = sqlite3.connect(tmp.name)
+            con.execute('CREATE TABLE datas (id INTEGER, alias INTEGER, setcode INTEGER, type INTEGER, attribute INTEGER, race INTEGER)')
+            con.executemany(
+                'INSERT INTO datas VALUES (?,?,?,?,?,?)',
+                [
+                    (123, 0, 0, 0x21, 0x20, 0x2),
+                    (456, 0, 0, 0x1, 0x10, 0x1),
+                    (789, 0, 0, 0x21, 0x20, 0x4),
+                ],
+            )
+            con.commit(); con.close()
+            # 789 exists in the database but is intentionally outside the
+            # supplied Reborn mapping and must never enter the legal choice set.
+            legal = enumerate_declarable(tmp.name, [0x20, OPCODE_ISTYPE], [456, 123, 999])
+            self.assertEqual(legal, [123])
+            self.assertEqual(choose_declarable(tmp.name, [0x20, OPCODE_ISTYPE], [456, 123, 999]), 123)
 
 
 if __name__ == '__main__':
