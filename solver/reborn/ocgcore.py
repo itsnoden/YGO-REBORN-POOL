@@ -11,6 +11,7 @@ import struct
 from pathlib import Path
 from .effects import UnsupportedInteraction
 from .rules import get_profile
+from .verified_data import nonstandard_engine_rows
 
 U8=C.c_uint8;U16=C.c_uint16;U32=C.c_uint32;U64=C.c_uint64;I32=C.c_int32;PTR=C.c_void_p
 SCRIPT_OVERRIDE_DIR=Path(__file__).resolve().parents[1]/'script_overrides'
@@ -62,6 +63,19 @@ def resolve_script_path(scripts,filename,overrides=SCRIPT_OVERRIDE_DIR):
     return None,None
 
 
+def merge_nonstandard_card_data(data,names):
+    """Merge only explicitly reviewed non-TCG records into runtime card data."""
+    added=[]
+    for row in nonstandard_engine_rows():
+        rid=int(row['id'])
+        if rid in data:
+            raise ValueError(f'nonstandard engine id collides with database: {rid}')
+        data[rid]={k:v for k,v in row.items() if not k.startswith('_') and k not in ('name','desc')}
+        names[rid]=row['name']
+        added.append(rid)
+    return added
+
+
 class Duel:
     def __init__(self,library,database,scripts,seed=1,flags=None):
         self.lib=C.CDLL(str(Path(library).resolve()));self.scripts=Path(scripts).resolve()
@@ -84,6 +98,7 @@ class Duel:
         try:self.names={r['id']:r['name'] for r in con.execute('SELECT id,name FROM texts')}
         except sqlite3.Error:self.names={}
         con.close()
+        self.nonstandard_engine_ids=merge_nonstandard_card_data(self.data,self.names)
         @READ
         def reader(payload,code,out):
             try:
