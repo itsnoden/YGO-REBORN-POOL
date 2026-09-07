@@ -1,9 +1,9 @@
 """Paired-seat stochastic piloting for adversarial engine-coverage testing.
 
 This deliberately weak pilot has no card-specific preferences. It randomizes
-among legal engine actions from information-safe observations to force deeper and
-more varied interactions than the conservative flow probe. Outcomes are NOT deck
-strength evidence and must never feed candidate selection or the oracle.
+among legal engine actions from information-safe observations/prompts to force
+deeper and more varied interactions than the conservative flow probe. Outcomes
+are NOT deck strength evidence and must never feed candidate selection/oracle.
 """
 import argparse
 from collections import Counter
@@ -16,6 +16,7 @@ from .import_pool import ROOT, dump
 from .observation import PublicTracker, observation_for
 from .ocgcore import Duel
 from .pilot import StochasticLegalPilot
+from .policy_view import policy_prompt_view, assert_no_hidden_code_leak
 from .protocol_extra import extract_decision
 from .search import validate
 
@@ -28,8 +29,8 @@ def run_game(library, database, scripts, decks, mapped, seed, budget=5000):
     tracker = PublicTracker()
     row = {
         'seed': seed, 'status': 'pending', 'steps': 0, 'decisions': 0,
-        'observation_checks': 0, 'decision_types': {}, 'message_types': {},
-        'blocker': None,
+        'observation_checks': 0, 'policy_view_checks': 0,
+        'decision_types': {}, 'message_types': {}, 'blocker': None,
     }
     decision_types = Counter(); message_types = Counter()
     with Duel(library, database, scripts, seed=seed) as duel:
@@ -52,13 +53,14 @@ def run_game(library, database, scripts, decks, mapped, seed, budget=5000):
                 row['decisions'] += 1; decision_types[decision.kind] += 1
                 observation = observation_for(duel, decision.player, tracker)
                 row['observation_checks'] += 1
-                if observation['viewer'] != decision.player:
-                    raise UnsupportedInteraction('pilot received wrong-player observation')
+                prompt = policy_prompt_view(decision, observation)
+                assert_no_hidden_code_leak(prompt, observation)
+                row['policy_view_checks'] += 1
                 if decision.kind == 'announce_card':
                     code = choose_declarable(database, decision.meta['opcodes'], allowed_codes)
                     response = struct.pack('<i', code)
                 else:
-                    response = pilots[decision.player].choose(decision, observation)
+                    response = pilots[decision.player].choose(decision, prompt)
                 duel.respond(response)
                 continue
             if status != 2:
@@ -121,13 +123,14 @@ def main():
         'attempted': len(results),
         'completed': sum(bool(r.get('completed')) for r in results),
         'observation_checks': sum(r.get('observation_checks', 0) for r in results),
+        'policy_view_checks': sum(r.get('policy_view_checks', 0) for r in results),
         'decision_types': dict(sorted(all_decisions.items())),
         'message_types': {str(k): v for k, v in sorted(all_messages.items())},
         'results': results,
         'note': 'Winner fields are debug-only. Do not convert these games into deck win rates or fitness.',
     }
     dump(ROOT/'reports/pilot_probe.json', report)
-    print(json.dumps({k: report[k] for k in ('attempted','completed','observation_checks','decision_types')}))
+    print(json.dumps({k: report[k] for k in ('attempted','completed','observation_checks','policy_view_checks','decision_types')}))
 
 
 if __name__ == '__main__':
