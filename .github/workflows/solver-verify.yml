@@ -125,14 +125,14 @@ jobs:
             --train-games 16 \
             --train-decks 4 \
             --eval-decks 2 \
-            --pairs-per-deck 4 \
+            --pairs-per-deck 8 \
             --budget 5000 \
             --train-seed 71000 \
             --cf-seed 72000 \
             --eval-seed 73000 \
             --policy-seed 20260907 \
-            --cf-sources 2 \
-            --cf-targets 2 \
+            --cf-sources 4 \
+            --cf-targets 4 \
             --cf-max-options 3 \
             --cf-rollouts 3 \
             --cf-continuation-seed 74000 \
