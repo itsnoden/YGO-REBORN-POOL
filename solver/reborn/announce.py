@@ -119,8 +119,13 @@ def declarable(row, opcodes):
     return bool(alias_ok and (allow_token or not is_token))
 
 
-def choose_declarable(database, opcodes, allowed_codes):
-    """Return the lowest legal Reborn-mapped passcode accepted by the core."""
+def enumerate_declarable(database, opcodes, allowed_codes):
+    """Return every legal declaration inside the mapped Reborn card pool.
+
+    This is a legality oracle, not a strength prior.  Codes are sorted only for
+    deterministic reproducibility; a learning or stochastic pilot may choose
+    among the returned legal set without consulting human strategy.
+    """
     allowed = sorted(set(int(c) for c in allowed_codes))
     if not allowed:
         raise ValueError('no allowed Reborn codes supplied')
@@ -134,8 +139,16 @@ def choose_declarable(database, opcodes, allowed_codes):
                 rows[row['id']] = dict(row)
     finally:
         con.close()
-    for code in allowed:
-        row = rows.get(code)
-        if row and declarable(row, opcodes):
-            return code
-    raise ValueError('no declarable card exists inside the mapped Reborn pool')
+    legal = [code for code in allowed if code in rows and declarable(rows[code], opcodes)]
+    if not legal:
+        raise ValueError('no declarable card exists inside the mapped Reborn pool')
+    return legal
+
+
+def choose_declarable(database, opcodes, allowed_codes):
+    """Return the lowest legal Reborn-mapped passcode accepted by the core.
+
+    Kept for deterministic diagnostics.  Strategic pilots should use
+    ``enumerate_declarable`` and choose from the complete legal set instead.
+    """
+    return enumerate_declarable(database, opcodes, allowed_codes)[0]
