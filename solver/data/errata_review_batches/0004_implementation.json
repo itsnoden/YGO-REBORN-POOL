@@ -1,0 +1,31 @@
+{
+  "reviews": {
+    "reborn-0952": {
+      "reborn_id": "reborn-0952",
+      "passcode": 30243636,
+      "official_text_sha256": "5e4330e0053524593f06c2cd134e8877ea890c116a68307a05ef57039138bbda",
+      "engine_text_sha256": "545a83b4652b4612db05ef56dd344d60a906a4725d4f393fd13e44af42fe16f9",
+      "script_sha256": "2d57f7d22fbd128bbc6c5082f1c2635f66fd8bac4768008c9cc5892c7f4decde",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Babel's legacy display text says Hungry Burger can only be Ritual Summoned with Hamburger Recipe and includes the old Recipe tribute instruction. Current official Hungry Burger text only states that it can be Ritual Summoned with Hamburger Recipe; the Ritual Spell itself supplies its own Tribute requirement, and other legal Ritual Summon effects are not prohibited by Hungry Burger. The exact pinned Lua correctly imposes only EnableReviveLimit() and does not add a named-Spell-only Special Summon restriction. The stale display text is therefore not treated as wording-equivalent; this review certifies only the exact executable script recorded here against current card behavior.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4732&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c30243636.lua"
+      ]
+    },
+    "reborn-1650": {
+      "reborn_id": "reborn-1650",
+      "passcode": 86327225,
+      "official_text_sha256": "9b41d074ac86cf6d7cfb6e318d9f540a62e0b4821acf093c6d1e91a3df117437",
+      "engine_text_sha256": "ceee50417ab401f71604102e52082ee39c8ce2752173a7ac144afdd2355778fe",
+      "script_sha256": "7249bfd9db9e761a6755a51716158a62f068c91f956b21e30be59885f1976e4b",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Babel's legacy display text says Shinato can only be Ritual Summoned with Shinato's Ark, while current official text says it can be Ritual Summoned with Shinato's Ark and gives the current Tribute requirement without making that Spell exclusive. The exact pinned Lua correctly uses only EnableReviveLimit(), leaving legal Ritual Summon procedures available rather than imposing an obsolete named-Spell-only restriction. Its mandatory battle-destroying trigger also checks that the destroyed opponent monster was in Defense Position, reached the GY, and inflicts its original/base ATK as effect damage, matching the current official second effect. This review is bound to the exact script SHA.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5701&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c86327225.lua"
+      ]
+    }
+  },
+  "note": "Hash-bound implementation reviews for legacy Ritual display text whose executable scripts correctly follow current non-exclusive Ritual behavior."
+}
