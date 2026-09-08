@@ -1,0 +1,31 @@
+{
+  "reviews": {
+    "reborn-0992": {
+      "reborn_id": "reborn-0992",
+      "passcode": 3056267,
+      "official_text_sha256": "703afa33e512bddc9f1c67b1d55128bfc083a4af74739ed355fdc50a59f3db84",
+      "engine_text_sha256": "2bdd07dc49dab63546d2a5798aa8dda40eb5b994b630671118cc6ec7b427b0b7",
+      "script_sha256": "b231871f64d91624a6242c3ca6c98f0c04fde351cb825a526650cf12841780b5",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "The legacy description says 'Select 1 monster' while current official text uses PSCT targeting. The exact pinned Lua marks the Flip effect with EFFECT_FLAG_CARD_TARGET, prohibits activation during the Battle Phase, uses Duel.SelectTarget for exactly one opponent-controlled monster that can change control, and swaps control only if both that target and Invader remain related to the resolving effect. The executable implementation matches current targeting semantics despite stale wording.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4795&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c3056267.lua"
+      ]
+    },
+    "reborn-1544": {
+      "reborn_id": "reborn-1544",
+      "passcode": 51482758,
+      "official_text_sha256": "8747e6a7c8af7fe324432f53b06c8f5ccf84914749a996ad85bb022200c0bf4f",
+      "engine_text_sha256": "9760037fa9e1b2ff6262837a71be0c992b8a29957f35c46d459a835258360f18",
+      "script_sha256": "94e3802ab4f04a29720ef0f332e2b958fb778f62700b063fcc8ee2cfb12c6443",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "The legacy description says 'Select 1 face-up Trap Card' while current official text says to target it. The exact pinned Lua marks the activation with EFFECT_FLAG_CARD_TARGET, uses Duel.SelectTarget for exactly one face-up Trap anywhere on the field, and destroys that target only if it remains related to the effect. The executable behavior therefore matches current PSCT targeting.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4468&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c51482758.lua"
+      ]
+    }
+  },
+  "note": "Script-hash-bound implementation reviews for the final unresolved legacy select-vs-current-target wording rows."
+}
