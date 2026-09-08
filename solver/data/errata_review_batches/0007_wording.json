@@ -1,0 +1,18 @@
+{
+  "reviews": {
+    "reborn-0126": {
+      "reborn_id": "reborn-0126",
+      "passcode": 62892347,
+      "official_text_sha256": "f1b15839c8ca218256562b8b95f66c093dddda8a8562963809b9899d24b2b9e4",
+      "engine_text_sha256": "91761f77b2a2a2cbdc8146fe9a922435812febbb0607673114d8bd77da1ab354",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Current English text says Arcana Force 0 - The Fool cannot be changed to Defense Position, while the legacy engine text explicitly adds 'except with a card effect.' Official Japanese Neuron Q&A clarifies the intended rule: the continuous effect prevents the turn player's ordinary Main Phase battle-position change from changing The Fool to Defense Position, but other card effects can change its battle position. The pinned Lua registers EFFECT_CANNOT_CHANGE_POSITION while The Fool is face-up in Attack Position, matching that engine rule distinction. The remaining battle-indestructibility and coin-result effects correspond to the same current card behavior, so the wording difference does not represent a simulator behavior mismatch.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=7581&ope=2&request_locale=en",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=7581&ope=4&request_locale=ja",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c62892347.lua"
+      ]
+    }
+  },
+  "note": "Hash-bound wording review using official Neuron Q&A to resolve Arcana Force 0 - The Fool's battle-position wording."
+}
