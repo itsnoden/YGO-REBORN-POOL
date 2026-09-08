@@ -1,0 +1,20 @@
+{
+  "reviews": {
+    "reborn-0434": {
+      "reborn_id": "reborn-0434",
+      "passcode": 59784896,
+      "official_text_sha256": "f08d2d883e5da5859db3ff9a5e3360d0cff44f33ee6279811a6d71176d14a42b",
+      "engine_text_sha256": "83bc541f95712ed3add7f8f881c4288a27d72ee6a5f062cab3b91d920dd6a37b",
+      "script_sha256": "37528bade6194a38b51ddab067ea1df3ec2cf7320f960484207e7da996c19bc0",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "The old English text says Dark Zebra changes to Defense Position if it is the only 'card' under the controller, while current official Japanese wording and Neuron supplemental information make clear that the condition is having no other monsters. The same official supplemental information states that the mandatory, non-targeting Standby Phase effect still activates if Dark Zebra is already face-up Defense Position, but because no position-change processing is applied in that case, the 'cannot change its Battle Position this turn' restriction is also not applied. The exact pinned Lua checks that the controller has exactly one monster, triggers mandatorily in that controller's Standby Phase, changes Dark Zebra only if it is face-up Attack Position, and registers the turn-long position lock only when that change actually succeeds. The executable behavior therefore matches the authoritative ruling despite the ambiguous old English wording.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4920&ope=2&request_locale=en",
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4920&ope=2&request_locale=ja",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=4920&ope=4&request_locale=ja",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c59784896.lua"
+      ]
+    }
+  },
+  "note": "Script-hash-bound review resolving Dark Zebra's monster-only condition and already-Defense interaction through official Neuron Q&A."
+}
