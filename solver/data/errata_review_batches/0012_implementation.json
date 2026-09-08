@@ -1,0 +1,19 @@
+{
+  "reviews": {
+    "reborn-0324": {
+      "reborn_id": "reborn-0324",
+      "passcode": 2926176,
+      "official_text_sha256": "e2a7bc550f51fa3e7bd8749c534596437e08defbe67f6a53426c44c4731097d6",
+      "engine_text_sha256": "dab8c5a6f0f4b973342222ac2764d3259f2a08febbeb7beb95830c97f4e58caf",
+      "script_sha256": "cfd75a03d4f460a9c9900a7fbc2c1b408db55a028733540becb80fadaea32528",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Current English Curse of Royal text is broad, but official Japanese Neuron Q&A supplies the operational restrictions that matter: it responds to the activation of a Spell/Trap Card (not merely activation of an already-face-up Spell/Trap effect), the activated card must target exactly 1 on-field Spell/Trap for destruction, and an effect that would destroy multiple cards is not eligible. The exact pinned Lua requires EFFECT_TYPE_ACTIVATE, a card-targeting chain with exactly one target, and CATEGORY_DESTROY for exactly one on-field Spell/Trap before allowing Curse of Royal to negate the activation and destroy the activated card. It therefore matches the authoritative ruling behavior despite the shorter current English text.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5441&ope=2&request_locale=en",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=5441&ope=4&request_locale=ja",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c2926176.lua"
+      ]
+    }
+  },
+  "note": "Script-hash-bound review resolving Curse of Royal's broad English wording through official Japanese Neuron ruling constraints."
+}
