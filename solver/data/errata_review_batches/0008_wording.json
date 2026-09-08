@@ -1,0 +1,18 @@
+{
+  "reviews": {
+    "reborn-1221": {
+      "reborn_id": "reborn-1221",
+      "passcode": 48642904,
+      "official_text_sha256": "80d660c09465e391df9719f6a6b1220dc8a7f2248c2ca9407e07faef333a2ab2",
+      "engine_text_sha256": "673def3be8c19100fb4861b220f78292bf5db8e95a20f4e72bc8db6c01d19058",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Current English text says the opponent cannot change monster battle positions during their next turn, while the engine text explicitly adds 'except with a card effect.' Official Japanese Neuron Q&A clarifies that Mesmeric Control prevents the turn player's ordinary once-per-Main-Phase battle-position changes, but card effects may still change battle positions. The pinned Lua registers the field-level EFFECT_CANNOT_CHANGE_POSITION restriction for the opponent's Monster Zone through the next opponent turn, matching that rule distinction. The two wordings therefore describe the same behavior.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4814&ope=2&request_locale=ja",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=4814&ope=4&request_locale=ja",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c48642904.lua"
+      ]
+    }
+  },
+  "note": "Hash-bound wording review using official Neuron Q&A to resolve Mesmeric Control's battle-position wording."
+}
