@@ -1,0 +1,29 @@
+{
+  "reviews": {
+    "reborn-0088": {
+      "reborn_id": "reborn-0088",
+      "passcode": 98927491,
+      "official_text_sha256": "8d1c0f20dd192de3ada5d0f81e27130a3316ca21753bb397b84237a482ab1bdf",
+      "engine_text_sha256": "41851257559c865a3ffb522eec29dd61040dc91b8c4381ed9771771cd5ab872a",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The older wording says Ambulance Rescueroid cannot be Special Summoned except by Fusion Summon, while the current engine description says it must be Fusion Summoned. The exact pinned Lua registers EFFECT_SPSUMMON_CONDITION with aux.fuslimit, which hard-restricts its Special Summons to Fusion Summons, so the Summoning restriction is behaviorally identical. Its once-per-turn battle-destruction trigger also identifies a monster previously controlled by this card's controller that was destroyed by battle and sent to the GY, then Special Summons that monster in face-up Defense Position, matching current effect behavior.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6941&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c98927491.lua"
+      ]
+    },
+    "reborn-0596": {
+      "reborn_id": "reborn-0596",
+      "passcode": 81003500,
+      "official_text_sha256": "7dc12b9b2e7ca3c42c67cf28e43e2f08d68d45a80118a3853a918ef0ee95c334",
+      "engine_text_sha256": "f4dedd9b51b73e6eca209344de99e289399ad0d269e739fd506d8bdb5a8f94f8",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The official wording 'Must be Fusion Summoned and cannot be Special Summoned by other ways' and the engine wording 'Must be Fusion Summoned' are the same executable restriction here. The pinned Lua registers EFFECT_SPSUMMON_CONDITION with aux.fuslimit, allowing only Fusion Summons. Its Special Summon trigger targets exactly one opponent monster, destroys that target, and only after successful destruction chooses and Special Summons one monster from the opponent's GY to the opponent's field, matching the current effect sequence.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6786&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c81003500.lua"
+      ]
+    }
+  },
+  "note": "Hash-bound wording reviews for two additional Fusion-only Summoning restriction rows after direct Lua inspection."
+}
