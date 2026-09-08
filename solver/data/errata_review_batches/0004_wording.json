@@ -1,0 +1,41 @@
+{
+  "reviews": {
+    "reborn-0611": {
+      "reborn_id": "reborn-0611",
+      "passcode": 10526791,
+      "official_text_sha256": "c08e944c0abe729a3f19e832de3757fff2d1574131877d22d1c02b614e8ab1d8",
+      "engine_text_sha256": "d53199548e849cf6c17a4f623fd4ff3e02650588d1f766d16c54c51692426bba",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Current 'Must be Fusion Summoned' and legacy 'Must be Fusion Summoned and cannot be Special Summoned by other ways' express the same summon restriction for this card. The pinned Lua enforces the Fusion-only condition with EFFECT_SPSUMMON_CONDITION/aux.fuslimit. Current 'attack all monsters your opponent controls, once each' and legacy 'attack every monster ... one attack on each per Battle Phase' are likewise the same attack-all behavior; Lua uses EFFECT_ATTACK_ALL with one attack per monster.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6551&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c10526791.lua"
+      ]
+    },
+    "reborn-0594": {
+      "reborn_id": "reborn-0594",
+      "passcode": 14225239,
+      "official_text_sha256": "3598fb6ea9a22f952e42e815520ce5ac12c0b80c1a40f7359e68b11f0fde51ab",
+      "engine_text_sha256": "98a18578ac74e9af01b7845866d76be3cfe30310938c59e0f1df2a0f770cc4b0",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Official 'Must be Fusion Summoned and cannot be Special Summoned by other ways' and the shorter engine 'Must be Fusion Summoned' encode the same Fusion-only restriction here; the pinned Lua enforces aux.fuslimit. 'Face-down card(s) in your Spell & Trap Card Zones' and 'Set card(s) in your Spell & Trap Zone' identify the same condition. Lua checks for a facedown card in the controller's normal Spell/Trap Zones (excluding the Field Zone) before granting direct attack.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6669&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c14225239.lua"
+      ]
+    },
+    "reborn-0610": {
+      "reborn_id": "reborn-0610",
+      "passcode": 55615891,
+      "official_text_sha256": "c7036dc217e99f5e1b05511e5353e42936e5af16d4d112c010e0ce2e6532adb7",
+      "engine_text_sha256": "e4f83a83e21336735f72a9339d5d5df87a93fabcb3a7354fc411abc8bd69c6f3",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The official Fusion-only sentence and the engine's shorter 'Must be Fusion Summoned' have the same effect because pinned Lua enforces aux.fuslimit. The effect wording differs only in PSCT sequencing: discard 1 card, then target 1 Spell/Trap, destroy it. Lua performs exactly that discard cost, target selection, and destruction.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6550&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c55615891.lua"
+      ]
+    }
+  },
+  "note": "Hash-bound Fusion summon wording reviews. No row is accepted from textual similarity alone; each pinned Lua summon condition/effect was checked directly."
+}
