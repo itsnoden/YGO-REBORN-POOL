@@ -1,0 +1,21 @@
+{
+  "reviews": {
+    "reborn-1139": {
+      "reborn_id": "reborn-1139",
+      "passcode": 61844784,
+      "official_text_sha256": "955d61f2022f4341af31d787e8e34d7dc4ac83719e67a8944ebb3d3ec731855c",
+      "engine_text_sha256": "cb8edff19b9765e3924ff3afac6b060e9d02029aa3a1ff16c8b1c18fc0445fa2",
+      "script_sha256": "47017201ace20f6d4c843eb558492f0ff0c0cd9a87298f00c41f823f47c140cc",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "The old English TCG text says to select a face-up Spell that remains on the field but omits the controller restriction. Official Japanese Neuron text/Q&A explicitly restricts the activation target to one face-up Spell the activating player controls, and current official Spanish/German TCG texts likewise say 'you control'. The Japanese Q&A also confirms that the destruction replacement does not start a Chain and applies by removing the placed counter when that Spell would be destroyed by a card effect. The exact pinned Lua targets only a face-up Spell in the activating player's Spell & Trap Zone, places the counter, and registers a non-chain destruction replacement that removes one counter while excluding rule/replacement destruction. The executable behavior therefore matches the authoritative current cross-language rule despite the stale English wording.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5395&ope=2&request_locale=en",
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5395&ope=2&request_locale=ja",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=5395&ope=4&request_locale=ja",
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5395&ope=2&request_locale=es",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c61844784.lua"
+      ]
+    }
+  },
+  "note": "Script-hash-bound review resolving Magic Reflector's stale English controller wording using official Neuron cross-language text and Q&A."
+}
