@@ -79,6 +79,7 @@ class ErrataReviewTests(unittest.TestCase):
         self.assertEqual(report['valid_wording_equivalence_reviews'], 1)
         self.assertEqual(report['valid_implementation_behavior_reviews'], 0)
         self.assertEqual(report['unresolved_lexical_behavior_blockers'], 0)
+        self.assertEqual(report['unresolved_review_rows'], [])
 
     def test_hash_bound_implementation_review_can_clear_stale_display_text(self):
         review = self._implementation_review()
@@ -113,10 +114,23 @@ class ErrataReviewTests(unittest.TestCase):
         self.assertEqual(report['unresolved_lexical_behavior_blockers'], 0)
 
     def test_empty_ledger_leaves_all_lexical_rows_unresolved(self):
-        report = build_review_report([self._card()], [self._entry()], {})
+        card = self._card()
+        entry = self._entry()
+        report = build_review_report([card], [entry], {})
         self.assertEqual(report['lexical_effect_rows'], 1)
         self.assertEqual(report['valid_behavior_equivalence_reviews'], 0)
         self.assertEqual(report['unresolved_lexical_behavior_blockers'], 1)
+        self.assertEqual(report['unresolved_reborn_ids'], ['reborn-0001'])
+        self.assertEqual(len(report['unresolved_review_rows']), 1)
+        row = report['unresolved_review_rows'][0]
+        self.assertEqual(row['reborn_id'], 'reborn-0001')
+        self.assertEqual(row['name'], 'Test Card')
+        self.assertEqual(row['passcode'], 123)
+        self.assertEqual(row['official_text_sha256'], normalized_text_sha256(card['official']['text']))
+        self.assertEqual(row['engine_text_sha256'], normalized_text_sha256(entry['engine_text']))
+        self.assertEqual(row['script_sha256'], 'script-a')
+        self.assertEqual(row['script_source'], 'upstream_official')
+        self.assertEqual(row['script_path'], 'official/c123.lua')
 
 
 if __name__ == '__main__':
