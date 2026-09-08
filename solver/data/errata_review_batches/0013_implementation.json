@@ -3,7 +3,7 @@
     "reborn-0097": {
       "reborn_id": "reborn-0097",
       "passcode": 34487429,
-      "official_text_sha256": "1870216a8c636f95e22a5364815683c48e38ead537ccb1217eb4e1429b46e07",
+      "official_text_sha256": "1870216a8c636f95e22a5364815683c48e38ead537ce7d374b28d50f0ade19de",
       "engine_text_sha256": "d8f7a9d8263cf22303f0728ee7304dc7b9f3284929ce4bd9be0a72ffbc5ceb69",
       "script_sha256": "689e8dbfb966fbb173a6c2552e168052a532676c9d2a1a6614a97da412bf3636",
       "status": "implementation_matches_official_reviewed",
