@@ -1,0 +1,66 @@
+{
+  "reviews": {
+    "reborn-0646": {
+      "reborn_id": "reborn-0646",
+      "passcode": 21598948,
+      "official_text_sha256": "4729848ec7347bed99ab4edc8ca832a4286656022e3d576dcddca02ea027bf63",
+      "engine_text_sha256": "0699e793fc3046c8f24a85fbf28051bf44a8f6a1bad8a1901bdc0f35995b4fd1",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The current and engine descriptions both require an opponent attack declaration, a called coin toss, ATK 0 through the Battle Phase on a correct call, and a 500 LP Standby Phase maintenance payment or destruction. The pinned Lua implements those same operations and limits the maintenance handling to once in each of the controller's Standby Phases.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5327&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c21598948.lua"
+      ]
+    },
+    "reborn-0979": {
+      "reborn_id": "reborn-0979",
+      "passcode": 79575620,
+      "official_text_sha256": "ee3d00df3495b3a01a19a99c649d682585f23ecd3d907e89c01d563234eedd43",
+      "engine_text_sha256": "9a371140cd42c86f7990c2db9af912846cd83c0b76a8c46c1d88caad3e6215aa",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Current 'once per battle, during damage calculation, if this card battles' and the engine's expanded attacker-or-attack-target wording describe the same timing. The pinned Lua activates at EVENT_PRE_DAMAGE_CALCULATE only when Lily is the attacker or attack target, charges 2000 LP, prevents a second use in the same damage calculation, and applies +3000 ATK only for that damage calculation.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5619&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c79575620.lua"
+      ]
+    },
+    "reborn-1042": {
+      "reborn_id": "reborn-1042",
+      "passcode": 83986578,
+      "official_text_sha256": "d6ea8e00ebd49f0ddf1376346905d612b61d18d2363b1aff627c1c2b985f244d",
+      "engine_text_sha256": "179720d13d1174ccaea1d6de0f4cef2779b0ed2f7e2543b4bbf610d8b5b72e2a",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The current 'If' and legacy 'When' forms are equivalent for this mandatory Summon-success trigger. The pinned Lua registers forced Normal- and Special-Summon triggers, ignores Wanghu's own Summon because it was not already controlled, filters the newly Summoned face-up monsters at 1400 or less ATK, requires Wanghu to remain face-up to resolve, and destroys the qualifying monsters.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5535&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c83986578.lua"
+      ]
+    },
+    "reborn-1931": {
+      "reborn_id": "reborn-1931",
+      "passcode": 64697231,
+      "official_text_sha256": "da4ed8e6e4b83dbb35b7672e78ef3050354f1cbf3be22afc8e1097b1da89b53b",
+      "engine_text_sha256": "c15862df98c78026220073aa16fddaf5552c3b091f837f3f306c926b5375feb4",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The legacy 'return to its owner's Deck' and current 'shuffle into the Deck' describe the same result here. The pinned Lua requires at least four cards in the opponent's hand, reveals that hand to the activating player, lets that player choose exactly one Monster Card, sends it to the Deck with shuffle sequencing, and then obscures the opponent's remaining hand order.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5856&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c64697231.lua"
+      ]
+    },
+    "reborn-2125": {
+      "reborn_id": "reborn-2125",
+      "passcode": 14989021,
+      "official_text_sha256": "1ebc6346548bab9fd4f7b7d3cc836c1feae842122f74cef57eaa45ba36116389",
+      "engine_text_sha256": "11fabadc059078e0b2ff9fc5e72be70c039bfe347c841970d8a8483cd4c5ad74",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The compact English wording about 'each of their End Phases' is clarified by official Japanese Neuron text/Q&A: during each player's End Phase, the triggered effect applies to both players and the damage is simultaneous, reduced by 500 for each Spell/Trap that respective player controls. The pinned Lua does exactly that on every End Phase while Simorgh remains face-up, while also enforcing no Special Summon and WIND-only Tributes for its Tribute Summon.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=6720&ope=4&request_locale=ja",
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6720&ope=2&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c14989021.lua"
+      ]
+    }
+  },
+  "note": "Five hash-bound wording reviews after direct executable inspection; Simorgh additionally uses official Neuron Q&A to resolve the English End Phase phrasing."
+}
