@@ -1,0 +1,20 @@
+{
+  "reviews": {
+    "reborn-0716": {
+      "reborn_id": "reborn-0716",
+      "passcode": 26931058,
+      "official_text_sha256": "e8eb069310c91b1a21d4b389f1d43f154adbc29bf821423cc24d3dd434911098",
+      "engine_text_sha256": "0f7673de07c88ebaf735cc8301e84f11ae10b285dda5e57c7bdc2a91fd6a37c6",
+      "script_sha256": "23475e45fbc91dd47c8d793d378fb76ce0447949772bbf7f891d0ca40d463af8",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Formation Union's legacy engine description and upstream Lua use stale targeting semantics. Current official PSCT targets only 1 face-up Union monster in the first mode; the appropriate equip recipient is not a target and is chosen while resolving. The second mode contains no targeting instruction. The reviewed Reborn override removes the global CARD_TARGET property, sets CARD_TARGET only for mode 1, uses Duel.SelectTarget exactly once for the Union monster, chooses the equip recipient with Duel.SelectMatchingCard during resolution, and likewise chooses the mode-2 equipped Union during resolution without targeting. It also removes the upstream second-target fallback that could send the Union to the GY if that stale target disappeared. This review certifies only the exact corrected executable script against current official targeting behavior.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5623&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c26931058.lua",
+        "solver/script_overrides/c26931058.lua",
+        "solver/tests/test_formation_union_override.py"
+      ]
+    }
+  },
+  "note": "Script-hash-bound implementation review for Formation Union's corrected mode-dependent targeting behavior."
+}
