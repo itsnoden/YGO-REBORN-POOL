@@ -1,0 +1,29 @@
+{
+  "reviews": {
+    "reborn-0588": {
+      "reborn_id": "reborn-0588",
+      "passcode": 28677304,
+      "official_text_sha256": "462fca1c4918b983ef76d31daf3f1f78ef2648594ffa9cab1344c3e6916496bc",
+      "engine_text_sha256": "8d02a76db92eedde67c7715c141444a8c5373f998e6a4d2f548a78783c48b151",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The contact-Summon procedure is the same; the legacy parenthetical only states that Polymerization is not used. Current 'you can only target 1 monster at a time with this effect' and engine 'if this card is not already targeting a monster' are equivalent restrictions. Pinned Lua requires GetCardTargetCount()==0, selects exactly one face-up Effect Monster, records that card target, and keeps its on-field effect disabled while Dark Neos controls that target. aux.EnableNeosReturn gives the End Phase return with a count limit of 1, matching current once-per-turn wording.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6845&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c28677304.lua"
+      ]
+    },
+    "reborn-0592": {
+      "reborn_id": "reborn-0592",
+      "passcode": 85507811,
+      "official_text_sha256": "44918ba58ce0bb99d3f82116a1202daf23daa3ba06dae253eef0245f281c8a06",
+      "engine_text_sha256": "e48c381246d10286ea2398aaba157d4af748c960c8563b858248f0e6ec882e2f",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The contact-Summon wording is equivalent, with the legacy parenthetical merely explaining that Polymerization is not used. aux.EnableNeosReturn implements the once-per-turn End Phase return to the Extra Deck. The pinned Lua also restricts the ignition effect to Main Phase 1 once per turn, targets one face-up opponent card, requires successful destruction before applying the type branch, and then applies the same Monster/no-attack, Spell/direct-attack, or Trap/Defense Position result as current official text.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6846&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c85507811.lua"
+      ]
+    }
+  },
+  "note": "Hash-bound Neos wording reviews after direct inspection of target tracking, End Phase return, and type-dependent effect branches."
+}
