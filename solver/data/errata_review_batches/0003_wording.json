@@ -1,0 +1,77 @@
+{
+  "reviews": {
+    "reborn-1214": {
+      "reborn_id": "reborn-1214",
+      "passcode": 71544954,
+      "official_text_sha256": "5ab51d043cfeb881d4a912c6766524c7d800e11f4649e009e6ca56af075450d0",
+      "engine_text_sha256": "59dcf6e9a767c729169b8364b87b99f19bab8cfbe2aa309dd312144b3bdfa70f",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The legacy 'cannot be Special Summoned except by removing from play Rock-Type monster(s) in your Graveyard' and current 'Must be Special Summoned from your hand by banishing any number of Rock monsters from your GY' describe the same mandatory hand summon procedure. Pinned Lua enforces a hand-only inherent Special Summon, requires at least one eligible Rock, permits any positive count, banishes the selected Rocks as cost, and sets original ATK/DEF to 700 times the number banished. Its Spirit Elimination-aware location handling preserves the official replacement interaction rather than changing the base effect.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6324&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c71544954.lua"
+      ]
+    },
+    "reborn-1034": {
+      "reborn_id": "reborn-1034",
+      "passcode": 71587526,
+      "official_text_sha256": "ea0ead8ce690b769672da7178ff3a405a5f76c23cafbde2b38810e8bdca52ef3",
+      "engine_text_sha256": "cd81a79c78365e2324253dd14c1592d4c9539da28ad12cb5e6032e646d1d263a",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Both wordings discard one card as cost, target one face-up opponent monster, banish that target, then banish every same-name card in the opponent's GY if present. The legacy phrase 'if there are any' is only an explicit zero-card guard. Pinned Lua targets a face-up banishable opponent monster, requires the first banish to succeed, then removes all eligible same-code cards; Spirit Elimination-aware handling preserves official replacement interactions.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6619&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c71587526.lua"
+      ]
+    },
+    "reborn-0288": {
+      "reborn_id": "reborn-0288",
+      "passcode": 47829960,
+      "official_text_sha256": "7c5ed706be181b19f1c7d491d8ec654da39c073d537ccb1217eb4e1429b46e07",
+      "engine_text_sha256": "77e08316eb88d532be180ff44319e4cfe3fb270c2738f876698d084444dbc52a",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The added legacy phrase 'and if you do' does not alter the current effect here: the ATK increase is based on the number of Spells actually banished by the effect. Pinned Lua selects one or two Spells from the controller's GY, banishes them, and applies +300 ATK per successfully banished card through the end of the opponent's turn, once per turn.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5828&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c47829960.lua"
+      ]
+    },
+    "reborn-0376": {
+      "reborn_id": "reborn-0376",
+      "passcode": 37043180,
+      "official_text_sha256": "ff6f06806a0ee3baca904bfd3f2b3750d398c3b578d7515fed8c44ff4e464d4d",
+      "engine_text_sha256": "b58cbb9d10e68437f0564ba54c3393f52a40742a79f32493ce273d189fe6591c",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "For this mandatory post-damage-calculation battle trigger, legacy 'when this card battles' and current 'if this card battled' identify the same EVENT_BATTLED window. Pinned Lua uses a forced EVENT_BATTLED trigger and banishes both battle-related monsters that remain related to battle.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4262&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c37043180.lua"
+      ]
+    },
+    "reborn-0590": {
+      "reborn_id": "reborn-0590",
+      "passcode": 35809262,
+      "official_text_sha256": "35bc58514351c6edaf631e527eefb09b6bef52960b0e4233ea40d7f1cc66b53d",
+      "engine_text_sha256": "cbb8c2451e5a8380b11aa38f82c33bd2055a085ac22ae599581e36a1940dc07c",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The only operative wording delta is current 'When' versus legacy 'If' for a mandatory battle-destroying trigger. Pinned Lua registers a forced EVENT_BATTLE_DESTROYING effect, requires the destroyed battle target to be a monster in the GY, and inflicts damage equal to that monster's ATK in the GY, matching current official behavior.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6344&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c35809262.lua"
+      ]
+    },
+    "reborn-0685": {
+      "reborn_id": "reborn-0685",
+      "passcode": 27132350,
+      "official_text_sha256": "f5c000842e582ca16577bdb84328dafcb6736d6d93aaf41b40a07b8d7423c563",
+      "engine_text_sha256": "57f097440c57175665018dd287f0cb9a6f56796b83d73784a4e050474943227c",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Legacy 'randomly select 2 cards from your hand and remove them from play to inflict 800 Direct Damage' and current 'banish 2 random cards from your hand; inflict 800 damage' encode the same Flip effect. Pinned Lua requires two banishable hand cards, randomly selects exactly two as cost, banishes them, then inflicts 800 effect damage to the opponent.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5199&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c27132350.lua"
+      ]
+    }
+  },
+  "note": "Direct high-risk wording reviews. Each row remains valid only while its exact official/engine text hashes and identity remain unchanged."
+}
