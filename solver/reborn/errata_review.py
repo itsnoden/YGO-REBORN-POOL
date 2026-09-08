@@ -138,16 +138,32 @@ def build_review_report(cards, mapped, reviews=None):
             row['mismatches'] = mismatches
             stale.append(row)
 
-    lexical_ids = set()
+    lexical_rows = []
     for entry in mapped:
         if entry.get('normal_monster'):
             continue
         card = by_id[entry['reborn_id']]
         official = (card.get('official') or {}).get('text') or ''
-        if classify_text_pair(official, entry.get('engine_text') or '') == 'lexical_difference_requires_audit':
-            lexical_ids.add(entry['reborn_id'])
+        engine = entry.get('engine_text') or ''
+        if classify_text_pair(official, engine) == 'lexical_difference_requires_audit':
+            lexical_rows.append({
+                'reborn_id': entry['reborn_id'],
+                'name': entry['name'],
+                'passcode': int(entry['passcode']),
+                'official_text_sha256': normalized_text_sha256(official),
+                'engine_text_sha256': normalized_text_sha256(engine),
+                'script_sha256': entry.get('script_sha256'),
+                'script_source': entry.get('script_source'),
+                'script_path': entry.get('script_path'),
+            })
+    lexical_ids = {row['reborn_id'] for row in lexical_rows}
     reviewed_ids = {row['reborn_id'] for row in valid}
     unresolved = sorted(lexical_ids - reviewed_ids)
+    unresolved_set = set(unresolved)
+    unresolved_rows = sorted(
+        (row for row in lexical_rows if row['reborn_id'] in unresolved_set),
+        key=lambda row: row['reborn_id'],
+    )
 
     return {
         'purpose': 'hash_bound_rules_text_and_implementation_review_not_strategy_prior',
@@ -164,12 +180,14 @@ def build_review_report(cards, mapped, reviews=None):
         'stale_reviews': stale,
         'orphan_review_rows': orphan,
         'unresolved_reborn_ids': unresolved,
+        'unresolved_review_rows': unresolved_rows,
         'note': (
             'A wording review clears only the text-wording audit for its exact hash-bound pair. '
             'An implementation review is additionally bound to the exact executable script SHA-256 and is used '
             'only when display text is stale/non-equivalent but the reviewed Lua behavior matches current official '
             'behavior. Neither review type certifies unrelated interactions, pilot skill, or deck strength. '
-            'Upstream script drift remains a separate mandatory certification gate.'
+            'Upstream script drift remains a separate mandatory certification gate. Unresolved review rows expose '
+            'the exact current hashes needed to create future reviews without weakening validation.'
         ),
     }
 
