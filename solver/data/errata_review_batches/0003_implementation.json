@@ -1,0 +1,21 @@
+{
+  "reviews": {
+    "reborn-0736": {
+      "reborn_id": "reborn-0736",
+      "passcode": 39711336,
+      "official_text_sha256": "e8ca03e0760750535b16050620db7fd21507d8c4ff087c9220bb584d30798956",
+      "engine_text_sha256": "77bda685523a12b96afb1f4b8855ba8e69b1d103db7eacfe5fd7f47ed53cc8c4",
+      "script_sha256": "8ffa8da98d282cf02f8cd12b00b946d7dcbfc38c5c27fd98d67ef5181508b0b3",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "The engine display text says Fushioh Richie 'must first' be Special Summoned by Great Dezard, which normally implies later revival is legal after a proper first Summon. Current official text is stricter: this card can only be Special Summoned from the hand or Deck by Tributing a Great Dezard that fulfilled its condition. Upstream Project Ignis used only EnableReviveLimit(), so a properly Summoned Fushioh could potentially be revived later. The reviewed Reborn override adds the engine-standard AddCannotBeSpecialSummoned() restriction. Great Dezard's pinned official script already selects Fushioh only from hand/Deck, summons it through the nocheck path, and calls CompleteProcedure(), so the intended Great Dezard Summon remains functional while generic later Special Summons are blocked. This review certifies only the exact script SHA recorded here.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5428&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c39711336.lua",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c88989706.lua",
+        "solver/script_overrides/c39711336.lua",
+        "solver/tests/test_fushioh_richie_override.py"
+      ]
+    }
+  },
+  "note": "Hash-bound implementation review for Fushioh Richie's current official summon restriction. Valid only while the exact identity, text hashes, and executable Lua SHA-256 remain unchanged."
+}
