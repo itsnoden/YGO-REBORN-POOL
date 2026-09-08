@@ -1,0 +1,21 @@
+{
+  "reviews": {
+    "reborn-0720": {
+      "reborn_id": "reborn-0720",
+      "passcode": 88753985,
+      "official_text_sha256": "7a28811430ade1ce2f8fae3d4ddea56417f5d14fd8c73b65d646061bbac9cb16",
+      "engine_text_sha256": "94de1355f509467165a32c81a58909a8b34bdc385922b3ea14706af11143d7e7",
+      "script_sha256": "c53b42f9e2e0dc13f815b4db3d0bdb2325d9884a1ac5efd82069d2514bbf2168",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Fox Fire has a real current TCG-vs-OCG battle-state divergence. Current TCG text requires Fox Fire to have been face-up at the start of the Damage Step for the End Phase self-Summon to apply. Official Japanese Neuron Q&A explicitly states that under OCG rules a face-down Defense Position Fox Fire that is attacked, flipped, destroyed by that battle, and sent to the GY still activates in the End Phase. The pinned Project Ignis Lua follows that OCG outcome because its battle-destruction check sees the post-flip previous face-up position. Reborn uses current TCG text as authority. The reviewed override records whether this exact Fox Fire was face-down when it became an attack target, suppresses End Phase registration for that battle case, clears/replaces the record on a later face-up attack, and preserves the face-up Tribute-Summon release restriction and all other upstream behavior. This review certifies only the exact corrected executable script.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6198&ope=2&request_locale=en",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=6198&ope=4&request_locale=ja",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c88753985.lua",
+        "solver/script_overrides/c88753985.lua",
+        "solver/tests/test_fox_fire_override.py"
+      ]
+    }
+  },
+  "note": "Script-hash-bound TCG-specific implementation review for Fox Fire's face-up-at-start-of-Damage-Step condition."
+}
