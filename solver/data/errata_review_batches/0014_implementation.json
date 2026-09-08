@@ -1,0 +1,19 @@
+{
+  "reviews": {
+    "reborn-2252": {
+      "reborn_id": "reborn-2252",
+      "passcode": 57953380,
+      "official_text_sha256": "579321475202d6ad06f0ee9bf1d4907f92b3026c72a508f27bfebba17032fe1c",
+      "engine_text_sha256": "6217057033c11d39346423ade4f7494d89e98c0d516e4626e41e2bcdd5b20b00",
+      "script_sha256": "4a058928965a4077316777f68f6c7f9ec5562c72352a2dee874eb85836ccb4f0",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Current TCG text explicitly says Card of Safe Return cannot activate during the Damage Step. Official Japanese Neuron supplemental information confirms that restriction and also confirms the legacy optional 'when' timing: if the Special Summon from the controller's GY occurs at Chain Link 2 or higher, the draw effect cannot activate after the chain finishes. The exact pinned Lua registers an ordinary optional EVENT_SPSUMMON_SUCCESS trigger, without EFFECT_FLAG_DAMAGE_STEP and without a delayed-trigger property, and checks that at least one successfully Special Summoned monster came from the controller's GY. It draws exactly 1 card for the summon event, including when multiple monsters are Special Summoned simultaneously. The executable behavior therefore matches the current official text/rulings even though the engine display text omits the explicit Damage Step clause.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5123&ope=2&request_locale=en",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=5123&ope=4&request_locale=ja",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c57953380.lua"
+      ]
+    }
+  },
+  "note": "Script-hash-bound review resolving Card of Safe Return's omitted Damage Step wording and optional trigger timing through official Neuron rules."
+}
