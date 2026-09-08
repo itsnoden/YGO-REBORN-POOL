@@ -1,0 +1,19 @@
+{
+  "reviews": {
+    "reborn-0624": {
+      "reborn_id": "reborn-0624",
+      "passcode": 96355986,
+      "official_text_sha256": "f8271ec78faa4466786813b701d1be5a41fa5ec2b52fb1a4d702b66bb66c34c9",
+      "engine_text_sha256": "aa9b74df491df4232b4091dd956877fb91624803ac1c506b5ef01e617c0599eb",
+      "script_sha256": "54e4d11cabbf0de53147833c64f2471d6ff075571327c16c379677ec66c6cc11",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "The ancient English text merely says to increase LP by the ATK of 1 attacking monster. Official Japanese Neuron supplemental information supplies the operational details: Enchanted Javelin activates when an opponent's monster declares an attack, targets that attacking monster, and recovers LP equal to the ATK currently applied to that target on the field. The exact pinned Lua is an EVENT_ATTACK_ANNOUNCE activation restricted to the opponent's turn, marks the effect as card-targeting, targets Duel.GetAttacker(), re-reads the target's current ATK at resolution, and only recovers if that target remains related and face-up. The executable behavior therefore matches the authoritative current ruling despite the non-PSCT English wording.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4992&ope=2&request_locale=en",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=4992&ope=4&request_locale=ja",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c96355986.lua"
+      ]
+    }
+  },
+  "note": "Script-hash-bound review resolving Enchanted Javelin's pre-PSCT targeting/timing text through official Neuron Q&A."
+}
