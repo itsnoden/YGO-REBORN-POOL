@@ -1,0 +1,41 @@
+{
+  "reviews": {
+    "reborn-0497": {
+      "reborn_id": "reborn-0497",
+      "passcode": 3549275,
+      "official_text_sha256": "39d4a1f2469daa741e9d1866a971235a1ca71f8439cae2c2277a1db8ef0118bd",
+      "engine_text_sha256": "114202454fe1777c575a4368352af2f716828f7cbc6259174afa064d026caf1e",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Dice Jar's two wordings encode the same outcome: reroll ties; otherwise the lower roller takes the higher roll x500 when the winning roll is 2-5, or 6000 when the winning roll is 6. The pinned Lua directly implements those branches for both players.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5424&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c3549275.lua"
+      ]
+    },
+    "reborn-1352": {
+      "reborn_id": "reborn-1352",
+      "passcode": 81306586,
+      "official_text_sha256": "bb294bb10682e82b4bedd24bbd505ea076f5221ed52200f73e3aeb37b7c29da1",
+      "engine_text_sha256": "699d34ec367e5041ca88290535d51548c7c4477837e73b5bc30ffbcc886e44cc",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The old display text spells out face-up WATER monsters while the current text says WATER monsters you control; a face-down monster does not present an Attribute for this continuous field modifier. The flip-trigger portion is the same return-to-hand effect. Pinned Lua applies +200 ATK to controlled WATER monsters in the Monster Zone and targets exactly one opponent-controlled card on EVENT_FLIP to return it to the hand.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5803&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c81306586.lua"
+      ]
+    },
+    "reborn-1546": {
+      "reborn_id": "reborn-1546",
+      "passcode": 24311595,
+      "official_text_sha256": "c17c10058913e79a9cd8e4ca855599326c82dc684ef2b4aa37733e8e577a157e",
+      "engine_text_sha256": "04b024cbfb0bf5cdfe57ba444992825f8efde452900ba523ceef7b260e84a71a",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Both texts trigger when a roid monster you controlled is destroyed by battle and sent to the GY, then optionally return that monster to its owner's hand. The engine text's requirement that Rescueroid remain face-up to activate/resolve is inherent in its field-trigger effect and is enforced by the Lua's LOCATION_MZONE range and relation check. Duel.SendtoHand with no receiving player returns the card to its owner.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6745&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c24311595.lua"
+      ]
+    }
+  },
+  "note": "Direct high-risk wording reviews. Each row remains valid only while its exact official/engine text hashes and identity remain unchanged."
+}
