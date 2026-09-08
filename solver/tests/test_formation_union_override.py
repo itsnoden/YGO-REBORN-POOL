@@ -25,6 +25,13 @@ class FormationUnionOverrideTests(unittest.TestCase):
             self.text,
         )
 
+    def test_mode_one_does_not_send_union_to_gy_if_no_recipient_remains(self):
+        # The recipient is not an activation target under current PSCT. If no
+        # appropriate recipient exists at resolution, the effect simply cannot
+        # equip; the targeted Union monster is not sent to the GY by rule.
+        self.assertNotIn('Duel.SendtoGrave(ec,REASON_RULE', self.text)
+        self.assertIn("if #g==0 then return end", self.text)
+
     def test_mode_two_selects_on_resolution_without_targeting(self):
         self.assertIn(
             'Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_STZONE,0,1,nil,e,tp)',
