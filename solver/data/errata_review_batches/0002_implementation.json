@@ -1,0 +1,31 @@
+{
+  "reviews": {
+    "reborn-1012": {
+      "reborn_id": "reborn-1012",
+      "passcode": 5257687,
+      "official_text_sha256": "06607e33c8fde31d5c85c4aa79fe141fa76d2fc35f435f15969efb71310015da",
+      "engine_text_sha256": "f02cc6ef7f85cf23906bc2ef05346cdb034ac7a73e39de74f5a12defb5811ff3",
+      "script_sha256": "54232188ab34ec5bd6291ba078c301af7bcd19a3a19a4cdde78efa5be8eb2fb9",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "The legacy engine display text does not explicitly say 'target', while current official text does. The exact pinned Lua marks the Flip effect with EFFECT_FLAG_CARD_TARGET, selects one opponent-controlled monster with Duel.SelectTarget, takes control through the End Phase, and grants that successfully controlled monster direct-attack capability for the turn. The executable implementation therefore matches the current official targeting/control behavior even though the stale display wording does not fully express targeting.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5035&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c5257687.lua"
+      ]
+    },
+    "reborn-0528": {
+      "reborn_id": "reborn-0528",
+      "passcode": 3682106,
+      "official_text_sha256": "0d1a4eb1570762f765da7e0b2218268c310e78a4ceaa0f13076172fe0f05c633",
+      "engine_text_sha256": "ca8b767421f71c3d78be369032b8f311e2be90bcdedc48019cfb413c46b583b4",
+      "script_sha256": "524c8d50aae40c8b92e109def14e5db24f4029f23fb0c113f7a41c20404a84c1",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Current official text explicitly targets one face-up card whose effect negates Trap effects, while the legacy engine display text merely says to destroy one such face-up card. The exact pinned Lua sets EFFECT_FLAG_CARD_TARGET, uses Duel.SelectTarget, requires a face-up on-field card carrying the Double Snare marker effect, and destroys that target only if it remains face-up and related to the effect. The executable targeting behavior matches current official text.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=5315&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c3682106.lua"
+      ]
+    }
+  },
+  "note": "Hash-bound implementation reviews for stale display text. Each row is additionally bound to the exact executable Lua SHA-256."
+}
