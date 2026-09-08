@@ -1,0 +1,31 @@
+{
+  "reviews": {
+    "reborn-1766": {
+      "reborn_id": "reborn-1766",
+      "passcode": 63102017,
+      "official_text_sha256": "886522535445e3993fdb29ddae28e7b177950ae76902e86ddc1ddbb3727312a3",
+      "engine_text_sha256": "ab58825242a0d5fb8eb15d4275fd1fd2fab1f08c1e3c1034b94d5219c227a66b",
+      "script_sha256": "f99a29b562b8c84e5830df32231d5d6e7e009e514393591a0180d3388b4ed4d4",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "The legacy display text says to select a Defense Position opponent monster, while current official text explicitly says to target it. The exact pinned Lua marks activation with EFFECT_FLAG_CARD_TARGET, requires an opponent-controlled Defense Position monster, uses Duel.SelectTarget for exactly one such monster, and changes that target to face-up Attack Position only while it remains related to the effect. The executable implementation therefore matches current targeting semantics even though the stale display text does not use modern PSCT targeting language.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=4456&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c63102017.lua"
+      ]
+    },
+    "reborn-1209": {
+      "reborn_id": "reborn-1209",
+      "passcode": 2694423,
+      "official_text_sha256": "075fe2a6287101f6e53f44520251547bf23bde6487ff9814445a8ccd0e586600",
+      "engine_text_sha256": "dc59e5433e2b48e5fe41b904f0faf24d0ee7378ae6fef3652bcfbbd4755049b5",
+      "script_sha256": "a2759dead452d8295e07749d715f8f9c6d6b8413e2cec31a1a0dfa391e52c14a",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "The legacy engine display says to destroy one opponent monster when Medusa Worm is Flip Summoned, while current official text explicitly targets that monster. The exact pinned Lua registers a forced EVENT_FLIP_SUMMON_SUCCESS effect with EFFECT_FLAG_CARD_TARGET, selects exactly one opponent Monster Zone card with Duel.SelectTarget, and destroys that target if it remains related to the effect. Its once-per-turn self-set ignition effect is also explicitly enforced. This review is bound to the exact executable SHA rather than treating the stale display wording as equivalent.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=6054&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c2694423.lua"
+      ]
+    }
+  },
+  "note": "Script-hash-bound implementation reviews for legacy descriptions that omit current PSCT targeting language."
+}
