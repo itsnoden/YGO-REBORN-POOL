@@ -22,6 +22,7 @@ on:
       - 'solver/data/verified_alias_official_records.json'
       - 'solver/data/reviewed_text_equivalence.json'
       - 'solver/data/reviewed_implementation_equivalence.json'
+      - 'solver/data/errata_review_batches/**'
       - '.github/workflows/text-difference-audit.yml'
   workflow_dispatch:
 
