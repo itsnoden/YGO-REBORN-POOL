@@ -1,0 +1,19 @@
+{
+  "reviews": {
+    "reborn-0089": {
+      "reborn_id": "reborn-0089",
+      "passcode": 36378213,
+      "official_text_sha256": "1c6b7d144e41f1e4b8ce5aed5186e754f499f6c86106d3b99c4331f4bc6f8647",
+      "engine_text_sha256": "20004f7c9d4067728776f67d04649400dc727927fc53bcf8f64cdd5d71729579",
+      "script_sha256": "0b3168741f88690e901043ade15d32c40145e06d1c688da74f50e6e372fe7de0",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Current English card text omits an explicit Damage Step clause, while the engine description says the trigger cannot activate during the Damage Step. Official Japanese Neuron Q&A for Ambulanceroid explicitly states that its Trigger Effect does not target and cannot be activated during the Damage Step. The exact pinned Lua registers a normal optional EVENT_TO_HAND trigger without Damage Step-enabling properties and only Special Summons a 'roid' that was added from the controller's GY to hand, matching that official ruling. The added engine wording therefore describes correct executable behavior rather than a simulator mismatch.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6736&ope=2&request_locale=en",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=6736&ope=4&request_locale=ja",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c36378213.lua"
+      ]
+    }
+  },
+  "note": "Script-hash-bound review resolving Ambulanceroid's omitted English Damage Step restriction using official Japanese Neuron Q&A."
+}
