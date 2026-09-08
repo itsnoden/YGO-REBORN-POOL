@@ -1,0 +1,21 @@
+{
+  "reviews": {
+    "reborn-0001": {
+      "reborn_id": "reborn-0001",
+      "passcode": 32603633,
+      "official_text_sha256": "219ba5b180f6dc258f6c821b3dbfc3a591a979ffc6ec1cf9341bf56034c5f44e",
+      "engine_text_sha256": "35788ebf4dd0c471ddd01b0778efc03de395f0ef035a2d91e5973e1f0458f412",
+      "script_sha256": "5ca448ae378a37ed2eedfcb4f681f4d587bcb6173171c5e08bf86b2c89eac170",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Backs to the Wall has a real current TCG-vs-OCG rules divergence. Current official TCG English text blocks a Graveyard Six Samurai only when the activating player already controls a monster with that same name. Current official Japanese OCG wording/Q&A applies the same-name prohibition to a same-name card on either player's field, and the pinned Project Ignis Lua follows that OCG behavior by searching both players' full on-field locations. Reborn uses current TCG text as authority. The reviewed override narrows only the duplicate-name gate to a face-up same-name monster in the activating player's Monster Zone, while preserving the leave-100-LP cost, different-name restriction within the same resolution, Special Summon capacity handling, and all other upstream behavior. This review certifies only the exact corrected executable script.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=7134&ope=2&request_locale=en",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=7134&ope=4&request_locale=ja",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c32603633.lua",
+        "solver/script_overrides/c32603633.lua",
+        "solver/tests/test_backs_to_the_wall_override.py"
+      ]
+    }
+  },
+  "note": "Script-hash-bound TCG-specific implementation review for Backs to the Wall's duplicate-name restriction."
+}
