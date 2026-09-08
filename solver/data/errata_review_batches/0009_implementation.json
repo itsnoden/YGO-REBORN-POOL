@@ -1,0 +1,21 @@
+{
+  "reviews": {
+    "reborn-1457": {
+      "reborn_id": "reborn-1457",
+      "passcode": 56840658,
+      "official_text_sha256": "de4959b377f504b6ea8a9c7e6bec6256260431b70aa8da1b21a1b09f8c51b7f7",
+      "engine_text_sha256": "7a12af7378e104445f27dae7bb4fb733e3874e9de22ad3e37bd7334509d16ef9",
+      "script_sha256": "99ed3e7a3a19c0a2a015342b07d817cdd99b26eee7b6b2333f12b8527bc43687",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Poison Draw Frog has a real TCG-vs-OCG rules divergence. Current official TCG English text explicitly excludes the case where the card was attacked while face-down and destroyed by battle. Official Japanese OCG Neuron Q&A explicitly allows that exact case because the monster flips face-up before battle destruction. The pinned Project Ignis implementation follows the OCG-style previous-face-up rule and therefore does not implement the Reborn format's current TCG authority. The reviewed Reborn override records whether this exact Frog was face-down when it became an attack target and suppresses the GY draw only if that state is still present and the actual send-to-GY reason is battle. A later face-up attack clears the flag, while non-battle sends remain eligible even after a canceled earlier attack. The flag intentionally survives the battle flip and move to the GY so EVENT_TO_GRAVE can enforce the TCG exception. This review certifies only the exact corrected executable script.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6426&ope=2&request_locale=en",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=6426&ope=4&request_locale=ja",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c56840658.lua",
+        "solver/script_overrides/c56840658.lua",
+        "solver/tests/test_poison_draw_frog_override.py"
+      ]
+    }
+  },
+  "note": "Script-hash-bound TCG-specific implementation review for Poison Draw Frog's face-down-when-attacked battle exception."
+}
