@@ -1,0 +1,20 @@
+{
+  "reviews": {
+    "reborn-1744": {
+      "reborn_id": "reborn-1744",
+      "passcode": 92394653,
+      "official_text_sha256": "8295f9f74bdddcede919d7ed399f72410538a4c0711847cf275c4adcd7c1a973",
+      "engine_text_sha256": "67c7515a44f5ffc14d0176e6c4bcc4868baf5dd1f2763e3fed87e2670a49d1ed",
+      "script_sha256": "88e8ba425dd0a0b82a005178a8899cb2f97fd54b4425d3c97fcf4c4ead48bdf1",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "The legacy English TCG text says to 'select' 1 opponent monster, which is ambiguous about who chooses and predates modern PSCT. The official Japanese Neuron card text and Q&A explicitly state that the opponent chooses 1 monster they control during resolution, that the effect does not target, that it mandatorily activates when a face-up Spirit monster returns from the Monster Zone to the controller's hand, and that this triggered effect can activate during the Damage Step. The exact pinned Lua implements a forced EVENT_TO_HAND trigger, verifies a previously face-up Spirit returned from the Monster Zone to the controller's hand, uses Duel.SelectMatchingCard with 1-tp so the opponent chooses at resolution, and does not mark the effect as CARD_TARGET. Its Standby Phase handling also implements the 500 LP maintenance choice or destruction. The executable implementation therefore matches the authoritative current OCG ruling behavior despite stale English wording.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5402&ope=2&request_locale=ja",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=5402&ope=4&request_locale=ja",
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5402&ope=2&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c92394653.lua"
+      ]
+    }
+  },
+  "note": "Script-hash-bound review using official Japanese Neuron text/Q&A to resolve stale English wording for Spirit's Invitation."
+}
