@@ -1,0 +1,19 @@
+{
+  "reviews": {
+    "reborn-0097": {
+      "reborn_id": "reborn-0097",
+      "passcode": 34487429,
+      "official_text_sha256": "1870216a8c636f95e22a5364815683c48e38ead537ccb1217eb4e1429b46e07",
+      "engine_text_sha256": "d8f7a9d8263cf22303f0728ee7304dc7b9f3284929ce4bd9be0a72ffbc5ceb69",
+      "script_sha256": "689e8dbfb966fbb173a6c2552e168052a532676c9d2a1a6614a97da412bf3636",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Current English text states that the required number of Crystal Beast cards must be present both to activate and to resolve the listed effects. Official Japanese Neuron supplemental information also states that the 2+ damage-halving effect is applied when the controller would take battle damage during damage calculation and that the 3+ Spell/Trap-negation effect cannot be activated during the Damage Step. The exact pinned Lua matches those timing rules, makes the 2+ effect once per turn, and re-checks the required Crystal Beast count at resolution for the 3+, 4+, and 5-card effects. Its 1+ indestructibility condition is likewise tied to the current face-up Crystal Beast count. The executable implementation therefore matches the authoritative current behavior despite the engine description's extra explicit Damage Step wording and legacy top-level phrasing.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=7079&ope=2&request_locale=en",
+        "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?cid=7079&ope=4&request_locale=ja",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c34487429.lua"
+      ]
+    }
+  },
+  "note": "Script-hash-bound review for Ancient City - Rainbow Ruins using current English text and official Japanese Neuron timing/ruling details."
+}
