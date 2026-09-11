@@ -1,0 +1,19 @@
+{
+  "reviews": {
+    "reborn-1167": {
+      "reborn_id": "reborn-1167",
+      "passcode": 21593977,
+      "official_text_sha256": "09cda594bc81822917f7cd2c9c12dd07864efeba303170465d590d8fb692ab46",
+      "engine_text_sha256": "05640326fea2fb2ff27c1a445a728a57cd00c58ac463236c9e22dde655e668b7",
+      "script_sha256": "8ab3a62e668a8e3c337451ad332e362356d26447f33ba0cf9c92e8ed98479a78",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "Current official TCG text requires Makyura to be sent from the Monster Zone to the GY, then permits exactly 1 Trap Card to be activated from the hand that turn, with a once-per-turn limit on Makyura's effect. The pinned executable Lua triggers optionally on EVENT_TO_GRAVE, requires the previous location to be LOCATION_MZONE, applies the hard once-per-turn count limit by card ID, and on resolution registers EFFECT_TRAP_ACT_IN_HAND with its own count limit of 1 until the End Phase. The BabelCDB display text has extra legacy/OCG explanatory wording, but the exact pinned executable behavior matches the current official TCG effect. Therefore the engine implementation is suitable for Reborn's latest-errata requirement without an override.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5285&ope=2&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c21593977.lua",
+        "https://github.com/itsnoden/YGO-REBORN-POOL/actions/runs/34274780702"
+      ]
+    }
+  },
+  "note": "Script-hash-bound review confirming current TCG Makyura the Destructor behavior; no simulator override required."
+}
