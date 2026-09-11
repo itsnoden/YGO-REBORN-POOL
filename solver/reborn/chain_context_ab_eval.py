@@ -25,6 +25,8 @@ from .import_pool import ROOT, dump
 from .learning import SparsePolicy
 from .pilot_eval import _usable_candidates
 
+# Held-out evaluation must preserve this subclass via pilot_eval.frozen_policy_copy.
+
 
 class ChainContextPolicy(SparsePolicy):
     """Experimental policy with tiny context interactions on chain actions only."""
