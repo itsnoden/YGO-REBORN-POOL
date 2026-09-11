@@ -1,0 +1,76 @@
+name: Exploratory Payoff Matrix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/exploratory-payoff-matrix.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: solver
+        shell: bash
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: solver/requirements.txt
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Rebuild pinned engine dependencies
+        run: python -m reborn.bootstrap_engine
+
+      - name: Build pinned ocgcore
+        run: python -m reborn.build_core --core vendor/core --output build --jobs 2
+
+      - name: Reconcile pinned simulator IDs
+        run: python -m reborn.engine_bridge --database vendor/database/cards.cdb --scripts vendor/scripts --core vendor/core
+
+      - name: Run payoff-matrix unit tests
+        run: python -m unittest tests.test_payoff_matrix_eval -v
+
+      - name: Run exploratory paired-seat matrix
+        run: |
+          set -o pipefail
+          python -m reborn.payoff_matrix_eval \
+            --library build/libocgcore.so \
+            --database vendor/database/cards.cdb \
+            --scripts vendor/scripts \
+            --policy chain_context \
+            --train-games 64 \
+            --train-decks 8 \
+            --population-size 4 \
+            --seeds-per-matchup 2 \
+            --budget 5000 \
+            --train-seed 231000 \
+            --eval-seed 241000 \
+            --policy-seed 20260911 \
+            2>&1 | tee reports/ci_exploratory_payoff_matrix.log
+
+      - name: Upload exploratory payoff matrix
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exploratory-payoff-matrix-${{ github.sha }}
+          path: |
+            solver/reports/payoff_matrix.json
+            solver/reports/payoff_policy.json
+            solver/reports/ci_exploratory_payoff_matrix.log
+            solver/reports/engine_coverage.json
+          if-no-files-found: warn
+          retention-days: 14
