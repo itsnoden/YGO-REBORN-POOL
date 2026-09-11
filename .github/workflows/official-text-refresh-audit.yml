@@ -10,6 +10,8 @@ on:
 permissions:
   contents: read
 
+# Manual refresh trigger: 2026-09-11 latest-text drift check
+
 # Rerun after reviewed official `(Updated from: ...)` display-name parser fix.
 jobs:
   refresh:
