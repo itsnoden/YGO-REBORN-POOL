@@ -47,7 +47,12 @@ def run_eval_game(library, database, scripts, deck, mapped, frozen_policy,
         raise ValueError('learned_seat must be 0 or 1')
     allowed_codes = [entry['passcode'] for entry in mapped.values()]
 
-    eval_policy = SparsePolicy(
+    # Preserve the exact policy class under test.  Reconstructing every frozen
+    # evaluation arm as SparsePolicy silently discarded treatment-specific
+    # feature generators (for example chain/scalar context subclasses), making
+    # policy-class A/B experiments evaluate the wrong model.
+    policy_cls = frozen_policy.__class__
+    eval_policy = policy_cls(
         seed=seed * 1009 + learned_seat,
         temperature=frozen_policy.temperature,
         learning_rate=0.0,
