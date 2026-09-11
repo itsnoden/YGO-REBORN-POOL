@@ -94,6 +94,7 @@ def main():
     p.add_argument('--database', required=True)
     p.add_argument('--scripts', required=True)
     p.add_argument('--blocks', type=int, default=6)
+    p.add_argument('--block-offset', type=int, default=0)
     p.add_argument('--train-games', type=int, default=64)
     p.add_argument('--train-decks', type=int, default=4)
     p.add_argument('--eval-decks', type=int, default=2)
@@ -126,7 +127,8 @@ def main():
     all_frozen = True
 
     for block in range(a.blocks):
-        train_pool, eval_pool = _block_slice(usable, block, a.train_decks, a.eval_decks)
+        cohort_block = a.block_offset + block
+        train_pool, eval_pool = _block_slice(usable, cohort_block, a.train_decks, a.eval_decks)
 
         control, control_train, control_ok, train_seed, policy_seed = _train_arm(
             a, mapped, train_pool, block, SparsePolicy
@@ -159,6 +161,7 @@ def main():
 
         blocks.append({
             'block': block,
+            'candidate_cohort_block': cohort_block,
             'train_candidate_ids': [cid for cid, _ in train_pool],
             'eval_candidate_ids': [cid for cid, _ in eval_pool],
             'train_seed_start': train_seed,
@@ -213,6 +216,7 @@ def main():
         'treatment_policy': 'canonical + coarse scalar-state x option interactions',
         'configuration': {
             'blocks': a.blocks,
+            'block_offset': a.block_offset,
             'train_decks_per_block': a.train_decks,
             'eval_decks_per_block': a.eval_decks,
             'pairs_per_eval_deck': a.pairs_per_deck,
