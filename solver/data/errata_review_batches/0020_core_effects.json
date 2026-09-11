@@ -1,0 +1,62 @@
+{
+  "reviews": {
+    "reborn-0023": {
+      "reborn_id": "reborn-0023",
+      "passcode": 70828912,
+      "official_text_sha256": "066f98442ec625ed9a43d849428a09d9a4c0fdfbb82379b7b06add3786cc9485",
+      "engine_text_sha256": "f18d9b7a051c6a495276e2e6430e54b4c0689816370fc4ca0836b86d3d70f29a",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Premature Burial's current official text and the pinned engine display encode the same effect. 'GY' versus 'Graveyard' is established terminology, and official 'Special Summon it' versus engine 'Special Summon that target' both unambiguously refer to the monster targeted by the activation. Both require paying 800 LP, target exactly 1 monster in the controller's GY, Special Summon it in Attack Position and equip this card to it, and destroy that equipped monster only when Premature Burial itself is destroyed.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=4966&ope=2&request_locale=en"
+      ]
+    },
+    "reborn-0034": {
+      "reborn_id": "reborn-0034",
+      "passcode": 97169186,
+      "official_text_sha256": "116906189fdc880dfc55e9daf78db57a53c73200f8d07477193dacedfbcbdb29",
+      "engine_text_sha256": "ede7e50c76ee09f648392990e4671567feb828daf2f876fc8e60da1cefc5c679",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The only substantive lexical difference is 'the face-up monster ... with the highest DEF' versus 'the face-up monster ... that has the highest DEF'. These phrases select the same set and preserve the same tie rule: the activating player chooses if multiple opposing face-up monsters share the highest DEF.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=5905&ope=2&request_locale=en"
+      ]
+    },
+    "reborn-0042": {
+      "reborn_id": "reborn-0042",
+      "passcode": 95519486,
+      "official_text_sha256": "5cf5a9ef12d9cd743f2d76ec971e8caec118795a65444fd0ea49b3b3978c1ac8",
+      "engine_text_sha256": "0ebc87506dafa3a70bd439a1e0497cf19f513bc34792716de15f4645a4eb2860",
+      "script_sha256": "c46420e3567ace28732600c1e2acbe5632851e3966610b1f8ff3e2d79cfec2f9",
+      "status": "implementation_matches_official_reviewed",
+      "rationale": "The pinned engine display omits 'face-up' from Zanji's destruction-replacement clause, so this is not cleared by wording similarity. The exact pinned Lua enforces the current official behavior: its attack-trigger effect requires another face-up Six Samurai with a different name, and its replacement filter allows only another face-up Six Samurai the controller controls to be destroyed instead. The executable behavior therefore matches current official text despite the stale display wording.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6964&ope=2&request_locale=en",
+        "https://github.com/ProjectIgnis/CardScripts/blob/14064037f42d0ae0bb9f8577d7eba2baad95e633/official/c95519486.lua"
+      ]
+    },
+    "reborn-1272": {
+      "reborn_id": "reborn-1272",
+      "passcode": 4929256,
+      "official_text_sha256": "b410401d0d001def357edbf53465bf5641766c0761373abac70108090980a8da",
+      "engine_text_sha256": "6fcab5fc9bb43182a90f90aebe69df37d555cb4a12ff93e81cda4d998fbec4db",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "Current official 'up to 2 Spells/Traps' and engine 'up to 2 Spell/Trap Cards' are behaviorally identical category wording. Both effects are optional on Tribute Summon, target one or two Spell/Trap cards anywhere on the field, and destroy the selected targets.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6114&ope=2&request_locale=en"
+      ]
+    },
+    "reborn-2148": {
+      "reborn_id": "reborn-2148",
+      "passcode": 12538374,
+      "official_text_sha256": "cb30ad51a2ef9b557290299b49ff8c7e590f63497e2216e8091704a87c28623e",
+      "engine_text_sha256": "2e1babe62b2f3afcc11f23e87bd94ae0afbac8d67a4e66bb9e869ca00873240f",
+      "status": "behavior_equivalent_wording_reviewed",
+      "rationale": "The lexical differences are terminology only: 'GY' versus 'Graveyard' and 'Spells/Traps' versus 'Spell/Trap Cards'. Both texts require the controller's Standby Phase, Treeborn Frog in that controller's GY, no controlled Treeborn Frog, and no controlled Spell/Trap both when activating and when resolving, with a once-per-turn Special Summon.",
+      "evidence": [
+        "https://www.db.yugioh-card.com/yugiohdb/card_search.action?cid=6603&ope=2&request_locale=en"
+      ]
+    }
+  },
+  "note": "Hash-bound reviews for five strategically relevant Reborn cards after a fresh 2026-09-11 official-text crawl. Zanji is implementation-reviewed because its engine display omits a face-up requirement that the pinned Lua correctly enforces; the other four differences are behavior-equivalent wording."
+}
