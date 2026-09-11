@@ -29,6 +29,17 @@ from .search import validate
 MSG_WIN = 5
 
 
+def frozen_policy_copy(frozen_policy, seed):
+    """Clone a frozen policy without changing its feature-generator class."""
+    policy_cls = frozen_policy.__class__
+    return policy_cls(
+        seed=seed,
+        temperature=frozen_policy.temperature,
+        learning_rate=0.0,
+        weights=dict(frozen_policy.weights),
+    )
+
+
 def _usable_candidates(cards, mapped):
     candidates = json.loads((ROOT/'data/processed/candidates-20260906.json').read_text())['candidates']
     usable = []
@@ -51,12 +62,8 @@ def run_eval_game(library, database, scripts, deck, mapped, frozen_policy,
     # evaluation arm as SparsePolicy silently discarded treatment-specific
     # feature generators (for example chain/scalar context subclasses), making
     # policy-class A/B experiments evaluate the wrong model.
-    policy_cls = frozen_policy.__class__
-    eval_policy = policy_cls(
-        seed=seed * 1009 + learned_seat,
-        temperature=frozen_policy.temperature,
-        learning_rate=0.0,
-        weights=dict(frozen_policy.weights),
+    eval_policy = frozen_policy_copy(
+        frozen_policy, seed * 1009 + learned_seat
     )
     weights_before = dict(eval_policy.weights)
     learned = LearningPilot(eval_policy, seed=seed * 101 + 17 + learned_seat)
