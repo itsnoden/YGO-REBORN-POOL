@@ -10,6 +10,8 @@ on:
 permissions:
   contents: read
 
+# Corrected rerun after frozen policy subclass preservation fix.
+
 jobs:
   experiment:
     runs-on: ubuntu-latest
