@@ -15,6 +15,7 @@ from collections import Counter
 import json
 
 from .announce import enumerate_declarable
+from .chain_context_ab_eval import ChainContextPolicy
 from .effects import UnsupportedInteraction
 from .import_pool import ROOT, dump
 from .learn_probe import run_training_game
@@ -32,6 +33,7 @@ MSG_WIN = 5
 
 POLICIES = {
     'canonical': SparsePolicy,
+    'chain_context': ChainContextPolicy,
     'scalar_context': ScalarContextPolicy,
 }
 
