@@ -124,15 +124,18 @@ class LearningTests(unittest.TestCase):
         self.assertEqual(pilot.learned_decisions, 1)
         self.assertEqual(pilot.complex_learned_decisions, 1)
 
-    def test_unbounded_complex_prompt_still_uses_observation_fallback(self):
+    def test_large_multicard_selection_is_factorized_and_learned(self):
         # C(13,6)=1716, above the default complete-option cap of 512.
+        # Large plain select-card prompts are now decomposed into safe internal
+        # pick decisions instead of being handed to the random fallback.
         decision, prompt = select_card_decision(13, 6, 6)
         pilot = LearningPilot(SparsePolicy(seed=8), seed=9)
         response = pilot.choose(decision, prompt, observation(0))
-        self.assertEqual(response[:4], struct.pack('<i', 2))
-        self.assertEqual(pilot.fallback_decisions, 1)
-        self.assertEqual(pilot.fallback_kinds['select_card'], 1)
-        self.assertEqual(pilot.learned_decisions, 0)
+        self.assertEqual(response[:8], struct.pack('<iI', 2, 6))
+        self.assertEqual(pilot.fallback_decisions, 0)
+        self.assertEqual(pilot.fallback_kinds['select_card'], 0)
+        self.assertEqual(pilot.learned_decisions, 6)
+        self.assertEqual(pilot.complex_learned_decisions, 6)
 
 
 if __name__ == '__main__':
