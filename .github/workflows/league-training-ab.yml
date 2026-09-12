@@ -1,0 +1,75 @@
+name: League Training AB
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'solver/reborn/league_training_ab_eval.py'
+      - '.github/workflows/league-training-ab.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: solver
+        shell: bash
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: solver/requirements.txt
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Rebuild pinned engine dependencies
+        run: python -m reborn.bootstrap_engine
+
+      - name: Build pinned ocgcore
+        run: python -m reborn.build_core --core vendor/core --output build --jobs 2
+
+      - name: Reconcile pinned simulator IDs
+        run: python -m reborn.engine_bridge --database vendor/database/cards.cdb --scripts vendor/scripts --core vendor/core
+
+      - name: Run historical-snapshot league A/B
+        run: |
+          set -o pipefail
+          python -m reborn.league_training_ab_eval \
+            --library build/libocgcore.so \
+            --database vendor/database/cards.cdb \
+            --scripts vendor/scripts \
+            --blocks 6 \
+            --block-offset 0 \
+            --train-games 64 \
+            --train-decks 4 \
+            --eval-decks 2 \
+            --pairs-per-deck 4 \
+            --snapshot-interval 16 \
+            --budget 5000 \
+            --train-seed 411000 \
+            --eval-seed 421000 \
+            --policy-seed 20260911 \
+            2>&1 | tee reports/ci_league_training_ab.log
+
+      - name: Upload A/B report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: league-training-ab-${{ github.sha }}
+          path: |
+            solver/reports/league_training_ab.json
+            solver/reports/ci_league_training_ab.log
+            solver/reports/engine_coverage.json
+          if-no-files-found: warn
+          retention-days: 14
