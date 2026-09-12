@@ -11,6 +11,8 @@ on:
 permissions:
   contents: read
 
+# Corrected rerun after learned large select-card factorization.
+
 jobs:
   experiment:
     runs-on: ubuntu-latest
