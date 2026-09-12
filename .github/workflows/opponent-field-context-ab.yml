@@ -1,0 +1,78 @@
+name: Opponent Field Context AB
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'solver/reborn/opponent_field_context_ab_eval.py'
+      - 'solver/tests/test_opponent_field_context_ab_eval.py'
+      - '.github/workflows/opponent-field-context-ab.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: solver
+        shell: bash
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: solver/requirements.txt
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Rebuild pinned engine dependencies
+        run: python -m reborn.bootstrap_engine
+
+      - name: Build pinned ocgcore
+        run: python -m reborn.build_core --core vendor/core --output build --jobs 2
+
+      - name: Reconcile pinned simulator IDs
+        run: python -m reborn.engine_bridge --database vendor/database/cards.cdb --scripts vendor/scripts --core vendor/core
+
+      - name: Test opponent-field features
+        run: python -m unittest tests.test_opponent_field_context_ab_eval -v
+
+      - name: Run opponent-field context duel A/B
+        run: |
+          set -o pipefail
+          python -m reborn.opponent_field_context_ab_eval \
+            --library build/libocgcore.so \
+            --database vendor/database/cards.cdb \
+            --scripts vendor/scripts \
+            --blocks 6 \
+            --block-offset 0 \
+            --train-games 64 \
+            --train-decks 4 \
+            --eval-decks 2 \
+            --pairs-per-deck 4 \
+            --budget 5000 \
+            --train-seed 431000 \
+            --eval-seed 441000 \
+            --policy-seed 20260911 \
+            2>&1 | tee reports/ci_opponent_field_context_ab.log
+
+      - name: Upload A/B report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opponent-field-context-ab-${{ github.sha }}
+          path: |
+            solver/reports/opponent_field_context_ab.json
+            solver/reports/ci_opponent_field_context_ab.log
+            solver/reports/engine_coverage.json
+          if-no-files-found: warn
+          retention-days: 14
