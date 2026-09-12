@@ -10,6 +10,8 @@ on:
 permissions:
   contents: read
 
+# Rerun after learned large select-card factorization.
+
 jobs:
   screen:
     runs-on: ubuntu-latest
