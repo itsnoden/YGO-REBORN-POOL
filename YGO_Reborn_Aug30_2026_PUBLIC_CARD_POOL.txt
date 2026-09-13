@@ -1,9 +1,12 @@
 YGO REBORN — AUGUST 30, 2026 — PUBLIC CARD POOL
 =================================================
 Confirmed source-visible card labels: 2,280
+Confirmed distinct current card identities: 2,279
 Unresolved cards: 0
 Source: reconstructed from the August 30, 2026 YGO Reborn card-pool footage, with later visual verification.
+Identity note: Red-Eyes Black Chick and Black Dragon's Chick are two source labels for the same current card identity.
 This file contains the CARD POOL only. The format banlist is maintained separately.
+
 0001. A Cat of Ill Omen
 0002. A Deal with Dark Ruler
 0003. A Feather of the Phoenix
@@ -1003,1282 +1006,1284 @@ This file contains the CARD POOL only. The format banlist is maintained separate
 0997. Harpie Lady 2
 0998. Harpie Lady 3
 0999. Harpie Lady Sisters
-1000. Harpie Queen0994. Harpie's Feather Duster
-1001. Harpie's Pet Baby Dragon
-1002. Harpie's Pet Dragon
-1003. Harpies' Hunting Ground
-1004. Harvest Angel of Wisdom
-1005. Hayabusa Knight
-1006. Headless Knight
-1007. Heart of Clear Water
-1008. Heart of the Underdog
-1009. Heavy Mech Support Platform
-1010. Heavy Slump
-1011. Heavy Storm
-1012. Helios - The Primordial Sun
-1013. Helios Duo Megistus
-1014. Helios Trice Megistus
-1015. Helpoemer
-1016. Herald of Green Light
-1017. Herald of Purple Light
-1018. Hercules Beetle
-1019. Hero Barrier
-1020. HERO Flash!!
-1021. HERO Heart
-1022. Hero Kid
-1023. Hero Medal
-1024. Hero Ring
-1025. Hero Signal
-1026. Hero Spirit
-1027. Hibikime
-1028. Hidden Soldiers
-1029. Hidden Spellbook
-1030. Hieracosphinx
-1031. Hieroglyph Lithograph
-1032. High Tide Gyojin
-1033. Hino-Kagu-Tsuchi
-1034. Hinotama
-1035. Hinotama Soul
-1036. Hiro's Shadow Scout
-1037. Hitosu-Me Giant
-1038. Homunculus the Alchemic Being
-1039. Horn of Heaven
-1040. Horn of Light
-1041. Horn of the Unicorn
-1042. Horus the Black Flame Dragon LV4
-1043. Horus the Black Flame Dragon LV6
-1044. Horus the Black Flame Dragon LV8
-1045. Horus' Servant
-1046. Hoshiningen
-1047. House of Adhesive Tape
-1048. Howling Insect
-1049. Huge Revolution
-1050. Human-Wave Tactics
-1051. Humanoid Slime
-1052. Humanoid Worm Drake
-1053. Hungry Burger
-1054. Hunter Owl
-1055. Hunter Spider
-1056. Hunting Instinct
-1057. Hyena
-1058. Hyosube
-1059. Hyozanryu
-1060. Hyper Hammerhead
-1061. Hysteric Fairy
-1062. Hysteric Party
-1063. Icarus Attack
-1064. Impenetrable Formation
-1065. Imperial Order
-1066. Inaba White Rabbit
-1067. Incandescent Ordeal
-1068. Indomitable Fighter Lei Lei
-1069. Infernal Dragon
-1070. Infernal Flame Emperor
-1071. Infernal Incinerator
-1072. Infernalqueen Archfiend
-1073. Inferno
-1074. Inferno Fire Blast
-1075. Inferno Hammer
-1076. Inferno Reckless Summon
-1077. Inferno Tempest
-1078. Infinite Cards
-1079. Infinite Dismissal
-1080. Injection Fairy Lily
-1081. Inpachi
-1082. Insect Barrier
-1083. Insect Imitation
-1084. Insect Knight
-1085. Insect Princess
-1086. Insect Queen
-1087. Insect Soldiers of the Sky
-1088. Inspection
-1089. Instant Fusion
-1090. Interdimensional Matter Transporter
-1091. Introduction to Gallantry
-1092. Invader of Darkness
-1093. Invader of the Throne
-1094. Invasion of Flames
-1095. Invigoration
-1096. Invitation to a Dark Sleep
-1097. Iris, the Earth Mother
-1098. Iron Blacksmith Kotetsu
-1099. Island Turtle
-1100. Jack's Knight
-1101. Jade Insect Whistle
-1102. Jam Breeding Machine
-1103. Jam Defender
-1104. Jar of Greed
-1105. Jar Robber
-1106. Jellyfish
-1107. Jerry Beans Man
-1108. Jetroid
-1109. Jigen Bakudan
-1110. Jinzo
-1111. Jinzo #7
-1112. Jirai Gumo
-1113. Jowgen the Spiritualist
-1114. Jowls of Dark Demise
-1115. Judge Man
-1116. Judgment of Anubis
-1117. Judgment of the Desert
-1118. Judgment of the Pharaoh
-1119. Jurassic World
-1120. Just Desserts
-1121. Justi-Break
-1122. KA-2 Des Scissors
-1123. Kabazauls
-1124. Kagemusha of the Blue Flame
-1125. Kaibaman
-1126. Kairyu-Shin
-1127. Kaiser Colosseum
-1128. Kaiser Dragon
-1129. Kaiser Glider
-1130. Kaiser Sea Horse
-1131. Kaminari Attack
-1132. Kaminote Blow
-1133. Kangaroo Champ
-1134. Karate Man
-1135. Karbonala Warrior
-1136. Karma Cut
-1137. Kattapillar
-1138. Kelbek
-1139. Keldo
-1140. Kid Guard
-1141. Killer Needle
-1142. King Dragun
-1143. King Fog
-1144. King of the Skull Servants
-1145. King of the Swamp
-1146. King Tiger Wanghu
-1147. King's Knight
-1148. Kiryu
-1149. Kiseitai
-1150. Kishido Spirit
-1151. Knight's Title
-1152. Koitsu
-1153. Kojikocy
-1154. Kotodama
-1155. Koumori Dragon
-1156. Kozaky
-1157. Kozaky's Self-Destruct Button
-1158. Kryuel
-1159. Kumootoko
-1160. Kurama
-1161. Kuriboh
-1162. Kuwagata α
-1163. Kwagar Hercules
-1164. Kycoo the Ghost Destroyer
-1165. La Jinn the Mystical Genie of the Lamp
-1166. Labyrinth of Nightmare
-1167. Labyrinth Tank
-1168. Labyrinth Wall
-1169. Lady Assailant of Flames
-1170. Lady Ninja Yae
-1171. Lady of Faith
-1172. Lady Panther
-1173. Larvae Moth
-1174. Larvas
-1175. Laser Cannon Armor
-1176. Last Day of Witch
-1177. Last Resort
-1178. Last Will
-1179. Launcher Spider
-1180. Lava Battleguard
-1181. Lava Golem
-1182. Layard the Liberator
-1183. Left Arm of the Forbidden One
-1184. Left Leg of the Forbidden One
-1185. Legacy Hunter
-1186. Legendary Black Belt
-1187. Legendary Ebon Steed
-1188. Legendary Flame Lord
-1189. Legendary Jujitsu Master
-1190. Legendary Sword
-1191. Leghul
-1192. Lekunga
-1193. Leogun
-1194. Lesser Dragon
-1195. Lesser Fiend
-1196. Level Conversion Lab
-1197. Level Down!
-1198. Level Limit - Area A
-1199. Level Limit - Area B
-1200. Level Modulation
-1201. Level Up!
-1202. Levia-Dragon - Daedalus
-1203. Lich Lord, King of the Underworld
-1204. Life Absorbing Machine
-1205. Life Equalizer
-1206. Light Laser
-1207. Light of Intervention
-1208. Light of Judgment
-1209. Lighten the Load
-1210. Lightforce Sword
-1211. Lightning Blade
-1212. Lightning Conger
-1213. Lightning Punisher
-1214. Lightning Vortex
-1215. Limiter Removal
-1216. Linear Accelerator Cannon
-1217. Liquid Beast
-1218. Little Chimera
-1219. Little-Winguard
-1220. Lizard Soldier
-1221. Lone Wolf
-1222. Long Nose
-1223. Lord D.
-1224. Lord of the Lamp
-1225. Lost Guardian
-1226. Lucky Iron Axe
-1227. Luminous Soldier
-1228. Luminous Spark
-1229. Luster Dragon
-1230. Luster Dragon #2
-1231. Lycanthrope
-1232. M-Warrior #1
-1233. M-Warrior #2
-1234. Machine Conversion Factory
-1235. Machine Duplication
-1236. Machine King
-1237. Machine King Prototype
-1238. Macro Cosmos
-1239. Mad Dog of Darkness
-1240. Mad Lobster
-1241. Mad Sword Beast
-1242. Mage Power
-1243. Magic Cylinder
-1244. Magic Drain
-1245. Magic Jammer
-1246. Magic Reflector
-1247. Magical Arm Shield
-1248. Magical Blast
-1249. Magical Dimension
-1250. Magical Explosion
-1251. Magical Ghost
-1252. Magical Hats
-1253. Magical Labyrinth
-1254. Magical Mallet
-1255. Magical Marionette
-1256. Magical Merchant
-1257. Magical Plant Mandragola
-1258. Magical Scientist
-1259. Magical Stone Excavation
-1260. Magical Thorn
-1261. Magician of Faith
-1262. Magician's Circle
-1263. Magician's Valkyria
-1264. Magicians Unite
-1265. Magna-Slash Dragon
-1266. Magnet Circle LV2
-1267. Maha Vailo
-1268. Maharaghi
-1269. Maiden of the Aqua
-1270. Maiden of the Moonlight
-1271. Maji-Gire Panda
-1272. Major Riot
-1273. Maju Garzett
-1274. Makyura the Destructor
-1275. Malevolent Nuzzler
-1276. Malfunction
-1277. Malice Ascendant
-1278. Malice Dispersion
-1279. Malice Doll of Demise
-1280. Mammoth Graveyard
-1281. Man Beast of Ares
-1282. Man Eater
-1283. Man-Eater Bug
-1284. Man-Eating Treasure Chest
-1285. Man-Thro' Tro'
-1286. Manga Ryu-Ran
-1287. Manticore of Darkness
-1288. Marauding Captain
-1289. Marie the Fallen One
-1290. Marionette Mite
-1291. Maryokutai
-1292. Masaki the Legendary Swordsman
-1293. Mask of Brutality
-1294. Mask of Darkness
-1295. Mask of Dispel
-1296. Mask of Restrict
-1297. Mask of the Accursed
-1298. Mask of Weakness
-1299. Masked Chopper
-1300. Masked Dragon
-1301. Masked Sorcerer
-1302. Mass Driver
-1303. Mass Hypnosis
-1304. Master & Expert
-1305. Master Kyonshee
-1306. Master Monk
-1307. Master of Oz
-1308. Mataza the Zapper
-1309. Mausoleum of the Emperor
-1310. Mazera DeVille
-1311. Mecha-Dog Marron
-1312. Mechanical Hound
-1313. Mechanical Snail
-1314. Mechanicalchaser
-1315. Meda Bat
-1316. Medusa Worm
-1317. Mefist the Infernal General
-1318. Mega Thunderball
-1319. Mega Ton Magical Cannon
-1320. Megamorph
-1321. Megarock Dragon
-1322. Megasonic Eye
-1323. Mei-Kou, Master of Barriers
-1324. Melchid the Four-Face Beast
-1325. Meltiel, Sage of the Sky
-1326. Memory Crusher
-1327. Mermaid Knight
-1328. Mesmeric Control
-1329. Messenger of Peace
-1330. Metal Armored Bug
-1331. Metal Detector
-1332. Metal Dragon
-1333. Metal Fish
-1334. Metal Guardian
-1335. Metallizing Parasite - Lunatite
-1336. Metalmorph
-1337. Metalsilver Armor
-1338. Metalzoa
-1339. Metamorphosis
-1340. Meteor Dragon
-1341. Meteor of Destruction
-1342. Meteorain
-1343. Michizure
-1344. Micro Ray
-1345. Mid Shield Gardna
-1346. Mighty Guard
-1347. Mikazukinoyaiba
-1348. Millennium Golem
-1349. Millennium Scorpion
-1350. Millennium Shield
-1351. Milus Radiant
-1352. Minar
-1353. Mind Control
-1354. Mind Crush
-1355. Mind Haxorz
-1356. Mind on Air
-1357. Mind Wipe
-1358. Mine Golem
-1359. Minefield Eruption
-1360. Minor Goblin Official
-1361. Miracle Dig
-1362. Miracle Fusion
-1363. Miracle Jurassic Egg
-1364. Miracle Kids
-1365. Miracle Restoring
-1366. Miraculous Descent
-1367. Miraculous Rebirth
-1368. Mirage Dragon
-1369. Mirage Knight
-1370. Mirage of Nightmare
-1371. Mirror Force
-1372. Mirror Wall
-1373. Misairuzame
-1374. Misfortune
-1375. Mispolymerization
-1376. Mist Archfiend
-1377. Mist Body
-1378. Moai Interceptor Cannons
-1379. Mobius the Frost Monarch
-1380. Moisture Creature
-1381. Mokey Mokey
-1382. Mokey Mokey King
-1383. Mokey Mokey Smackdown
-1384. Molten Behemoth
-1385. Molten Destruction
-1386. Molten Zombie
-1387. Monk Fighter
-1388. Monster Egg
-1389. Monster Gate
-1390. Monster Reborn
-1391. Monster Recovery
-1392. Monster Reincarnation
-1393. Moon Envoy
-1394. Morale Boost
-1395. Morinphen
-1396. Morphing Jar
-1397. Morphing Jar #2
-1398. Mother Grizzly
-1399. Mountain
-1400. Mr. Volcano
-1401. Mucus Yolk
-1402. Muka Muka
-1403. Multiplication of Ants
-1404. Mushroom Man #2
-1405. Musician King
-1406. Mustering of the Dark Scorpions
-1407. My Body as a Shield
-1408. Mysterious Guard
-1409. Mysterious Puppeteer
-1410. Mystic Box
-1411. Mystic Clown
-1412. Mystic Horseman
-1413. Mystic Lamp
-1414. Mystic Plasma Zone
-1415. Mystic Probe
-1416. Mystic Swordsman LV2
-1417. Mystic Swordsman LV4
-1418. Mystic Swordsman LV6
-1419. Mystic Tomato
-1420. Mystical Elf
-1421. Mystical Knight of Jackal
-1422. Mystical Moon
-1423. Mystical Sheep #1
-1424. Mystical Sheep #2
-1425. Mystical Shine Ball
-1426. Mystical Space Typhoon
-1427. Mystical Wind Typhoon
-1428. Mystik Wok
-1429. Mythical Beast Cerberus
-1430. Nanobreaker
-1431. Narrow Pass
-1432. Necklace of Command
-1433. Necroface
-1434. Necrovalley
-1435. Needle Burrower
-1436. Needle Ceiling
-1437. Needle Wall
-1438. Needle Worm
-1439. Negate Attack
-1440. Neko Mane King
-1441. Nekogal #1
-1442. Nekogal #2
-1443. Nemuriko
-1444. Neo Aqua Madoor
-1445. Neo Bug
-1446. Neo Space
-1447. Neo the Magic Swordsman
-1448. Neo-Parshath, the Sky Paladin
-1449. Neo-Spacian Air Hummingbird
-1450. Neo-Spacian Aqua Dolphin
-1451. Neo-Spacian Dark Panther
-1452. Neo-Spacian Flare Scarab
-1453. Neo-Spacian Glow Moss
-1454. Neo-Spacian Grand Mole
-1455. Neos Force
-1456. Newdoria
-1457. Next to be Lost
-1458. Night Assailant
-1459. Nightmare Horse
-1460. Nightmare Penguin
-1461. Nightmare Wheel
-1462. Nightmare's Steelcage
-1463. Nimble Momonga
-1464. Nin-Ken Dog
-1465. Ninja Grandmaster Sasuke
-1466. Ninjitsu Art of Decoy
-1467. Ninjitsu Art of Transformation
-1468. Nitro Unit
-1469. Niwatori
-1470. Nobleman of Crossout
-1471. Nobleman of Extermination
-1472. Nobleman-Eater Bug
-1473. Non Aggression Area
-1474. Non-Fusion Area
-1475. Non-Spellcasting Area
-1476. Nova Summoner
-1477. Novox's Prayer
-1478. Nubian Guard
-1479. Numinous Healer
-1480. Nutrient Z
-1481. Nuvia the Wicked
-1482. O - Oversoul
-1483. Obnoxious Celtic Guard
-1484. Ocean Dragon Lord - Neo-Daedalus
-1485. Octoberser
-1486. Ocubeam
-1487. Offerings to the Doomed
-1488. Ogre of the Black Shadow
-1489. Ojama Black
-1490. Ojama Delta Hurricane!!
-1491. Ojama Green
-1492. Ojama King
-1493. Ojama Trio
-1494. Ojama Yellow
-1495. Ojamagic
-1496. Ojamuscle
-1497. Old Vindictive Magician
-1498. Ominous Fortunetelling
-1499. One-Eyed Shield Dragon
-1500. Oni Tank T-34
-1501. Ooguchi
-1502. Ookazi
-1503. Oppressed People
-1504. Opti-Camouflage Armor
-1505. Opticlops
-1506. Option Hunter
-1507. Orbital Bombardment
-1508. Orca Mega-Fortress of Darkness
-1509. Ordeal of a Traveler
-1510. Order to Charge
-1511. Order to Smash
-1512. Oscillo Hero
-1513. Otherworld - The "A" Zone
-1514. Otohime
-1515. Outstanding Dog Marron
-1516. Over Destiny
-1517. Overdrive
-1518. Overload Fusion
-1519. Oxygeddon
-1520. Painful Choice
-1521. Paladin of White Dragon
-1522. Pale Beast
-1523. Pandemonium
-1524. Pandemonium Watchbear
-1525. Panther Warrior
-1526. Paralyzing Potion
-1527. Parasite Paracide
-1528. Parasitic Ticky
-1529. Parrot Dragon
-1530. Patrician of Darkness
-1531. Patroid
-1532. Patrol Robo
-1533. Peacock
-1534. Penalty Game!
-1535. Penguin Knight
-1536. Penguin Soldier
-1537. Penumbral Soldier Lady
-1538. People Running About
-1539. Perfect Machine King
-1540. Perfectly Ultimate Great Moth
-1541. Performance of Sword
-1542. Peten the Dark Clown
-1543. Petit Angel
-1544. Petit Dragon
-1545. Petit Moth
-1546. Phantasmal Martyrs
-1547. Phantom Beast Cross-Wing
-1548. Phantom Beast Rock-Lizard
-1549. Phantom Beast Thunder-Pegasus
-1550. Pharaoh's Servant
-1551. Pharaoh's Treasure
-1552. Pharaonic Protector
-1553. Phoenix Wing Wind Blast
-1554. Photon Generator Unit
-1555. Physical Double
-1556. Pikeru's Circle of Enchantment
-1557. Pikeru's Second Sight
-1558. Pinch Hopper
-1559. Pineapple Blast
-1560. Piranha Army
-1561. Pitch-Black Power Stone
-1562. Pitch-Black Warwolf
-1563. Pitch-Dark Dragon
-1564. Pixie Knight
-1565. Plague Wolf
-1566. Poison Draw Frog
-1567. Poison Fangs
-1568. Poison Mummy
-1569. Poison of the Old Man
-1570. Pole Position
-1571. Polymerization
-1572. Possessed Dark Soul
-1573. Pot of Avarice
-1574. Pot of Generosity
-1575. Pot of Greed
-1576. Power Bond
-1577. Power Capsule
-1578. Power of Kaishin
-1579. Pragtical
-1580. Precious Cards from Beyond
-1581. Premature Burial
-1582. Prepare to Strike Back
-1583. Prevent Rat
-1584. Prickle Fairy
-1585. Primal Seed
-1586. Princess Curran
-1587. Princess of Tsurugi
-1588. Princess Pikeru
-1589. Prisman
-1590. Prohibition
-1591. Prometheus, King of the Shadows
-1592. Protective Soul Ailin
-1593. Protector of the Sanctuary
-1594. Protector of the Throne
-1595. Proto-Cyber Dragon
-1596. Psychic Kappa
-1597. Pulling the Rug
-1598. Pumpking the King of Ghosts
-1599. Punished Eagle
-1600. Puppet Plant
-1601. Pyramid Energy
-1602. Pyramid of Light
-1603. Pyramid Turtle
-1604. Queen Bird
-1605. Queen of Autumn Leaves
-1606. Queen's Bodyguard
-1607. Queen's Double
-1608. Queen's Knight
-1609. Question
-1610. R - Righteous Justice
-1611. Rabid Horseman
-1612. Radiant Jeral
-1613. Radiant Mirror Force
-1614. Rafflesia Seduction
-1615. Raging Earth
-1616. Raging Eria
-1617. Raging Flame Sprite
-1618. Raging Spirit
-1619. Raigeki
-1620. Raigeki Break
-1621. Rain of Mercy
-1622. Rain Storm
-1623. Rainbow Dragon
-1624. Rainbow Flower
-1625. Raise Body Heat
-1626. Raiza the Storm Monarch
-1627. Rallis the Star Bird
-1628. Rampaging Rhynos
-1629. Rapid-Fire Magician
-1630. Rare Metal Dragon
-1631. Rare Metalmorph
-1632. Rare Value
-1633. Raregold Armor
-1634. Raviel, Lord of Phantasms
-1635. Ray & Temperature
-1636. Ray of Hope
-1637. Re-Fusion
-1638. Ready for Intercepting
-1639. Really Eternal Rest
-1640. Reaper of the Cards
-1641. Reaper on the Nightmare
-1642. Reasoning
-1643. Reckless Greed
-1644. Recurring Nightmare
-1645. Recycle
-1646. Recycling Batteries
-1647. Red Archery Girl
-1648. Red Gadget
-1649. Red Medicine
-1650. Red-Eyes B. Dragon
-1651. Red-Eyes Black Chick
-1652. Red-Eyes Darkness Dragon
-1653. Red-Eyes Darkness Metal Dragon
-1654. Red-Eyes Wyvern
-1655. Red-Eyes Zombie Dragon
-1656. Regenerating Mummy
-1657. Reinforcement of the Army
-1658. Reinforcements
-1659. Release Restraint
-1660. Reliable Guardian
-1661. Relinquished
-1662. Reload
-1663. Remove Brainwashing
-1664. Remove Trap
-1665. Rescue Cat
-1666. Rescueroid
-1667. Reshef the Dark Being
-1668. Respect Play
-1669. Restructer Revolution
-1670. Return from the Different Dimension
-1671. Return of the Doomed
-1672. Return of the Six Samurai
-1673. Return Soul
-1674. Reversal Quiz
-1675. Reverse Trap
-1676. Revival Jam
-1677. Revival of Dokurorider
-1678. Right Arm of the Forbidden One
-1679. Right Leg of the Forbidden One
-1680. Ring of Defense
-1681. Ring of Destruction
-1682. Ring of Magnetism
-1683. Riryoku
-1684. Riryoku Field
-1685. Rising Air Current
-1686. Rising Energy
-1687. Rite of Spirit
-1688. Ritual Foregone
-1689. Ritual Sealing
-1690. Ritual Weapon
-1691. Rivalry of Warlords
-1692. Roaring Ocean Snake
-1693. Robbin' Goblin
-1694. Robbin' Zombie
-1695. Robolady
-1696. Robotic Knight
-1697. Roboyarou
-1698. Roc from the Valley of Haze
-1699. Rock Bombardment
-1700. Rock Ogre Grotto #1
-1701. Rocket Jumper
-1702. Rocket Warrior
-1703. Rod of Silence - Kay'est
-1704. Rod of the Mind's Eye
-1705. Rogue Doll
-1706. Roll Out!
-1707. Root Water
-1708. Rope of Life
-1709. Roulette Barrel
-1710. Royal Command
-1711. Royal Decree
-1712. Royal Keeper
-1713. Royal Knight
-1714. Royal Magical Library
-1715. Royal Oppression
-1716. Royal Surrender
-1717. Royal Tribute
-1718. Rude Kaiser
-1719. Ruin, Queen of Oblivion
-1720. Rush Recklessly
-1721. Ruthless Denial
-1722. Ryu Kokki
-1723. Ryu Senshi
-1724. Ryu-Kishin
-1725. Ryu-Kishin Powered
-1726. Ryu-Ran
-1727. Saber Beetle
-1728. Sabersaurus
-1729. Sacred Crane
-1730. Sacred Phoenix of Nephthys
-1731. Sage of Silence
-1732. Sage of Stillness
-1733. Sage's Stone
-1734. Saggi the Dark Clown
-1735. Sakuretsu Armor
-1736. Salamandra
-1737. Salvage
-1738. Samsara
-1739. Sanctuary in the Sky
-1740. Sand Gambler
-1741. Sand Moth
-1742. Sand Stone
-1743. Sanga of the Thunder
-1744. Sangan
-1745. Sanwitch
-1746. Sasuke Samurai
-1747. Sasuke Samurai #2
-1748. Sasuke Samurai #3
-1749. Sasuke Samurai #4
-1750. Satellite Cannon
-1751. Scapegoat
-1752. Scarr, Scout of Dark World
-1753. Science Soldier
-1754. Scroll of Bewitchment
-1755. Sea Serpent Warrior of Darkness
-1756. Seal of the Ancients
-1757. Sealmaster Meisei
-1758. Searchlightman
-1759. Sebek's Blessing
-1760. Second Coin Toss
-1761. Second Goblin
-1762. Secret Barrel
-1763. Secret Pass to the Treasures
-1764. Secrets of the Gallant
-1765. Sectarian of Secrets
-1766. Seismic Crasher
-1767. Seismic Shockwave
-1768. Seiyaryu
-1769. Self-Destruct Button
-1770. Senet Switch
-1771. Senju of the Thousand Hands
-1772. Senri Eye
-1773. Serial Spell
-1774. Serpent Night Dragon
-1775. Serpentine Princess
-1776. Servant of Catabolism
-1777. Seven Tools of the Bandit
-1778. Shadow Ghoul
-1779. Shadow Spell
-1780. Shadow Tamer
-1781. Shien's Castle of Mist
-1782. Shien's Footsoldier
-1783. Shien's Spy
-1784. Shift
-1785. Shifting Shadows
-1786. Shinato, King of a Higher Plane
-1787. Shinato's Ark
-1788. Shining Abyss
-1789. Shining Angel
-1790. Shining Friendship
-1791. Shooting Star Bow - Ceal
-1792. Shrink
-1793. Silent Abyss
-1794. Silent Insect
-1795. Silent Magician LV4
-1796. Silent Magician LV8
-1797. Silent Swordsman LV3
-1798. Silent Swordsman LV5
-1799. Silent Swordsman LV7
-1800. Sillva, Warlord of Dark World
-1801. Silpheed
-1802. Silver Bow and Arrow
-1803. Silver Fang
-1804. Simorgh, Bird of Divinity
-1805. Simultaneous Loss
-1806. Sinister Serpent
-1807. Skelengel
-1808. Skilled Dark Magician
-1809. Skilled White Magician
-1810. Skull Archfiend of Lightning
-1811. Skull Dice
-1812. Skull Dog Marron
-1813. Skull Guardian
-1814. Skull Invitation
-1815. Skull Knight
-1816. Skull Knight #2
-1817. Skull Lair
-1818. Skull Mariner
-1819. Skull Red Bird
-1820. Skull Servant
-1821. Skull-Mark Ladybug
-1822. Sky Dragon
-1823. Sky Scourge Enrise
-1824. Sky Scourge Invicil
-1825. Sky Scourge Norleras
-1826. Sky Scout
-1827. Skyscraper
-1828. Skyscraper 2 - Hero City
-1829. Slate Warrior
-1830. Sleeping Lion
-1831. Slime Toad
-1832. Slot Machine
-1833. Smashing Ground
-1834. Smoke Grenade of the Thief
-1835. Snake Fang
-1836. Snatch Steal
-1837. Sniper Hunter
-1838. Sogen
-1839. Soitsu
-1840. Solar Flare Dragon
-1841. Solemn Judgment
-1842. Solemn Wishes
-1843. Solomon's Lawbook
-1844. Sonic Bird
-1845. Sonic Duck
-1846. Sonic Jammer
-1847. Sonic Maid
-1848. Sonic Shooter
-1849. Sorcerer of Dark Magic
-1850. Sorcerer of the Doomed
-1851. Soul Absorption
-1852. Soul Demolition
-1853. Soul Exchange
-1854. Soul Release
-1855. Soul Resurrection
-1856. Souls of the Forgotten
-1857. Space Mambo
-1858. Spark Blaster
-1859. Sparks
-1860. Spatial Collapse
-1861. Spear Cretin
-1862. Spear Dragon
-1863. Special Hurricane
-1864. Spell Absorption
-1865. Spell Calling
-1866. Spell Canceller
-1867. Spell Economics
-1868. Spell Purification
-1869. Spell Reproduction
-1870. Spell Shield Type-8
-1871. Spell Striker
-1872. Spell Vanishing
-1873. Spell-Stopping Statute
-1874. Spellbinding Circle
-1875. Spellbook Organization
-1876. Spherous Lady
-1877. Sphinx Teleia
-1878. Spike Seadra
-1879. Spikebot
-1880. Spiral Serpent
-1881. Spiral Spear Strike
-1882. Spirit Barrier
-1883. Spirit Caller
-1884. Spirit Message "A"
-1885. Spirit Message "I"
-1886. Spirit Message "L"
-1887. Spirit Message "N"
-1888. Spirit of Flames
-1889. Spirit of the Books
-1890. Spirit of the Breeze
-1891. Spirit of the Harp
-1892. Spirit of the Pharaoh
-1893. Spirit of the Pot of Greed
-1894. Spirit Reaper
-1895. Spirit Ryu
-1896. Spirit's Invitation
-1897. Spiritual Earth Art - Kurogane
-1898. Spiritual Fire Art - Kurenai
-1899. Spiritual Water Art - Aoi
-1900. Spiritual Wind Art - Miyabi
-1901. Spiritualism
-1902. Spring of Rebirth
-1903. St. Joan
-1904. Stamping Destruction
-1905. Star Boy
-1906. Statue of the Wicked
-1907. Staunch Defender
-1908. Stealth Bird
-1909. Steam Gyroid
-1910. Steamroid
-1911. Steel Ogre Grotto #2
-1912. Steel Scorpion
-1913. Steel Shell
-1914. Stim-Pack
-1915. Stone Dragon
-1916. Stone Ogre Grotto
-1917. Stone Shooter
-1918. Stone Statue of the Aztecs
-1919. Stop Defense
-1920. Storming Wynn
-1921. Straight Flush
-1922. Stray Asmodian
-1923. Stray Lambs
-1924. Strike Ninja
-1925. Stronghold the Moving Fortress
-1926. Stuffed Animal
-1927. Stumbling
-1928. Submarineroid
-1929. Success Probability 0%
-1930. Succubus Knight
-1931. Suijin
-1932. Summoned Skull
-1933. Summoner of Illusions
-1934. Super Conductor Tyranno
-1935. Super Rejuvenation
-1936. Super Robolady
-1937. Super Roboyarou
-1938. Super Vehicroid - Jumbo Drill
-1939. Super-Ancient Dinobeast
-1940. Supercharge
-1941. Supply
-1942. Survival Instinct
-1943. Susa Soldier
-1944. Swamp Battleguard
-1945. Swarm of Locusts
-1946. Swarm of Scarabs
-1947. Swift Birdman Joe
-1948. Swift Gaia the Fierce Knight
-1949. Swift Samurai Storm!
-1950. Sword Hunter
-1951. Sword of Dark Destruction
-1952. Sword of Deep-Seated
-1953. Sword of Dragon's Soul
-1954. Sword of the Soul-Eater
-1955. Swords of Concealing Light
-1956. Swords of Revealing Light
-1957. Swordsman of Landstar
-1958. Swordstalker
-1959. Symbol of Heritage
-1960. Synthesis Spell
-1961. Synthetic Seraphim
-1962. System Down
-1963. T.A.D.P.O.L.E.
-1964. Tactical Espionage Expert
-1965. Tail Swipe
-1966. Tailor of the Fickle
-1967. Tainted Wisdom
-1968. Takriminos
-1969. Takuhee
-1970. Talisman of Spell Sealing
-1971. Talisman of Trap Sealing
-1972. Taunt
-1973. Temple of Skulls
-1974. Tenkabito Shien
-1975. Terra the Terrible
-1976. Terraforming
-1977. Terrible Deal
-1978. Terrorking Archfiend
-1979. Terrorking Salmon
-1980. Teya
-1981. The 13th Grave
-1982. The A. Forces
-1983. The Agent of Creation - Venus
-1984. The Agent of Force - Mars
-1985. The Agent of Judgment - Saturn
-1986. The Agent of Wisdom - Mercury
-1987. The All-Seeing White Tiger
-1988. The Big March of Animals
-1989. The Bistro Butcher
-1990. The Cheerful Coffin
-1991. The Creator
-1992. The Creator Incarnate
-1993. The Dark - Hex-Sealed Fusion
-1994. The Dark Door
-1995. The Dragon Dwelling in the Cave
-1996. The Dragon's Bead
-1997. The Earl of Demise
-1998. The Earth - Hex-Sealed Fusion
-1999. The Emperor's Holiday1994. The End of Anubis
-2000. The Eye of Truth
-2001. The Fiend Megacyber
-2002. The First Sarcophagus
-2003. The Flute of Summoning Dragon
-2004. The Flute of Summoning Kuriboh
-2005. The Forceful Sentry
-2006. The Forces of Darkness
-2007. The Forgiving Maiden
-2008. The Furious Sea King
-2009. The Gift of Greed
-2010. The Graveyard in the Fourth Dimension
-2011. The Gross Ghost of Fled Dreams
-2012. The Hunter with 7 Weapons
-2013. The Inexperienced Spy
-2014. The Judgement Hand
-2015. The Kick Man
-2016. The King of Yamimakai
-2017. The Lady in Wight
-2018. The Last Warrior from Another Planet
-2019. The Law of the Normal
-2020. The League of Uniform Nomenclature
-2021. The Legendary Fisherman
-2022. The Light - Hex-Sealed Fusion
-2023. The Little Swordsman of Aile
-2024. The Masked Beast
-2025. The Paths of Destiny
-2026. The Portrait's Secret
-2027. The Puppet Magic of Dark Ruler
-2028. The Regulation of Tribe
-2029. The Rock Spirit
-2030. The Secret of the Bandit
-2031. The Shallow Grave
-2032. The Six Samurai - Irou
-2033. The Six Samurai - Kamon
-2034. The Six Samurai - Nisashi
-2035. The Six Samurai - Yaichi
-2036. The Six Samurai - Yariza
-2037. The Six Samurai - Zanji
-2038. The Spell Absorbing Life
-2039. The Statue of Easter Island
-2040. The Stern Mystic
-2041. The Unhappy Girl
-2042. The Unhappy Maiden
-2043. The Warrior Returning Alive
-2044. The Wicked Worm Beast
-2045. Theban Nightmare
-2046. Theinen the Great Sphinx
-2047. Thestalos the Firestorm Monarch
-2048. Thousand Dragon
-2049. Thousand Energy
-2050. Thousand Knives
-2051. Thousand Needles
-2052. Thousand-Eyes Idol
-2053. Thousand-Eyes Restrict
-2054. Threatening Roar
-2055. Three-Headed Geedo
-2056. Three-Hump Lacooda
-2057. Throwstone Unit
-2058. Thunder Crash
-2059. Thunder Dragon
-2060. Thunder Kid
-2061. Thunder Nyan Nyan
-2062. Thunder of Ruler
-2063. Tiger Axe
-2064. Time Seal
-2065. Time Wizard
-2066. Timeater
-2067. Timidity
-2068. Token Feastevil
-2069. Token Thanksgiving
-2070. Toll
-2071. Tongyo
-2072. Toon Alligator
-2073. Toon Cannon Soldier
-2074. Toon Dark Magician Girl
-2075. Toon Defense
-2076. Toon Gemini Elf
-2077. Toon Goblin Attack Force
-2078. Toon Masked Sorcerer
-2079. Toon Mermaid
-2080. Toon Summoned Skull
-2081. Toon Table of Contents
-2082. Toon World
-2083. Tornado
-2084. Tornado Bird
-2085. Tornado Wall
-2086. Torpedo Fish
-2087. Torrential Tribute
-2088. Total Defense Shogun
-2089. Tower of Babel
-2090. Tragedy
-2091. Trakodon
-2092. Transcendent Wings
-2093. Trap Dustshoot
-2094. Trap Hole
-2095. Trap Jammer
-2096. Trap Master
-2097. Trap of Board Eraser
-2098. Treasure Map
-2099. Treeborn Frog
-2100. Tremendous Fire
-2101. Trent
-2102. Tri-Blaze Accelerator
-2103. Tri-Horned Dragon
-2104. Trial of Nightmare
-2105. Trial of the Princesses
-2106. Triangle Ecstasy Spark
-2107. Triangle Power
-2108. Tribe-Infecting Virus
-2109. Tribute Doll
-2110. Tribute to the Doomed
-2111. Triggered Summon
-2112. Tripwire Beast
-2113. Trojan Blast
-2114. Troop Dragon
-2115. Tsukuyomi
-2116. Turtle Bird
-2117. Turtle Oath
-2118. Turtle Tiger
-2119. Turu-Purun
-2120. Tutan Mask
-2121. Twin Long Rods #2
-2122. Twin Swords of Flashing Light - Tryce
-2123. Twin-Headed Beast
-2124. Twin-Headed Behemoth
-2125. Twin-Headed Fire Dragon
-2126. Twin-Headed Thunder Dragon
-2127. Twin-Headed Wolf
-2128. Twister
-2129. Two-Headed King Rex
-2130. Two-Man Cell Battle
-2131. Two-Mouth Darkruler
-2132. Two-Pronged Attack
-2133. Tyhone
-2134. Tyhone #2
-2135. Type Zero Magic Crusher
-2136. Tyranno Infinity
-2137. Tyrant Dragon
-2138. UFO Turtle
-2139. UFOroid
-2140. UFOroid Fighter
-2141. Ultimate Baseball Kid
-2142. Ultimate Insect LV1
-2143. Ultimate Insect LV3
-2144. Ultimate Insect LV5
-2145. Ultimate Insect LV7
-2146. Ultimate Obedient Fiend
-2147. Ultimate Offering
-2148. Ultimate Tyranno
-2149. Ultra Evolution Pill
-2150. Umbral Soul
-2151. Umi
-2152. Umiiruka
-2153. Union Rider
-2154. United Resistance
-2155. United We Stand
-2156. Unity
-2157. Unknown Warrior of Fiend
-2158. Unshaven Angler
-2159. Upstart Goblin
-2160. Uraby
-2161. Uria, Lord of Searing Flames
-2162. Ushi Oni
-2163. V-Tiger Jet
-2164. Valkyrion the Magna Warrior
-2165. Vampire Baby
-2166. Vampire Genesis
-2167. Vampire Lady
-2168. Vampire Lord
-2169. Vampire Orchis
-2170. Vanity's Call
-2171. Vanity's Fiend
-2172. Vanity's Ruler
-2173. Vehicroid Connection Zone
-2174. Vengeful Bog Spirit
-2175. Vengeful Servant
-2176. Victory Viper XX03
-2177. Vile Germs
-2178. Vilepawn Archfiend
-2179. Violent Rain
-2180. Violet Crystal
-2181. Volcanic Blaster
-2182. Volcanic Doomfire
-2183. Volcanic Eruption
-2184. Volcanic Hammerer
-2185. Volcanic Recharge
-2186. Volcanic Rocket
-2187. Volcanic Scattershot
-2188. Volcanic Shell
-2189. Volcanic Slicer
-2190. Voltanis the Adjudicator
-2191. Vorse Raider
-2192. VW-Tiger Catapult
-2193. VWXYZ-Dragon Catapult Cannon
-2194. W-Wing Catapult
-2195. Waboku
-2196. Wall of Illusion
-2197. Wall of Revealing Light
-2198. Wall Shadow
-2199. Wandering Mummy
-2200. Warrior Dai Grepher
-2201. Warrior Elimination
-2202. Warrior Lady of the Wasteland
-2203. Warrior of Atlantis
-2204. Warrior of Tradition
-2205. Warrior of Zera
-2206. Wasteland
-2207. Watapon
-2208. Water Dragon
-2209. Water Magician
-2210. Water Omotics
-2211. Wattkid
-2212. Wave-Motion Cannon
-2213. Weapon Change
-2214. Weather Report
-2215. Weed Out
-2216. Whiptail Crow
-2217. Whirlwind Prodigy
-2218. Whirlwind Weasel
-2219. White Dragon Ritual
-2220. White Hole
-2221. White Magical Hat
-2222. White Magician Pikeru
-2223. White Ninja
-2224. White-Horned Dragon
-2225. Wicked-Breaking Flamberge - Baou
-2226. Widespread Ruin
-2227. Wild Fire
-2228. Wild Nature's Release
-2229. Windstorm of Etaqua
-2230. Winged Dragon, Guardian of the Fortress #1
-2231. Winged Dragon, Guardian of the Fortress #2
-2232. Winged Kuriboh
-2233. Winged Kuriboh LV10
-2234. Winged Minion
-2235. Winged Sage Falcos
-2236. Wingweaver
-2237. Witch Doctor of Chaos
-2238. Witch of the Black Forest
-2239. Witch's Apprentice
-2240. Witty Phantom
-2241. Wolf Axwielder
-2242. Wonder Garage
-2243. Wood Remains
-2244. Woodborg Inpachi
-2245. Woodland Sprite
-2246. World Suppression
-2247. Worm Drake
-2248. Worm Warrior
-2249. Wretched Ghost of the Attic
-2250. Wroughtweiler
-2251. Wynn the Wind Charmer
-2252. X-Head Cannon
-2253. Xing Zhen Hu
-2254. XY-Dragon Cannon
-2255. XYZ-Dragon Cannon
-2256. XZ-Tank Cannon
-2257. Y-Dragon Head
-2258. Yado Karu
-2259. Yamadron
-2260. Yamata Dragon
-2261. Yami
-2262. Yaranzo
-2263. Yata-Garasu
-2264. Yellow Gadget
-2265. Yellow Luster Shield
-2266. Yomi Ship
-2267. Yu-Jo Friendship
-2268. YZ-Tank Dragon
-2269. Z-Metal Tank
-2270. Zaborg the Thunder Monarch
-2271. Zeradias, Herald of Heaven
-2272. Zero Gravity
-2273. Zoa
-2274. Zolga
-2275. Zombie Tiger
-2276. Zombyra the Dark
-2277. Zone Eater
-2278. Zure, Knight of Dark World
+1000. Harpie Queen
+1001. Harpie's Feather Duster
+1002. Harpie's Pet Baby Dragon
+1003. Harpie's Pet Dragon
+1004. Harpies' Hunting Ground
+1005. Harvest Angel of Wisdom
+1006. Hayabusa Knight
+1007. Headless Knight
+1008. Heart of Clear Water
+1009. Heart of the Underdog
+1010. Heavy Mech Support Platform
+1011. Heavy Slump
+1012. Heavy Storm
+1013. Helios - The Primordial Sun
+1014. Helios Duo Megistus
+1015. Helios Trice Megistus
+1016. Helpoemer
+1017. Herald of Green Light
+1018. Herald of Purple Light
+1019. Hercules Beetle
+1020. Hero Barrier
+1021. HERO Flash!!
+1022. HERO Heart
+1023. Hero Kid
+1024. Hero Medal
+1025. Hero Ring
+1026. Hero Signal
+1027. Hero Spirit
+1028. Hibikime
+1029. Hidden Soldiers
+1030. Hidden Spellbook
+1031. Hieracosphinx
+1032. Hieroglyph Lithograph
+1033. High Tide Gyojin
+1034. Hino-Kagu-Tsuchi
+1035. Hinotama
+1036. Hinotama Soul
+1037. Hiro's Shadow Scout
+1038. Hitosu-Me Giant
+1039. Homunculus the Alchemic Being
+1040. Horn of Heaven
+1041. Horn of Light
+1042. Horn of the Unicorn
+1043. Horus the Black Flame Dragon LV4
+1044. Horus the Black Flame Dragon LV6
+1045. Horus the Black Flame Dragon LV8
+1046. Horus' Servant
+1047. Hoshiningen
+1048. House of Adhesive Tape
+1049. Howling Insect
+1050. Huge Revolution
+1051. Human-Wave Tactics
+1052. Humanoid Slime
+1053. Humanoid Worm Drake
+1054. Hungry Burger
+1055. Hunter Owl
+1056. Hunter Spider
+1057. Hunting Instinct
+1058. Hyena
+1059. Hyosube
+1060. Hyozanryu
+1061. Hyper Hammerhead
+1062. Hysteric Fairy
+1063. Hysteric Party
+1064. Icarus Attack
+1065. Impenetrable Formation
+1066. Imperial Order
+1067. Inaba White Rabbit
+1068. Incandescent Ordeal
+1069. Indomitable Fighter Lei Lei
+1070. Infernal Dragon
+1071. Infernal Flame Emperor
+1072. Infernal Incinerator
+1073. Infernalqueen Archfiend
+1074. Inferno
+1075. Inferno Fire Blast
+1076. Inferno Hammer
+1077. Inferno Reckless Summon
+1078. Inferno Tempest
+1079. Infinite Cards
+1080. Infinite Dismissal
+1081. Injection Fairy Lily
+1082. Inpachi
+1083. Insect Barrier
+1084. Insect Imitation
+1085. Insect Knight
+1086. Insect Princess
+1087. Insect Queen
+1088. Insect Soldiers of the Sky
+1089. Inspection
+1090. Instant Fusion
+1091. Interdimensional Matter Transporter
+1092. Introduction to Gallantry
+1093. Invader of Darkness
+1094. Invader of the Throne
+1095. Invasion of Flames
+1096. Invigoration
+1097. Invitation to a Dark Sleep
+1098. Iris, the Earth Mother
+1099. Iron Blacksmith Kotetsu
+1100. Island Turtle
+1101. Jack's Knight
+1102. Jade Insect Whistle
+1103. Jam Breeding Machine
+1104. Jam Defender
+1105. Jar of Greed
+1106. Jar Robber
+1107. Jellyfish
+1108. Jerry Beans Man
+1109. Jetroid
+1110. Jigen Bakudan
+1111. Jinzo
+1112. Jinzo #7
+1113. Jirai Gumo
+1114. Jowgen the Spiritualist
+1115. Jowls of Dark Demise
+1116. Judge Man
+1117. Judgment of Anubis
+1118. Judgment of the Desert
+1119. Judgment of the Pharaoh
+1120. Jurassic World
+1121. Just Desserts
+1122. Justi-Break
+1123. KA-2 Des Scissors
+1124. Kabazauls
+1125. Kagemusha of the Blue Flame
+1126. Kaibaman
+1127. Kairyu-Shin
+1128. Kaiser Colosseum
+1129. Kaiser Dragon
+1130. Kaiser Glider
+1131. Kaiser Sea Horse
+1132. Kaminari Attack
+1133. Kaminote Blow
+1134. Kangaroo Champ
+1135. Karate Man
+1136. Karbonala Warrior
+1137. Karma Cut
+1138. Kattapillar
+1139. Kelbek
+1140. Keldo
+1141. Kid Guard
+1142. Killer Needle
+1143. King Dragun
+1144. King Fog
+1145. King of the Skull Servants
+1146. King of the Swamp
+1147. King Tiger Wanghu
+1148. King's Knight
+1149. Kiryu
+1150. Kiseitai
+1151. Kishido Spirit
+1152. Knight's Title
+1153. Koitsu
+1154. Kojikocy
+1155. Kotodama
+1156. Koumori Dragon
+1157. Kozaky
+1158. Kozaky's Self-Destruct Button
+1159. Kryuel
+1160. Kumootoko
+1161. Kurama
+1162. Kuriboh
+1163. Kuwagata α
+1164. Kwagar Hercules
+1165. Kycoo the Ghost Destroyer
+1166. La Jinn the Mystical Genie of the Lamp
+1167. Labyrinth of Nightmare
+1168. Labyrinth Tank
+1169. Labyrinth Wall
+1170. Lady Assailant of Flames
+1171. Lady Ninja Yae
+1172. Lady of Faith
+1173. Lady Panther
+1174. Larvae Moth
+1175. Larvas
+1176. Laser Cannon Armor
+1177. Last Day of Witch
+1178. Last Resort
+1179. Last Will
+1180. Launcher Spider
+1181. Lava Battleguard
+1182. Lava Golem
+1183. Layard the Liberator
+1184. Left Arm of the Forbidden One
+1185. Left Leg of the Forbidden One
+1186. Legacy Hunter
+1187. Legendary Black Belt
+1188. Legendary Ebon Steed
+1189. Legendary Flame Lord
+1190. Legendary Jujitsu Master
+1191. Legendary Sword
+1192. Leghul
+1193. Lekunga
+1194. Leogun
+1195. Lesser Dragon
+1196. Lesser Fiend
+1197. Level Conversion Lab
+1198. Level Down!
+1199. Level Limit - Area A
+1200. Level Limit - Area B
+1201. Level Modulation
+1202. Level Up!
+1203. Levia-Dragon - Daedalus
+1204. Lich Lord, King of the Underworld
+1205. Life Absorbing Machine
+1206. Life Equalizer
+1207. Light Laser
+1208. Light of Intervention
+1209. Light of Judgment
+1210. Lighten the Load
+1211. Lightforce Sword
+1212. Lightning Blade
+1213. Lightning Conger
+1214. Lightning Punisher
+1215. Lightning Vortex
+1216. Limiter Removal
+1217. Linear Accelerator Cannon
+1218. Liquid Beast
+1219. Little Chimera
+1220. Little-Winguard
+1221. Lizard Soldier
+1222. Lone Wolf
+1223. Long Nose
+1224. Lord D.
+1225. Lord of the Lamp
+1226. Lost Guardian
+1227. Lucky Iron Axe
+1228. Luminous Soldier
+1229. Luminous Spark
+1230. Luster Dragon
+1231. Luster Dragon #2
+1232. Lycanthrope
+1233. M-Warrior #1
+1234. M-Warrior #2
+1235. Machine Conversion Factory
+1236. Machine Duplication
+1237. Machine King
+1238. Machine King Prototype
+1239. Macro Cosmos
+1240. Mad Dog of Darkness
+1241. Mad Lobster
+1242. Mad Sword Beast
+1243. Mage Power
+1244. Magic Cylinder
+1245. Magic Drain
+1246. Magic Jammer
+1247. Magic Reflector
+1248. Magical Arm Shield
+1249. Magical Blast
+1250. Magical Dimension
+1251. Magical Explosion
+1252. Magical Ghost
+1253. Magical Hats
+1254. Magical Labyrinth
+1255. Magical Mallet
+1256. Magical Marionette
+1257. Magical Merchant
+1258. Magical Plant Mandragola
+1259. Magical Scientist
+1260. Magical Stone Excavation
+1261. Magical Thorn
+1262. Magician of Faith
+1263. Magician's Circle
+1264. Magician's Valkyria
+1265. Magicians Unite
+1266. Magna-Slash Dragon
+1267. Magnet Circle LV2
+1268. Maha Vailo
+1269. Maharaghi
+1270. Maiden of the Aqua
+1271. Maiden of the Moonlight
+1272. Maji-Gire Panda
+1273. Major Riot
+1274. Maju Garzett
+1275. Makyura the Destructor
+1276. Malevolent Nuzzler
+1277. Malfunction
+1278. Malice Ascendant
+1279. Malice Dispersion
+1280. Malice Doll of Demise
+1281. Mammoth Graveyard
+1282. Man Beast of Ares
+1283. Man Eater
+1284. Man-Eater Bug
+1285. Man-Eating Treasure Chest
+1286. Man-Thro' Tro'
+1287. Manga Ryu-Ran
+1288. Manticore of Darkness
+1289. Marauding Captain
+1290. Marie the Fallen One
+1291. Marionette Mite
+1292. Maryokutai
+1293. Masaki the Legendary Swordsman
+1294. Mask of Brutality
+1295. Mask of Darkness
+1296. Mask of Dispel
+1297. Mask of Restrict
+1298. Mask of the Accursed
+1299. Mask of Weakness
+1300. Masked Chopper
+1301. Masked Dragon
+1302. Masked Sorcerer
+1303. Mass Driver
+1304. Mass Hypnosis
+1305. Master & Expert
+1306. Master Kyonshee
+1307. Master Monk
+1308. Master of Oz
+1309. Mataza the Zapper
+1310. Mausoleum of the Emperor
+1311. Mazera DeVille
+1312. Mecha-Dog Marron
+1313. Mechanical Hound
+1314. Mechanical Snail
+1315. Mechanicalchaser
+1316. Meda Bat
+1317. Medusa Worm
+1318. Mefist the Infernal General
+1319. Mega Thunderball
+1320. Mega Ton Magical Cannon
+1321. Megamorph
+1322. Megarock Dragon
+1323. Megasonic Eye
+1324. Mei-Kou, Master of Barriers
+1325. Melchid the Four-Face Beast
+1326. Meltiel, Sage of the Sky
+1327. Memory Crusher
+1328. Mermaid Knight
+1329. Mesmeric Control
+1330. Messenger of Peace
+1331. Metal Armored Bug
+1332. Metal Detector
+1333. Metal Dragon
+1334. Metal Fish
+1335. Metal Guardian
+1336. Metallizing Parasite - Lunatite
+1337. Metalmorph
+1338. Metalsilver Armor
+1339. Metalzoa
+1340. Metamorphosis
+1341. Meteor Dragon
+1342. Meteor of Destruction
+1343. Meteorain
+1344. Michizure
+1345. Micro Ray
+1346. Mid Shield Gardna
+1347. Mighty Guard
+1348. Mikazukinoyaiba
+1349. Millennium Golem
+1350. Millennium Scorpion
+1351. Millennium Shield
+1352. Milus Radiant
+1353. Minar
+1354. Mind Control
+1355. Mind Crush
+1356. Mind Haxorz
+1357. Mind on Air
+1358. Mind Wipe
+1359. Mine Golem
+1360. Minefield Eruption
+1361. Minor Goblin Official
+1362. Miracle Dig
+1363. Miracle Fusion
+1364. Miracle Jurassic Egg
+1365. Miracle Kids
+1366. Miracle Restoring
+1367. Miraculous Descent
+1368. Miraculous Rebirth
+1369. Mirage Dragon
+1370. Mirage Knight
+1371. Mirage of Nightmare
+1372. Mirror Force
+1373. Mirror Wall
+1374. Misairuzame
+1375. Misfortune
+1376. Mispolymerization
+1377. Mist Archfiend
+1378. Mist Body
+1379. Moai Interceptor Cannons
+1380. Mobius the Frost Monarch
+1381. Moisture Creature
+1382. Mokey Mokey
+1383. Mokey Mokey King
+1384. Mokey Mokey Smackdown
+1385. Molten Behemoth
+1386. Molten Destruction
+1387. Molten Zombie
+1388. Monk Fighter
+1389. Monster Egg
+1390. Monster Gate
+1391. Monster Reborn
+1392. Monster Recovery
+1393. Monster Reincarnation
+1394. Moon Envoy
+1395. Morale Boost
+1396. Morinphen
+1397. Morphing Jar
+1398. Morphing Jar #2
+1399. Mother Grizzly
+1400. Mountain
+1401. Mr. Volcano
+1402. Mucus Yolk
+1403. Muka Muka
+1404. Multiplication of Ants
+1405. Mushroom Man #2
+1406. Musician King
+1407. Mustering of the Dark Scorpions
+1408. My Body as a Shield
+1409. Mysterious Guard
+1410. Mysterious Puppeteer
+1411. Mystic Box
+1412. Mystic Clown
+1413. Mystic Horseman
+1414. Mystic Lamp
+1415. Mystic Plasma Zone
+1416. Mystic Probe
+1417. Mystic Swordsman LV2
+1418. Mystic Swordsman LV4
+1419. Mystic Swordsman LV6
+1420. Mystic Tomato
+1421. Mystical Elf
+1422. Mystical Knight of Jackal
+1423. Mystical Moon
+1424. Mystical Sheep #1
+1425. Mystical Sheep #2
+1426. Mystical Shine Ball
+1427. Mystical Space Typhoon
+1428. Mystical Wind Typhoon
+1429. Mystik Wok
+1430. Mythical Beast Cerberus
+1431. Nanobreaker
+1432. Narrow Pass
+1433. Necklace of Command
+1434. Necroface
+1435. Necrovalley
+1436. Needle Burrower
+1437. Needle Ceiling
+1438. Needle Wall
+1439. Needle Worm
+1440. Negate Attack
+1441. Neko Mane King
+1442. Nekogal #1
+1443. Nekogal #2
+1444. Nemuriko
+1445. Neo Aqua Madoor
+1446. Neo Bug
+1447. Neo Space
+1448. Neo the Magic Swordsman
+1449. Neo-Parshath, the Sky Paladin
+1450. Neo-Spacian Air Hummingbird
+1451. Neo-Spacian Aqua Dolphin
+1452. Neo-Spacian Dark Panther
+1453. Neo-Spacian Flare Scarab
+1454. Neo-Spacian Glow Moss
+1455. Neo-Spacian Grand Mole
+1456. Neos Force
+1457. Newdoria
+1458. Next to be Lost
+1459. Night Assailant
+1460. Nightmare Horse
+1461. Nightmare Penguin
+1462. Nightmare Wheel
+1463. Nightmare's Steelcage
+1464. Nimble Momonga
+1465. Nin-Ken Dog
+1466. Ninja Grandmaster Sasuke
+1467. Ninjitsu Art of Decoy
+1468. Ninjitsu Art of Transformation
+1469. Nitro Unit
+1470. Niwatori
+1471. Nobleman of Crossout
+1472. Nobleman of Extermination
+1473. Nobleman-Eater Bug
+1474. Non Aggression Area
+1475. Non-Fusion Area
+1476. Non-Spellcasting Area
+1477. Nova Summoner
+1478. Novox's Prayer
+1479. Nubian Guard
+1480. Numinous Healer
+1481. Nutrient Z
+1482. Nuvia the Wicked
+1483. O - Oversoul
+1484. Obnoxious Celtic Guard
+1485. Ocean Dragon Lord - Neo-Daedalus
+1486. Octoberser
+1487. Ocubeam
+1488. Offerings to the Doomed
+1489. Ogre of the Black Shadow
+1490. Ojama Black
+1491. Ojama Delta Hurricane!!
+1492. Ojama Green
+1493. Ojama King
+1494. Ojama Trio
+1495. Ojama Yellow
+1496. Ojamagic
+1497. Ojamuscle
+1498. Old Vindictive Magician
+1499. Ominous Fortunetelling
+1500. One-Eyed Shield Dragon
+1501. Oni Tank T-34
+1502. Ooguchi
+1503. Ookazi
+1504. Oppressed People
+1505. Opti-Camouflage Armor
+1506. Opticlops
+1507. Option Hunter
+1508. Orbital Bombardment
+1509. Orca Mega-Fortress of Darkness
+1510. Ordeal of a Traveler
+1511. Order to Charge
+1512. Order to Smash
+1513. Oscillo Hero
+1514. Otherworld - The "A" Zone
+1515. Otohime
+1516. Outstanding Dog Marron
+1517. Over Destiny
+1518. Overdrive
+1519. Overload Fusion
+1520. Oxygeddon
+1521. Painful Choice
+1522. Paladin of White Dragon
+1523. Pale Beast
+1524. Pandemonium
+1525. Pandemonium Watchbear
+1526. Panther Warrior
+1527. Paralyzing Potion
+1528. Parasite Paracide
+1529. Parasitic Ticky
+1530. Parrot Dragon
+1531. Patrician of Darkness
+1532. Patroid
+1533. Patrol Robo
+1534. Peacock
+1535. Penalty Game!
+1536. Penguin Knight
+1537. Penguin Soldier
+1538. Penumbral Soldier Lady
+1539. People Running About
+1540. Perfect Machine King
+1541. Perfectly Ultimate Great Moth
+1542. Performance of Sword
+1543. Peten the Dark Clown
+1544. Petit Angel
+1545. Petit Dragon
+1546. Petit Moth
+1547. Phantasmal Martyrs
+1548. Phantom Beast Cross-Wing
+1549. Phantom Beast Rock-Lizard
+1550. Phantom Beast Thunder-Pegasus
+1551. Pharaoh's Servant
+1552. Pharaoh's Treasure
+1553. Pharaonic Protector
+1554. Phoenix Wing Wind Blast
+1555. Photon Generator Unit
+1556. Physical Double
+1557. Pikeru's Circle of Enchantment
+1558. Pikeru's Second Sight
+1559. Pinch Hopper
+1560. Pineapple Blast
+1561. Piranha Army
+1562. Pitch-Black Power Stone
+1563. Pitch-Black Warwolf
+1564. Pitch-Dark Dragon
+1565. Pixie Knight
+1566. Plague Wolf
+1567. Poison Draw Frog
+1568. Poison Fangs
+1569. Poison Mummy
+1570. Poison of the Old Man
+1571. Pole Position
+1572. Polymerization
+1573. Possessed Dark Soul
+1574. Pot of Avarice
+1575. Pot of Generosity
+1576. Pot of Greed
+1577. Power Bond
+1578. Power Capsule
+1579. Power of Kaishin
+1580. Pragtical
+1581. Precious Cards from Beyond
+1582. Premature Burial
+1583. Prepare to Strike Back
+1584. Prevent Rat
+1585. Prickle Fairy
+1586. Primal Seed
+1587. Princess Curran
+1588. Princess of Tsurugi
+1589. Princess Pikeru
+1590. Prisman
+1591. Prohibition
+1592. Prometheus, King of the Shadows
+1593. Protective Soul Ailin
+1594. Protector of the Sanctuary
+1595. Protector of the Throne
+1596. Proto-Cyber Dragon
+1597. Psychic Kappa
+1598. Pulling the Rug
+1599. Pumpking the King of Ghosts
+1600. Punished Eagle
+1601. Puppet Plant
+1602. Pyramid Energy
+1603. Pyramid of Light
+1604. Pyramid Turtle
+1605. Queen Bird
+1606. Queen of Autumn Leaves
+1607. Queen's Bodyguard
+1608. Queen's Double
+1609. Queen's Knight
+1610. Question
+1611. R - Righteous Justice
+1612. Rabid Horseman
+1613. Radiant Jeral
+1614. Radiant Mirror Force
+1615. Rafflesia Seduction
+1616. Raging Earth
+1617. Raging Eria
+1618. Raging Flame Sprite
+1619. Raging Spirit
+1620. Raigeki
+1621. Raigeki Break
+1622. Rain of Mercy
+1623. Rain Storm
+1624. Rainbow Dragon
+1625. Rainbow Flower
+1626. Raise Body Heat
+1627. Raiza the Storm Monarch
+1628. Rallis the Star Bird
+1629. Rampaging Rhynos
+1630. Rapid-Fire Magician
+1631. Rare Metal Dragon
+1632. Rare Metalmorph
+1633. Rare Value
+1634. Raregold Armor
+1635. Raviel, Lord of Phantasms
+1636. Ray & Temperature
+1637. Ray of Hope
+1638. Re-Fusion
+1639. Ready for Intercepting
+1640. Really Eternal Rest
+1641. Reaper of the Cards
+1642. Reaper on the Nightmare
+1643. Reasoning
+1644. Reckless Greed
+1645. Recurring Nightmare
+1646. Recycle
+1647. Recycling Batteries
+1648. Red Archery Girl
+1649. Red Gadget
+1650. Red Medicine
+1651. Red-Eyes B. Dragon
+1652. Red-Eyes Black Chick
+1653. Red-Eyes Darkness Dragon
+1654. Red-Eyes Darkness Metal Dragon
+1655. Red-Eyes Wyvern
+1656. Red-Eyes Zombie Dragon
+1657. Regenerating Mummy
+1658. Reinforcement of the Army
+1659. Reinforcements
+1660. Release Restraint
+1661. Reliable Guardian
+1662. Relinquished
+1663. Reload
+1664. Remove Brainwashing
+1665. Remove Trap
+1666. Rescue Cat
+1667. Rescueroid
+1668. Reshef the Dark Being
+1669. Respect Play
+1670. Restructer Revolution
+1671. Return from the Different Dimension
+1672. Return of the Doomed
+1673. Return of the Six Samurai
+1674. Return Soul
+1675. Reversal Quiz
+1676. Reverse Trap
+1677. Revival Jam
+1678. Revival of Dokurorider
+1679. Right Arm of the Forbidden One
+1680. Right Leg of the Forbidden One
+1681. Ring of Defense
+1682. Ring of Destruction
+1683. Ring of Magnetism
+1684. Riryoku
+1685. Riryoku Field
+1686. Rising Air Current
+1687. Rising Energy
+1688. Rite of Spirit
+1689. Ritual Foregone
+1690. Ritual Sealing
+1691. Ritual Weapon
+1692. Rivalry of Warlords
+1693. Roaring Ocean Snake
+1694. Robbin' Goblin
+1695. Robbin' Zombie
+1696. Robolady
+1697. Robotic Knight
+1698. Roboyarou
+1699. Roc from the Valley of Haze
+1700. Rock Bombardment
+1701. Rock Ogre Grotto #1
+1702. Rocket Jumper
+1703. Rocket Warrior
+1704. Rod of Silence - Kay'est
+1705. Rod of the Mind's Eye
+1706. Rogue Doll
+1707. Roll Out!
+1708. Root Water
+1709. Rope of Life
+1710. Roulette Barrel
+1711. Royal Command
+1712. Royal Decree
+1713. Royal Keeper
+1714. Royal Knight
+1715. Royal Magical Library
+1716. Royal Oppression
+1717. Royal Surrender
+1718. Royal Tribute
+1719. Rude Kaiser
+1720. Ruin, Queen of Oblivion
+1721. Rush Recklessly
+1722. Ruthless Denial
+1723. Ryu Kokki
+1724. Ryu Senshi
+1725. Ryu-Kishin
+1726. Ryu-Kishin Powered
+1727. Ryu-Ran
+1728. Saber Beetle
+1729. Sabersaurus
+1730. Sacred Crane
+1731. Sacred Phoenix of Nephthys
+1732. Sage of Silence
+1733. Sage of Stillness
+1734. Sage's Stone
+1735. Saggi the Dark Clown
+1736. Sakuretsu Armor
+1737. Salamandra
+1738. Salvage
+1739. Samsara
+1740. Sanctuary in the Sky
+1741. Sand Gambler
+1742. Sand Moth
+1743. Sand Stone
+1744. Sanga of the Thunder
+1745. Sangan
+1746. Sanwitch
+1747. Sasuke Samurai
+1748. Sasuke Samurai #2
+1749. Sasuke Samurai #3
+1750. Sasuke Samurai #4
+1751. Satellite Cannon
+1752. Scapegoat
+1753. Scarr, Scout of Dark World
+1754. Science Soldier
+1755. Scroll of Bewitchment
+1756. Sea Serpent Warrior of Darkness
+1757. Seal of the Ancients
+1758. Sealmaster Meisei
+1759. Searchlightman
+1760. Sebek's Blessing
+1761. Second Coin Toss
+1762. Second Goblin
+1763. Secret Barrel
+1764. Secret Pass to the Treasures
+1765. Secrets of the Gallant
+1766. Sectarian of Secrets
+1767. Seismic Crasher
+1768. Seismic Shockwave
+1769. Seiyaryu
+1770. Self-Destruct Button
+1771. Senet Switch
+1772. Senju of the Thousand Hands
+1773. Senri Eye
+1774. Serial Spell
+1775. Serpent Night Dragon
+1776. Serpentine Princess
+1777. Servant of Catabolism
+1778. Seven Tools of the Bandit
+1779. Shadow Ghoul
+1780. Shadow Spell
+1781. Shadow Tamer
+1782. Shien's Castle of Mist
+1783. Shien's Footsoldier
+1784. Shien's Spy
+1785. Shift
+1786. Shifting Shadows
+1787. Shinato, King of a Higher Plane
+1788. Shinato's Ark
+1789. Shining Abyss
+1790. Shining Angel
+1791. Shining Friendship
+1792. Shooting Star Bow - Ceal
+1793. Shrink
+1794. Silent Abyss
+1795. Silent Insect
+1796. Silent Magician LV4
+1797. Silent Magician LV8
+1798. Silent Swordsman LV3
+1799. Silent Swordsman LV5
+1800. Silent Swordsman LV7
+1801. Sillva, Warlord of Dark World
+1802. Silpheed
+1803. Silver Bow and Arrow
+1804. Silver Fang
+1805. Simorgh, Bird of Divinity
+1806. Simultaneous Loss
+1807. Sinister Serpent
+1808. Skelengel
+1809. Skilled Dark Magician
+1810. Skilled White Magician
+1811. Skull Archfiend of Lightning
+1812. Skull Dice
+1813. Skull Dog Marron
+1814. Skull Guardian
+1815. Skull Invitation
+1816. Skull Knight
+1817. Skull Knight #2
+1818. Skull Lair
+1819. Skull Mariner
+1820. Skull Red Bird
+1821. Skull Servant
+1822. Skull-Mark Ladybug
+1823. Sky Dragon
+1824. Sky Scourge Enrise
+1825. Sky Scourge Invicil
+1826. Sky Scourge Norleras
+1827. Sky Scout
+1828. Skyscraper
+1829. Skyscraper 2 - Hero City
+1830. Slate Warrior
+1831. Sleeping Lion
+1832. Slime Toad
+1833. Slot Machine
+1834. Smashing Ground
+1835. Smoke Grenade of the Thief
+1836. Snake Fang
+1837. Snatch Steal
+1838. Sniper Hunter
+1839. Sogen
+1840. Soitsu
+1841. Solar Flare Dragon
+1842. Solemn Judgment
+1843. Solemn Wishes
+1844. Solomon's Lawbook
+1845. Sonic Bird
+1846. Sonic Duck
+1847. Sonic Jammer
+1848. Sonic Maid
+1849. Sonic Shooter
+1850. Sorcerer of Dark Magic
+1851. Sorcerer of the Doomed
+1852. Soul Absorption
+1853. Soul Demolition
+1854. Soul Exchange
+1855. Soul Release
+1856. Soul Resurrection
+1857. Souls of the Forgotten
+1858. Space Mambo
+1859. Spark Blaster
+1860. Sparks
+1861. Spatial Collapse
+1862. Spear Cretin
+1863. Spear Dragon
+1864. Special Hurricane
+1865. Spell Absorption
+1866. Spell Calling
+1867. Spell Canceller
+1868. Spell Economics
+1869. Spell Purification
+1870. Spell Reproduction
+1871. Spell Shield Type-8
+1872. Spell Striker
+1873. Spell Vanishing
+1874. Spell-Stopping Statute
+1875. Spellbinding Circle
+1876. Spellbook Organization
+1877. Spherous Lady
+1878. Sphinx Teleia
+1879. Spike Seadra
+1880. Spikebot
+1881. Spiral Serpent
+1882. Spiral Spear Strike
+1883. Spirit Barrier
+1884. Spirit Caller
+1885. Spirit Message "A"
+1886. Spirit Message "I"
+1887. Spirit Message "L"
+1888. Spirit Message "N"
+1889. Spirit of Flames
+1890. Spirit of the Books
+1891. Spirit of the Breeze
+1892. Spirit of the Harp
+1893. Spirit of the Pharaoh
+1894. Spirit of the Pot of Greed
+1895. Spirit Reaper
+1896. Spirit Ryu
+1897. Spirit's Invitation
+1898. Spiritual Earth Art - Kurogane
+1899. Spiritual Fire Art - Kurenai
+1900. Spiritual Water Art - Aoi
+1901. Spiritual Wind Art - Miyabi
+1902. Spiritualism
+1903. Spring of Rebirth
+1904. St. Joan
+1905. Stamping Destruction
+1906. Star Boy
+1907. Statue of the Wicked
+1908. Staunch Defender
+1909. Stealth Bird
+1910. Steam Gyroid
+1911. Steamroid
+1912. Steel Ogre Grotto #2
+1913. Steel Scorpion
+1914. Steel Shell
+1915. Stim-Pack
+1916. Stone Dragon
+1917. Stone Ogre Grotto
+1918. Stone Shooter
+1919. Stone Statue of the Aztecs
+1920. Stop Defense
+1921. Storming Wynn
+1922. Straight Flush
+1923. Stray Asmodian
+1924. Stray Lambs
+1925. Strike Ninja
+1926. Stronghold the Moving Fortress
+1927. Stuffed Animal
+1928. Stumbling
+1929. Submarineroid
+1930. Success Probability 0%
+1931. Succubus Knight
+1932. Suijin
+1933. Summoned Skull
+1934. Summoner of Illusions
+1935. Super Conductor Tyranno
+1936. Super Rejuvenation
+1937. Super Robolady
+1938. Super Roboyarou
+1939. Super Vehicroid - Jumbo Drill
+1940. Super-Ancient Dinobeast
+1941. Supercharge
+1942. Supply
+1943. Survival Instinct
+1944. Susa Soldier
+1945. Swamp Battleguard
+1946. Swarm of Locusts
+1947. Swarm of Scarabs
+1948. Swift Birdman Joe
+1949. Swift Gaia the Fierce Knight
+1950. Swift Samurai Storm!
+1951. Sword Hunter
+1952. Sword of Dark Destruction
+1953. Sword of Deep-Seated
+1954. Sword of Dragon's Soul
+1955. Sword of the Soul-Eater
+1956. Swords of Concealing Light
+1957. Swords of Revealing Light
+1958. Swordsman of Landstar
+1959. Swordstalker
+1960. Symbol of Heritage
+1961. Synthesis Spell
+1962. Synthetic Seraphim
+1963. System Down
+1964. T.A.D.P.O.L.E.
+1965. Tactical Espionage Expert
+1966. Tail Swipe
+1967. Tailor of the Fickle
+1968. Tainted Wisdom
+1969. Takriminos
+1970. Takuhee
+1971. Talisman of Spell Sealing
+1972. Talisman of Trap Sealing
+1973. Taunt
+1974. Temple of Skulls
+1975. Tenkabito Shien
+1976. Terra the Terrible
+1977. Terraforming
+1978. Terrible Deal
+1979. Terrorking Archfiend
+1980. Terrorking Salmon
+1981. Teya
+1982. The 13th Grave
+1983. The A. Forces
+1984. The Agent of Creation - Venus
+1985. The Agent of Force - Mars
+1986. The Agent of Judgment - Saturn
+1987. The Agent of Wisdom - Mercury
+1988. The All-Seeing White Tiger
+1989. The Big March of Animals
+1990. The Bistro Butcher
+1991. The Cheerful Coffin
+1992. The Creator
+1993. The Creator Incarnate
+1994. The Dark - Hex-Sealed Fusion
+1995. The Dark Door
+1996. The Dragon Dwelling in the Cave
+1997. The Dragon's Bead
+1998. The Earl of Demise
+1999. The Earth - Hex-Sealed Fusion
+2000. The Emperor's Holiday
+2001. The End of Anubis
+2002. The Eye of Truth
+2003. The Fiend Megacyber
+2004. The First Sarcophagus
+2005. The Flute of Summoning Dragon
+2006. The Flute of Summoning Kuriboh
+2007. The Forceful Sentry
+2008. The Forces of Darkness
+2009. The Forgiving Maiden
+2010. The Furious Sea King
+2011. The Gift of Greed
+2012. The Graveyard in the Fourth Dimension
+2013. The Gross Ghost of Fled Dreams
+2014. The Hunter with 7 Weapons
+2015. The Inexperienced Spy
+2016. The Judgement Hand
+2017. The Kick Man
+2018. The King of Yamimakai
+2019. The Lady in Wight
+2020. The Last Warrior from Another Planet
+2021. The Law of the Normal
+2022. The League of Uniform Nomenclature
+2023. The Legendary Fisherman
+2024. The Light - Hex-Sealed Fusion
+2025. The Little Swordsman of Aile
+2026. The Masked Beast
+2027. The Paths of Destiny
+2028. The Portrait's Secret
+2029. The Puppet Magic of Dark Ruler
+2030. The Regulation of Tribe
+2031. The Rock Spirit
+2032. The Secret of the Bandit
+2033. The Shallow Grave
+2034. The Six Samurai - Irou
+2035. The Six Samurai - Kamon
+2036. The Six Samurai - Nisashi
+2037. The Six Samurai - Yaichi
+2038. The Six Samurai - Yariza
+2039. The Six Samurai - Zanji
+2040. The Spell Absorbing Life
+2041. The Statue of Easter Island
+2042. The Stern Mystic
+2043. The Unhappy Girl
+2044. The Unhappy Maiden
+2045. The Warrior Returning Alive
+2046. The Wicked Worm Beast
+2047. Theban Nightmare
+2048. Theinen the Great Sphinx
+2049. Thestalos the Firestorm Monarch
+2050. Thousand Dragon
+2051. Thousand Energy
+2052. Thousand Knives
+2053. Thousand Needles
+2054. Thousand-Eyes Idol
+2055. Thousand-Eyes Restrict
+2056. Threatening Roar
+2057. Three-Headed Geedo
+2058. Three-Hump Lacooda
+2059. Throwstone Unit
+2060. Thunder Crash
+2061. Thunder Dragon
+2062. Thunder Kid
+2063. Thunder Nyan Nyan
+2064. Thunder of Ruler
+2065. Tiger Axe
+2066. Time Seal
+2067. Time Wizard
+2068. Timeater
+2069. Timidity
+2070. Token Feastevil
+2071. Token Thanksgiving
+2072. Toll
+2073. Tongyo
+2074. Toon Alligator
+2075. Toon Cannon Soldier
+2076. Toon Dark Magician Girl
+2077. Toon Defense
+2078. Toon Gemini Elf
+2079. Toon Goblin Attack Force
+2080. Toon Masked Sorcerer
+2081. Toon Mermaid
+2082. Toon Summoned Skull
+2083. Toon Table of Contents
+2084. Toon World
+2085. Tornado
+2086. Tornado Bird
+2087. Tornado Wall
+2088. Torpedo Fish
+2089. Torrential Tribute
+2090. Total Defense Shogun
+2091. Tower of Babel
+2092. Tragedy
+2093. Trakodon
+2094. Transcendent Wings
+2095. Trap Dustshoot
+2096. Trap Hole
+2097. Trap Jammer
+2098. Trap Master
+2099. Trap of Board Eraser
+2100. Treasure Map
+2101. Treeborn Frog
+2102. Tremendous Fire
+2103. Trent
+2104. Tri-Blaze Accelerator
+2105. Tri-Horned Dragon
+2106. Trial of Nightmare
+2107. Trial of the Princesses
+2108. Triangle Ecstasy Spark
+2109. Triangle Power
+2110. Tribe-Infecting Virus
+2111. Tribute Doll
+2112. Tribute to the Doomed
+2113. Triggered Summon
+2114. Tripwire Beast
+2115. Trojan Blast
+2116. Troop Dragon
+2117. Tsukuyomi
+2118. Turtle Bird
+2119. Turtle Oath
+2120. Turtle Tiger
+2121. Turu-Purun
+2122. Tutan Mask
+2123. Twin Long Rods #2
+2124. Twin Swords of Flashing Light - Tryce
+2125. Twin-Headed Beast
+2126. Twin-Headed Behemoth
+2127. Twin-Headed Fire Dragon
+2128. Twin-Headed Thunder Dragon
+2129. Twin-Headed Wolf
+2130. Twister
+2131. Two-Headed King Rex
+2132. Two-Man Cell Battle
+2133. Two-Mouth Darkruler
+2134. Two-Pronged Attack
+2135. Tyhone
+2136. Tyhone #2
+2137. Type Zero Magic Crusher
+2138. Tyranno Infinity
+2139. Tyrant Dragon
+2140. UFO Turtle
+2141. UFOroid
+2142. UFOroid Fighter
+2143. Ultimate Baseball Kid
+2144. Ultimate Insect LV1
+2145. Ultimate Insect LV3
+2146. Ultimate Insect LV5
+2147. Ultimate Insect LV7
+2148. Ultimate Obedient Fiend
+2149. Ultimate Offering
+2150. Ultimate Tyranno
+2151. Ultra Evolution Pill
+2152. Umbral Soul
+2153. Umi
+2154. Umiiruka
+2155. Union Rider
+2156. United Resistance
+2157. United We Stand
+2158. Unity
+2159. Unknown Warrior of Fiend
+2160. Unshaven Angler
+2161. Upstart Goblin
+2162. Uraby
+2163. Uria, Lord of Searing Flames
+2164. Ushi Oni
+2165. V-Tiger Jet
+2166. Valkyrion the Magna Warrior
+2167. Vampire Baby
+2168. Vampire Genesis
+2169. Vampire Lady
+2170. Vampire Lord
+2171. Vampire Orchis
+2172. Vanity's Call
+2173. Vanity's Fiend
+2174. Vanity's Ruler
+2175. Vehicroid Connection Zone
+2176. Vengeful Bog Spirit
+2177. Vengeful Servant
+2178. Victory Viper XX03
+2179. Vile Germs
+2180. Vilepawn Archfiend
+2181. Violent Rain
+2182. Violet Crystal
+2183. Volcanic Blaster
+2184. Volcanic Doomfire
+2185. Volcanic Eruption
+2186. Volcanic Hammerer
+2187. Volcanic Recharge
+2188. Volcanic Rocket
+2189. Volcanic Scattershot
+2190. Volcanic Shell
+2191. Volcanic Slicer
+2192. Voltanis the Adjudicator
+2193. Vorse Raider
+2194. VW-Tiger Catapult
+2195. VWXYZ-Dragon Catapult Cannon
+2196. W-Wing Catapult
+2197. Waboku
+2198. Wall of Illusion
+2199. Wall of Revealing Light
+2200. Wall Shadow
+2201. Wandering Mummy
+2202. Warrior Dai Grepher
+2203. Warrior Elimination
+2204. Warrior Lady of the Wasteland
+2205. Warrior of Atlantis
+2206. Warrior of Tradition
+2207. Warrior of Zera
+2208. Wasteland
+2209. Watapon
+2210. Water Dragon
+2211. Water Magician
+2212. Water Omotics
+2213. Wattkid
+2214. Wave-Motion Cannon
+2215. Weapon Change
+2216. Weather Report
+2217. Weed Out
+2218. Whiptail Crow
+2219. Whirlwind Prodigy
+2220. Whirlwind Weasel
+2221. White Dragon Ritual
+2222. White Hole
+2223. White Magical Hat
+2224. White Magician Pikeru
+2225. White Ninja
+2226. White-Horned Dragon
+2227. Wicked-Breaking Flamberge - Baou
+2228. Widespread Ruin
+2229. Wild Fire
+2230. Wild Nature's Release
+2231. Windstorm of Etaqua
+2232. Winged Dragon, Guardian of the Fortress #1
+2233. Winged Dragon, Guardian of the Fortress #2
+2234. Winged Kuriboh
+2235. Winged Kuriboh LV10
+2236. Winged Minion
+2237. Winged Sage Falcos
+2238. Wingweaver
+2239. Witch Doctor of Chaos
+2240. Witch of the Black Forest
+2241. Witch's Apprentice
+2242. Witty Phantom
+2243. Wolf Axwielder
+2244. Wonder Garage
+2245. Wood Remains
+2246. Woodborg Inpachi
+2247. Woodland Sprite
+2248. World Suppression
+2249. Worm Drake
+2250. Worm Warrior
+2251. Wretched Ghost of the Attic
+2252. Wroughtweiler
+2253. Wynn the Wind Charmer
+2254. X-Head Cannon
+2255. Xing Zhen Hu
+2256. XY-Dragon Cannon
+2257. XYZ-Dragon Cannon
+2258. XZ-Tank Cannon
+2259. Y-Dragon Head
+2260. Yado Karu
+2261. Yamadron
+2262. Yamata Dragon
+2263. Yami
+2264. Yaranzo
+2265. Yata-Garasu
+2266. Yellow Gadget
+2267. Yellow Luster Shield
+2268. Yomi Ship
+2269. Yu-Jo Friendship
+2270. YZ-Tank Dragon
+2271. Z-Metal Tank
+2272. Zaborg the Thunder Monarch
+2273. Zeradias, Herald of Heaven
+2274. Zero Gravity
+2275. Zoa
+2276. Zolga
+2277. Zombie Tiger
+2278. Zombyra the Dark
+2279. Zone Eater
+2280. Zure, Knight of Dark World
