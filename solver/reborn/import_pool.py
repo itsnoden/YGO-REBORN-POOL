@@ -16,7 +16,7 @@ def dump(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n')
 
 
-def parse_pool(text, expected=2273):
+def parse_pool(text, expected=2280):
     section = text.split('SECTION A — 100% CONFIRMED (', 1)[1].split('SECTION B —', 1)[0]
     rows = []
     for line_number, line in enumerate(text.splitlines(), 1):
@@ -141,7 +141,7 @@ def main():
                     official=None, effects=[], implementation_status='unimplemented')
     dump(ROOT/'data/processed/cards.json', cards)
     dump(ROOT/'data/processed/input_audit.json', {
-        'expected_pool':2273, 'imported_pool':len(cards),
+        'expected_pool':2280, 'imported_pool':len(cards),
         'source_corrections':applied_corrections,
         'limits':{str(i):sum(c['copy_limit']==i for c in cards) for i in range(4)},
         'banlist_names_outside_pool':sorted(set(limits)-{key(c['name']) for c in cards}),
