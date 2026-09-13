@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 import json
+import sqlite3
 from types import SimpleNamespace
 
 from .chain_context_ab_eval import ChainContextPolicy
@@ -253,8 +254,8 @@ DECK_SPECS = {
             "Compulsory Evacuation Device": 1,
         },
     },
-    "Demise Doom Dozer": {
-        "source": "ai_reconstructed_representative_40_no_advanced_ritual_art",
+    "Demise Doom Dozer ARA": {
+        "source": "ai_reconstructed_representative_40_with_source_verified_ara",
         "cards": {
             "Demise, King of Armageddon": 3,
             "Doom Dozer": 3,
@@ -262,7 +263,7 @@ DECK_SPECS = {
             "Sonic Bird": 3,
             "Insect Knight": 3,
             "Neo Bug": 3,
-            "End of the World": 3,
+            "Advanced Ritual Art": 3,
             "Upstart Goblin": 3,
             "Megamorph": 2,
             "Smashing Ground": 2,
@@ -272,14 +273,81 @@ DECK_SPECS = {
             "Book of Moon": 1,
             "Brain Control": 1,
             "Premature Burial": 1,
-            "Lightning Vortex": 1,
             "Bottomless Trap Hole": 2,
             "Torrential Tribute": 1,
             "Mirror Force": 1,
             "Solemn Judgment": 1,
+            "Ring of Destruction": 1,
         },
-    },
-}
+    }}
+
+
+SOURCE_CONFIRMED_EXTRAS = [
+    "Adhesion Trap Hole",
+    "Adhesive Explosive",
+    "Advanced Ritual Art",
+    "Aegis of Gaia",
+    "After the Struggle",
+    "Agido",
+    "Airknight Parshath",
+]
+
+
+def inject_source_confirmed_extras(cards, mapped, database_path):
+    """Inject source-video-confirmed cards missing from the stale processed cache.
+
+    The raw MASTER is now 2,280 labels, but the committed processed cache predates
+    the source-frame correction. This one-off bridge uses exact title matches from
+    the pinned card database and gives each injected card a unique synthetic Reborn
+    id. It does not infer or fuzzy-match identities.
+    """
+    existing_names = {c["name"].casefold() for c in cards.values()}
+    con = sqlite3.connect(database_path)
+    con.row_factory = sqlite3.Row
+    report = {}
+    for name in SOURCE_CONFIRMED_EXTRAS:
+        if name.casefold() in existing_names:
+            report[name] = {"status": "already_in_processed_cache"}
+            continue
+        rows = [
+            dict(r) for r in con.execute(
+                "SELECT d.*, t.name, t.desc FROM datas d JOIN texts t USING(id) WHERE lower(t.name)=lower(?)",
+                (name,),
+            )
+        ]
+        primary = [r for r in rows if int(r.get("alias", 0) or 0) == 0]
+        if len(primary) != 1:
+            report[name] = {
+                "status": "exact_engine_title_not_unique",
+                "matches": [{"id": r["id"], "name": r["name"], "alias": r["alias"]} for r in rows],
+            }
+            continue
+        r = primary[0]
+        cid = "source-extra-" + name.casefold().replace(" ", "-").replace("'", "").replace(",", "")
+        cards[cid] = {
+            "id": cid,
+            "name": name,
+            "copy_limit": 3,
+            "legal": True,
+            "placement": "main",
+            "deck_name_group": cid,
+        }
+        mapped[cid] = {
+            "reborn_id": cid,
+            "name": name,
+            "passcode": int(r["id"]),
+            "copy_limit": 3,
+            "engine_name": r["name"],
+            "mapping_source": "source_video_exact_title_injection",
+        }
+        existing_names.add(name.casefold())
+        report[name] = {
+            "status": "injected",
+            "passcode": int(r["id"]),
+            "engine_name": r["name"],
+        }
+    con.close()
+    return report
 
 
 def build_name_index(cards):
@@ -363,6 +431,7 @@ def main():
         r["reborn_id"]: r
         for r in json.loads((ROOT/"data/processed/engine_cards.json").read_text())
     }
+    source_extra_report = inject_source_confirmed_extras(cards, mapped, a.database)
 
     resolved = {}
     deck_checks = {}
@@ -475,6 +544,7 @@ def main():
         "seeds_per_matchup": a.seeds_per_matchup,
         "duels_per_resolved_matchup": a.seeds_per_matchup * 2,
         "deck_checks": deck_checks,
+        "source_confirmed_extra_injection": source_extra_report,
         "matchups": matchups,
         "all_duels": all_rows,
         "note": (
@@ -501,6 +571,7 @@ def main():
         "training_completed": report["training_games_completed"],
         "matchups": compact,
         "deck_checks": deck_checks,
+        "source_confirmed_extra_injection": source_extra_report,
         "pilot_skill_certified_for_ranking": False,
     }, indent=2))
 
